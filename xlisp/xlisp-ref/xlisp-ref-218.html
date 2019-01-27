@@ -1,0 +1,128 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-218.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP remove</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-217.html">Previous</a> |
+<a href="xlisp-ref-219.html">Next</a>
+
+<hr>
+
+<h1>remove</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(remove <i>expr list-expr</i> [{:test | :test-not} <i>test</i>])</dt>
+<dd><i>expr</i> - the expression to remove, an atom or list<br>
+<i>list-expr</i> - the list to remove from<br>
+<i>test</i> - optional test function, default is
+<a href="xlisp-ref-100.html">eql</a><br>
+returns - a copy of <i>list-expr</i> with matching expressions removed</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'remove' function searches through 'list-expr' for 'expr'. If 'expr'
+is found, 'remove' returns the list with the 'expr' deleted. All occurances
+of 'expr' are deleted. If 'expr' is not found, then the 'list-expr' is
+returned unaltered. You may specify your own test with the ':test' and
+':test-not' keywords followed by the test you which to perform. Note that
+this operation is non-destructive, it does not modify or affect 'list-expr'
+directly, it creates a modified copy.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq mylist '(a b c d it e f))       <font color="#0000CC">; set up a list</font>
+(remove 'it mylist)                   <font color="#0000CC">; returns (A B C D E F)</font>
+(print mylist)                        <font color="#0000CC">; prints (A B C D IT E F)</font>
+                                      <font color="#0000CC">;   note that MYLIST is not affected</font>
+
+(setq mylist '(a b c b d b))          <font color="#0000CC">; change list to include duplicates</font>
+(remove 'b mylist)                    <font color="#0000CC">; returns (A C D)</font>
+
+(setq alist '( (a) (b) (it) (c)))     <font color="#0000CC">; set up another list</font>
+(remove '(it) alist)                  <font color="#0000CC">; returns ((A) (B) (IT) (C))</font>
+                                      <font color="#0000CC">;   the EQ test doesn't work for lists</font>
+(remove '(it) alist :test 'equal)     <font color="#0000CC">; returns ((A) (B) (C))</font>
+
+(setq slist '( "a" "b" "it" "c"))     <font color="#0000CC">; set up yet another list</font>
+(remove "it" slist)                   <font color="#0000CC">; returns ("a" "b" "c")</font>
+(remove "it" slist :test-not 'equal)  <font color="#0000CC">; returns ("it")</font>
+                                      <font color="#0000CC">;   REMOVE takes away everything but IT</font>
+</pre>
+
+<p><b>Note:</b> The 'remove' function can work with a list or string as the
+'expr'. However, the default <a href="xlisp-ref-100.html">eql</a> test does
+not work with lists or strings, only symbols and numbers. To make this work,
+you need to use the ':test' keyword along with
+<a href="xlisp-ref-101.html">equal</a> for 'test'.</p>
+
+<p><b>Common Lisp:</b> XLISP does not support the ':from-end', ':start',
+':end', ':count' and ':key' keywords which Common Lisp does.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#remove">remove</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-217.html">Previous</a> |
+<a href="xlisp-ref-219.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-218.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

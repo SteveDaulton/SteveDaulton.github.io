@@ -1,0 +1,113 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-011.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP /</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-010.html">Previous</a> |
+<a href="xlisp-ref-012.html">Next</a>
+
+<hr>
+
+<h1>/</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlmath.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(/ <i>expr</i> ... )</dt>
+<dd><i>expr </i> - integer or floating point number/expression<br>
+returns - the result of the division</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The '/' function divides the first number given by the rest of the
+numbers and returns the result. If all the expressions are integers, the
+division is integer division. If any expression is a floating point number,
+then the division will be floating point division.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(/ 1)                                 <font color="#0000CC">; returns 1</font>
+(/ 1 2)                               <font color="#0000CC">; returns 0 (integer division)</font>
+(float (/ 1 2))                       <font color="#0000CC">; returns 0 (integer division)</font>
+(/ (float 1) 2)                       <font color="#0000CC">; returns 0.5</font>
+(/ 1 1.0 2)                           <font color="#0000CC">; returns 0.5 (short cut)</font>
+(/ (float 1) 2 3)                     <font color="#0000CC">; returns 0.166667</font>
+(/ 1 1.0 2 3 4)                       <font color="#0000CC">; returns 0.0416667</font>
+(print (+ 1 2 (* 3.5 (/ 3.9 1.45))))  <font color="#0000CC">; returns and prints 12.4138</font>
+</pre>
+
+<p><b>Common Lisp:</b> Common Lisp supports a ratio data type. This means
+that <nobr>(/ 3 4 5)</nobr> will result in the value 3/20. In XLISP <nobr>(/
+3 4 5)</nobr> will result in 0 [because of integer values]. <nobr>(/ 3.0 4
+5)</nobr> will result in 0.15 for both XLISP and Common Lisp.</p>
+
+<p><b>Note:</b> An easy way to force a sequence of integers to be divided as
+floating point numbers is to insert the number 1.0 after the first argument
+in the list of arguments to the divider function.</p>
+
+<p>See the
+<nobr><a href="../xlisp-man/xlisp-man-023.html#divide">&nbsp;/&nbsp;</a></nobr>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-010.html">Previous</a> |
+<a href="xlisp-ref-012.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-011.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

@@ -1,0 +1,582 @@
+<title>examples.lsp</title>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<h1 align=center>Examples from Nyquist Reference Manual</h1>
+
+<h2>1.3. Examples</h2>
+
+<pre>
+ (play (osc 60))
+</pre>
+
+<p>- Sound example: <a href="16-examples/1.3-01.ogg">1.3-01.ogg</a></p>
+
+<h2>1.3.1. Waveforms</h2>
+
+<pre>
+ ; build-harmonic is already defined in nyquist.lsp:
+ ;(defun build-harmonic (n) (snd-sine 0 n tablesize 1))
+
+ (defun mkwave ()
+   (setf *table* (sim (scale 0.5  (build-harmonic 1.0 2048))
+                      (scale 0.25  (build-harmonic 2.0 2048))
+                      (scale 0.125 (build-harmonic 3.0 2048))
+                      (scale 0.062 (build-harmonic 4.0 2048))))
+   (setf *table* (list *table* (hz-to-step 1) T)))
+
+ (cond ((not (boundp '*mkwave*))
+        (mkwave)
+        (setf *mkwave* t)))
+
+ (play (osc 60))
+</pre>
+
+<p>- Sound example: <a href="16-examples/1.3.1-01.ogg">1.3.1-01.ogg</a></p>
+
+<h2>1.3.3. Sequences</h2>
+
+<pre>
+ (defun note (pitch dur) 
+   (osc pitch dur *table*))
+
+ (play (seq (note c4 i)
+            (note d4 i)
+            (note f4 i)
+            (note g4 i)
+            (note d4 q)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/1.3.3-01.ogg">1.3.3-01.ogg</a></p>
+
+<h2>1.3.4. Envelopes</h2>
+
+<pre>
+ (defun env-note (p)
+   (mult (note p 1.0)
+         (env 0.05 0.1 0.5 1.0 0.5 0.4)))
+
+ (play (env-note c4))
+</pre>
+
+<p>- Sound example: <a href="16-examples/1.3.4-01.ogg">1.3.4-01.ogg</a></p>
+
+<pre>
+ (play (seq (stretch 0.25 
+                     (seq (env-note c4)
+                          (env-note d4)))
+            (stretch 0.5
+                     (seq (env-note f4)
+                          (env-note g4)))
+            (env-note c4)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/1.3.4-02.ogg">1.3.4-02.ogg</a></p>
+
+<h2>2.2. Sequential Behavior</h2>
+
+<pre>
+ (play (seq (note c4 q) (note d4 i)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.2-01.ogg">2.2-01.ogg</a></p>
+
+<h2>2.3. Simultaneous Behavior</h2>
+
+<pre>
+ (play (scale 0.5 (sim (note c4 q) (note d4 i))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.3-01.ogg">2.3-01.ogg</a></p>
+
+<h2>2.4. Sounds vs. Behaviors</h2>
+
+<pre>
+ ;; previous versions could not get current-path to locate demo-snd.aiff...
+ ;(format t "~%examples.lsp tries to load demo-snd.aiff from the~%")
+ ;(format t "default sound file directory, which is stored in~%")
+ ;(format t "the variable *default-sf-dir*. The current value is:~%")
+ ;(format t "\"~A\". If you get an error immediately, you should~%"
+ ;        *default-sf-dir*)
+ ;(format t "either set *default-sf-dir* or copy demo-snd.aiff~%")
+ ;(format t "where Nyquist will find it.~%")
+
+ (setf a-snd (s-read (strcat (current-path) "demo-snd.aiff")))
+ (play a-snd)
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.4-01.ogg">2.4-01.ogg</a></p>
+
+<pre>
+ (play (seq (cue a-snd) (cue a-snd)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.4-02.ogg">2.4-02.ogg</a></p>
+
+<pre>
+ (play (sim (at 0.0 (cue a-snd))
+            (at 0.7 (cue a-snd))
+            (at 1.0 (cue a-snd))
+            (at 1.2 (cue a-snd))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.4-03.ogg">2.4-03.ogg</a></p>
+
+<h2>2.6. Nested Transformations</h2>
+
+<pre>
+ (play (sim (cue a-snd)
+            (loud 6.0 (at 3.0 (cue a-snd)))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.6-01.ogg">2.6-01.ogg</a></p>
+
+<pre>
+ (play (loud 6.0 (sim (at 0.0 (cue a-snd))
+                      (at 0.7 (cue a-snd)))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.6-02.ogg">2.6-02.ogg</a></p>
+
+<h2>2.7. Defining Behaviors</h2>
+
+<pre>
+ (defun snds (dly)
+   (sim (at 0.0 (cue a-snd))
+        (at 0.7 (cue a-snd))
+        (at 1.0 (cue a-snd))
+        (at (+ 1.2 dly) (cue a-snd))))
+
+ (play (snds 0.1))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.7-01.ogg">2.7-01.ogg</a></p>
+
+<pre>
+ (play (loud 0.25 (stretch 0.9 (snds 0.3))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.7-02.ogg">2.7-02.ogg</a></p>
+
+<h2>2.8. Sample Rates</h2>
+
+<pre>
+ (play (sound-srate-abs 44100.0 (osc c4)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/2.8-01.ogg">2.8-01.ogg</a></p>
+
+<h2>3.1. Simple Transformations</h2>
+
+<pre>
+ (defun tone-seq ()
+   (seqrep (i 16)
+           (stretch 0.25 (osc-note c4))))	
+
+ (defun pitch-rise () (stretch 4.0 (scale 16 (ramp))))
+
+ (defun chromatic-scale ()
+   (transpose (pitch-rise) (tone-seq)))
+
+ (play (chromatic-scale))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.1-01.ogg">3.1-01.ogg</a></p>
+
+<pre>
+ (play (sustain (stretch 4 (sum 0.2 (ramp))) (chromatic-scale)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.1-02.ogg">3.1-02.ogg</a></p>
+
+<h2>3.2. Time Warps</h2>
+
+<pre>
+ (defun warper ()
+   (pwl .25 .4 .75 .6 1.0 1.0 2.0 2.0 2.0))
+
+ (defun warp4 () (stretch 4 (scale 4 (warper))))
+
+ (play (warp (warp4) (tone-seq)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.2-01.ogg">3.2-01.ogg</a></p>
+
+<h2>3.3. Abstract Time Warps</h2>
+
+<pre>
+ ; note: as explained in the manual, the following is NOT
+ ; the solution to a fixed duration/variable tempo sequence:
+ ;
+ (defun tone-seq-2 ()
+   (seqrep (i 16)
+           (stretch-abs 0.25 (osc-note c4))))
+
+ (play (warp (warp4) (tone-seq-2)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.3-01.ogg">3.3-01.ogg</a></p>
+
+<pre>
+ ; here is the proper solution (vs. ex19):
+ ;
+ (defun tone-seq-3 ()
+   (seqrep (i 16)
+           (set-logical-stop
+              (stretch-abs 0.25 (osc-note c4))
+              0.25)))
+
+ (play (warp (warp4) (tone-seq-3)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.3-02.ogg">3.3-02.ogg</a></p>
+
+<h2>3.4. Nested Transformations</h2>
+
+<pre>
+ (play (warp (warp4)
+             (transpose (pitch-rise) (tone-seq))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.4-01.ogg">3.4-01.ogg</a></p>
+
+<pre>
+ (play (warp (warp4)
+             (transpose (control-warp (get-warp)
+                                      (warp-abs nil (pitch-rise)))
+                        (tone-seq))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/3.4-02.ogg">3.4-02.ogg</a></p>
+
+<h2>4.1. Stretching Sampled Sounds</h2>
+
+<pre>
+ (if (not (boundp 'a-snd)) 
+     (setf a-snd 
+        (s-read "demo-snd.aiff")))
+
+ (play (force-srate *default-sound-srate* (stretch 3.0 (sound a-snd))))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.1-01.ogg">4.1-01.ogg</a></p>
+
+<pre>
+ (defun down ()
+   (force-srate *default-sound-srate*
+     (seq (stretch 0.2 (sound a-snd))
+          (stretch 0.3 (sound a-snd))
+          (stretch 0.4 (sound a-snd))
+          (stretch 0.5 (sound a-snd))
+          (stretch 0.6 (sound a-snd)))))
+
+ (play (down))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.1-02.ogg">4.1-02.ogg</a></p>
+
+<pre>
+ (defun up ()
+   (force-srate *default-sound-srate*
+     (seq (stretch 0.5 (sound a-snd))
+          (stretch 0.4 (sound a-snd))
+          (stretch 0.3 (sound a-snd))
+          (stretch 0.2 (sound a-snd)))))
+
+ (play (seq (down) (up) (down)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.1-03.ogg">4.1-03.ogg</a></p>
+
+<h2>4.2. Saving Sound Files</h2>
+
+<p><b>Note:</b> The "system" function seems only to work on unix-based systems.
+I couldn't bring it to work under Windows 2000 + XP.</p>
+
+<pre>
+ (s-save a-snd 1000000000 "./a-snd-file.snd")
+ (play-file "./a-snd-file.snd")
+ (system "rm ./a-snd-file.snd")
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.2-01.ogg">4.2-01.ogg</a></p>
+
+<pre>
+ (setf my-sound-file "./a-snd-file.snd")
+ (s-save a-snd 1000000000 my-sound-file)
+ (play-file my-sound-file)
+ (system (strcat "rm " my-sound-file))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.2-02.ogg">4.2-02.ogg</a></p>
+
+<h2>4.3. Memory Space and Normalization</h2>
+
+<pre>
+ ; normalize in memory.  First, assign the sound to a variable so 
+ ; it will be retained:
+ (setf mysound (sim (osc c4) (osc c5)))
+ ; now compute the maximum value (ny:all is a 1 giga-samples, you may want a
+ ; smaller constant if you have less than 4GB of memory :-):
+ (setf mymax (snd-max mysound NY:ALL))
+ (display "Computed max" mymax)
+ ; now write out and play the sound from memory with a scale factor:
+ (play (scale (/ 1.0 mymax) mysound))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.3-01.ogg">4.3-01.ogg</a></p>
+
+<pre>
+ ; if you don't have space in memory, here's how to do it:
+ (defun myscore () (sim (osc c4) (osc c5)))
+ ; compute the maximum, don't forget the quote!:
+ (setf mymax (snd-max '(myscore) NY:ALL))
+ (display "Computed max" mymax)
+ ; now we know the max, but we don't have a the sound (it was garbage
+ ; collected and never existed all at once in memory).  Compute the sound
+ ; again, this time with a scale factor:]
+ (play (scale (/ 1.0 mymax) (myscore)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.3-02.ogg">4.3-02.ogg</a></p>
+
+<h2>4.4. Frequency Modulation</h2>
+
+<pre>
+ (play (fmosc c4 (pwl 0.1)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-01.ogg">4.4-01.ogg</a></p>
+
+<pre>
+ (play (fmosc c4 (pwl 0.5)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-02.ogg">4.4-02.ogg</a></p>
+
+<pre>
+ (play (fmosc c4 (pwl 0.5 (step-to-hz c4) 0.501)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-03.ogg">4.4-03.ogg</a></p>
+
+<pre>
+ (setf *fm-voice* (list 
+                  (extract 0.110204 0.13932 (cue a-snd))
+                  24.848422
+                  T))
+
+ (play (fmosc cs2 (pwl 0.5 (step-to-hz cs2) 0.501) *fm-voice* 0.0))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-04.ogg">4.4-04.ogg</a></p>
+
+<pre>
+ (defun sweep (delay pitch-1 sweep-time pitch-2 hold-time)
+   (let ((interval (- (step-to-hz pitch-2)
+                      (step-to-hz pitch-1))))
+     (pwl delay 0.0 
+          ; sweep from pitch 1 to pitch 2
+           (+ delay sweep-time) interval
+          ; hold until about 1 sample from the end
+           (+ delay sweep-time hold-time -0.0005) interval
+          ; quickly ramp to zero (pwl always does this,
+          ;    so make it short)
+          (+ delay sweep-time hold-time))))
+
+ (play (fmosc cs2 (sweep 0.1 cs2 0.6 gs2 0.5) *fm-voice* 0.0))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-05.ogg">4.4-05.ogg</a></p>
+
+<pre>
+ (play (fmosc cs2 (scale 10.0 (lfo 6.0)) *fm-voice* 0.0))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-06.ogg">4.4-06.ogg</a></p>
+
+<pre>
+ (let (modulator)
+   (setf modulator (mult (pwl 1.0 1000.0 1.0005) (osc c4)))
+
+ (play (fmosc c4 modulator)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.4-07.ogg">4.4-07.ogg</a></p>
+
+<h2>4.5. Building a Wavetable</h2>
+
+<pre>
+ ;;; FINDING ZERO CROSSINGS, SND-SAMPLES
+
+ (setf max-samples-for-zeros 1000)
+
+ (defun zeros (snd)
+   ; start by getting the samples, only take 1000 samples max
+   (prog ((s (snd-samples snd max-samples-for-zeros))
+          newsign sign n len result result2 starttime srate)
+     ; go through the array looking for zero crossings
+     (setf len (length s))
+     ; stop if there are no samples
+     (if (= len 0) (return nil))
+     (setf sign (> 0.0 (aref s 0)))
+     ; get the start time and sample rate of the sound for use below
+     (setf starttime (car (snd-extent snd max-samples-for-zeros)))
+     (setf srate (snd-srate snd))
+     (setf n 1)
+   loop
+     (if (>= n len) (go done))
+     (setf newsign (> 0.0 (aref s n)))
+     (if (not (eq sign newsign)) (setf result (cons n result)))
+     (setf sign newsign)
+     (setf n (1+ n))
+     (go loop)
+   done ; now we have the zero crossings, convert them to times
+   (dolist (num result)
+     ; return the time of the zero crossing, which is the start time
+     ; of the snd plus the sample number / srate
+     (setf result2 (cons (+ starttime (/ num srate)) result2)))
+   (return result2)))
+
+ ; extract a short piece of this sample
+ (setf short (extract 0.1 0.14 (cue a-snd)))
+ (setf z (zeros short))
+ (format t "Zero crossings from a-snd: ~A~%" z)
+
+ ; find the differences between zero crossings reported by zeros
+ ; print the result in terms of samples for readability
+ ;
+ (defun periods (lis short)
+   (prog (result prev srate)
+     (if (null lis) (return nil))
+     (setf srate (snd-srate short))
+    loop
+     (setf prev (car lis))
+     (setf lis (cdr lis))
+     (if (null lis) (return (reverse result)))
+     (setf result (cons (* srate (- (car lis) prev)) result))
+     (go loop)))
+
+ (setf p (periods z short))
+ (format t "The intervals (in samples) between zero crossings are: ~%~A~%" p)
+
+ ; build a wavetable using zero crossing information
+ ;
+ ; I interactively played with the data and decided to extract from the
+ ; 5th period to the 21st period (these had 86 and 87 samples each and
+ ; seem to indicate some kind of periodicity).  The 1st period measures
+ ; from the zeroth zero crossing to the first, so the 5th period measures
+ ; from the 4th zero crossing to the 5th.  I'll arbitrarily take
+ ; the 4th and 20th zero crossing times (the 5th and 20th should work as
+ ; well), and from the data, this looks like 2 waveform periods.
+ ; This is very clear if you plot the data.
+ ;
+ ; arguments are:
+ ;  snd - the sound to extract from
+ ;  zeros - the result of (zeros snd)
+ ;  start - the number of the starting zero crossing
+ ;  stop - the number of the ending zero crossing
+ ;  n - number of periods contained in the extracted sound
+ ;
+ (defun extract-table (snd zeros start stop n)
+   (let (starttime extent hz)
+     ; Start by shifting snd to time zero:
+     (setf starttime (car (snd-extent snd max-samples-for-zeros)))
+     (setf snd (at (- starttime) (cue snd)))
+
+     (format t "~A~%" snd)
+     ; also get the start and stop times and shift them:
+     (setf start (- (nth start zeros) starttime))
+     (setf stop (- (nth stop zeros) starttime))
+
+     (format t "table ~A start ~A stop ~A~%" snd start stop)
+
+     ; now extract the samples of interest, note that we are
+     ; overwriting our pointer to the snd argument
+     (setf snd (extract start stop (cue snd)))
+
+     ; now we need to figure out the pitch this sound would represent
+     ; when played at its samplerate.  The pitch in hz is 1 / duration,
+     ; and duration is the extent of the sound / n.  Therefore, take
+     ; n/extent
+     (setf extent (snd-extent snd max-samples-for-zeros))
+     (setf hz (/ n (- (cadr extent) (car extent))))
+     ; an osc table is a list of the sound, pitch number, and T (periodic)
+     (list snd (hz-to-step hz) T)))
+
+ ; try it out
+ (setf *a-voice* (extract-table short z 4 20 2))
+ ; now use the table with an oscillator
+ (play (osc c3 1.0 *a-voice* ))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.5-01.ogg">4.5-01.ogg</a></p>
+
+<pre>
+ ; play it at its normal pitch
+ (play (osc (cadr *a-voice*) 1.0 *a-voice*))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.5-02.ogg">4.5-02.ogg</a></p>
+
+<h2>4.6. Filter Examples</h2>
+
+<pre>
+ (play (noise))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-01.ogg">4.6-01.ogg</a></p>
+
+<pre>
+ (play (lp (noise) 1000.0))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-02.ogg">4.6-02.ogg</a></p>
+
+<pre>
+ (play (hp (noise) 1000.0))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-03.ogg">4.6-03.ogg</a></p>
+
+<pre>
+ ; low pass sweep from 100 hz to 2000 hz
+ (play (lp (noise) (pwl 0.0 100.0 1.0 2000.0 1.0)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-04.ogg">4.6-04.ogg</a></p>
+
+<pre>
+ ; high pass sweep from 50 hz to 4000 hz
+ (play (hp (noise) (pwl 0.0 50.0 1.0 4000.0 1.0)))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-05.ogg">4.6-05.ogg</a></p>
+
+<pre>
+ ; band pass at 500 hz, 20 hz bandwidth
+ (play (reson (scale 10.0 (noise)) 500.0 20.0 1))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-06.ogg">4.6-06.ogg</a></p>
+
+<pre>
+; band pass sweep from 100 to 1000 hz, 20 hz bandwidth
+ (play (reson (scale 0.04 (noise)) (pwl 0.0 200.0 1.0 1000.0 1.0) 20.0))
+</pre>
+
+<p>- Sound example: <a href="16-examples/4.6-07.ogg">4.6-07.ogg</a></p>
+
+<br>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>

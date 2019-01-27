@@ -1,0 +1,145 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-141.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP intern</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-140.html">Previous</a> |
+<a href="xlisp-ref-142.html">Next</a>
+
+<hr>
+
+<h1>intern</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(intern <i>name-str</i>)</dt>
+<dd><i>name-str</i> - a string expression<br>
+returns - the new symbol</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'intern' function takes a string name 'name-str' and creates a new
+interned symbol. What this means is that the symbol 'name-str' will be
+placed into the symbol hash table
+<a href="xlisp-ref-186.html">*obarray*</a>. It's value will be unbound. It's
+property list will be <a href="xlisp-ref-177.html">NIL</a> [empty]. If the
+symbol already exists, no error or action is taken and the old values and
+property lists remain intact. The 'intern' function returns the symbol as
+its result.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun lookin (sym)                  <font color="#0000CC">; create a function to</font>
+  (aref *obarray*                    <font color="#0000CC">;   look inside *OBARRAY* and</font>
+    (hash sym (length *obarray*))))  <font color="#0000CC">;   look for a specific symbol</font>
+                                     <font color="#0000CC">;   returns a list</font>
+
+(lookin "FINGERS")                   <font color="#0000CC">; see if "FINGERS" is a symbol</font>
+                                     <font color="#0000CC">;   returns (:START1) - it isn't</font>
+
+(intern "FINGERS")                   <font color="#0000CC">; intern "FINGERS" as a symbol</font>
+                                     <font color="#0000CC">;   returns FINGERS</font>
+
+(lookin "FINGERS")                   <font color="#0000CC">; returns (FINGERS :START1)</font>
+
+(print fingers)                      <font color="#0000CC">; error: unbound variable</font>
+                                     <font color="#0000CC">;   it exists, but has no value</font>
+
+(lookin "TOES")                      <font color="#0000CC">; returns NIL - doesn't exist</font>
+toes                                 <font color="#0000CC">; error: unbound variable</font>
+
+(lookin "TOES")                      <font color="#0000CC">; returns (TOES)</font>
+                                     <font color="#0000CC">;   the act of looking for a</font>
+                                     <font color="#0000CC">;   value or using a symbol</font>
+                                     <font color="#0000CC">;   causes it to be INTERNed</font>
+
+(lookin "KNEECAPS")                  <font color="#0000CC">; returns (MAX MAPLIST)</font>
+                                     <font color="#0000CC">;   KNEECAPS doesn't exist</font>
+
+(setq kneecaps 'a-bone)              <font color="#0000CC">; create symbol with a value</font>
+(lookin "KNEECAPS")                  <font color="#0000CC">; returns (KNEECAPS MAX MAPLIST)</font>
+</pre>
+
+<p><b>Note:</b> When you 'intern' a string symbol like &quot;fingers&quot;
+in lower case letters, this gets placed in the
+<a href="xlisp-ref-186.html">*obarray*</a> symbol table as a lower case
+symbol. Note that this is different from doing an 'intern' on a string
+symbol &quot;FINGERS&quot; in upper case letters which will get placed in
+the <a href="xlisp-ref-186.html">*obarray*</a> as a upper case symbol.
+&quot;fingers&quot; and &quot;FINGERS&quot; then are two different symbols
+in <a href="xlisp-ref-186.html">*obarray*</a>. Remember also that normal
+symbols created by XLISP are automatically converted to upper case names.
+So, an intern of the lower case symbol name 'fingers and the upper case
+symbol name 'FINGERS will result in the effect that both symbol names get
+interned as the same upper-case symbol FINGERS.</p>
+
+<p><b>Common Lisp:</b> Common LISP allows an optional package
+specification, which XLISP does not support.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-013.html#intern">intern</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-140.html">Previous</a> |
+<a href="xlisp-ref-142.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-141.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

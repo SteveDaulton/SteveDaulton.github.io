@@ -1,0 +1,101 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-227.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP reverse</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-226.html">Previous</a> |
+<a href="xlisp-ref-228.html">Next</a>
+
+<hr>
+
+<h1>reverse</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(reverse list-expr)</dt>
+<dd><i>list-expr</i> - a list or list expression<br>
+returns - a new list in the reverse order</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'reverse' function reverses the 'list-expr'. The reversed list is the
+returned value. The reversal process only occurs on the 'top-level' of the
+'list-expr'. If there are nested sub-lists, these are left intact.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(reverse NIL)                     <font color="#0000CC">; returns NIL</font>
+(reverse 'a)                      <font color="#0000CC">; error: bad argument type</font>
+(reverse '(a))                    <font color="#0000CC">; returns (A)</font>
+(reverse '(a b c))                <font color="#0000CC">; returns (C B A)</font>
+(reverse '((a b) (c d) (e f)))    <font color="#0000CC">; returns ((E F) (C D) (A B))</font>
+(reverse (list (+ 1 2) (+ 3 4)))  <font color="#0000CC">; returns (7 3)</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#reverse">reverse</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-226.html">Previous</a> |
+<a href="xlisp-ref-228.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-227.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

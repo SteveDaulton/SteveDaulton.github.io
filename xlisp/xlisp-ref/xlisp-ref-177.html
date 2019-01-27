@@ -1,0 +1,98 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-177.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP nil</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-176.html">Previous</a> |
+<a href="xlisp-ref-178.html">Next</a>
+
+<hr>
+
+<h1>nil</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>system constant</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlsym.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;nil</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'nil' constant represents the empty list or the false value, as
+oppossed to the true value [the symbol
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a>]. 'nil' can be written as
+the three character symbol 'nil' or as the empty list ().</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq myvar nil)                     <font color="#0000CC">; set MYVAR to False</font>
+(setq myvar 'nil)                    <font color="#0000CC">; NIL and 'NIL evaluate to NIL</font>
+(setq myvar ())                      <font color="#0000CC">; () is the empty list = NIL</font>
+(setq myvar '())                     <font color="#0000CC">; () and '() evaluate to NIL</font>
+(if nil (print "this won't print")   <font color="#0000CC">; if/then/else</font>
+        (print "this will print"))
+</pre>
+
+<p><b>Note:</b> You can not change the value of NIL.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-176.html">Previous</a> |
+<a href="xlisp-ref-178.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-177.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

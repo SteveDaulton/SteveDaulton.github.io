@@ -1,0 +1,125 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-215.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP read-line</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-214.html">Previous</a> |
+<a href="xlisp-ref-216.html">Next</a>
+
+<hr>
+
+<h1>read-line</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlfio.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(read-line [<i>source</i>])</dt>
+<dd><i>source</i> - an optional source, must be a file pointer or stream,
+default is <a href="xlisp-ref-244.html">*standard-input*</a><br>
+returns - the line as a string</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'read-line' function reads a single line from the specified 'source'.
+The line read is returned as a string value for the result. The 'source' may
+be a file pointer or a stream. If there is no 'source',
+<a href="xlisp-ref-244.html">*standard-input*</a> is the default. If an
+end-of-file is encountered in the 'source', then
+<a href="xlisp-ref-177.html">NIL</a> will be returned as the result.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq fp (open "f" :direction :output))  <font color="#0000CC">; set up file</font>
+(print "fe fi" fp)
+(print 12.34 fp)
+(close fp)
+
+(setq fp (open "f" :direction :input))   <font color="#0000CC">; now read the file</font>
+(read-line fp)                           <font color="#0000CC">; returns ""fe fi""</font>    
+(read-line fp)                           <font color="#0000CC">; returns "12.34"</font>
+(read-line fp)                           <font color="#0000CC">; returns NIL</font>
+(close fp)
+</pre>
+
+<p><b>Common Lisp:</b> The XLISP and Common Lisp 'read-line' functions are
+compatible for simple cases. They both allow for the optional 'source'.
+However, in Common Lisp, there are additional parameters which occur right
+after 'source'. So, when porting from Common Lisp to XLISP, remember there
+are additional arguments in Common Lisp's 'read-line' function.</p>
+
+<p><b>Common Lisp:</b> Common Lisp specifies that 'read' operations with a
+'source' of <a href="xlisp-ref-177.html">NIL</a> will come from
+<a href="xlisp-ref-244.html">*standard-input*</a>. XLISP does not read the
+input from <a href="xlisp-ref-244.html">*standard-input*</a> with a
+'source' of <a href="xlisp-ref-177.html">NIL</a>. Common Lisp also
+specifies that a 'source' of <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a>
+will read from *terminal-io* which is not defined in XLISP by default. XLISP
+does not allow <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> as a valid
+argument for 'source'.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-029.html#read-line">read-line</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-214.html">Previous</a> |
+<a href="xlisp-ref-216.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-215.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

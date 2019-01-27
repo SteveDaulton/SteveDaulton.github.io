@@ -1,0 +1,120 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-151.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP listp</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-150.html">Previous</a> |
+<a href="xlisp-ref-152.html">Next</a>
+
+<hr>
+
+<h1>listp</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>predicate function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(listp <i>expr</i>)</dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> if the value is a
+list or <nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="xlisp-ref-177.html">NIL</a> otherwise</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'listp' predicate function checks if the 'expr' is a list.
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> is returned if 'expr' is a
+list or an empty list [the <a href="xlisp-ref-177.html">NIL</a> value],
+<a href="xlisp-ref-177.html">NIL</a> is returned otherwise.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(listp '(a b))                  <font color="#0000CC">; returns T - list</font>
+(listp nil)                     <font color="#0000CC">; returns T - NIL</font>
+(listp '(a . b))                <font color="#0000CC">; returns T - dotted pair list</font>
+
+(listp (lambda (x) (print x)))  <font color="#0000CC">; returns NIL - closure - lambda</font>
+(listp #(1 2 3))                <font color="#0000CC">; returns NIL - array</font>
+(listp *standard-output*)       <font color="#0000CC">; returns NIL - stream</font>
+(listp 1.2)                     <font color="#0000CC">; returns NIL - float</font>
+(listp #'quote)                 <font color="#0000CC">; returns NIL - fsubr</font>
+(listp 1)                       <font color="#0000CC">; returns NIL - integer</font>
+(listp object)                  <font color="#0000CC">; returns NIL - object</font>
+(listp "str")                   <font color="#0000CC">; returns NIL - string</font>
+(listp #'car)                   <font color="#0000CC">; returns NIL - subr</font>
+(listp 'a)                      <font color="#0000CC">; returns NIL - symbol</font>
+</pre>
+
+<p><b>Note:</b> <a href="xlisp-ref-177.html">NIL</a> or '() is used in many
+places as a list-class or atom-class expression. Both
+<a href="xlisp-ref-034.html">atom</a> and 'listp', when applied to
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> return
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a>. If you wish to check
+for a non-empty list, use the <a href="xlisp-ref-081.html">consp</a>
+predicate function.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-018.html#listp">listp</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-150.html">Previous</a> |
+<a href="xlisp-ref-152.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-151.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

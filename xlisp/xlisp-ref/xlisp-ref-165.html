@@ -1,0 +1,121 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-165.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP make-symbol</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-164.html">Previous</a> |
+<a href="xlisp-ref-166.html">Next</a>
+
+<hr>
+
+<h1>make-symbol</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(make-symbol <i>symbol-str</i>)</dt>
+<dd><i>symbol-str</i> - a string expression<br>
+returns - the new symbol</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'make-symbol' function takes a string name 'symbol-str' and creates a
+new symbol. This symbol is temporary and is not
+<a href="xlisp-ref-141.html">intern</a>ed [placed] into the symbol hash
+table <a href="xlisp-ref-186.html">*obarray*</a>. If the symbol already
+exists, no error or action is taken and the old values and property lists
+remain intact. The 'make-symbol' function returns the symbol as its
+result.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun lookin (sym)                  <font color="#0000CC">; create a function to</font>
+  (aref *obarray*                    <font color="#0000CC">;   look inside *OBARRAY*</font>
+    (hash sym (length *obarray*))))  <font color="#0000CC">;   and look for a specific</font>
+                                     <font color="#0000CC">;   symbol - returns a list</font>
+
+(lookin "FEE")                       <font color="#0000CC">; returns (CHAR-INT NTH ++)</font>
+                                     <font color="#0000CC">;   FEE symbol doesn't exist</font>
+
+(make-symbol "FEE")                  <font color="#0000CC">; returns FEE symbol</font>
+(lookin "FEE")                       <font color="#0000CC">; returns (CHAR-INT NTH ++)</font>
+                                     <font color="#0000CC">;   FEE still doesn't exist</font>
+
+(intern "FEE")                       <font color="#0000CC">; intern FEE symbol</font>
+(lookin "FEE")                       <font color="#0000CC">; returns (FEE CHAR-INT NTH ++)</font>
+                                     <font color="#0000CC">;   FEE does now exist</font>
+</pre>
+
+<p><b>Note:</b> When you 'make-symbol' a string type symbol like
+&quot;fingers&quot;, this is a lower case symbol. This is different from
+doing a 'make-symbol' on a string type symbol &quot;FINGERS&quot;, which is
+an upper case symbol. With string type symbols, &quot;fingers&quot; and
+&quot;FINGERS&quot; are two different symbols. Remember also that normal
+symbols created by XLISP are automatically converted to upper case.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-013.html#make-symbol">make-symbol</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-164.html">Previous</a> |
+<a href="xlisp-ref-166.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-165.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

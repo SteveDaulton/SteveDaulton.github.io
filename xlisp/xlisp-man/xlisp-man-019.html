@@ -1,0 +1,201 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-019.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#20">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-018.html">Previous</a> |
+<a href="xlisp-man-020.html">Next</a>
+
+<hr>
+
+<h1>19&nbsp; Control Constructs</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#cond">cond</a> - evaluate conditionally</nobr></li>
+<li><nobr><a href="#and">and</a> - the logical AND of a list of expressions</nobr></li>
+<li><nobr><a href="#or">or</a> - the logical OR of a list of expressions</nobr></li>
+<li><nobr><a href="#if">if</a> - evaluate expressions conditionally</nobr></li>
+<li><nobr><a href="#when">when</a> - evaluate only when a condition is true</nobr></li>
+<li><nobr><a href="#unless">unless</a> - evaluate only when a condition is false</nobr></li>
+<li><nobr><a href="#case">case</a> - select by case</nobr></li>
+<li><nobr><a href="#let">let</a> - create local bindings</nobr></li>
+<li><nobr><a href="#let*">let*</a> - let with sequential binding</nobr></li>
+<li><nobr><a href="#flet">flet</a> - create local functions</nobr></li>
+<li><nobr><a href="#labels">labels</a> - flet with recursive functions</nobr></li>
+<li><nobr><a href="#macrolet">macrolet</a> - create local macros</nobr></li>
+<li><nobr><a href="#catch">catch</a> - evaluate expressions and catch throws</nobr></li>
+<li><nobr><a href="#throw">throw</a> - throw to a catch</nobr></li>
+<li><nobr><a href="#unwind-protect">unwind-protect</a> - protect evaluation of an expression</nobr></li>
+</ol>
+
+<hr>
+
+<a name="cond"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-079.html">cond</a> <i>pair</i>...)
+- evaluate conditionally</dt>
+<dd><i>pair</i> - pair consisting of:<br>
+<dl><dd>(<i>pred</i> <i>expr</i>...)</dd></dl>where:<dl>
+<dd><i>pred</i> - is a predicate expression<br>
+<i>expr</i> -  evaluated if the predicate is not NIL</dd></dl>
+returns  -   the value of the first expression whose predicate is not NIL</dd>
+
+<a name="and"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-024.html">and</a> <i>expr</i>...)
+- the logical AND of a list of expressions</dt>
+<dd><i>expr</i> - the expressions to be anded<br>
+returns  -  NIL if any expression evaluates to NIL, otherwise the value of
+the last expression<br>
+<b>Note:</b> evaluation of expressions stops after the first
+expression that evaluates to NIL</dd>
+
+<a name="or"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-192.html">or</a> <i>expr</i>...)
+- the logical OR of a list of expressions</dt>
+<dd><i>expr</i> - the expressions to be ored<br>
+returns  -   NIL if all expressions evaluate to NIL, otherwise the value of
+the first non-NIL expression<br>
+<b>Note:</b> evaluation of expressions stops after the
+first expression that does not evaluate to NIL</dd>
+
+<a name="if"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-137.html">if</a> <i>texpr</i> <i>expr1</i>
+[<i>expr2</i>])  - evaluate expressions conditionally</dt>
+<dd><i>texpr</i> - the test expression<br>
+<i>expr1</i> - the expression to be evaluated if texpr is non-NIL<br>
+<i>expr2</i> - the expression to be evaluated if texpr is NIL<br>
+returns - the value of the selected expression</dd>
+
+<a name="when"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-297.html">when</a> <i>texpr</i>
+<i>expr</i>...) - evaluate only when a condition is true</dt>
+<dd><i>texpr</i> - the test expression<br>
+<i>expr</i> - the expression[s] to be evaluated if texpr is non-NIL<br>
+returns - the value of the last expression or NIL</dd>
+
+<a name="unless"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-292.html">unless</a> <i>texpr</i>
+<i>expr</i>...) - evaluate only when a condition is false</dt>
+<dd><i>texpr</i> - the test expression<br>
+<i>expr</i> - the expression[s] to be evaluated if texpr is NIL<br>
+returns - the value of the last expression or NIL</dd>
+
+<a name="case"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-047.html">case</a> <i>expr</i>
+<i>case</i>...) - select by case</dt>
+<dd><i>expr</i> - the selection expression<br>
+<i>case</i> - pair consisting of:
+<dl><dd>(<i>value</i> <i>expr</i>...)</dd></dl>
+where:
+<dl><dd><i>value</i> - is a single expression or a list of expressions (unevaluated)<br>
+<i>expr</i> - are expressions to execute if the case matches</dd></dl>
+returns - the value of the last expression of the matching case</dd>
+
+<a name="let"></a><a name="let*"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-148.html">let</a> (<i>binding</i>...)
+<i>expr</i>...) - create local bindings<br>
+(<a href="../xlisp-ref/xlisp-ref-149.html">let*</a> (<i>binding</i>...)
+<i>expr</i>...) - let with sequential binding</dt>
+<dd><i>binding</i> - the variable bindings each of which is either:<br><dl>
+<dd>1) a symbol [which is initialized to NIL]<br>
+2) a list whose car is a symbol and whose CADR is an initialization expression</dd></dl>
+<i>expr</i> - the expressions to be evaluated<br>
+returns - the value of the last expression</dd>
+
+<a name="flet"></a><a name="labels"></a><a name="macrolet"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-117.html">flet</a> (<i>binding</i>...)
+<i>expr</i>...) - create local functions<br>
+(<a href="../xlisp-ref/xlisp-ref-144.html">labels</a> (<i>binding</i>...)
+<i>expr</i>...) - flet with recursive functions<br>
+(<a href="../xlisp-ref/xlisp-ref-161.html">macrolet</a> (<i>binding</i>...)
+<i>expr</i>...) -  create local macros</dt>
+<dd><i>binding</i> - the function bindings each of which is:<br>
+<dl><dd>(<i>sym</i> <i>fargs</i> <i>expr</i>...)</dd></dl>
+where:
+<dl><dd><i>sym</i> - the function/macro name<br>
+<i>fargs</i> - formal argument list [lambda list]<br>
+<i>expr</i> - expressions constituting the body of the function/macro</dd></dl>
+<i>expr</i> - the expressions to be evaluated<br>
+returns - the value of the last expression</dd>
+
+<a name="catch"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-048.html">catch</a> <i>sym</i>
+<i>expr</i>...) - evaluate expressions and catch throws</dt>
+<dd><i>sym</i> - the catch tag<br>
+<i>expr</i> - expressions to evaluate<br>
+returns - the value of the last expression the throw expression</dd>
+
+<a name="throw"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-281.html">throw</a> <i>sym</i>
+[<i>expr</i>]) - throw to a catch</dt>
+<dd><i>sym</i> - the catch tag<br>
+<i>expr</i> - the value for the catch to return [defaults to NIL]<br>
+returns - never returns</dd>
+
+<a name="unwind-protect"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-295.html">unwind-protect</a>
+<i>expr</i> <i>cexpr</i>...) - protect evaluation of an expression</dt>
+<dd><i>expr</i> - the expression to protect<br>
+<i>cexpr</i> - the cleanup expressions<br>
+returns - the value of the expression<br>
+<b>Note:</b> 'unwind-protect' guarantees to execute the cleanup expressions
+even if a non-local exit terminates the evaluation of the protected expression</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#20">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-018.html">Previous</a> |
+<a href="xlisp-man-020.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-019.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

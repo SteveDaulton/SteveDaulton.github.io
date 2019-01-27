@@ -1,0 +1,129 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-207.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP progv</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-206.html">Previous</a> |
+<a href="xlisp-ref-208.html">Next</a>
+
+<hr>
+
+<h1>progv</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(progv <i>symbols values</i> [<i>expr1 expr2</i> ... ])</dt>
+<dd><i>symbols</i> - a list comprising symbols to be bound<br>
+<i>values</i> - a list comprising values to be bound to symbols<br>
+<i>exprN</i> - expressions comprising the body of the loop<br>
+returns - the value of the last expression</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'progv' special form is basically a 'block' construct that contains a
+block of code [expressions] to evaluate. 'progv' is different from
+<nobr><a href="xlisp-ref-204.html">prog1</a> ,</nobr>
+<a href="xlisp-ref-205.html">prog2</a> and
+<a href="xlisp-ref-206.html">progn</a> in that it contains a pair of lists,
+'symbols' and 'values'. Before evaluating the expressions, 'progv'
+will dynamically bind the 'values' to the corresponding 'symbols'. If there
+are too many 'symbols' for the 'values', the 'symbols' with no corresponding
+'values' will be bound to <a href="xlisp-ref-177.html">NIL</a>. The
+variables will be unbound after the execution of 'progv'. The value of the
+last 'expr' will be returned as the result of 'progv'. If there are no
+'exprs', <a href="xlisp-ref-177.html">NIL</a> is returned.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(progv '(var) '(2)
+       (print var) (print "two"))  <font color="#0000CC">; prints 2 "two"  returns "two"</font>
+
+(setq a "beginning")               <font color="#0000CC">; initialize A</font>
+(progv '(a) '(during) (print a))   <font color="#0000CC">; prints DURING</font>
+(print a)                          <font color="#0000CC">; prints "beginning"</font>
+
+(progv '(no-way) '(no-how))        <font color="#0000CC">; returns NIL</font>
+(progv)                            <font color="#0000CC">; error: too few arguments</font>
+</pre>
+
+<p><b>Note:</b> 'progv' is different from
+<nobr><a href="xlisp-ref-202.html">prog</a> ,</nobr> which allows symbols
+and initialization forms, in that 'progv' allows its 'symbols' and 'values'
+to be evaluated. This allows you to pass in forms that generate the
+'symbols' and their 'values'.</p>
+
+<p><b>Note:</b> <nobr><a href="xlisp-ref-204.html">prog1</a> ,</nobr>
+<nobr><a href="xlisp-ref-205.html">prog2</a> ,</nobr>
+<a href="xlisp-ref-206.html">progn</a> and
+'progv' do not allow the use of
+<a href="xlisp-ref-225.html">return</a> or
+<a href="xlisp-ref-135.html">go</a> or tags for
+<a href="xlisp-ref-135.html">go</a>.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-021.html#progv">progv</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-206.html">Previous</a> |
+<a href="xlisp-ref-208.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-207.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

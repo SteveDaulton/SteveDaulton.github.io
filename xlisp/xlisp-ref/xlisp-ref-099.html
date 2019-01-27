@@ -1,0 +1,111 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-099.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP eq</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-098.html">Previous</a> |
+<a href="xlisp-ref-100.html">Next</a>
+
+<hr>
+
+<h1>eq</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>predicate function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c, xlsubr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(eq <i>expr1 expr2</i>)</dt>
+<dd><i>expr1</i> - the first expression to compare<br>
+<i>expr2</i> - the second expression to compare<br>
+returns - <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> if the expressions
+are the same internal value, <a href="xlisp-ref-177.html">NIL</a>
+otherwise</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'eq' predicate function checks to see if 'expr1' and 'expr2' are
+identical. <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> is returned if
+they are exactly the same internal value,
+<a href="xlisp-ref-177.html">NIL</a> is returned otherwise.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(eq 'a 'a)          <font color="#0000CC">; returns T</font>
+(eq 1 1)            <font color="#0000CC">; returns T</font>
+(eq 1 1.0)          <font color="#0000CC">; returns NIL</font>
+(eq 1.0 1.0)        <font color="#0000CC">; returns NIL</font>
+(eq "a" "a")        <font color="#0000CC">; returns NIL</font>
+(eq '(a b) '(a b))  <font color="#0000CC">; returns NIL</font>
+(eq 'a 34)          <font color="#0000CC">; returns NIL</font>
+(setq a '(a b))     <font color="#0000CC">; set value of A to (A B)</font>
+(setq b a)          <font color="#0000CC">; set B to point to A's value</font>
+(setq c '(a b))     <font color="#0000CC">; set value of C to dif. (A B)</font>
+(eq a b)            <font color="#0000CC">; returns T</font>
+(eq a c)            <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-018.html#eq">eq</a>
+predicate function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-098.html">Previous</a> |
+<a href="xlisp-ref-100.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-099.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

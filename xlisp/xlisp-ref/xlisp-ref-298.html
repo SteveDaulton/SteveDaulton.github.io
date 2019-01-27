@@ -1,0 +1,120 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-298.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP :white-space</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-297.html">Previous</a> |
+<a href="xlisp-ref-299.html">Next</a>
+
+<hr>
+
+<h1>:white-space</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>keyword</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlread.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;:white-space</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>The ':white-space' keyword is an entry that is used in the <a
+href="xlisp-ref-216.html">*readtable*</a> system variable that contains
+XLISP's data structures relating to the processing of characters from the
+user [or files] and read-macro expansions. The existance of the
+':white-space' keyword means that the specified character may be skipped
+over. The system defines that 'tab', 'space', 'return' and 'line-feed' are
+':white-space' characters.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+<font color="#0000CC">;; define a function to look in a table</font>
+<font color="#0000CC">;; and print out any white-space characters</font>
+
+(defun look-at (table)
+  (dotimes (ch 127)
+    (prog ((entry (aref table ch)))
+      (case entry
+        (nil          nil)
+        (:constituent nil)
+        (:white-space (print ch))
+        (t            nil))))
+  (terpri))
+
+(look-at *readtable*)  <font color="#0000CC">; prints  9   - tab</font>
+                       <font color="#0000CC">;         10  - newline</font>
+                       <font color="#0000CC">;         12  - formfeed</font>
+                       <font color="#0000CC">;         13  - return</font>
+                       <font color="#0000CC">;         32  - space</font>
+</pre>
+
+<p><b>Caution:</b> If you experiment with
+<nobr><a href="xlisp-ref-216.html">*readtable*</a> ,</nobr> it is useful
+to save the old value in a variable, so that you can restore the system
+state.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-008.html#white-space">:white-space</a>
+keyword in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-297.html">Previous</a> |
+<a href="xlisp-ref-299.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-298.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

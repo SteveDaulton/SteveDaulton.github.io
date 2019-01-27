@@ -1,0 +1,113 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-011.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP savefun</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-010.html">Previous</a> |
+<a href="xlisp-plus-012.html">Next</a>
+
+<hr>
+
+<h1>savefun</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined macro (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(savefun <i>function</i>)</dt>
+<dd><i>function</i> - the name of the function or macro to be saved<br>
+returns - the file name that was created to save the function or macro</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'savefun' macro saves the specified function or macro to a file. The
+file will be called '<i>function</i>.lsp' where 'function' is the name of
+the function or macro to save, given as parameter to the 'savefun' macro.
+The macro returns the file name that was created. An error will occur if the
+'function' parameter is not a function or macro.</p>
+
+<pre class="example">
+(defmacro savefun (fun)
+  `(let* ((fname (strcat (symbol-name ',fun) ".lsp"))
+          (fval (get-lambda-expression (symbol-function ',fun)))
+          (fp (open fname :direction :output)))
+     (cond (fp (print (cons (if (eq (car fval) 'lambda)
+                                'defun
+                                'defmacro)
+                            (cons ',fun (cdr fval))) fp)
+               (close fp)
+               fname)
+           (t nil))))
+</pre>
+
+<p><b>Note:</b> The 'savefun' macro is not included in the standard Nyquist
+distribution. If you want to use it, copy the code to your 'init.lsp'
+file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun myfoo (fee fi)  <font color="#0000CC">; create a function</font>
+  (+ fee fi))
+
+(savefun myfoo)        <font color="#0000CC">; saves MYFOO to "MYFOO.lsp"</font>
+(savefun savefun)      <font color="#0000CC">; saves SAVEFUN to "SAVEFUN.lsp"</font>
+(savefun 'a)           <font color="#0000CC">; error: bad argument type</font>
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-010.html">Previous</a> |
+<a href="xlisp-plus-012.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-011.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

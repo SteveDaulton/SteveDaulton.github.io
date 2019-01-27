@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/emacs/how-to/nyquist-in-an-emacs-buffer.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:08 GMT -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Running Nyquist in an Emacs buffer</title>
+</head>
+
+<body>
+
+<p align=center><a href="../main.html">Nyquist and Emacs</a></p>
+
+<hr>
+
+<center>
+<table width=640><tbody><tr><td>
+<h2>Running Nyquist in an Emacs buffer</h2>
+
+<p>(see GNU Emacs user manual: compiling and testing programs - sub-chapter:
+running an external lisp)</p>
+
+<p>Type the following lines by replacing "e:/programme/nyquist/ny.exe" with
+the path to your nyquist executable:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x (setq inferior-lisp-program "e:/programme/nyquist/ny.exe")
+ M-x run-lisp
+</pre></td></tr></tbody></table>
+
+<p>Emacs opens a new buffer named "inferior-lisp" with the Nyquist interpreter
+running inside. You can either type your commands directly into the interpreter
+or you can do the following:</p>
+
+<p>Go to the Emacs scratch buffer. I the status line you can read [(Lisp
+Interaction)] what means the buffer is in Lisp interaction mode. Then you
+type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x lisp-mode
+</pre></td></tr></tbody></table>
+
+<p>In the status line appears (Lisp), the buffer is in Lisp mode now. Then, in
+the buffer, type some Nyquist code:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ (play (osc 60))
+</pre></td></tr></tbody></table>
+
+<p>Place the cursor after the last paren and type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ C-x C-e
+</pre></td></tr></tbody></table>
+
+<p>C-x C-e is the Emacs abbreviation of: execute evaluation</p>
+
+<p>On a Microsoft windows computer you will hear a one second sine wave sound.
+If you go to the "inferior-lisp" buffer you will see a Nyquist message:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ Saving sound file to temp.wav
+
+ total samples: 44100
+ AutoNorm: peak was 1,
+     peak after normalization was 1,
+     new normalization factor is 0.9
+ 1
+</pre></td></tr></tbody></table>
+
+<p>If you leave the scratch buffer in "Lisp Interaction" mode instead and type
+C-x C-e, Emacs will send your Nyquist code to the internal ELisp interpreter
+and the result will be that a debugger buffer is opened with a message like
+this:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><table bgcolor="eeeeee"
+width="100%"><tbody><tr><td><pre>
+ Debugger entered--Lisp error: (void-function play)
+   (play (osc 60))
+   eval((play (osc 60)))
+   eval-last-sexp-1(nil)
+   eval-last-sexp(nil)
+ * call-interactively(eval-last-sexp)
+</pre></td></tr></tbody></table></td></tr></tbody></table>
+
+<p>If this happens to you then you know that your buffer is in the wrong Lisp
+mode. But you have learned that it is only a question of the buffer mode which
+Lisp interpreter will be used by Emacs. Now you know that you can use both -
+Emacs Lisp or Nyquist XLisp - whenever you like. You only have to switch the
+buffer mode.</p>
+
+<p>For Nyquist XLisp evaluations you need "Lisp Mode". For Lisp mode you type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x lisp-mode
+</pre></td></tr></tbody></table>
+
+<p>For Emacs Lisp (called ELisp) evaluations you need either "Emacs Lisp Mode"
+or "Lisp Interaction" mode.</p>
+
+<p>For Emacs Lisp mode you type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x emacs-lisp-mode
+</pre></td></tr></tbody></table>
+
+<p>For Lisp interaction mode you type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x lisp-interaction-mode
+</pre></td></tr></tbody></table>
+
+<p>See also: <a href="emacs-lisp-modes.html">The different Emacs Lisp modes
+</a></p>
+
+</td></tr></tbody></table>
+</center>
+
+<br><br><hr>
+
+<p align=center><a href="../main.html">Nyquist and Emacs</a></p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/emacs/how-to/nyquist-in-an-emacs-buffer.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:08 GMT -->
+</html>

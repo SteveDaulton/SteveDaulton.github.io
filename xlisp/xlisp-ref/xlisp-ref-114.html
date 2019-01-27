@@ -1,0 +1,102 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-114.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP first</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-113.html">Previous</a> |
+<a href="xlisp-ref-115.html">Next</a>
+
+<hr>
+
+<h1>first</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlinit.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(first <i>expr</i>)</dt>
+<dd><i>expr</i> - a list or list expression<br>
+returns - the first element of the expression</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'first' function returns the first element of the expression.
+If the first expression is itself a list, then the sublist is returned.
+If the list is <nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="xlisp-ref-177.html">NIL</a> is returned.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(first '(a b c))               <font color="#0000CC">; returns A</font>
+(first '((a b) c d))           <font color="#0000CC">; returns (A B)</font>
+(first NIL)                    <font color="#0000CC">; returns NIL</font>
+(first 'a)                     <font color="#0000CC">; error: bad argument type</font>
+(setq children '(amanda ben))  <font color="#0000CC">; set up variable CHILDREN</font>
+(first children)               <font color="#0000CC">; returns AMANDA</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#first">first</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-113.html">Previous</a> |
+<a href="xlisp-ref-115.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-114.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

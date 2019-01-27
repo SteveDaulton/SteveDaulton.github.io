@@ -1,0 +1,160 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-119.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP *float-format*</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-118.html">Previous</a> |
+<a href="xlisp-ref-120.html">Next</a>
+
+<hr>
+
+<h1>*float-format*</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>system variable</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlprin.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;*float-format*</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p> *float-format* is a system variable that allows a user to specify how
+floating point numbers are to be printed by XLISP. The value of
+*float-format* should be set to one of the string expressions
+&quot;%e&quot;, &quot;%f&quot; or &quot;%g&quot;. These format strings are
+similar to C-language floating point specifications:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>&quot;%e&quot;</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">exponential. The number is converted to decimal notation
+    of the form:
+
+<pre class="example">
+[-]<font color="#0000CC"><i>m</i></font>.<font color="#0000CC"><i>nnnnnn</i></font>E[+-]<font color="#0000CC"><i>xx</i></font>
+</pre>
+
+    There is one leading digit. There are 6 digits after the decimal
+    point.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>&quot;%f&quot;</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">decimal. The number is converted to decimal notation of
+    the form:
+
+<pre class="example">
+[-]<font color="#0000CC"><i>mmmmmm</i></font>.<font color="#0000CC"><i>nnnnnn</i></font>
+</pre>
+
+    There are as many digits before the decimal point as necessary. There
+    are 6 digits after the decimal point.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>&quot;%g&quot;</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">shortest. The number is converted to either the form of
+    &quot;%e&quot; or &quot;%f&quot;, whichever produces the shortest output
+    string. Non-significant zeroes are not printed.</td>
+</tr>
+</tbody></table></p>
+
+<p> The default value for *float-format* is the string "%g".</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq *float-format* "%e")         <font color="#0000CC">; exponential notation</font>
+(print 1.0)                        <font color="#0000CC">; prints 1.000000e+00</font>
+(print -9e99)                      <font color="#0000CC">; prints -9.000000e+99</font>
+
+(setq *float-format* "%f")         <font color="#0000CC">; decimal notation</font>
+(print 1.0)                        <font color="#0000CC">; prints 1.000000</font>
+(print 1.0e4)                      <font color="#0000CC">; prints 10000.000000</font>
+(print -999.99e-99)                <font color="#0000CC">; prints -0.000000</font>
+
+(setq *float-format* "%g")         <font color="#0000CC">; shortest notation</font>
+(print 1.0)                        <font color="#0000CC">; prints 1</font>
+(print 1.0e7)                      <font color="#0000CC">; prints 1e+07</font>
+(print -999.999e99)                <font color="#0000CC">; prints -9.99999e+101</font>
+
+(setq *float-format* "SOMETHING")  <font color="#0000CC">; bad notation</font>
+(print 1.0)                        <font color="#0000CC">; prints SOMETHING</font>
+(setq *float-format* "%g")         <font color="#0000CC">; reset to shortest notation</font>
+</pre>
+
+<p><b>Note:</b> There can be other characters put in the string, but in
+general, this will not produce particularly desirable behaviour. There is no
+error checking performed on the format string.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-011.html#float-format">*float-format*</a>
+system variable in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-118.html">Previous</a> |
+<a href="xlisp-ref-120.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-119.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

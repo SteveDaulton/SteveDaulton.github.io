@@ -1,0 +1,156 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-295.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP unwind-protect</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-294.html">Previous</a> |
+<a href="xlisp-ref-296.html">Next</a>
+
+<hr>
+
+<h1>unwind-protect</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(unwind-protect <i>protect-form clean-up-form</i> ... )</dt>
+<dd><i>protect-form</i> - a form that is to be protected<br>
+<i>clean-up-form</i> - a sequence forms to execute after <i>protect-form</i><br>
+returns - the value of <i>protect-form</i></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> The 'unwind-protect' special form allows the protecting [trapping] of
+all forms of exit from the 'protect-form'. The exits that are trapped
+include errors, <nobr><a href="xlisp-ref-281.html">throw</a> ,</nobr> <a
+href="xlisp-ref-225.html">return</a> and <a
+href="xlisp-ref-135.html">go</a>. The 'clean-up-form' will be executed in
+all cases, when there is an exit from 'protect-form' and when the form does
+not have exit. 'unwind-protect' will return the result from the
+'protect-form', not from the 'clean-up-forms'. Errors or exits that occur in
+the 'clean-up-form' are not protected. It is possible to trap these with
+another 'unwind-protect'.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(unwind-protect
+  (+ 2 2)                           <font color="#0000CC">; protected form</font>
+  (print "an exit"))                <font color="#0000CC">; clean up form</font>
+                                    <font color="#0000CC">; prints "an exit"</font>
+                                    <font color="#0000CC">; returns 4</font>
+</pre>
+
+<pre class="example">
+(setq *breakenable* nil)            <font color="#0000CC">; to turn off break loop traps</font>
+
+(unwind-protect
+  (+ 1 "2")                         <font color="#0000CC">; protected form</font>
+  (print "something happened"))     <font color="#0000CC">; clean up form</font>
+                                    <font color="#0000CC">; error: bad argument type - "2"</font>
+                                    <font color="#0000CC">; prints "something happened"</font>
+</pre>
+
+<pre class="example">
+(catch 'mytag
+  (unwind-protect
+    (throw 'mytag)                  <font color="#0000CC">; protected form</font>
+    (print "an exit")))             <font color="#0000CC">; clean up form</font>
+                                    <font color="#0000CC">; prints "an exit"</font>
+</pre>
+
+<pre class="example">
+(setq *breakenable* nil)            <font color="#0000CC">; to turn off break loop traps</font>
+
+(unwind-protect
+  (throw 'notag)                    <font color="#0000CC">; protected form</font>
+  (print "an exit"))                <font color="#0000CC">; clean up form</font>
+                                    <font color="#0000CC">; error: no target for THROW</font>
+                                    <font color="#0000CC">; prints "an exit"</font>
+</pre>
+
+<pre class="example">
+(prog () (print "start")
+         (unwind-protect
+           (go end)                 <font color="#0000CC">; protected form</font>
+           (print "an exit"))       <font color="#0000CC">; clean-up form</font>
+    end  (print "end"))             <font color="#0000CC">; prints "start"</font>
+                                    <font color="#0000CC">; prints "an exit"</font>
+                                    <font color="#0000CC">; prints "end"</font>
+</pre>
+
+<pre class="example">
+(prog () (print "start")
+         (unwind-protect
+           (return "I'm done")      <font color="#0000CC">; protected form</font>
+           (print "but first"))     <font color="#0000CC">; clean-up form</font>
+         (print "won't get here"))  <font color="#0000CC">; prints "start"</font>
+                                    <font color="#0000CC">; prints "but first"</font>
+                                    <font color="#0000CC">; returns "I'm done"</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-019.html#unwind-protect">unwind-protect</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-294.html">Previous</a> |
+<a href="xlisp-ref-296.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-295.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

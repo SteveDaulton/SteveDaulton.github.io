@@ -1,0 +1,124 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-269.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP subst</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-268.html">Previous</a> |
+<a href="xlisp-ref-271.html">Next</a>
+
+<hr>
+
+<h1>subst</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(subst <i>new-expr old-expr expr</i> [{:test | :test-not} <i>test</i>])</dt>
+<dd><i>old-expr</i> - the expression to search for<br>
+<i>new-expr</i> - the expression to replace <i>old-expr</i> with<br>
+<i>expr</i> - the expression to substitute within, an atom or list<br>
+<i>test</i> - optional test function, default is <a href="xlisp-ref-100.html">eql</a><br>
+returns - the expression with substitutions</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'subst' function searches through an 'expr' and replaces each of the
+'old-expr' elements with the 'new-expr'. The 'expr' with the substitutions,
+if any, is returned. You may specify your own test with the ':test' and
+':test-not' keywords followed by the 'test' you wish to perform.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(subst 'new 'old '(old mid dif))           <font color="#0000CC">; returns (NEW MID DIF)</font>
+(subst '(a) 'old '(old mid dif))           <font color="#0000CC">; returns ((A) MID DIF)</font>
+(subst "a" 'old '(old mid dif))            <font color="#0000CC">; returns ("a" MID DIF)</font>
+
+(defun mytest (x y) (princ x) (princ " ")  <font color="#0000CC">; define a test function</font>
+                    (princ y) (terpri)     <font color="#0000CC">; that prints the arguments</font>
+                    T )                    <font color="#0000CC">; and always returns T</font>
+
+(subst 'a 'b '(a b c d) :test 'mytest)     <font color="#0000CC">; prints (A B C D) B   returns A</font>
+
+(subst 'a 'b '(a b) :test-not 'mytest)     <font color="#0000CC">; prints (A B) B</font>
+                                           <font color="#0000CC">;        A B</font>
+                                           <font color="#0000CC">;        (B) B</font>
+                                           <font color="#0000CC">;        B B</font>
+                                           <font color="#0000CC">;        NIL B    returns (A B)</font>
+</pre>
+
+<p><b>Note:</b> The 'subst' function can work with a list or string as the
+'expr' However, the default <a href="xlisp-ref-100.html">eql</a> test does
+not work with lists or strings, only symbols and numbers. To make this work,
+you need to use the ':test' keyword along with
+<a href="xlisp-ref-101.html">equal</a> for 'test'.</p>
+
+<p><b>Common Lisp:</b> Common Lisp supports the use of the ':key' keyword
+which specifies a function that is applied to each element of 'expr' before
+it is tested. XLISP does not support this.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#subst">subst</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-268.html">Previous</a> |
+<a href="xlisp-ref-271.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-269.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

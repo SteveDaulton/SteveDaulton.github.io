@@ -1,0 +1,107 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-066.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP char-int</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-065.html">Previous</a> |
+<a href="xlisp-ref-067.html">Next</a>
+
+<hr>
+
+<h1>char-int</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlstr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(char-int <i>char</i>)</dt>
+<dd><i>char</i> - a character expression<br>
+returns - the decimal <a href="../xlisp-misc/ascii-table.html">ASCII</a>
+value as an integer</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'char-int' function returns the decimal
+<a href="../xlisp-misc/ascii-table.html">ASCII</a> value of the 'char'
+expression.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(char-int #\0)              <font color="#0000CC">; returns 48</font>
+(char-int #\A)              <font color="#0000CC">; returns 65</font>
+(char-int #\a)              <font color="#0000CC">; returns 97</font>
+(char-int #\[)              <font color="#0000CC">; returns 91</font>
+(char-int #\newline)        <font color="#0000CC">; returns 10</font>
+(char-int (code-char 127))  <font color="#0000CC">; returns 127</font>
+(char-int (int-char 255))   <font color="#0000CC">; returns 255</font>
+</pre>
+
+<p><b>Note:</b> <a href="xlisp-ref-062.html">char-code</a> and 'char-int'
+are identical in use. See <a href="xlisp-ref-062.html">char-code</a> for
+additional information.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-026.html#char-int">char-int</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-065.html">Previous</a> |
+<a href="xlisp-ref-067.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-066.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

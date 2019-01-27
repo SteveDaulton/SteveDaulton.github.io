@@ -1,0 +1,237 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-008.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#8">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-007.html">Previous</a> |
+<a href="xlisp-man-009.html">Next</a>
+
+<hr>
+
+<h1>8&nbsp; Readtable</h1>
+
+<hr>
+
+<a name="constituent"></a><a name="white-space"></a>
+<a name="tmacro"></a><a name="nmacro"></a>
+<a name="sescape"></a><a name="mescape"></a>
+
+<p>The behavior of the reader is controlled by a data structure called a
+'readtable'. The reader uses the symbol
+<a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> to locate the
+current readtable. This table controls the interpretation of input
+characters. It is an array with 128 entries, one for each of the
+<a href="../xlisp-misc/ascii-table.html">ASCII</a> character codes. Each
+entry contains one of the following things:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>&nbsp;NIL</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>indicating an invalid character</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-177.html">nil</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:CONSTITUENT</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>indicating a symbol constituent</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-082.html">:constituent</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:WHITE-SPACE</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>indicating a whitespace character</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-298.html">:white-space</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>(:TMACRO . <font color="#0000CC"><i>fun</i></font>)</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>terminating readmacro</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>(:NMACRO . <font color="#0000CC"><i>fun</i></font>)</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>non-terminating readmacro</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:SESCAPE</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>single escape character '\'</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-236.html">:sescape</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:MESCAPE</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>multiple escape character '|'</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="../xlisp-ref/xlisp-ref-172.html">:mescape</a>]</nobr></td>
+</tr>
+</tbody></table></p>
+
+<p>In the case of <a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> and
+<a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a>, the 'fun' component
+is a function. This can either be a built-in readmacro function or a
+<a href="../xlisp-ref/xlisp-ref-145.html">lambda</a> expression. The
+function should take two parameters. The first is the input stream and the
+second is the character that caused the invocation of the readmacro. The
+readmacro function should return
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> to indicate that the
+character should be treated as white space or a value
+<a href="../xlisp-ref/xlisp-ref-080.html">cons</a>ed with
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> to indicate that the
+readmacro should be treated as an occurence of the specified value. Of
+course, the readmacro code is free to
+<a href="../xlisp-ref/xlisp-ref-212.html">read</a> additional characters
+from the input stream.</p>
+
+<a name="quote"></a><a name="function"></a><a name="array"></a>
+<a name="hexadecimal"></a><a name="octal"></a><a name="binary"></a>
+<a name="character"></a><a name="comment"></a><a name="uninterned"></a>
+<a name="backquote"></a><a name="comma"></a><a name="comma-at"></a>
+
+<p>XLISP defines several useful read macros:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>'<font color="#0000CC"><i>expr</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>(<a href="../xlisp-ref/xlisp-ref-210.html">quote</a>
+    <i>expr</i>)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#'<font color="#0000CC"><i>expr</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>(<a href="../xlisp-ref/xlisp-ref-124.html">function</a>
+    <i>expr</i>)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#(<font color="#0000CC"><i>expr</i></font>...)</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>an array of the specified expressions</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#x<font color="#0000CC"><i>digits</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>a hexadecimal number [0-9,A-F]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#o<font color="#0000CC"><i>digits</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>an octal number [0-7]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#b<font color="#0000CC"><i>digits</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>a binary number [0-1]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#\<font color="#0000CC"><i>char</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>a single character</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#| ... |#</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>a comment</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#:<font color="#0000CC"><i>symbol</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>an uninterned symbol</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>`<font color="#0000CC"><i>expr</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>(<a href="../xlisp-ref/xlisp-ref-036.html">backquote</a>
+    <i>expr</i>)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>,<font color="#0000CC"><i>expr</i></font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>(<a href="../xlisp-ref/xlisp-ref-077.html">comma</a>
+    <i>expr</i>)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>,@<i><font color="#0000CC">expr</font></i></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>(<a href="../xlisp-ref/xlisp-ref-078.html">comma-at</a>
+    <i>expr</i>)</nobr></td>
+</tr>
+</tbody></table></p>
+
+<a name="Tab"></a><a name="Newline"></a><a name="Space"></a>
+
+<p>Characters names handled by the reader:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>#\Tab</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td><nobr>&nbsp;horiz. tab</nobr></td>
+  <td><nobr>&nbsp;&nbsp; (<a href="../xlisp-misc/ascii-table.html">ASCII</a> decimal value 9)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#\Newline</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td><nobr>&nbsp;newline</nobr></td>
+  <td><nobr>&nbsp;&nbsp; (<a href="../xlisp-misc/ascii-table.html">ASCII</a> decimal value 10)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>#\Space</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;=&nbsp;&nbsp;</nobr></td>
+  <td><nobr>&nbsp;space</nobr></td>
+  <td><nobr>&nbsp;&nbsp; (<a href="../xlisp-misc/ascii-table.html">ASCII</a> decimal value 32)</nobr></td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#8">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-007.html">Previous</a> |
+<a href="xlisp-man-009.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-008.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

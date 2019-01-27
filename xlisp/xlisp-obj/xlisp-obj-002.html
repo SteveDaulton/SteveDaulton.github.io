@@ -1,0 +1,254 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-obj/xlisp-obj-002.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>A More Realistic Example</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-obj-001.html">Objects</a>&nbsp; -&nbsp;
+Example
+
+<hr>
+
+<h1>Xlisp Objects Example</h1>
+
+<hr>
+
+<p> The following is an example, using the idea of tools again. It contains
+a hierarchy of tool classes. The top of the class hierarchy is 'tools'.
+'hand-tools' and 'shop-tools' are sub-classes of 'tools'. The example
+creates instances of these sub-classes. It is possible to extend this
+example in various ways. One obvious extension would be to create a third
+tier of classes under 'hand-tools' that could contain classes like drills,
+screwdrivers, pliers and so on. </p>
+
+<pre class="example">
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;       Define the superclasses and classes
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; make TOOLS superclass
+;       with a different :ISNEW method
+;       added methods are :BORROW and :RETURN
+;       class variables are     NUMBER          contains # of tool instances
+;                               ACTIVE-LIST     contains list of current objects
+;       instance variables are  POWER           list - (AC BATTERY HAND)
+;                               MOVEABLE        CAN-CARRY or CAN-ROLL or FIXED
+;                               OPERATIONS      list
+;                               MATERIAL        list - (WOOD METAL PLASTIC ...)
+;                               PIECES          list
+;                               LOCATION        HOME or person's name
+;
+
+(setq tools (send class :new '(power 
+                               moveable 
+                               operations 
+                               material 
+                               pieces 
+                               location) 
+                             '(number active-list)))
+
+(send tools :answer :isnew '() 
+                           '((if (null number) (setq number 1)
+                                               (setq number (1+ number)))
+                             (setq active-list (cons self active-list))
+                             (setq location 'home)))
+
+(send tools :answer :borrow '(by-who)
+                            '((if (eq location 'home) (setq location by-who)
+                                                      (print "you can't"))))
+
+(send tools :answer :return '()
+                            '((if (eq location 'home) (print "got it already")
+                                                      (setq location
+                                                      'home))))
+
+;
+; make HAND-TOOLS class
+;       with a different :ISNEW method
+;       new instance variable   WEIGHT          &lt;number&gt; of pounds
+;       the rest is inherited from TOOLS 
+; 
+(setq hand-tools (send class :new '(weight) '() tools))
+(send hand-tools :answer :isnew '(pow op mat parts w-in)
+                                '((setq power pow)
+                                  (setq moveable 'can-carry)
+                                  (setq operations op)
+                                  (setq material mat)
+                                  (setq pieces parts)
+                                  (setq weight w-in)
+                                  (send-super :isnew)))
+
+;
+; make SHOP-TOOLS class
+;       with a different :ISNEW method
+;       no new instance variables
+;       the rest is inherited from TOOLS 
+; 
+(setq shop-tools (send class :new '() '() tools))
+(send shop-tools :answer :isnew '(pow mov op mat parts)
+                                '((setq power pow)
+                                 (setq moveable mov)
+                                 (setq operations op)
+                                 (setq material mat)
+                                 (setq pieces parts)
+                                 (send-super :isnew)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;       Create instances of various tool classes 
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq hand-drill (send hand-tools :new          ; make an instance - HAND-DRILL
+                             '(ac) 
+                             '(drill polish grind screw)
+                             '(wood metal plastic)
+                             '(drill drill-bits screw-bits buffer)
+                             '2.5))
+
+(setq table-saw (send shop-tools :new           ; make an instance - TABLE-SAW
+                             '(ac)
+                             'fixed
+                             '(rip cross-cut)
+                             '(wood plastic)
+                             '(saw blades fence)))
+
+(setq radial-arm (send shop-tools :new          ; make an instance = RADIAL-ARM
+                             '(ac)
+                             'can-roll
+                             '(rip cross-cut)
+                             '(wood plastic)
+                             '(saw blades dust-bag)))
+</pre>
+
+<p>The following session shows how to use the tool definitions from this
+better example. The example starts at the OS shell and brings up xlisp
+running the file 'tools.lsp'.</p>
+
+<pre class="example">
+$ xlisp tools
+; loading "init.lsp"
+; loading "tools.lsp"
+&gt; (send hand-drill :borrow 'fred)
+FRED
+
+&gt; (send table-saw :return)
+"got it already"
+"got it already"
+
+&gt; (send hand-drill :borrow 'joe)
+"you can't"
+"you can't"
+
+&gt; (send hand-drill :return)
+HOME
+</pre>
+
+<p>So, Fred was able to borrow the 'hand-drill'. When an attempt was made
+to return the 'table-saw', it was already at home. A second attempt to
+borrow the 'hand-drill' indicated that <nobr>'you can't'</nobr> because it
+was already lent out. Lastly, the 'hand-drill' was returned successfully.
+[Note that the <nobr>'got it already'</nobr> and <nobr>'you can't'</nobr>
+strings show up twice in the display because the methods both print and
+return the string.)</p>
+
+<p>The following session shows the structure of the 'tools' object:</p>
+
+<pre class="example">
+&gt; (send tools :show)
+Object is #&lt;Object: #276fc&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:RETURN . #&lt;Closure-:RETURN: #2dbd0&gt;) 
+              (:BORROW . #&lt;Closure-:BORROW: #2ddba&gt;) 
+              (:ISNEW . #&lt;Closure-:ISNEW: #274a4&gt;))
+  IVARS = (POWER MOVEABLE OPERATIONS MATERIAL PIECES LOCATION)
+  CVARS = (NUMBER ACTIVE-LIST)
+  CVALS = #(3 (#&lt;Object: #2cadc&gt; 
+               #&lt;Object: #2cda2&gt; 
+               #&lt;Object: #2d0e0&gt;))
+  SUPERCLASS = #&lt;Object: #23fd8&gt;
+  IVARCNT = 6
+  IVARTOTAL = 6
+#&lt;Object: #276fc&gt;
+</pre>
+
+<p>The two 'tools' sub-classes 'hand-tools' and 'shop-tools' structure looks
+like:</p>
+
+<pre class="example">
+&gt; (send hand-tools :show)
+Object is #&lt;Object: #2dab8&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:ISNEW . #&lt;Closure-:ISNEW: #2d7a2&gt;))
+  IVARS = (WEIGHT)
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = #&lt;Object: #276fc&gt;
+  IVARCNT = 1
+  IVARTOTAL = 7
+#&lt;Object: #2dab8&gt;
+
+&gt; (send shop-tools :show)
+Object is #&lt;Object: #2d680&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:ISNEW . #&lt;Closure-:ISNEW: #2d450&gt;))
+  IVARS = NIL
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = #&lt;Object: #276fc&gt;
+  IVARCNT = 0
+  IVARTOTAL = 6
+#&lt;Object: #2d680&gt;
+</pre>
+
+<p>The class 'hand-tools' has an instance 'hand-drill' which looks like:</p>
+
+<pre class="example">
+&gt; (send hand-drill :show)
+Object is #&lt;Object: #2d0e0&gt;, Class is #&lt;Object: #2dab8&gt;
+  WEIGHT = 2.5
+  POWER = (AC)
+  MOVEABLE = CAN-CARRY
+  OPERATIONS = (DRILL POLISH GRIND SCREW)
+  MATERIAL = (WOOD METAL PLASTIC)
+  PIECES = (DRILL DRILL-BITS SCREW-BITS BUFFER)
+  LOCATION = HOME
+#&lt;Object: #2d0e0&gt;
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-obj-001.html">Objects</a>&nbsp; -&nbsp;
+Example
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-obj/xlisp-obj-002.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

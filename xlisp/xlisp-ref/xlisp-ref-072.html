@@ -1,0 +1,141 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-072.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP class</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-071.html">Previous</a> |
+<a href="xlisp-ref-073.html">Next</a>
+
+<hr>
+
+<h1>class</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>object</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlobj.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;class</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>'class' is the built-in object class that is used to build other classes.
+Classes are, essentially, the template for defining
+<a href="xlisp-ref-187.html">object</a> instances.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq myclass (send class :new '(var)))              <font color="#0000CC">; create MYCLASS with VAR</font>
+
+(send myclass :answer :isnew '()                     <font color="#0000CC">; set up initialization</font>
+                             '((setq var nil) self))
+
+(send myclass :answer :set-it '(value)               <font color="#0000CC">; create :SET-IT message</font>
+                              '((setq var value)))    
+
+(setq my-obj (send myclass :new))                    <font color="#0000CC">; create MY-OBJ of MYCLASS</font>
+(send my-obj :set-it 5)                              <font color="#0000CC">; VAR is set to 5</font>
+</pre>
+
+<p><b>Class definition:</b> The internal definition of the 'class' object
+instance looks like:</p>
+
+<pre class="example">
+Object is #&lt;Object: #23fe2&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:ANSWER . #&lt;Subr-: #23e48&gt;) 
+              (:ISNEW . #&lt;Subr-: #23e84&gt;) 
+              (:NEW . #&lt;Subr-: #23ea2&gt;))
+  IVARS = (MESSAGES IVARS CVARS CVALS SUPERCLASS IVARCNT IVARTOTAL)
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = #&lt;Object: #23fd8&gt;
+  IVARCNT = 7
+  IVARTOTAL = 7
+#&lt;Object: #23fe2&gt;
+</pre>
+
+<p>The class of 'class' is 'class', itself. The superclass of 'class' is
+<a href="xlisp-ref-187.html">object</a>. Remember that the location
+information [like #23fe2] varies from system to system, yours will probably
+look different.</p>
+
+<p><b>Built-in methods:</b> The built in methods in XLISP include:</p>
+
+<ul>
+<li><nobr><a href="xlisp-ref-025.html">:answer</a> - add a method to an <a href="xlisp-ref-187.html">object</a></nobr></li>
+<li><nobr><a href="xlisp-ref-073.html">:class</a> - return the <a href="xlisp-ref-187.html">object</a>'s class</nobr></li>
+<li><nobr><a href="xlisp-ref-142.html">:isnew</a> - run initialization code on <a href="xlisp-ref-187.html">object</a></nobr></li>
+<li><nobr><a href="xlisp-ref-176.html">:new</a> - create a new <a href="xlisp-ref-187.html">object</a> [instance or class]</nobr></li>
+<li><nobr><a href="xlisp-ref-240.html">:show</a> - show the internal state of the <a href="xlisp-ref-187.html">object</a></nobr></li>
+</ul>
+
+<p><b>Message Structure:</b> The normal XLISP convention for a 'message' is
+to have a valid symbol preceeded by a colon like
+<a href="xlisp-ref-142.html">:isnew</a> or ':my-message'. However, it
+is possible to define a 'message' that is a symbol without a colon, but
+this makes the code less readable.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-010.html#class">class</a>
+object in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-071.html">Previous</a> |
+<a href="xlisp-ref-073.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-072.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

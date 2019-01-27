@@ -1,0 +1,111 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-268.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP subseq</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-267.html">Previous</a> |
+<a href="xlisp-ref-269.html">Next</a>
+
+<hr>
+
+<h1>subseq</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlstr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(subseq <i>string start</i> [<i>end</i>])</dt>
+<dd><i>string</i> - a string expression<br>
+<i>start</i> - an integer expression<br>
+<i>end</i> - an integer expression<br>
+returns - the substring between <i>start</i> and <i>end</i></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> The 'subseq' function extracts a substring from 'string' starting with
+the 'start' offset and ending with the 'end' offset. The 'start' offset has
+a origin or 0. The substring is returned.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(subseq "12345678" 0)     <font color="#0000CC">; returns "12345678"</font>
+(subseq "12345678" 2)     <font color="#0000CC">; returns "345678"</font>
+(subseq "12345678" 2 4)   <font color="#0000CC">; returns "34"</font>
+(subseq "1234" 3)         <font color="#0000CC">; returns "4"</font>
+
+(subseq "1234" 4)         <font color="#0000CC">; returns ""</font>
+(subseq "1234" 4 2)       <font color="#0000CC">; returns ""</font>
+(subseq "1234" 5)         <font color="#0000CC">; error: string index out of bounds - 5</font>
+</pre>
+
+<p><b>Common Lisp:</b> The 'subseq' function in Common Lisp is intended to
+return a portion of a sequence, a sub-sequence. This function operates on
+lists and vectors [one-dimensional arrays of data], basically ordered data.
+Strings are just one of the valid types operated on by 'subseq' in Common
+Lisp. The XLISP 'subseq' function only operates on strings.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-025.html#subseq">subseq</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-267.html">Previous</a> |
+<a href="xlisp-ref-269.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-268.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

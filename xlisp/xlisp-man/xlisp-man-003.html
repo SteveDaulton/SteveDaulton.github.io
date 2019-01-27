@@ -1,0 +1,76 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-003.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#3">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-002.html">Previous</a> |
+<a href="xlisp-man-004.html">Next</a>
+
+<hr>
+
+<h1>3&nbsp; XLISP Command Loop</h1>
+
+<hr>
+
+<p>When XLISP is started, it first tries to load the workspace 'xlisp.wks'
+from the current directory. If that file doesn't exist, XLISP builds an
+initial workspace, empty except for the built-in functions and symbols. Then
+XLISP attempts to load 'init.lsp' from the current directory. It then loads
+any files named as parameters on the command line [after appending '.lsp' to
+their names].</p>
+
+<p>XLISP then issues the following prompt:</p>
+
+<pre class="example">
+&gt;
+</pre>
+
+<p>This indicates that XLISP is waiting for an expression to be typed. When
+a complete expression has been entered, XLISP attempts to evaluate that
+expression. If the expression evaluates successfully, XLISP prints the
+result and then returns to the initial prompt waiting for another expression
+to be typed.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#3">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-002.html">Previous</a> |
+<a href="xlisp-man-004.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-003.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

@@ -1,0 +1,274 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-018.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#19">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-017.html">Previous</a> |
+<a href="xlisp-man-019.html">Next</a>
+
+<hr>
+
+<h1>18&nbsp; Predicate Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#atom">atom</a> - is this an atom ?</nobr></li>
+<li><nobr><a href="#symbolp">symbolp</a> - is this a symbol ?</nobr></li>
+<li><nobr><a href="#numberp">numberp</a> - is this a number ?</nobr></li>
+<li><nobr><a href="#null">null</a> - is this an empty list ?</nobr></li>
+<li><nobr><a href="#not">not</a> - is this false ?</nobr></li>
+<li><nobr><a href="#listp">listp</a> - is this a list ?</nobr></li>
+<li><nobr><a href="#endp">endp</a> - is this the end of a list ?</nobr></li>
+<li><nobr><a href="#consp">consp</a> - is this a non-empty list ?</nobr></li>
+<li><nobr><a href="#integerp">integerp</a> - is this an integer ?</nobr></li>
+<li><nobr><a href="#floatp">floatp</a> - is this a float ?</nobr></li>
+<li><nobr><a href="#stringp">stringp</a> - is this a string ?</nobr></li>
+<li><nobr><a href="#characterp">characterp</a> - is this a character ?</nobr></li>
+<li><nobr><a href="#arrayp">arrayp</a> - is this an array ?</nobr></li>
+<li><nobr><a href="#streamp">streamp</a> - is this a stream ?</nobr></li>
+<li><nobr><a href="#objectp">objectp</a> - is this an object ?</nobr></li>
+<li><nobr><a href="#boundp">boundp</a> - is a value bound to this symbol ?</nobr></li>
+<li><nobr><a href="#fboundp">fboundp</a> - is a functional value bound to this symbol ?</nobr></li>
+<li><nobr><a href="#minusp">minusp</a> - is this number negative ?</nobr></li>
+<li><nobr><a href="#zerop">zerop</a> - is this number zero ?</nobr></li>
+<li><nobr><a href="#plusp">plusp</a> - is this number positive ?</nobr></li>
+<li><nobr><a href="#evenp">evenp</a> - is this integer even ?</nobr></li>
+<li><nobr><a href="#oddp">oddp</a> - is this integer odd ?</nobr></li>
+<li><nobr><a href="#eq">eq</a> - are the expressions identical ?</nobr></li>
+<li><nobr><a href="#eql">eql</a> - are the expressions identical ?</nobr></li>
+<li><nobr><a href="#equal">equal</a> - are the expressions equal ?</nobr></li>
+</ol>
+
+<p><b>Note:</b> The string predicate functions are described in
+<nobr>Chapter 26,</nobr> <nobr><a href="xlisp-man-025.html">String
+Functions</a></nobr>, the character predicate functions are described in
+<nobr>Chapter 27,</nobr> <nobr><a href="xlisp-man-026.html">Character
+Functions</a></nobr>.</p>
+
+<hr>
+
+<a name="atom"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-034.html">atom</a> <i>expr</i>)
+- is this an <nobr>atom ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is an atom, NIL otherwise</dd>
+
+<a name="symbolp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-274.html">symbolp</a> <i>expr</i>)
+- is this a <nobr>symbol ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the expression is a symbol, NIL otherwise</dd>
+
+<a name="numberp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-185.html">numberp</a> <i>expr</i>)
+- is this a <nobr>number ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the expression is a number, NIL otherwise</dd>
+
+<a name="null"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-184.html">null</a> <i>expr</i>)
+- is this an empty <nobr>list ?</nobr></dt>
+<dd><i>expr</i> - the list to check<br>
+returns - T if the list is empty, NIL otherwise</dd>
+
+<a name="not"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-179.html">not</a> <i>expr</i>)
+- is this <nobr>false ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+return - T if the value is NIL, NIL otherwise</dd>
+
+<a name="listp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-151.html">listp</a> <i>expr</i>)
+- is this a <nobr>list ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is a cons or NIL, NIL otherwise</dd>
+
+<a name="endp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-098.html">endp</a> <i>list</i>)
+- is this the end of a <nobr>list ?</nobr></dt>
+<dd><i>list</i> - the list<br>
+returns - T if the value is NIL, NIL otherwise</dd>
+
+<a name="consp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-081.html">consp</a> <i>expr</i>)
+- is this a non-empty <nobr>list ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is a cons, NIL otherwise</dd>
+
+<a name="integerp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-140.html">integerp</a> <i>expr</i>)
+- is this an <nobr>integer ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is an integer, NIL otherwise</dd>
+
+<a name="floatp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-120.html">floatp</a> <i>expr</i>)
+- is this a <nobr>float ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is a float, NIL otherwise</dd>
+
+<a name="stringp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-255.html">stringp</a> <i>expr</i>)
+- is this a <nobr>string ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is a string, NIL otherwise</dd>
+
+<a name="characterp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-061.html">characterp</a> <i>expr</i>)
+- is this a <nobr>character ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is a character, NIL otherwise</dd>
+
+<a name="arrayp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-030.html">arrayp</a> <i>expr</i>)
+- is this an <nobr>array ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is an array, NIL otherwise<</dd>
+
+<a name="streamp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-247.html">streamp</a> <i>expr</i>)
+- is this a <nobr>stream ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is a stream, NIL otherwise</dd>
+
+<a name="objectp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-188.html">objectp</a> <i>expr</i>)
+- is this an <nobr>object ?</nobr></dt>
+<dd><i>expr</i> - the expression to check<br>
+returns - T if the value is an object, NIL otherwise</dd>
+
+<a name="boundp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-040.html">boundp</a> <i>sym</i>)
+- is a value bound to this <nobr>symbol ?</nobr></dt>
+<dd><i>sym</i> - the symbol<br>
+returns - T if a value is bound to the symbol, NIL otherwise</dd>
+
+<a name="fboundp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-113.html">fboundp</a> <i>sym</i>)
+- is a functional value bound to this <nobr>symbol ?</nobr></dt>
+<dd><i>sym</i> - the symbol<br>
+returns  - T if a functional value is bound to the symbol, NIL otherwise</dd>
+
+<a name="minusp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-174.html">minusp</a> <i>expr</i>)
+- is this number <nobr>negative ?</nobr></dt>
+<dd><i>expr</i> - the number to test<br>
+returns - T if the number is negative, NIL otherwise</dd>
+
+<a name="zerop"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-301.html">zerop</a> <i>expr</i>)
+- is this number <nobr>zero ?</nobr></dt>
+<dd><i>expr</i> - the number to test<br>
+returns - T if the number is zero, NIL otherwise</dd>
+
+<a name="plusp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-195.html">plusp</a> <i>expr</i>)
+- is this number <nobr>positive ?</nobr></dt>
+<dd><i>expr</i> - the number to test<br>
+returns - T if the number is positive, NIL otherwise</dd>
+
+<a name="evenp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-108.html">evenp</a> <i>expr</i>)
+- is this integer <nobr>even ?</nobr></dt>
+<dd><i>expr</i> - the integer to test<br>
+returns - T if the integer is even, NIL otherwise</dd>
+
+<a name="oddp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-189.html">oddp</a> <i>expr</i>)
+- is this integer <nobr>odd ?</nobr></dt>
+<dd><i>expr</i> - the integer to test<br>
+returns - T if the integer is odd, NIL otherwise</dd>
+
+<a name="eq"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-099.html">eq</a> <i>expr1</i>
+<i>expr2</i>) - are the expressions <nobr>identical ?</nobr></dt>
+<dd><i>expr1</i> - the first expression<br>
+<i>expr2</i> - the second expression<br>
+returns - T if they are equal, NIL otherwise</dd>
+
+<a name="eql"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-100.html">eql</a> <i>expr1</i>
+<i>expr2</i>) - are the expressions <nobr>identical ?</nobr>
+(works with all numbers)</dt>
+<dd><i>expr1</i> - the first expression<br>
+<i>expr2</i> - the second expression<br>
+returns - T if they are equal, NIL otherwise</dd>
+
+<a name="equal"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-101.html">equal</a> <i>expr1</i>
+<i>expr2</i>) - are the expressions <nobr>equal ?</nobr></dt>
+<dd><i>expr1</i> - the first expression<br>
+<i>expr2</i> - the second expression<br>
+returns - T if they are equal, T otherwise</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#19">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-017.html">Previous</a> |
+<a href="xlisp-man-019.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-018.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

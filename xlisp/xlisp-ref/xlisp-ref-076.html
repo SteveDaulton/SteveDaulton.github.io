@@ -1,0 +1,120 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-076.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP code-char</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-075.html">Previous</a> |
+<a href="xlisp-ref-077.html">Next</a>
+
+<hr>
+
+<h1>code-char</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlstr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(code-char <i>code</i>)</dt>
+<dd><i>code</i> - a numeric expression representing the
+<a href="../xlisp-misc/ascii-table.html">ASCII</a> code as an integer<br>
+returns - the character with that code or <a href="xlisp-ref-177.html">NIL</a> </dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'code-char' function returns a character which is the result of
+turning 'code' expression into a character. If a 'code' cannot be made into
+a character, <a href="xlisp-ref-177.html">NIL</a> is returned. The range
+that 'code' produces a valid character is <nobr>0 through 127.</nobr></p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(code-char 48)    <font color="#0000CC">; returns #\0</font>
+(code-char 65)    <font color="#0000CC">; returns #\A</font>
+(code-char 97)    <font color="#0000CC">; returns #\a</font>
+(code-char 91)    <font color="#0000CC">; returns #\[</font>
+(code-char 10)    <font color="#0000CC">; returns #\Newline</font>
+(code-char 128)   <font color="#0000CC">; returns NIL</font>
+(code-char 999)   <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p><b>Common Lisp:</b> Common Lisp allows for some optional arguments in
+'code-char' because it supports the concept of a complex character that
+includes not only the ASCII code value, but also fonts and bits. The bits
+allow for more than <nobr>8 bits</nobr> per character <nobr>[16 bits</nobr>
+is especially useful in oriental languages]. The fonts allow for up to 128
+different fonts. XLISP does not support fonts and bits or the optional
+parameters associated with them.</p>
+
+<p><b>Note:</b> Unlike the <a href="xlisp-ref-062.html">char-code</a> and
+<a href="xlisp-ref-066.html">char-int</a> functions, 'code-char' and
+<a href="xlisp-ref-138.html">int-char</a> are not identical in use.
+'code-char' accepts 0..127 for its range and then produces
+<a href="xlisp-ref-177.html">NIL</a> results.
+<a href="xlisp-ref-138.html">int-char</a> accepts 0..255 for its range and
+then produces errors.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-026.html#code-char">code-char</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-075.html">Previous</a> |
+<a href="xlisp-ref-077.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-076.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

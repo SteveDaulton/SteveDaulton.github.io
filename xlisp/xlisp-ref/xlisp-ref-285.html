@@ -1,0 +1,131 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-285.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP *tracelimit*</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-284.html">Previous</a> |
+<a href="xlisp-ref-286.html">Next</a>
+
+<hr>
+
+<h1>*tracelimit*</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>system variable</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlinit.c, xldbug.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;*tracelimit*</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>The *tracelimit* system variable controls the number of forms printed on
+entry to the <nobr><a href="../xlisp-man/xlisp-man-004.html">break
+loop</a></nobr>. If *tracelimit* is an integer, then the integer is the
+maximum number of forms that will be printed. If *tracelimit* is <a
+href="xlisp-ref-177.html">NIL</a> or a non-integer, then all of the forms
+will be printed. Note that <a href="xlisp-ref-287.html">*tracenable*</a>
+needs to be set to a non-<a href="xlisp-ref-177.html">NIL</a> value to
+enable the printing of back-trace information on entry to the <nobr><a
+href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun foo (x) (fee x))   <font color="#0000CC">; define FOO</font>
+(defun fee (y) (break))   <font color="#0000CC">; define FEE</font>
+(setq *tracenable* T)     <font color="#0000CC">; enable the back trace</font>
+(setq *tracelimit* NIL)   <font color="#0000CC">; show all the entries</font>
+
+(foo 5)                   <font color="#0000CC">; break: **BREAK**</font>
+                          <font color="#0000CC">; prints Function:#&lt;Subr-BREAK...&gt;</font>
+                          <font color="#0000CC">;        Function:#&lt;Closure-FEE...&gt;</font>
+                          <font color="#0000CC">;        Arguments:</font>
+                          <font color="#0000CC">;          5</font>
+                          <font color="#0000CC">;        Function:#&lt;Closure-FOO...&gt;</font>
+                          <font color="#0000CC">;        Arguments:</font>
+                          <font color="#0000CC">;          5</font>
+
+(clean-up)                <font color="#0000CC">; from break loop</font>
+(setq *tracelimit* 2)     <font color="#0000CC">; show only 2 entries</font>
+
+(foo 5)                   <font color="#0000CC">; break: **BREAK**</font>
+                          <font color="#0000CC">; prints Function:#&lt;Subr-BREAK...&gt;</font>
+                          <font color="#0000CC">;        Function:#&lt;Closure-FEE...&gt;</font>
+                          <font color="#0000CC">;        Arguments:</font>
+                          <font color="#0000CC">;          5</font>
+
+(clean-up)                <font color="#0000CC">; from break loop</font>
+</pre>
+
+<p><b>Note:</b> <a href="xlisp-ref-287.html">*tracenable*</a> and
+*tracelimit* system variables have to do with back trace information at
+entry to a
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>
+and are not related to the
+<a href="xlisp-ref-284.html">trace</a> and
+<a href="xlisp-ref-293.html">untrace</a> functions.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-011.html#tracelimit">*tracelimit*</a>
+system variable in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-284.html">Previous</a> |
+<a href="xlisp-ref-286.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-285.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

@@ -1,0 +1,107 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-122.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP fourth</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-121.html">Previous</a> |
+<a href="xlisp-ref-123.html">Next</a>
+
+<hr>
+
+<h1>fourth</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlinit.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(fourth <i>expr</i>)</dt>
+<dd><i>expr</i> - a list or list expression<br>
+returns - the fourth element of the list</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'fourth' function returns the fourth element of a list or list
+expression. If the list is
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="xlisp-ref-177.html">NIL</a> is returned.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(fourth '(1 2 3 4 5))                    <font color="#0000CC">; returns 4</font>
+(fourth NIL)                             <font color="#0000CC">; returns NIL</font>
+(setq kids '(junie vickie cindy chris))  <font color="#0000CC">; set up variable KIDS</font>
+(first kids)                             <font color="#0000CC">; returns JUNIE</font>
+(second kids)                            <font color="#0000CC">; returns VICKIE</font>
+(third kids)                             <font color="#0000CC">; returns CINDY</font>
+(fourth kids)                            <font color="#0000CC">; returns CHRIS</font>
+(rest kids)                              <font color="#0000CC">; returns (VICKIE CINDY CHRIS)</font>
+</pre>
+
+<p><b>Note:</b> This function is set to the same code as
+<a href="xlisp-ref-046.html">cadddr</a>.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#fourth">fourth</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-121.html">Previous</a> |
+<a href="xlisp-ref-123.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-122.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

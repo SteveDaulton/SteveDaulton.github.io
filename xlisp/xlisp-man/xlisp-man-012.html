@@ -1,0 +1,149 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-012.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#13">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-011.html">Previous</a> |
+<a href="xlisp-man-013.html">Next</a>
+
+<hr>
+
+<h1>12&nbsp; Evaluation Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#eval">eval</a> - evaluate an XLISP expression</nobr></li>
+<li><nobr><a href="#apply">apply</a> - apply a function to a list of arguments</nobr></li>
+<li><nobr><a href="#funcall">funcall</a> - call a function with arguments</nobr></li>
+<li><nobr><a href="#quote">quote</a> - return an expression unevaluated</nobr></li>
+<li><nobr><a href="#function">function</a> - get the functional interpretation</nobr></li>
+<li><nobr><a href="#backquote">backquote</a> - fill in a template</nobr></li>
+<li><nobr><a href="#lambda">lambda</a> - make a function closure</nobr></li>
+<li><nobr><a href="#get-lambda-expression">get-lambda-expression</a> - get the lambda expression</nobr></li>
+<li><nobr><a href="#macroexpand">macroexpand</a> - recursively expand macro calls</nobr></li>
+<li><nobr><a href="#macroexpand-1">macroexpand-1</a> - expand a macro call</nobr></li>
+</ol>
+
+
+
+<hr>
+
+<a name="eval"></a>
+
+<dl>
+<dt>(<a href="../xlisp-ref/xlisp-ref-105.html">eval</a> <i>expr</i>)
+  - evaluate an XLISP expression</dt>
+<dd><i>expr</i> - the expression to be evaluated<br>
+returns the result of evaluating the expression</dd>
+
+<a name="apply"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-027.html">apply</a> <i>fun</i> <i>args</i>)
+ - apply a function to a list of arguments</dt>
+<dd><i>fun</i> - the function to apply [or function symbol]<br>
+<i>args</i> - the argument list<br>
+returns the result of applying the function to the arguments</dd>
+
+<a name="funcall"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-123.html">funcall</a> <i>fun</i> <i>arg</i>...)
+ - call a function with arguments</dt>
+<dd><i>fun</i> - the function to call [or function symbol]<br>
+<i>arg</i> - arguments to pass to the function<br>
+returns the result of calling the function with the arguments</dd>
+
+<a name="quote"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-210.html">quote</a> <i>expr</i>)
+ - return an expression unevaluated</dt>
+<dd><i>expr</i> - the expression to be quoted [quoted]<br>
+returns <i>expr</i> unevaluated</dd>
+
+<a name="function"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-124.html">function</a> <i>expr</i>)
+ - get the functional interpretation</dt>
+<dd><i>expr</i> - the symbol or lambda expression [quoted]<br>
+returns - the functional interpretation</dd>
+
+<a name="backquote"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-036.html">backquote</a> <i>expr</i>)
+ - fill in a template</dt>
+<dd><i>expr</i> - the template<br>
+returns - a copy of the template with comma and comma-at expressions
+expanded</dd>
+
+<a name="lambda"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-145.html">lambda</a> <i>args</i>
+<i>expr</i>...) - make a function closure</dt>
+<dd><i>args</i> - formal argument list [lambda list] [quoted]<br>
+<i>expr</i> - expressions of the function body<br>
+returns  -   the function closure</dd>
+
+<a name="get-lambda-expression"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-132.html">get-lambda-expression</a>
+<i>closure</i>) - get the lambda expression</dt>
+<dd><i>closure</i> -  the closure<br>
+returns - the original lambda expression</dd>
+
+<a name="macroexpand"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-159.html">macroexpand</a> <i>form</i>)
+ - recursively expand macro calls</dt>
+<dd><i>form</i> - the form to expand<br>
+returns - the macro expansion</dd>
+
+<a name="macroexpand-1"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-160.html">macroexpand-1</a> <i>form</i>)
+ - expand a macro call</dt>
+<dd><i>form</i> - the macro call form<br>
+returns - the macro expansion</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#13">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-011.html">Previous</a> |
+<a href="xlisp-man-013.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-012.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

@@ -1,0 +1,136 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-048.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP catch</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-047.html">Previous</a> |
+<a href="xlisp-ref-049.html">Next</a>
+
+<hr>
+
+<h1>catch</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(catch <i>tag-symbol</i> [<i>expr</i> ... ])</dt>
+<dd><i>tag-symbol</i> - an expression that evaluates to a symbol<br>
+<i>expr</i> - an optional series of expressions to be evaluated<br>
+returns - the value of the last expression the
+<a href="xlisp-ref-281.html">throw</a> expression</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'catch' and <a href="xlisp-ref-281.html">throw</a> special forms
+allow for non-local exits and traps without going through the intermediate
+evaluations and function returns. If there is a 'catch' for a 'tag-symbol'
+that has no <a href="xlisp-ref-281.html">throw</a> performed to it, 'catch'
+returns the value returned from 'expr'. If there is no 'expr', a
+<a href="xlisp-ref-177.html">NIL</a> is returned. If a
+<a href="xlisp-ref-281.html">throw</a> is evaluated with no corresponding
+'catch', an error is generated:</p>
+
+<pre class="example">
+<font color="#AA0000">error: no target for THROW</font>
+</pre>
+
+<p>If, in the calling process, more than one 'catch' is set up for the same
+'tag-symbol', the most recently evaluated 'tag-symbol' will be the one that
+does the actual catching.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(catch 'mytag)                          <font color="#0000CC">; returns NIL   - no THROW</font>
+(catch 'mytag (+ 1 (+ 2 3)))            <font color="#0000CC">; returns 6     - no THROW</font>
+(catch 'mytag (+ 1 (throw 'mytag)))     <font color="#0000CC">; returns NIL   - caught it</font>
+(catch 'mytag (+ 1 (throw 'mytag 55)))  <font color="#0000CC">; returns 55    - caught it</font>
+(catch 'mytag (throw 'foo))             <font color="#0000CC">; error: no target for THROW</font>
+(defun in (x)                           <font color="#0000CC">; define IN</font>
+  (if (numberp x) (+ x x)               <font color="#0000CC">; if number THEN double</font>
+                  (throw 'math 42)))    <font color="#0000CC">;           ELSE throw 42</font>
+(defun out (x)                          <font color="#0000CC">; define OUT</font>
+  (princ "&lt;") 
+  (princ  (* (in x) 2))                 <font color="#0000CC">; double via multiply</font>
+  (princ "&gt;") "there")
+(defun main (x)                         <font color="#0000CC">; define MAIN</font>
+  (catch 'math (out x)))                <font color="#0000CC">; with CATCH</font>
+(in 5)                                  <font color="#0000CC">; returns 10</font>
+(out 5)                                 <font color="#0000CC">; prints  &lt;20&gt;   returns "there"</font>
+(main 5)                                <font color="#0000CC">; prints  &lt;20&gt;   returns "there"</font>
+(main 'a)                               <font color="#0000CC">; prints  &lt;      returns 42</font>
+</pre>
+
+<p><b>Note:</b> Although 'catch' and <a href="xlisp-ref-281.html">throw</a>
+will accept a 'tag-symbol' that is not a symbol, it will not find this
+improper 'tag-symbol'. An error will be generated:</p>
+
+<pre class="example">
+<font color="#AA0000">error: no target for THROW</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-019.html#catch">catch</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-047.html">Previous</a> |
+<a href="xlisp-ref-049.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-048.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

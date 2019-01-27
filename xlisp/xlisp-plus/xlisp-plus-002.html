@@ -1,0 +1,116 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-002.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP defconstant</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-001.html">Previous</a> |
+<a href="xlisp-plus-003.html">Next</a>
+
+<hr>
+
+<h1>defconstant</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined macro (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(defconstant <i>symbol init-value</i>)</dt>
+<dd><i>symbol</i> - an expression evaluating to a symbol<br>
+<i>init-value</i> - an initial value expression<br>
+returns - the value of <i>symbol</i></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'defconstant' macro defines a user constant with the name 'symbol'.
+The 'symbol' is created with the initial value 'init-value' expression. If
+'symbol' did exist, its previous value will be overwritten. 'defconstant'
+returns the 'symbol' as its result.</p>
+
+<pre class="example">
+(defmacro defconstant (sym val) `(setq ,sym ,val))
+</pre>
+
+<p><b>Note:</b> The 'defconstant' macro does not define a constant in the
+sense of an 'unchangeable' value. It's only intended to simplify porting
+code from Common Lisp to XLISP. XLISP does not support a 'constant' data
+type and also raises no error if the 'init-value' gets changed by the
+program afterwards. This macro is not included in the standard Nyquist
+distribution. If you want to use it, copy the code above to your 'init.lsp'
+file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(boundp 'mvyar)        <font color="#0000CC">; returns NIL - doesn't exist</font>
+(defconstant myvar 7)  <font color="#0000CC">; returns 7</font>
+(boundp 'myvar)        <font color="#0000CC">; returns T</font>
+myvar                  <font color="#0000CC">; returns 7</font>
+</pre>
+
+<p><b>Common Lisp:</b> In Common Lisp, the definition of 'defconstant' is
+such that it returns the 'symbol' as its result, XLISP returns the value of
+'symbol'. In Common Lisp, any change to the value of the 'defconstant
+symbol' is supposed to generate an error, XLISP treats it like any user
+symbol and allows it to change. Common LISP supports an additional
+documentation string as an optional parameter, XLISP does not support
+this.</p>
+
+<p>See also the XLISP Plus <a href="xlisp-plus-003.html">defparameter</a> and
+ <a href="xlisp-plus-004.html">defvar</a> functions.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-001.html">Previous</a> |
+<a href="xlisp-plus-003.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-002.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

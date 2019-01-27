@@ -1,0 +1,123 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-082.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP :constituent</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-081.html">Previous</a> |
+<a href="xlisp-ref-083.html">Next</a>
+
+<hr>
+
+<h1>:constituent</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>keyword</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlread.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;:constituent</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>':constituent' is an entry that is used in the
+<a href="xlisp-ref-216.html">*readtable*</a> system variable that
+contains XLISP's data structures relating to the processing of characters
+from the user [or files] and read-macro expansions. The existance of the
+':constituent' keyword means that the specified character is to be used, as
+is, with no further processing. The system defines that the following
+characters are ':constituent' characters:</p>
+
+<pre class="example">
+0123456789
+!$%&amp;*+-./:&lt;=&gt;?@[]^_{}~
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+</pre>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun look-at (table)               <font color="#0000CC">; define a function to</font>
+  (dotimes (ch 127)                  <font color="#0000CC">;   look in a table</font>
+    (prog ((entry (aref table ch)))  <font color="#0000CC">;   and print out any</font>
+      (case entry                    <font color="#0000CC">;   entries with a function</font>
+        (:CONSTITUENT
+          (princ (int-char ch)))
+        (T NIL))))
+  (terpri))
+
+(look-at *readtable*)                <font color="#0000CC">; prints  !$%&amp;*+-./0123456789</font>
+                                     <font color="#0000CC">;         :&lt;=&gt;?@ABCDEFGHIJKLM</font>
+                                     <font color="#0000CC">;         NOPQRSTUVWXYZ[]^_ab</font>
+                                     <font color="#0000CC">;         cdefghijklmnopqrstu</font>
+                                     <font color="#0000CC">;         vwxyz{}~</font>
+</pre>
+
+<p><b>Caution:</b> If you experiment with
+<nobr><a href="xlisp-ref-216.html">*readtable*</a> ,</nobr> it is useful to
+save the old value in a variable, so that you can restore the system
+state.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-008.html#constituent">:constituent</a>
+keyword in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-081.html">Previous</a> |
+<a href="xlisp-ref-083.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-082.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

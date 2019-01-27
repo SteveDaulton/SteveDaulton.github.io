@@ -1,0 +1,124 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-004.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP defvar</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-003.html">Previous</a> |
+<a href="xlisp-plus-005.html">Next</a>
+
+<hr>
+
+<h1>defvar</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined macro (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(defvar <i>symbol</i> [<i>init-value</i>])</dt>
+<dd><i>symbo</i>l - an expression evaluating to a symbol<br>
+<i>init-value</i> - an optional initial value expression<br>
+returns - the value of <i>symbol</i></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'defvar' macro defines a user variable with the name 'symbol'. If
+'symbol' did not already exist, the 'symbol' is created with the initial
+value <a href="../xlisp-ref/xlisp-ref-177.html">NIL</a>. If the optional
+'init-value' expression is present, the new 'symbol' will be set to the
+'init-value'. If 'symbol' did exist, its previous value will be left
+untouched. 'defvar' returns the value of 'symbol' as its result.</p>
+
+<pre class="example">
+(defmacro defvar (sym &optional val)
+  `(if (boundp ',sym) ,sym (setq ,sym ,val)))
+</pre>
+
+<p><b>Note:</b> The 'defvar' macro is intended to simplify porting code from
+Common Lisp to XLISP. XLISP does not have different concepts of 'variables',
+'parameters' and 'constants'. In XLISP they are all variables, so the only
+difference is that the 'defvar' macro prevents overriding the value of
+an already existing variable. This macro is not included in the standard
+Nyquist distribution. If you want to use it, copy the code above to your
+'init.lsp' file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(boundp 'mvyar)     <font color="#0000CC">; returns NIL - doesn't exist</font>
+(defvar myvar)      <font color="#0000CC">; returns NIL - no init-value was given</font>
+(boundp 'myvar)     <font color="#0000CC">; returns T</font>
+(setq myvar 7)      <font color="#0000CC">; returns 7</font>
+(defvar myvar)      <font color="#0000CC">; returns 7 - the variable was not changed</font>
+(defvar myvar 99)   <font color="#0000CC">; returns 7 - the variable was not changed</font>
+
+(boundp 'newyar)    <font color="#0000CC">; returns NIL - doesn't exist</font>
+(defvar newvar 99)  <font color="#0000CC">; returns 99 - a init-value of 99 was given</font>
+newvar              <font color="#0000CC">; returns 99</font>
+(defvar newvar)     <font color="#0000CC">; returns 99 - the variable was not changed</font>
+(defvar newvar 7)   <font color="#0000CC">; returns 99 - the variable was not changed</font>
+</pre>
+
+<p><b>Common Lisp:</b> In Common Lisp, the definition of 'defvar' is such
+that it returns the 'symbol' as its result, XLISP returns the value of
+'symbol'. Common Lisp supports a documentation string as an additional
+optional parameter, XLISP does not support this.</p>
+
+<p>See also the XLISP Plus <a href="xlisp-plus-002.html">defconstant</a>
+and <a href="xlisp-plus-003.html">defparameter</a> functions.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-003.html">Previous</a> |
+<a href="xlisp-plus-005.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-004.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

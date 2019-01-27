@@ -1,0 +1,225 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-025.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#26">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-024.html">Previous</a> |
+<a href="xlisp-man-026.html">Next</a>
+
+<hr>
+
+<h1>25&nbsp; String Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#string">string</a> - make a string from an integer ascii value</nobr></li>
+<li><nobr><a href="#string-trim">string-trim</a> - trim both ends of a string</nobr></li>
+<li><nobr><a href="#string-left-trim">string-left-trim</a> - trim the left end of a string</nobr></li>
+<li><nobr><a href="#string-right-trim">string-right-trim</a> - trim the right end of a string</nobr></li>
+<li><nobr><a href="#string-upcase">string-upcase</a> - convert a string to uppercase</nobr></li>
+<li><nobr><a href="#string-downcase">string-downcase</a> - convert a string to lowercase</nobr></li>
+<li><nobr><a href="#nstring-upcase">nstring-upcase</a> - convert a part of a string to uppercase</nobr></li>
+<li><nobr><a href="#nstring-downcase">nstring-downcase</a> - convert a part of a string to lowercase</nobr></li>
+<li><nobr><a href="#strcat">strcat</a> - concatenate strings</nobr></li>
+<li><nobr><a href="#subseq">subseq</a> - extract a substring</nobr></li>
+<li><nobr><a href="#string-less-than">string&lt;</a> - test for less than in ASCII ordering</nobr></li>
+<li><nobr><a href="#string-less-than-or-equal">string&lt;=</a> - test for less than or equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="#string-equal">string=</a> - test for equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="#string-not-equal">string/=</a> - test for not equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="#string-greater-than-or-equal">string&gt;=</a> - test for greater than or equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="#string-greater-than">string&gt;</a> - test for greater than in ASCII ordering</nobr></li>
+<li><nobr><a href="#string-lessp">string-lessp</a> - is this less than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="#string-not-greaterp">string-not-greaterp</a> - is this not greater than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="#string-equalp">string-equal</a> - is this equal in ASCII ordering ?</nobr></li>
+<li><nobr><a href="#string-not-equalp">string-not-equal</a> - is this not equal in ASCII ordering ?</nobr></li>
+<li><nobr><a href="#string-not-lessp">string-not-lessp</a> - is this not less than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="#string-greaterp">string-greaterp</a> - is this greater than in ASCII ordering ?</nobr></li>
+</ol>
+
+<hr>
+
+<a name="string"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-248.html">string</a> <i>expr</i>)
+- make a string from a symbol, character or string</dt>
+<dd><i>expr</i> - a symbol, character or string expression<br>
+returns - a string</dd>
+
+<a name="string-trim"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-265.html">string-trim</a> <i>bag</i>
+<i>str</i>) - trim both ends of a string</dt>
+<dd><i>bag</i> - a string containing characters to trim<br>
+<i>str</i> - the string to trim<br>
+returns - a trimed copy of the string</dd>
+
+<a name="string-left-trim"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-259.html">string-left-trim</a>
+<i>bag</i> <i>str</i>) - trim the left end of a string</dt>
+<dd><i>bag</i> - a string containing characters to trim<br>
+<i>str</i> - the string to trim<br>
+returns - a trimed copy of the string</dd>
+
+<a name="string-right-trim"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-264.html">string-right-trim</a>
+<i>bag</i> <i>str</i>) - trim the right end of a string</dt>
+<dd><i>bag</i> - a string containing characters to trim<br>
+<i>str</i> - the string to trim<br>
+returns - a trimed copy of the string</dd>
+
+<a name="string-upcase"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-266.html">string-upcase</a> <i>str</i>
+&amp;key :start :end) - convert to uppercase</dt>
+<dd><i>str</i> - the string<br>
+:start - the starting offset<br>
+:end - the ending offset + 1<br>
+returns - a converted copy of the string</dd>
+
+<a name="string-downcase"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-256.html">string-downcase</a>
+<i>str</i> &amp;key :start :end) - convert to lowercase</dt>
+<dd><i>str</i> - the string<br>
+:start - the starting offset<br>
+:end - the ending offset + 1<br>
+returns - a converted copy of the string</dd>
+
+<a name="nstring-upcase"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-181.html">nstring-upcase</a> <i>str</i>
+&amp;key :start :end) - convert to uppercase</dt>
+<dd><i>str</i> - the string<br>
+:start - the starting offset<br>
+:end - the ending offset + 1<br>
+returns - the converted string [not a copy]</dd>
+
+<a name="nstring-downcase"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-180.html">nstring-downcase</a>
+<i>str</i> &amp;key :start :end) - convert to lowercase</dt>
+<dd><i>str</i> - the string<br>
+:start - the starting offset<br>
+:end - the ending offset + 1<br>
+returns - the converted string [not a copy]</dd>
+
+<a name="strcat"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-246.html">strcat</a> <i>expr</i>...)
+- concatenate strings</dt>
+<dd><i>expr</i> - the strings to concatenate<br>
+returns - the result of concatenating the strings</dd>
+
+<a name="subseq"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-268.html">subseq</a> <i>string</i>
+<i>start</i> [<i>end</i>]) - extract a substring</dt>
+<dd><i>string</i> - the string<br>
+<i>start</i> - the starting position [zero origin]<br>
+<i>end</i> - the ending position + 1 [defaults to end]<br>
+returns - substring between <i>start</i> and <i>end</i></dd>
+
+<a name="string-less-than"></a>
+<a name="string-less-than-or-equal"></a>
+<a name="string-equal"></a>
+<a name="string-not-equal"></a>
+<a name="string-greater-than-or-equal"></a>
+<a name="string-greater-than"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-250.html">string&lt;</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-251.html">string&lt;=</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-252.html">string=</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-249.html">string/=</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-254.html">string&gt;=</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-253.html">string&gt;</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)</dt>
+<dd><i>str1</i> - the first string to compare<br>
+<i>str2</i> - the second string to compare<br>
+:start1 - first substring starting offset<br>
+:end1 - first substring ending offset + 1<br>
+:start2 - second substring starting offset<br>
+:end2 - second substring ending offset + 1<br>
+returns - a non-NIL value if the predicate is true, NIL otherwise<br>
+<b>Note:</b> case is significant with these comparison functions.</dd>
+
+<a name="string-lessp"></a>
+<a name="string-not-greaterp"></a>
+<a name="string-equalp"></a>
+<a name="string-not-equalp"></a>
+<a name="string-not-lessp"></a>
+<a name="string-greaterp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-260.html">string-lessp</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-262.html">string-not-greaterp</a>
+<i>str1</i> <i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-257.html">string-equal</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-261.html">string-not-equal</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-263.html">string-not-lessp</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)<br>
+(<a href="../xlisp-ref/xlisp-ref-258.html">string-greaterp</a> <i>str1</i>
+<i>str2</i> &amp;key :start1 :end1 :start2 :end2)</dt>
+<dd><i>str1</i> - the first string to compare<br>
+<i>str2</i> - the second string to compare<br>
+:start1 - first substring starting offset<br>
+:end1 - first substring ending offset + 1<br>
+:start2 - second substring starting offset<br>
+:end2 - second substring ending offset + 1<br>
+returns - T if predicate is true, NIL otherwise<br>
+<b>Note:</b> case is not significant with these comparison functions.</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#26">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-024.html">Previous</a> |
+<a href="xlisp-man-026.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-025.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

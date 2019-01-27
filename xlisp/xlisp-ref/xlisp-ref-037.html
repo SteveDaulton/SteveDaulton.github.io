@@ -1,0 +1,130 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-037.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP baktrace</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-036.html">Previous</a> |
+<a href="xlisp-ref-038.html">Next</a>
+
+<hr>
+
+<h1>baktrace</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xldbug.c, xlsys.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(baktrace [<i>level</i>])</dt>
+<dd><i>level</i> - an optional integer expression<br>
+returns - <a href="xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> The 'baktrace' function is used to examine the system execution stack
+from within the
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a>.</nobr> It
+shows the nested forms that got the system to the current state. The
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr> can be
+entered by a system error,
+<nobr><a href="xlisp-ref-102.html">error</a> ,</nobr>
+<a href="xlisp-ref-053.html">cerror</a> or
+<a href="xlisp-ref-041.html">break</a> functions. If the 'levels' parameter
+is not specified, all the nested forms will be shown back to the main loop
+form that started the execution. If 'level' is specified the most recent
+'level' nested forms will be shown.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+  (defun out (x) (print x) (mid 99))       <font color="#0000CC">; define OUT</font>
+  (defun mid (x) (print x) (in 999))       <font color="#0000CC">; define MID</font>
+  (defun in (x) (print x) (break "in" x))  <font color="#0000CC">; define IN with a BREAK</font>
+  (out 9)                                  <font color="#0000CC">; prints  9</font>
+                                           <font color="#0000CC">;         99</font>
+                                           <font color="#0000CC">;         999</font>
+                                           <font color="#0000CC">; break: in - 999</font>
+  (baktrace)                               <font color="#0000CC">; this is done from within break loop</font>
+                                           <font color="#0000CC">; prints  Function: #&lt;Subr-BAKTRACE: #22cb4&gt;</font>
+                                           <font color="#0000CC">;         Function: #&lt;Subr-BREAK</font>
+                                           <font color="#0000CC">;         Arguments:</font>
+                                           <font color="#0000CC">;           "in"</font>
+                                           <font color="#0000CC">;           999</font>
+                                           <font color="#0000CC">;         Function: #&lt;Closure-IN: #2bc44&gt;</font>
+                                           <font color="#0000CC">;         Arguments:</font>
+                                           <font color="#0000CC">;           999</font>
+                                           <font color="#0000CC">;         Function: #&lt;Closure-MID: #2bd20&gt;</font>
+                                           <font color="#0000CC">;         Arguments:</font>
+                                           <font color="#0000CC">;           99</font>
+                                           <font color="#0000CC">;         Function: #&lt;Closure-OUT: #2bec4&gt;</font>
+                                           <font color="#0000CC">;         Arguments:</font>
+                                           <font color="#0000CC">;           9</font>
+                                           <font color="#0000CC">;         NIL</font>
+</pre>
+
+<p><b>Common Lisp:</b> Common LISP has a similar function called
+'backtrace'. For XLISP, 'baktrace' is spelled with no 'c'.</p>
+
+<p>See the
+<nobr><a href="../xlisp-man/xlisp-man-022.html#baktrace">baktrace</a></nobr>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-036.html">Previous</a> |
+<a href="xlisp-ref-038.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-037.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

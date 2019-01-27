@@ -1,0 +1,127 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-229.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP rplaca</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-228.html">Previous</a> |
+<a href="xlisp-ref-230.html">Next</a>
+
+<hr>
+
+<h1>rplaca</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(rplaca <i>list expr</i>)</dt>
+<dd><i>list</i> - the list to destructively modify<br>
+<i>expr</i> - the expression to replace <a href="xlisp-ref-043.html">car</a>
+of <i>list</i><br>
+returns - the list node after updating the
+<a href="xlisp-ref-043.html">car</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'rplaca' function destructively modifies the
+<a href="xlisp-ref-043.html">car</a> of 'list' and replaces it with the
+'expr'. The destructive aspect of this operation means that the actual
+symbol value is used in the list-modifying operations, not a copy. 'list'
+must evaluate to a valid list.</p>
+
+<p>An atom or <a href="xlisp-ref-177.html">NIL</a> for 'list' will result in
+an error:</p>
+
+<pre class="example">
+<font color="#AA0000">error: bad argument type</font>
+</pre>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq a '(1 2 3))           <font color="#0000CC">; make A with value (1 2 3)</font>
+(setq b '(1 2 3))           <font color="#0000CC">; make B with value (1 2 3)</font>
+(setq c a)                  <font color="#0000CC">; make C point to A's value</font>
+(rplaca a 'new)             <font color="#0000CC">; returns (NEW 2 3)</font>
+
+(print a)                   <font color="#0000CC">; prints (NEW 2 3)</font>
+                            <font color="#0000CC">;   note that A is modified</font>
+
+(print b)                   <font color="#0000CC">; prints (1 2 3)</font>
+                            <font color="#0000CC">;   note that B is not modified</font>
+
+(print c)                   <font color="#0000CC">; prints (NEW 2 3)</font>
+                            <font color="#0000CC">;   note that C is modified too</font>
+
+(setq a '(1 2 3))           <font color="#0000CC">; reset A to value (1 2 3)</font>
+(rplaca a '(the sub list))  <font color="#0000CC">; returns ((THE SUB LIST) 2 3)</font>
+(rplaca '(1 2 3) 'more)     <font color="#0000CC">; returns (MORE 2 3)</font>
+
+(rplaca 'a 'b)              <font color="#0000CC">; error: bad argument type</font>
+(rplaca NIL 'b)             <font color="#0000CC">; error: bad argument type</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-017.html#rplaca">rplaca</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-228.html">Previous</a> |
+<a href="xlisp-ref-230.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-229.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

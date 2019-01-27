@@ -1,0 +1,48 @@
+<title>additive synthesis - b4.lsp</title>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<p align=center>Back to <a href="main.html">Pedro Morales' Examples Page</a></p>
+
+<h1 align=center>Continuous pitch control by LFO </h1>
+
+<p align=center>Sound Example: <a href="b4-starship.ogg">starship.ogg</a></p>
+
+<br>
+
+<pre>
+;;; ADDITIVE SYNTHESIS
+;;; Continuous pitch control by LFO
+;;; coded by Pedro Jose Morales
+;;; pmorales@iele-ab.uclm.es
+
+(load "pjmg.lsp")
+
+(defun lfo-pitch-control ()
+  (pwlv 0.25 0.6 0.25 1.4 0.5 2.0 0.25 2.2 0.25 3.4 0.5 3.8 0.75 7.0 -0.2))
+
+(defun starship (frq scl)
+  (apply #'sim
+         (mapcar #'(lambda (offset)
+                     (fmosc (hz-to-step (+ frq offset))
+                            (scale scl (lfo-pitch-control))))
+                 '(0.0 4.5 9.4 23.0 39.0 84.0))))
+
+(ss (starship 200.0 1000.0))
+</pre>
+
+<br>
+
+<p align=center>Back to <a href="main.html">Pedro Morales' Examples Page</a></p>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>

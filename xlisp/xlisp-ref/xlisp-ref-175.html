@@ -1,0 +1,117 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-175.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP nconc</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-174.html">Previous</a> |
+<a href="xlisp-ref-176.html">Next</a>
+
+<hr>
+
+<h1>nconc</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(nconc [<i>list1</i> ... ])</dt>
+<dd><i>listN</i> - a list to destructively concatenate<br>
+returns - the result of concatenating the lists</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'nconc' function destructively concatenates a sequence of lists and
+returns the result of this concatentation. The destructive aspect of this
+operation means that the actual symbol values are used in the list-modifying
+operations, not copies. This means, for 'nconc', that the lists are spliced
+together. 'listN' must evaluate to a valid list. An atom for 'listN' will
+result in an error. <a href="xlisp-ref-177.html">NIL</a> is a valid
+'listN'.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq a '(1 2 3))      <font color="#0000CC">; set up A with (1 2 3)</font>
+(setq b '(4 5 6))      <font color="#0000CC">; set up B with (4 5 6)</font>
+(setq c '(7 8 9))      <font color="#0000CC">; set up C with (7 8 9)</font>
+(NCONC a b c)          <font color="#0000CC">; returns (1 2 3 4 5 6 7 8 9)</font>
+(setf (nth 8 a) 'end)  <font color="#0000CC">; change last element of A</font>
+(print a)              <font color="#0000CC">; prints (1 2 3 4 5 6 7 8 END)</font>
+(print b)              <font color="#0000CC">; prints (4 5 6 7 8 END)</font>
+(print c)              <font color="#0000CC">; prints (7 8 END)</font>
+</pre>
+
+<p><b>Note:</b> with Nyquist, no error is raised if 'listN' is an atom.
+Instead, all atoms given to the 'nconc' function, if not given as the last
+argument, just disappear:</p>
+
+<pre class="example">
+(nconc 'a 'b 'c 'd)       <font color="#0000CC">; returns D</font>
+(nconc 'a '(b) 'c '(d))   <font color="#0000CC">; returns (B D)</font>
+(nconc '(a) 'b '(c) 'd)   <font color="#0000CC">; returns (A C . D)</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-017.html#nconc">nconc</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-174.html">Previous</a> |
+<a href="xlisp-ref-176.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-175.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

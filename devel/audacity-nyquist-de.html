@@ -1,0 +1,916 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/devel/audacity-nyquist-de.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:18:16 GMT -->
+<head>
+
+<title>Nyquist in Audacity</title>
+
+<style type="text/css">
+.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+.box {
+  color: #000000;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+</style>
+
+</head>
+
+<body>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../nyquist.html">Audacity and Nyquist</a> /
+<a href="../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples/examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<hr>
+
+<h1>Audacity und Nyquist 2007</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#header">Nyquist Plugin Header</a></nobr></li>
+<li><nobr><a href="#variables">Nyquist Variablen</a></nobr></li>
+<li><nobr><a href="#stereo">Stereo Tonspuren</a></nobr></li>
+<li><nobr><a href="#return">Rückgabewerte</a></nobr></li>
+<li><nobr><a href="#undocumented">Nyquist Plugins Version 2 und 3</a></nobr></li>
+<li><nobr><a href="#apropos">Apropos Plugin</a></nobr></li>
+</ol>
+
+<p><b>Hinweis:</b> Alle [Kommentare] und [Erklärungen] sind in eckigen
+Klammern geschrieben, damit sie nicht mit <nobr>(Lisp Code)</nobr>
+verwechselt werden können.</p>
+
+<p><b>Hinweis:</b> Es gibt Audacity Plugins <nobr>Version 1,</nobr>
+2, <nobr>und 3.</nobr> <nobr>'version 1'</nobr> sind die Plugins, wie sie
+auch in der offiziellen Dokumentation beschrieben sind. Die Funktionen der
+<nobr>'version 2'</nobr> und <nobr>'version 3'</nobr> und  Plugins wurden
+meines Wissens nach bis heute nie offiziell dokumentiert. Im ersten Teil
+dieser Seite sind die Variablen und Funktionen beschreiben, von denen ich
+weiss, dass sie mit *allen* Audacity Versionen funktionieren.</p>
+
+<a name="header"></a>
+
+<hr>
+
+<h2>Nyquist Plugin Header</h2>
+
+<hr>
+
+<p><b>Wichtig:</b> im Plugin Header darf nur *ein* Semikolon [Strichpunkt]
+am Anfang der Zeile stehen, weil diese Zeilen von Audacity ausgewertet
+werden. Der Nyquist Interpreter hingegen hält alles, was nach dem ersten
+Semikolon bis zum Ende der Zeile steht für einen Kommentar und ignoriert es
+einfach. In einem Nyquist Kommentar *ausserhalb* des Plugin Headers können
+auch mehrere Strichpunkte hintereinander verwendet werden.</p>
+
+<pre class="example">
+;nyquist plug-in
+;version 1
+;type <font color="#0000CC">typ</font>
+;name "<font color="#0000CC">name</font>"
+;action "<font color="#0000CC">text</font>"
+;info "<font color="#0000CC">text</font>"
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;type generate</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">'Erzeugen' [Generieren] Plugin</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;type process</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">'Effekt' Plugin</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;type analyze</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">'Analyse' Plugin</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;name "<font color="#0000CC">name</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Name des Plugins, wie er im Audacity Menü erscheinen soll</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;action "<font color="#0000CC">text</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Text, der erscheinen soll, während das Plugin arbeitet</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;info "<font color="#0000CC">text</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Text, der am oberen Rand des Plugin Fensters angezeigt werden soll</td>
+</tr>
+</tbody></table></p>
+
+<p>Die Zeichenfolge '\n' innerhalb von 'text' erzeugt einen Zeilenumbruch.</p>
+
+<p>Es ist leider nicht möglich mit einem Backslash '\' am Ende einer Zeile
+den Zeilenumbruch selbst ungültig zu machen. Der Text in den 'action' und
+'info' Zeilen muss also in jeweils einer einzigen Zeile stehen.</p>
+
+<p>Die 'info' Zeile ist optional und kann auch weggelassen werden.</p>
+
+<p><b>Schieberegler</b></p>
+
+<pre class="example">
+;control <font color="#0000CC">variable-name</font> "<font color="#0000CC">text-links</font>" <font color="#0000CC">variable-typ</font> "<font color="#0000CC">text-rechts</font>" <font color="#0000CC">anfangswert minimum maximum</font>
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">variable-name</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">ein Lisp Symbol</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">variable-typ</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">ein Zahlentyp:</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td colspan="2">
+  </td>
+  <td width="100%">
+    <table cellpadding="0" cellspacing="0"><tbody>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>int</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">Integer [Ganzzahl ohne Komma]</td>
+    </tr>
+    <tr>
+      <td style="height:5px"></td>
+    </tr>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>real</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">Fliesskommazahl</td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"<font color="#0000CC">text-links</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Text, der links vom Regler erscheinen soll</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"<font color="#0000CC">text_rechts</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Text, der rechts vom Regler erscheinen soll</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">anfangs-wert</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Wert des Reglers beim ersten Start des Plugins</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">minimum</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Wert des Reglers bei Linksanschlag</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">maximum</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Wert des Reglers bei Rechtsanschlag</td>
+</tr>
+</tbody></table></p>
+
+<p>Der eingestellte Wert des Reglers wird in der Variablen an das Programm
+übergegeben.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Nach oben</a></nobr></p>
+
+<a name="variables"></a>
+
+<hr>
+
+<h2>Nyquist Variablen</h2>
+
+<hr>
+
+<p>Die Übergabe der Variablen von Audacity an Nyquist ist in der Funktion
+'nyx_set_input_audio' in der Datei 'lib-src/libnyquist/nyx/nyx.c'
+im Audacity Quelltext definiert.</p>
+
+<p>Audacity übergibt an Nyquist folgende Variablen:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>s</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">der Audacity Sound [der markierte Teil der Tonspur]</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>len</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">die Anzahl der in 's' enthaltenen Samples</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>*sound-srate*</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">die Samplefrequenz der Audacity Tonspur</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>*warp*</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">eine Liste aus drei Werten:
+  </td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td colspan="2"></td>
+  <td width="100%">
+    <table cellpadding="0" cellspacing="0"><tbody>
+    <tr valign="top">
+      <td><nobr>time-offset</nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">ist in Audacity immer 0</td>
+    </tr>
+    <tr valign="top">
+      <td><nobr>time-stretch</nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">die Länge des markierten Teils der Tonspur in Sekunden</td>
+    </tr>
+    <tr valign="top">
+      <td><nobr>continuous-time-warp</nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">ist in Audacity immer NIL</td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+</tbody></table>
+
+<p>Die Länge des Audacity Sounds in Sekunden kann auf verschiedene
+Arten berechnet werden:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(/ len *sound-srate*)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">teilt die Anzahl der Samples durch die Samplefrequenz</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(get-duration 1)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">gibt den 'time-stretch' Wert aus der *warp* Variablen zurück</td>
+</tr>
+</tbody></table></p>
+
+<p><b>Roger Dannenberg schreibt:</b><p>
+
+<p>Die *warp* Variable gehört zum internen Teil der Nyquist Implementation,
+und sollte nicht direkt gelesen oder geschrieben werden. Um die Länge des
+markierten Teils der Audacity Tonspur aus der *warp* Variablen zu ermitteln,
+sollte die 'get-duration' Funktion verwendet werden:<p>
+
+<pre class="example">
+(get-duration 1)
+</pre>
+
+<p>Dies beantwortet die Frage: &quot;Wenn ein Nyquist Verhalten [behaviour]
+normalerweise eine Länge <nobr>von 1</nobr> hat, wie viele Sekunden Länge
+wird es nach einer 'warp' Funktion in Abhängigkeit des Zustands der Nyquist
+Umgebungsvariablen haben?&quot; Da viele der eingebauten Nyquist
+Verhaltensweisen [behaviours] wie etwa OSC und LFO eine voreingestellte
+Länge <nobr>von 1</nobr> haben, setzt Audacity den 'time-stretch' Wert
+der Umgebungsvariablen auf die Länge des markierten Teils der Tonspur,
+um die Länge des erzeugten Tons auf die Länge der Tonspur anzupassen.
+Andernfalls hätte z.B. <nobr>(OSC C4)</nobr> eine Länge von konstant einer
+Sekunde, egal wie kurz oder lang der markierte Teil der Tonspur wäre.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Nach oben</a></nobr></p>
+
+<a name="stereo"></a>
+
+<hr>
+
+<h2>Stereo Tonspuren</h2>
+
+<hr>
+
+<p>Wenn es sich um eine Stereospur handelt ist 's' ein Array [Feldvariable].
+Da die Nyquist <nobr>Low-Level</nobr> '<nobr>snd-...</nobr>' Funktionen aber
+nur <nobr>Mono-Signale</nobr> verarbeiten können muss [je nach verwendeter
+Nyquist Funktion] ein <nobr>Stereo-Signal</nobr> zuerst in zwei
+<nobr>Mono-Signale</nobr> zerlegt werden:</p>
+
+<pre class="example">
+(if (arrayp s)
+    (vector
+      (<font color="#0000CC">snd-function</font> (aref s 0))   <font color="#008844">; linker Stereokanal</font>
+      (<font color="#0000CC">snd-function</font> (aref s 1)))  <font color="#008844">; rechter Stereokanal</font>
+  (<font color="#0000CC">snd-function</font> s))               <font color="#008844">; Monosignal</font>
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(arrayp s)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">testet, ob es sich bei 's' um ein Array [Feldvariable]
+    handelt.</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(vector ... )</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">macht aus den beiden Mono-Signalen am Ende wieder ein
+    Stereo-Signal. Ein 'vector' ist ein ein eindimensionales Array.</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(aref s 0)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">ist der linke Stereo-Kanal [das nullte Feld des Arrays].</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(aref s 1)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">ist der rechte Stereo-Kanal [das erste Feld des Arrays].</td>
+</tr>
+</tbody></table></p>
+
+<p><b>Wichtig:</b> Nyquist in Audacity kann maximal zwei Signale [Stereo]
+gleichzeitig bearbeiten. Wenn in Audacity mehr als eine Tonspur ausgewählt
+wurde, werden alle Tonspuren *nacheinander* mit maximal zwei Kanälen
+gleichzeitig [Stereo] an Nyquist übergeben. Es ist mit Nyquist in Audacity
+momentan nicht möglich, z.B. Tonsignale von einer Audacity Tonspur in eine
+andere zu kopieren <nobr>[Audacity 1.3.4,</nobr> <nobr>Dezember
+2007].</nobr></p>
+
+<p><b>multichan-expand</b></p>
+
+<p>Es gibt im Audacity 'nyquist' Ordner in der Datei 'nyquist.lsp' eine
+Funktion 'multichan-expand', die auch Signale mit mehr als einem Kanal
+[z.B. Stereo Arrays] verwalten kann:</p>
+
+<pre class="example">
+(multichan-expand (<font color="#0000CC">function</font> &rest <font color="#0000CC">arguments</font>))
+</pre>
+
+<p>Die 'arrayp' Konstruktion von oben kann also auch folgendermassen
+geschrieben werden:</p>
+
+<pre class="example">
+(multichan-expand #'<font color="#0000CC">snd-function</font> s)
+</pre>
+
+<p>Meiner Meinung nach ist das aber wesentlich kryptischer [und damit
+weniger verständlich] zu lesen als die 'arrayp' Konstruktion von oben.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Nach oben</a></nobr></p>
+
+<a name="return"></a>
+
+<hr>
+
+<h2>Rückgabewerte</h2>
+
+<hr>
+
+<p>Das Ergebnis der letzten Berechnung im Programmablauf des Nyquist
+Plugins wird an Audacity zurückgegeben. Je nachdem, welcher Datentyp
+dabei an Audacity zurückgegeben wird, passiert folgendes:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr>sound<code></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">der zurückgegebene Sound wird in die in Audacity
+    markierten Auswahl in die Tonspur eingefügt. Wenn der zurückgegebene
+    Sound kürzer oder länger als der Originalsound ist, wird die Auswahl in
+    Audacity entsprechend vergrössert oder verkleinert. Wird ein Mono-Sound
+    in eine Stereo-Tonspur eingefügt, so wird auf *beiden* Stereo-Kanälen
+    der gleiche Mono-Sound eingefügt. Wenn ein Stereo-Sound in eine
+    Mono-Tonspur eingefügt werden soll, erscheint eine Fehlermeldung.</td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr>string<code></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">es erscheint ein Fenster, in dem die an Audacity
+    zurückgegebene Zeichenkette [string] angezeigt wird.</td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr>liste<code></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">wird eine speziell formatierte Liste [siehe unten] an
+    Audacity zurückgegeben, erscheint unter der Tonspur eine Spur mit
+    Textmarken.</td>
+</tr>
+</tbody></table></p>
+
+<p>Die Liste für die Textmarken muss folgendes Format haben:</p>
+
+<pre class="example">
+((<font color="#0000CC">fliesskommazahl</font> "<font color="#0000cc">text</font>") (<font color="#0000CC">fliesskommazahl</font> "<font color="#0000cc">text</font>") ... )
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">fliesskommazahl</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">die Zeit in Sekunden, an der die Textmarke eingefügt
+    werden soll.</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"<font color="#0000CC">text</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">der Text, der in der Textmarke angezeigt
+    werden soll.</td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Nach oben</a></nobr></p>
+
+<a name="undocumented"></a>
+
+<hr>
+
+<h2>Nyquist Plugins Version 2 und 3</h2>
+
+<hr>
+
+<p><b>Hinweis:</b> Nyquist <nobr>'version 2'</nobr> und <nobr>'version
+3'</nobr> Plugins sind meines Wissens nach nirgendwo offiziell dokumentiert.
+Es handelt sich hier um Nyquist Funktionen, die nur 'gerüchteweise' bekannt
+wurden oder 'herausexperimentiert' wurden. Ich übernehme keine Garantie,
+dass auch nur irgend etwas von dem, was ich hier schreibe, auch nur
+irgendwie funktioniert. Im Zweifelsfall lesen Sie bitte die Datei
+'src/effects/nyquist/Nyquist.cpp' im Audacity Quelltext.</p>
+
+<p><b>Plugin Header</b></p>
+
+<p>Der Plugin Header ist bis auf die 'version' Zeile identisch mit dem der
+'version 1' Plugins.</p>
+
+<p>Nyquist 'version 2' plugin header:</p>
+
+<pre class="example">
+;nyquist plug-in
+;version 2
+;type <font color="#0000CC">typ</font>
+;name "<font color="#0000CC">name</font>"
+;action "<font color="#0000CC">text</font>"
+;info "<font color="#0000CC">text</font>"
+</pre>
+
+<p>Nyquist 'version 3' plugin header:</p>
+
+<pre class="example">
+;nyquist plug-in
+;version 3
+;type <font color="#0000CC">typ</font>
+;name "<font color="#0000CC">name</font>"
+;action "<font color="#0000CC">text</font>"
+;info "<font color="#0000CC">text</font>"
+</pre>
+
+<p>Die Syntax der einzelnen Zeilen des Plugin Headers sowie auch die Syntax
+für die Schieberegler ist die gleiche wie <a href="#header">oben</a>.</p>
+
+<p>Neu hinzugekommen sind:</p>
+
+<p><b>Texteingabefeld</b> - neu in 'version 2'</p>
+
+<pre class="example">
+;control <font color="#0000CC">variable-name</font> "<font color="#0000CC">text-links</font>" string "<font color="#0000CC">text-rechts</font>" <font color="#0000CC">leerzeichen leerzeichen</font>
+</pre>
+
+<p>Der im Eingabefeld eingegebene Text wird in der Variablen als
+Zeichenkette [string] an das Programm übergegeben.</p>
+
+<p><b>Auswahlbox</b> - neu in 'version 3'</p>
+
+<pre class="example">
+;control <font color="#0000CC">variable-name</font> "<font color="#0000CC">text-links</font>" choice "<font color="#0000CC">text-1</font>,<font color="#0000CC">text-2</font>,..." <font color="#0000cc">anfangswert leerzeichen leerzeichen</font>
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"<font color="#0000CC">text-1</font>,..."</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">für jeden 'Text' wird ein Listeneintrag erzeugt.</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000CC">anfangswert</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">der Listeneintrag als Zahl, der beim ersten Start des
+    Plugins angezeigt werden soll.</td>
+</tr>
+</tbody></table></p>
+
+<p>Die Listeneinträge werden als Ganzzahlen verwaltet. Der erste [oberste]
+Listeneintrag hat die Nummer Null. Der ausgewählte Listeneintrag wird in der
+Variablen als Ganzzahl an das Programm übergegeben.</p>
+
+<p>Beispiele für Texteingabefeld und Auswahlbox finden sich im Quelltext des
+'Apropos' Plugins.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Nach oben</a></nobr></p>
+
+<a name="apropos"></a>
+
+<hr>
+
+<h2>Nyquist Apropos Plugin</h2>
+
+<hr>
+
+<p>Da nicht alle Funktionen, die im Nyquist Manual beschrieben sind auch in
+Audacity implementiert sind und auch überhaupt nicht alle Nyquist Funktionen
+im Nyquist Manual dokumentiert sind [Lisp ist eine 'programmierbare
+Programmiersprache', es sind also nur die Funktionen dokumentiert, die als
+'stabil' angesehen werden], ist es oft hilfreich ein Werkzeug zu haben, mit
+dem herausgefunden werden kann, ob die gewünschte Funktion in Audacity
+überhaupt vorhanden ist.</p>
+
+<p>Prinzipiell sind nur alle Nyquist Funktionen, die mit 'snd-...' beginnen
+innerhalb des Nyquist Interpreters in C implementiert [im Nyquist Manual
+heissen sie 'low-level' Funktionen], während *alle* anderen Funktionen in
+den Dateien im Audacity 'nyquist' Verzeichnis in Lisp implementiert sind und
+damit nachträglich jederzeit verändert oder erweitert werden können, ohne
+dass Audacity dazu neu kompiliert werden muss [es sei denn die jeweilige
+Lisp Funktion braucht eine in C implementierte Nyquist 'low-level' Funktion,
+die in Audacity noch nicht vorhanden ist].</p>
+
+<p>Alle Nyquist/XLISP Symbole [z.B. alle Variablen- und Funktionsnamen] sind
+im XLISP *obarray* gespeichert. Um in Audacity herauszufinden, ob eine
+bestimmte Funktion vorhanden ist kann z.B. zuerst mit einer Funktion aus dem
+Audacity 'Erzeugen' [Generieren] Menü eine beliebige Tonspur erzeugt werden
+und dann mit dem 'Nyquist Prompt' [Eingabeaufforderung] aus dem Audacity
+'Effekt' Menü [funktioniert nicht ohne markierte Audacity Tonspur] z.B.
+folgendes eingegeben werden:</p>
+
+<pre class="example">
+(print (fboundp 'snd-abs))
+</pre>
+
+<p><b>Wichtig:</b> bitte danach nicht auf 'OK' sondern auf 'Diagnose'
+[Debug] klicken.</p>
+
+<p>Es erscheint zuerst eine Meldung 'Nyquist gab keine Audiodaten zurück'
+oder ähnlich, dort bitte auf 'OK' klicken, danach erscheint ein Fenster
+'Nyquist Diagnose Protokoll' mit der Ausgabe der 'print' Funktion:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>T</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Funktion vorhanden</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>NIL</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">Funktion nicht vorhanden</td>
+</tr>
+</tbody></table></p>
+
+<p>Ich habe das in der Vergangenheit so oft gebraucht, dass ich ein Audacity
+Nyquist 'Apropos' Plugin geschrieben habe:</p>
+
+<p><b>Download:</b>&nbsp; <a href="apropos/apropos.html">Apropos-Plugin</a></p>
+
+<p>Das 'Apropos' Plugin istalliert sich im Audacity 'Erzeugen' [Generieren]
+Menü. Es durchsucht mit Hilfe eines Suchmusters das Nyquist/XLISP *obarray*
+nach Variablen- und/oder Funktionsnamen:</p>
+
+<p><img alt="Apropos Plugin Window" src="apropos/apropos-plugin.png"></p>
+
+<p><b>Hinweis:</b> wird *kein* Suchmuster [Search Pattern] angegeben,
+erscheinen *alle* Symbolnamen in alphabetischer Reihenfolge.</p>
+
+<p><b>Wichtig:</b> bitte im Apropos Plugin Fenster nicht auf 'OK' sondern
+auf 'Diagnose' [Debug] klicken.</p>
+
+<p>Es erscheint zuerst ein Fenster, dass mich daran erinnern soll, dass ich
+vergessen habe auf 'Diagnose' [Debug] zu klicken:</p>
+
+<p><img alt="Apropos Plugin Message" src="apropos/apropos-message.png"></p>
+
+<p>Danach, aber nur wenn auf  'Diagnose' [Debug] geklickt wurde, erscheint
+das Fenster mit den Ergebnissen, sortiert in alphabetischer Reihenfolge:</p>
+
+<p><img alt="Apropos Plugin Output" src="apropos/apropos-output.png"></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Nach oben</a></nobr></p>
+
+<a name=""></a>
+
+<hr>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../nyquist.html">Audacity and Nyquist</a> /
+<a href="../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples/examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/devel/audacity-nyquist-de.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:18:17 GMT -->
+</html>

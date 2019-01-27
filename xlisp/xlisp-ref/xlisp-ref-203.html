@@ -1,0 +1,129 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-203.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP prog*</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-202.html">Previous</a> |
+<a href="xlisp-ref-204.html">Next</a>
+
+<hr>
+
+<h1>prog*</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(prog* ([<i>binding</i> ... ]) [<i>expr</i> ... ])</dt>
+<dd><i>binding</i> - a variable binding which is can take one of
+<dl><dd><i>symbol</i><br>
+(<i>symbol init-expr</i>)</dd>
+<dl><dd><i>symbol</i> - a symbol<br>
+<i>init-expr</i> - an initialization expression for <i>symbol</i></dd></dl></dl>
+<i>expr</i> - expressions comprising the body of the loop which may contain
+<a href="xlisp-ref-225.html">return</a>s,
+<a href="xlisp-ref-135.html">go</a>s or tags for
+<a href="xlisp-ref-135.html">go</a><br>
+returns - <a href="xlisp-ref-177.html">NIL</a> or the argument passed to
+the <a href="xlisp-ref-225.html">return</a> function</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'prog*' special form is basically a 'block' construct that contains
+symbols with optional initializations and a block of code [expressions] to
+evaluate. The 'prog*' special form evaluates its initializations in
+sequential order as opposed to <a href="#">prog</a> which does it in no
+specified order. The first form after the 'prog*' is the 'binding' form. It
+contains a series of 'symbols' or 'bindings'. The 'binding' is a 'symbol'
+followed by an initialization expression 'init-expr'. If there is no
+'init-expr', the 'symbol' will be initialized to
+<a href="xlisp-ref-177.html">NIL</a>. The order of execution of the bindings
+is sequential. If a <a href="xlisp-ref-225.html">return</a> form is
+evaluated, its value will be returned. Otherwise,
+<a href="xlisp-ref-177.html">NIL</a> is returned. When the 'prog*' is
+finished execution, the 'symbols' that were defined will no longer exist or
+retain their values.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(prog* (i j)                 <font color="#0000CC">; PROG* with vars I and J</font>
+       (print i) (print j))  <font color="#0000CC">; prints  NIL NIL  returns NIL</font>
+
+(prog* ((i 1) (j 2))         <font color="#0000CC">; PROG* with vars I and J</font>
+       (print i) (print j)
+       (return (+ i j)))     <font color="#0000CC">; prints 1 2  returns 3</font>
+
+(prog* () (print "hello"))   <font color="#0000CC">; prints "hello"  returns NIL</font>
+
+(prog ((i 1) (j (+ i 1)))    <font color="#0000CC">; PROG won't work due to order</font>
+      (print (+ i j)) )      <font color="#0000CC">; error: unbound variable - I</font>
+
+(prog* ((i 1) (j (+ i 1)))   <font color="#0000CC">; PROG* will work due to order</font>
+       (print (+ i j)) )     <font color="#0000CC">; prints 3  returns NIL</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-021.html#prog*">prog*</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-202.html">Previous</a> |
+<a href="xlisp-ref-204.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-203.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

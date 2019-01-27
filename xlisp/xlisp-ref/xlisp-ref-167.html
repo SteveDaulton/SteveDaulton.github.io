@@ -1,0 +1,130 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-167.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP mapcar</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-166.html">Previous</a> |
+<a href="xlisp-ref-168.html">Next</a>
+
+<hr>
+
+<h1>mapcar</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(mapcar <i>function list1</i> [<i>list2</i> ... ])</dt>
+<dd><i>function</i> - a function definition like a
+<a href="xlisp-ref-145.html">lambda</a> or a function name<br>
+<i>listN</i> - a list or list expression<br>
+returns - a list that is constructed from the results of the <i>function</i> applications</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The mapcan function 'mapcar' applies the 'function' to the succesive
+<a href="xlisp-ref-043.html">car</a>s of each of the lists 'listN'. Each of
+the lists supplies one of the arguments to 'function'. The 'mapcar' function
+returns a list that is constructed from the results of the 'function'
+applications. If the lists are of different lengths, the shortest list will
+determine the number of applications of 'function'.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(mapcar '+ '(1 2 3) '(1 2 3))       <font color="#0000CC">; returns (2 4 6)</font>
+
+(mapcar 'princ '(1 2 3))            <font color="#0000CC">; prints 123</font>
+                                    <font color="#0000CC">; returns (1 2 3)</font>
+
+(mapcar '+ '(1 2 3) '(1 2 3 4 5 6)  <font color="#0000CC">; different length lists</font>
+                                    <font color="#0000CC">; returns (2 4 6)</font>
+</pre>
+
+<p><b>Note:</b> The use of the 'function' will work properly when it is a
+quoted symbol [the name of the function], an unquoted symbol whose value is
+a function or a closure object like a
+<a href="xlisp-ref-145.html">lambda</a> form.</p>
+
+<p><b>Bug:</b> The proper syntax for 'function' when 'function' is a
+<a href="xlisp-ref-145.html">lambda</a> expression is, for example:</p>
+
+<pre class="example">
+(mapcar #'(lambda (arg1 arg2) (+ arg1 arg2)) '(1 2))
+</pre>
+
+<p>and not:</p>
+
+<pre class="example">
+(mapcar '(lambda (arg1 arg2) (+ arg1 arg2)) '(1 2))
+</pre>
+
+<p>That is, the #' [<a href="xlisp-ref-124.html">function</a>] read macro
+must be present. This error should be caught by the XLISP interpreter, but
+it is not, with the result that very obscure garbage collection bugs
+occur. [I still haven't tested this with Nyquist.]</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#mapcar">mapcar</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-166.html">Previous</a> |
+<a href="xlisp-ref-168.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-167.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

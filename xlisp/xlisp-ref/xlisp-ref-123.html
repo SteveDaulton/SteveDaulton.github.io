@@ -1,0 +1,117 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-123.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP funcall</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-122.html">Previous</a> |
+<a href="xlisp-ref-124.html">Next</a>
+
+<hr>
+
+<h1>funcall</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(funcall <i>function</i> [<i>arg1</i> ... ])</dt>
+<dd><i>function</i> - the function or symbol to be called<br>
+<i>argN</i> - an argument to be passed to <i>function</i><br>
+returns - the result of calling the function with the arguments</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'funcall' function calls a function with a series of arguments.
+It returns the result from calling the function with the arguments.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(funcall '+ 1 2 3 4)                 <font color="#0000CC">; returns 10</font>
+(funcall #'+ 1 2 3 4)                <font color="#0000CC">; returns 10</font>
+(funcall '+ '1 '2 '3)                <font color="#0000CC">; returns 6</font>
+
+(setq sys-add (function +))          <font color="#0000CC">; returns #&lt;Subr-+: #22c32&gt;</font>
+(setq a 99)
+(funcall sys-add 1 a)                <font color="#0000CC">; 100</font>
+(funcall sys-add 1 'a)               <font color="#0000CC">; error: bad argument type</font>
+                                     <font color="#0000CC">;   you can't add a symbol, only it's value</font>
+
+(setq a 2)                           <font color="#0000CC">; set A</font>
+(setq b 3)                           <font color="#0000CC">; and B values</font>
+(funcall (if (&lt; a b) (function +)    <font color="#0000CC">; 'function' can be computed</font>
+                     (function -))
+         a b)                        <font color="#0000CC">; returns 5</font>
+
+(defun add-to-list (arg list)        <font color="#0000CC">; add a list or an atom</font>
+   (funcall (if (atom arg) 'cons     <font color="#0000CC">;   to the front of a list</font>
+                           'append)
+            arg list))
+(add-to-list 'a '(b c))              <font color="#0000CC">; returns (A B C)</font>
+(add-to-list '(a b) '(b c))          <font color="#0000CC">; returns (A B B C)</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-012.html#funcall">funcall</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-122.html">Previous</a> |
+<a href="xlisp-ref-124.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-123.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

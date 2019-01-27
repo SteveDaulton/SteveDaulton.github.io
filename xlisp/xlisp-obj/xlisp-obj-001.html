@@ -1,0 +1,588 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-obj/xlisp-obj-001.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:07 GMT -->
+<head><title>Programming Styles</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+Objects&nbsp; -&nbsp;
+<a href="xlisp-obj-002.html">Example</a>
+
+<hr>
+
+<h1>Xlisp Objects Primer</h1>
+
+<hr>
+
+<h2>Copyright</h2>
+
+<p>This tutorial is adapted from a 'XLISPOOP.DOC' document with the
+following copyright:</p>
+
+<p>XLisp 2.0 Objects Primer by Tim I Mikkelsen - February 3, 1990</p>
+
+<blockquote>
+<p> Copyright (c) 1990 by Tim I. Mikkelsen. All Rights Reserved. No part of this
+document may be copied, reproduced or translated for commercial use without
+prior written consent of the author. Permission is granted for non-commercial
+use as long as this notice is left intact.
+
+<p> One of the features in the design of XLISP is object-oriented programming.
+This primer is intended to serve as a very brief introduction to the object
+facilities of the XLISP 2.0 dialect of LISP. Note that the object features of
+XLISP are not based on other existing object definitions in other LISP dialects.
+If you find problems in the primer, I'd appreciate hearing. </p>
+</blockquote>
+
+<p>Tim Mikkelsen, (tim@hpfcbig.SDE.HP.COM), 4316 Picadilly Drive, Fort Collins,
+Colorado  80526</p>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#1">Programming Styles</a></nobr></li>
+<li><nobr><a href="#2">Object Oriented Programming</a></nobr></li>
+<li><nobr><a href="#3">Xlisp Object Terminology</a></nobr></li>
+<li><nobr><a href="#4">Sending Messages</a></nobr></li>
+<li><nobr><a href="#5">Classes</a></nobr></li>
+<li><nobr><a href="#6">A Better Class Example</a></nobr></li>
+<li><nobr><a href="#7">Instances</a></nobr></li>
+<li><nobr><a href="#8">Methods</a></nobr></li>
+<li><nobr><a href="#9">Sending Messages To A Superclass</a></nobr></li>
+<li><nobr><a href="#10">Object And Class</a></nobr></li>
+<li><nobr><a href="xlisp-obj-002.html">Xlisp Objects Example</a></nobr></li>
+</ol>
+
+<a name="1"></a>
+
+<hr>
+
+<h2>1&nbsp; Programming Styles</h2>
+
+<hr>
+
+<p> There are many programming paradigms [models]. Some of the paradigms are
+procedural, functional, rule-based, declarative and object-oriented. A
+language can have aspects of one or many of these programming models. </p>
+
+<p><b>Procedure-Oriented</b> - The programming paradigm most people are
+familiar with is the procedural style. The primitives in procedural
+programming are: subroutines and data structures. Through these primitives,
+programmers have some limited abilities to share programs and program
+fragments. C and Pascal are examples of procedural languages. Some
+procedural languages [such as Modula and ADA] have extensions that provide
+for better sharing of code.</p>
+
+<p><b>Object-Oriented</b> - Object-oriented programming is based on the
+primitives of objects, classes and messages. Objects are defined in terms of
+classes. Actions occur by sending a message to an object. An object's
+definition can be inherited from more general classes. Objective-C and C++
+both are object-oriented dialects of the C language. Many dialects of LISP
+have some object oriented extension [Flavors, Common LOOPS, CLOS and
+others]. There currently is standards work proceeding to add object-oriented
+programming to Common LISP.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2"></a>
+
+<hr>
+
+<h2>2&nbsp; Object Oriented Programming</h2>
+
+<hr>
+
+<p>So, the object-oriented programming model is based around the concepts of
+objects, classes and messages. An object is essentially a black box that
+contains internal state information. You send an object a message which
+causes the object to perform some operation. Objects are defined and
+described through classes.</p>
+
+<p>One aspect of an object is that you do not have to know what is inside or
+how it works to be able to use it. From a programming point of view, this is
+very handy. You can develop a series of objects for someone to use. If you
+need to change what goes on inside, the users of the objects should be
+unaware.</p>
+
+<p>Another aspect of objects is that of inheritance. You can build up new
+classes from existing classes by inheriting the existing class's
+functionality and then extending the new definition. For example, you can
+define a 'tool' class [with various attributes] and then go about creating
+object instances 'tool-1', 'tool-2', and so on. You can also create new
+sub-classes of the tool class like power-tool. This is also very handy
+because you don't have to re-implement something if you can build it up from
+existing code.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="3"></a>
+
+<hr>
+
+<h2>3&nbsp; Xlisp Object Terminology</h2>
+
+<hr>
+
+<p>There are, as previously mentioned, many different languages with
+object-oriented extensions and facilities. The terminology, operations and
+styles of these are very different. Some of the main definitions for XLISP's
+object-oriented extensions are:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr valign="top">
+  <td nowrap><nobr><b>object data type</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The 'object' data type is a built-in data type of XLISP.
+    Members of the object data type are object instances and classes.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>object instances</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">An 'object instance' is a composite structure that
+    contains internal state information, methods (the code which respond
+    to messages), a pointer to the object instance's defining class and
+    a pointer to the object's super-class. XLISP contains no built-in
+    object instances.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>class objects</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">A 'class object' is, essentially, the template for
+    defining the derived object instances. A class object, although used
+    differently from a simple object instance, is structurally a member of
+    the object data type. It is also contains the linking mechanism that
+    allows you to build class hierarchies (sub-classes and super-classes).
+    XLISP contains two built-in class objects: 'object' and 'class'.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>message selector</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The 'message selector' is the symbol that is used to
+    select a particular action (Method) from the object.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>message</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The 'message' is the combination of the message selector
+    and the data (if any) to be sent to the object.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>method</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The 'method' is the actual code that gets executed when
+    the object receives the Message.</td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="4"></a>
+
+<hr>
+
+<h2>4&nbsp; Sending Messages</h2>
+
+<hr>
+
+<p>The mechanism for sending messages to XLISP objects is via the 'send'
+function. It takes an object, a message selector and various optional
+arguments [depending on the message selector].</p>
+
+<p>The way that a user creates a new object is to send a ':new' message to a
+previously defined class. The result of this 'send' will return an object, so
+this is normally preceded by a 'setq'. The values shown in the examples that
+follow may not match what you see if you try this on your version of XLISP,
+this is not an error. The screens that are used in the various examples are
+similar to what you should see on your computer screen. The '&gt;' is the
+normal XLISP prompt [the characters that follow the prompt is what you
+should type in to try these examples].</p>
+
+<pre class="example">
+&gt; (setq my-object (send object :new))
+#&lt;Object: #2e100&gt;
+</pre>
+
+<p> The object created here is of limited value. Most often, you create a
+class object and then you create instances of that class. So in the
+following example, a class called 'my-class' is created that inherits its
+definition from the a built-in 'class' definition. Then two instances are
+created of the new class. </p>
+
+<pre class="example">
+&gt; (setq my-class (send class :new '()))
+#&lt;Object: #27756&gt;
+
+&gt; (setq my-instance (send my-class :new))
+#&lt;Object: #27652&gt;
+
+&gt; (setq another-instance (send my-class :new))
+#&lt;Object: #275da&gt;
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="5"></a>
+
+<hr>
+
+<h2>5&nbsp; Classes</h2>
+
+<hr>
+
+<p> Previously, a ':new' message was used to create an object. The message
+used to see what is in an object is the ':show' message. </p>
+
+<pre class="example">
+&gt; (send my-class :show)
+Object is #&lt;Object: #27756&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = NIL
+  IVARS = NIL
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = #&lt;Object: #23fd8&gt;
+  IVARCNT = 0
+  IVARTOTAL = 0
+#&lt;Object: #27756&gt;
+</pre>
+
+<p> From the display of the 'my-class' object you can see there are a
+variety of components. The components of a class are: </p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr valign="top">
+  <td nowrap><nobr><b>class pointer</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">This pointer shows to what class the object [instance or
+    class] belongs. For a class, this always points to the built-in object
+    'class'. This is also true of the 'class' object, its class pointer
+    points to itself.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>superclass pointer</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">This pointer shows what the next class up the class
+    hierarchy is. If the user does not specify what class is the superclass,
+    it will point to the built-in class 'object'.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>messages</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">This component shows what messages are allowed for the
+    class, and the description of the method that will be used. If the
+    method is system-defined, it will show up in the form of:
+
+<pre class="example">
+#&lt;Subr-: #18b98&gt;
+</pre>
+
+    Remember that the class hierarchy [through the Superclass Pointer] is
+    searched if the requested message is not found in the class.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>instance variables</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">This component lists what instance variables will be
+    created when an object instance is created. If no instances of the class
+    exist, there are no instance variables. If there are 5 instances of a
+    class, there are 5 complete and different groups of the Instance
+    Variables.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>class variables<br>&nbsp;and values</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The 'class variables' [cvar] component lists what class
+    variables exist within the class. The Class Values [cval] component
+    shows what the current values of the variables are. Class Variables are
+    used to hold state information about a class. There will be one of each
+    of the Class Variables, independent of the number of instances of the
+    class created.</td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="6"></a>
+
+<hr>
+
+<h2>6&nbsp; A Better Class Example</h2>
+
+<hr>
+
+<p> The example previously shown does work, but the class and instances created
+don't really do anything of interest. The following example sets up a tool class
+and creates some tool instances. </p>
+
+<pre class="example">
+&gt; (setq my-tools (send class :new '(power moveable operation)))
+#&lt;Object: #277a6&gt;
+
+&gt; (send my-tools :answer :isnew '(pow mov op) 
+                                '((setq power pow)
+                                  (setq moveable mov)
+                                  (setq operation op)))
+#&lt;Object: #277a6&gt;
+
+&gt; (setq drill (send my-tools :new 'AC t 'holes))
+#&lt;Object: #2ddbc&gt;
+
+&gt; (setq hand-saw (send my-tools :new 'none t 'cuts))
+#&lt;Object: #2dc40&gt;
+
+&gt; (setq table-saw (send my-tools :new 'AC nil 'cuts))
+#&lt;Object: #2db00&gt;
+</pre>
+
+<p>So, a class of objects called 'my-tools' was created. Note that the class
+object 'my-tools' was created by sending the ':new' message to the built-in
+'class' object. Within the 'my-tool' class, there are three instances called
+'drill', 'hand-saw' and 'table-saw'. These were created by sending the
+':new' message to the 'my-tools' class object. Notice that the parameters
+followed the message selector.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="7"></a>
+
+<hr>
+
+<h2>7&nbsp; Instances</h2>
+
+<hr>
+
+<p>The following is a display of the contents of some of the previously
+created instances:</p>
+
+<pre class="example">
+&gt; (send drill :show)
+Object is #&lt;Object: #2ddbc&gt;, Class is #&lt;Object: #277a6&gt;
+  POWER = AC
+  MOVEABLE = T
+  OPERATION = HOLES
+#&lt;Object: #2ddbc&gt;
+
+&gt; (send hand-saw :show)
+Object is #&lt;Object: #2dc40&gt;, Class is #&lt;Object: #277a6&gt;
+  POWER = NONE
+  MOVEABLE = T
+  OPERATION = CUTS
+#&lt;Object: #2dc40&gt;
+</pre>
+
+<p> From the display of these instances you can see there are some
+components and values. The components of an instance are: </p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr valign="top">
+  <td nowrap><nobr><b>class pointer</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">This pointer shows to which class the current object
+    instance belongs. It is through this link that the system finds the
+    methods to execute for the received messages.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>instance variables<br>&nbsp;and values</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The instance variables [ivar] component lists what
+    variables exist within the instance. The instance values component holds
+    what the current values of the variables are. Instance Variables are
+    used to hold state information for each instance. There will be a group
+    of Instance Variables for each instance.</td>
+</tr>
+</tbody></table>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="8"></a>
+
+<hr>
+
+<h2>8&nbsp; Methods</h2>
+
+<hr>
+
+<p> There have been a few of the messages and methods in XLISP shown to this
+point [':new' and ':show']. The following are the methods built into XLISP:
+</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr valign="top">
+  <td nowrap><nobr><b>:answer</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The ':answer' method allows you to define or change
+    methods within a class.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>:class</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The ':class' method returns the class of an object.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>:isnew</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The ':isnew' method causes an instance to run its
+    initialization code. When the ':isnew' method is run on a class, it
+    resets the class state. This allows you to re-define instance variables,
+    class variables, etc.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>:new</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The ':new' method allows you to create an instance when
+    the ':new' message is sent to a user-defined class. The ':new' method
+    allows you to create a new class (when the ':new' message is sent to the
+    built-in 'class').</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td nowrap><nobr><b>:show</b></nobr></td>
+  <td nowrap><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">The ':show' method displays the instance or class.</td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="9"></a>
+
+<hr>
+
+<h2>9&nbsp; Sending Messages To A Superclass</h2>
+
+<hr>
+
+<p> In addition to the 'send' function, there is another function called
+'send-super'. The 'send-super' function causes the specified message to be
+performed by the superclass method. This is a mechanism to allow chaining of
+methods in a class hierarchy. This chaining behavior can be achieved by
+creating a method for a class with the ':answer' message. Within the body of
+the method, you include a 'send-super' form. This function is allowed only
+inside the execution of a method of an object. </p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="10"></a>
+
+<hr>
+
+<h2>10&nbsp; Object And Class</h2>
+
+<hr>
+
+<p>The definition of the built-in class 'object' is:</p>
+
+<pre class="example">
+&gt; (send object :show)
+Object is #&lt;Object: #23fd8&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:SHOW . #&lt;Subr-: #23db2&gt;) 
+              (:CLASS . #&lt;Subr-: #23dee&gt;) 
+              (:ISNEW . #&lt;Subr-: #23e2a&gt;))
+  IVARS = NIL
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = NIL
+  IVARCNT = 0
+  IVARTOTAL = 0
+#&lt;Object: #23fd8&gt;
+</pre>
+
+<p> Note that 'object' is a class, as opposed to an 'instance-style' object.
+'object' has no superclass, it is the top or root of the class hierarchy. 'object's
+class is 'class'. </p>
+
+<pre class="example">
+&gt; (send class :show)
+Object is #&lt;Object: #23fe2&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:ANSWER . #&lt;Subr-: #23e48&gt;) 
+              (:ISNEW . #&lt;Subr-: #23e84&gt;) 
+              (:NEW . #&lt;Subr-: #23ea2&gt;))
+  IVARS = (MESSAGES IVARS CVARS CVALS SUPERCLASS 
+           IVARCNT IVARTOTAL)
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = #&lt;Object: #23fd8&gt;
+  IVARCNT = 7
+  IVARTOTAL = 7
+#&lt;Object: #23fe2&gt;
+</pre>
+
+<p>'class' has a superclass of 'object'. It's class is itself, 'class'.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+Objects&nbsp; -&nbsp;
+<a href="xlisp-obj-002.html">Example</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-obj/xlisp-obj-001.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:07 GMT -->
+</html>

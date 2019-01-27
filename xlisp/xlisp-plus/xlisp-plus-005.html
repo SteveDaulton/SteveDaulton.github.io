@@ -1,0 +1,156 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-005.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP get-macro-character</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-004.html">Previous</a> |
+<a href="xlisp-plus-006.html">Next</a>
+
+<hr>
+
+<h1>get-macro-character</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined function (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(get-macro-character <i>char</i>)</dt>
+<dd><i>char</i> - a character<br>
+returns - the code associated with the
+<a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> entry or
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> The 'get-macro-character' function returns the code that will be
+executed when the specified character 'char' is encountered by the XLISP
+reader. The returned value is taken from the
+<a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> system variable which contains
+the reader table array. The table is 128 entries [0..127] for each of the
+7-bit ASCII characters that XLISP can read. Each entry in the table must be
+one of <nobr><a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-082.html">:constituent</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-236.html">:sescape</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-172.html">:mescape</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-298.html">:white-space</a> ,</nobr> a
+<a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> dotted pair or a
+<a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a> dotted pair.</p>
+
+<p>The 'get-macro-character' function will return a
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> value if the table entry is
+
+<nobr><a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-082.html">:constituent</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-236.html">:sescape</a> ,</nobr>
+<a href="../xlisp-ref/xlisp-ref-172.html">:mescape</a> or
+<a href="../xlisp-ref/xlisp-ref-298.html">:white-space</a>. If the table entry is
+<a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> or
+<nobr><a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a> ,</nobr> then the code
+associated with the entry is returned.
+<a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> is used for a terminating
+read-macro. <a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a> is used for a
+non-terminating read-macro. 'get-macro-character' does not differentiate
+whether the code returned is a
+<a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> or an
+<a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a>.</p>
+
+<p>The function returned may be a built-in read-macro function or a user
+defined <a href="../xlisp-ref/xlisp-ref-145.html">lambda</a> expression. The function
+takes two parameters, an input stream specification, and an integer that is
+the character value. The function should return
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> if the character is 'white-space' or a
+value <a href="../xlisp-ref/xlisp-ref-080.html">cons</a>ed with
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> to return the value.</p>
+
+<pre class="example">
+(defun get-macro-character (ch)
+  (if (consp (aref *readtable* (char-int ch)))
+      (cdr (aref *readtable* (char-int ch)))
+    nil))
+</pre>
+
+<p><b>Note:</b> This function is not included in the standard Nyquist
+distribution. If you want to use it, copy the code above to your 'init.lsp'
+file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(get-macro-character #\()      <font color="#0000CC">; returns #&lt;Subr-: #...&gt;</font>
+(get-macro-character #\#)      <font color="#0000CC">; returns #&lt;Subr-: #...&gt;</font>
+(get-macro-character #\Space)  <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p><b>Note:</b> In the normal XLISP system the following characters have
+code associated with them in the
+<a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a>:</p>
+
+<pre>
+  "   #   '   (   )   ,   ;   `
+</pre>
+
+<p>[double-quote, hash, quote, opening parenthesis, closing parenthesis,
+comma, semicolon, backquote]</p>
+
+<p><b>Common Lisp:</b> The 'get-macro-character' function is
+somewhat related to the Common Lisp 'get-dispatch-macro-character' function.</p>
+
+<p>See also the XLISP Plus <a href="xlisp-plus-006.html">set-macro-character</a>
+function.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-004.html">Previous</a> |
+<a href="xlisp-plus-006.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-005.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

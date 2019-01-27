@@ -1,0 +1,127 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-017.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#18">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-016.html">Previous</a> |
+<a href="xlisp-man-018.html">Next</a>
+
+<hr>
+
+<h1>17&nbsp; Destructive List Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#rplaca">rplaca</a> - replace the car of a list node</nobr></li>
+<li><nobr><a href="#rplacd">rplacd</a> - replace the cdr of a list node</nobr></li>
+<li><nobr><a href="#nconc">nconc</a> - destructively concatenate lists</nobr></li>
+<li><nobr><a href="#delete">delete</a> - delete elements from a list</nobr></li>
+<li><nobr><a href="#delete-if">delete-if</a> - delete elements that pass test</nobr></li>
+<li><nobr><a href="#delete-if-not">delete-if-not</a> - delete elements that fail test</nobr></li>
+<li><nobr><a href="#sort">sort</a> - sort a list</nobr></li>
+</ol>
+
+<hr>
+
+<a name="rplaca"></a>
+
+<dl>
+<dt>(<a href="../xlisp-ref/xlisp-ref-229.html">rplaca</a> <i>list</i>
+<i>expr</i>) - replace the car of a list node</dt>
+<dd> <i>list</i> - the list node<br>
+<i>expr</i> - the new value for the car of the list node<br>
+returns - the list node after updating the car</dd>
+
+<a name="rplacd"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-230.html">rplacd</a> <i>list</i>
+<i>expr</i>) - replace the cdr of a list node</dt>
+<dd><i>list</i> - the list node<br>
+<i>expr</i> - the new value for the cdr of the list node<br>
+returns - the list node after updating the cdr</dd>
+
+<a name="nconc"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-175.html">nconc</a> <i>list</i>...)
+- destructively concatenate lists</dt>
+<dd><i>list</i> - lists to concatenate<br>
+returns - the result of concatenating the lists</dd>
+
+<a name="delete"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-088.html">delete</a> <i>expr</i>
+&amp;key :test :test-not) - delete elements from a list</dt>
+<dd><i>expr</i> - the element to delete<br>
+<i>list</i> - the list<br>
+:test - the test function [defaults to eql]<br>
+:test-not - the test function [sense inverted]<br>
+returns - the list with the matching expressions deleted</dd>
+
+<a name="delete-if"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-089.html">delete-if</a> <i>test</i>
+<i>list</i>) - delete elements that pass test</dt>
+<dd><i>test</i> - the test predicate<br>
+<i>list</i> - the list<br>
+returns - the list with matching elements deleted</dd>
+
+<a name="delete-if-not"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-090.html">delete-if-not</a> <i>test</i>
+<i>list</i>) - delete elements that fail test</dt>
+<dd><i>test</i> - the test predicate<br>
+<i>list</i> - the list<br>
+returns - the list with non-matching elements deleted</dd>
+
+<a name="sort"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-242.html">sort</a> <i>list</i>
+<i>test</i>) - sort a list</dt>
+<dd><i>list</i> - the list to sort<br>
+<i>test</i> - the comparison function<br>
+returns - the sorted list</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#18">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-016.html">Previous</a> |
+<a href="xlisp-man-018.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-017.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

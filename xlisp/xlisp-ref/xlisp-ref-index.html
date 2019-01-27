@@ -1,0 +1,2236 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-index.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:18:58 GMT -->
+<head><title>XLISP Language Reference</title>
+
+<style type="text/css">
+  td.bix {
+  color: #000000;
+  background-color: #FFFFFF;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  border: #A0A0A0;
+  border-style: solid;
+  border-width: 1px;
+}
+  td.box {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 2px;
+  padding-right: 2px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+Reference&nbsp; -&nbsp;
+<a href="xlisp-ref-301.html">Previous</a> |
+<a href="xlisp-ref-copyright.html">Next</a>
+
+<hr>
+
+<h1>XLISP Language Reference</h1>
+
+<hr>
+
+<p><nobr>
+<a href="#1">&nbsp;<i>#</i>&nbsp;</a> |
+<a href="#a">&nbsp;<i>a</i>&nbsp;</a> |
+<a href="#b">&nbsp;<i>b</i>&nbsp;</a> |
+<a href="#c">&nbsp;<i>c</i>&nbsp;</a> |
+<a href="#d">&nbsp;<i>d</i>&nbsp;</a> |
+<a href="#e">&nbsp;<i>e</i>&nbsp;</a> |
+<a href="#f">&nbsp;<i>f</i>&nbsp;</a> |
+<a href="#g">&nbsp;<i>g</i>&nbsp;</a> |
+<a href="#h">&nbsp;<i>h</i>&nbsp;</a> |
+<a href="#i">&nbsp;<i>i</i>&nbsp;</a> |
+<a href="#k">&nbsp;<i>k</i>&nbsp;</a> |
+<a href="#l">&nbsp;<i>l</i>&nbsp;</a> |
+<a href="#m">&nbsp;<i>m</i>&nbsp;</a> |
+<a href="#n">&nbsp;<i>n</i>&nbsp;</a> |
+<a href="#o">&nbsp;<i>o</i>&nbsp;</a> |
+<a href="#p">&nbsp;<i>p</i>&nbsp;</a> |
+<a href="#q">&nbsp;<i>q</i>&nbsp;</a> |
+<a href="#r">&nbsp;<i>r</i>&nbsp;</a> |
+<a href="#s">&nbsp;<i>s</i>&nbsp;</a> |
+<a href="#t">&nbsp;<i>t</i>&nbsp;</a> |
+<a href="#u">&nbsp;<i>u</i>&nbsp;</a> |
+<a href="#v">&nbsp;<i>v</i>&nbsp;</a> |
+<a href="#w">&nbsp;<i>w</i>&nbsp;</a> |
+<a href="#z">&nbsp;<i>z</i>&nbsp;</a> |
+</nobr></p>
+
+<ul>
+<li><nobr><a href="xlisp-ref-copyright.html">Copyright</a></nobr></li>
+<li><nobr><a href="xlisp-ref-format.html">Entry Format</a></nobr></li>
+</ul>
+
+
+<a name="1"></a>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td><nobr><a href="xlisp-ref-001.html">&nbsp;*&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - multiply a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-002.html">&nbsp;*&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the most recent result</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-003.html">&nbsp;**&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the second recent result</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-004.html">&nbsp;***&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the third recent result</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-005.html">&nbsp;+&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - add a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-006.html">&nbsp;+&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the most recent input expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-007.html">&nbsp;++&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the second recent input expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-008.html">&nbsp;+++&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the third recent input expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-009.html">&nbsp;-&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - subtract a list of numbers or negate a single number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-010.html">&nbsp;-&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">variable</font>
+    - bound to the expression currently being evaluated</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-011.html">&nbsp;/&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - divide a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-012.html">&nbsp;/=&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test numbers for not equal to</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-013.html">&nbsp;1+&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - add one to a number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-014.html">&nbsp;1-&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - subtract one from a number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-015.html">&nbsp;&lt;&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test numbers for less than</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-016.html">&nbsp;&lt;=&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test numbers for less than or equal to</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-017.html">&nbsp;=&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test numbers for equal to</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-018.html">&nbsp;&gt;&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test numbers for greater than</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-019.html">&nbsp;&gt;=&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test numbers for greater than or equal to</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="a"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-020.html">abs</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - the absolute value of a number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-021.html">acos</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the arccosine of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-022.html">address-of</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the address of an xlisp node</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-023.html">alloc</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - change the number of nodes to allocate in each segment</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-024.html">and</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - the logical AND of a list of expressions</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-025.html">:answer</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">message selector</font>
+    - add a message to a class</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-026.html">append</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - append lists</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-027.html">apply</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - apply a function to a list of arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-028.html">*applyhook*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - [not yet implemented]</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-029.html">aref</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the nth element of an array</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-030.html">arrayp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an array ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-031.html">asin</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the arcsine of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-032.html">assoc</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - find an expression in an a-list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-033.html">atan</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the arctangent of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-034.html">atom</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an atom ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-035.html">&amp;aux</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - define auxiliary variables</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="b"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-036.html">backquote</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - fill in a template</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-037.html">baktrace</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - print n levels of trace back information</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-038.html">block</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - named block</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-039.html">both-case-p</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an alphabetic [either case] character ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-040.html">boundp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is a value bound to this symbol ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-041.html">break</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - enter a break loop</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-042.html">*breakenable*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - controlling entering break loop on errors</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="c"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-043.html">car</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the first element of a list node</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-044.html">caar cadr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - perform a sequence of car and cdr operations</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-045.html">caaar...caddr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - perform a sequence of car and cdr operations</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-046.html">caaaar...cadddr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - perform a sequence of car and cdr operations</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-047.html">case</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - select by case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-048.html">catch</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - evaluate expressions and catch throws</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-049.html">cdr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return a list node with the first element removed</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-050.html">cdar cddr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - perform a sequence of car and cdr operations</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-051.html">cdaar...cdddr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - perform a sequence of car and cdr operations</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-052.html">cdaaar...cddddr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - perform a sequence of car and cdr operations</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-053.html">cerror</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - signal a correctable error</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-054.html">char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - extract a character from a string</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-055.html">char/=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are not equal, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-056.html">char&lt;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are monotonically increasing, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-057.html">char&lt;=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are monotonically non-decreasing, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-058.html">char=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are equivalent, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-059.html">char&gt;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are monotonically decreasing, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-060.html">char&gt;=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are monotonically non-increasing, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-061.html">characterp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a character ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-062.html">char-code</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the ASCII code of a character</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-063.html">char-downcase</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a character to lower case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-064.html">char-equal</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are equivalent, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-065.html">char-greaterp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if characters are monotonically decreasing, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-066.html">char-int</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a character to an integer</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-067.html">char-lessp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if characters are monotonically increasing, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-068.html">char-not-equal</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if characters are different values, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-069.html">char-not-greaterp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if characters are monotonically non-decreasing, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-070.html">char-not-lessp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if characters are monotonically non-increasing, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-071.html">char-upcase</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a character to upper case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-072.html">class</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">object</font>
+    - the built-in object class</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-073.html">:class</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">message selector</font>
+    - return the class of an object</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-074.html">clean-up</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - clean-up after an error</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-075.html">close</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - close a file stream</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-076.html">code-char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the character with a specified ASCII code</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-077.html">comma</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">reader expansion</font>
+    - comma evaluates expressions in a backquote form</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-078.html">comma-at</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">reader expansion</font>
+    - splices a list into a expression in a backquote form</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-079.html">cond</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - evaluate conditionally</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-080.html">cons</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - construct a new list node</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-081.html">consp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a non-empty list ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-082.html">:constituent</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - readtable entry to specify a character to be used as is</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-083.html">continue</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - continue from a correctable error</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-084.html">cos</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the cosine of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="d"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-085.html">*debug-io*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - file pointer for debug input and output</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-086.html">defmacro</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - define a XLISP macro</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-087.html">defun</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - define a XLISP function</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-088.html">delete</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - delete elements from a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-089.html">delete-if</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - delete elements from a list that pass a test</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-090.html">delete-if-not</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - delete elements from a list that fail a test</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-091.html">digit-char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a decimal digit to a character</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-092.html">digit-char-p</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - convert a character to a decimal digit, if possible</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-093.html">do</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - 'while' loop with local bindings, evaluated in no specific order</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-094.html">do*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - 'while' loop with local bindings, evaluated in sequencial order</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-095.html">dolist</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - 'for' loop with loop symbol, looping throgh a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-096.html">dotimes</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - 'for' loop with loop symbol, looping a given number of times</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-097.html">dribble</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - create a file with a transcript of a XLISP session</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="e"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-098.html">endp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this the end of a list ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-099.html">eq</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - equality test comparing memory pointers, may fail on numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-100.html">eql</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - same as 'eq', but works with all symbols and numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-101.html">equal</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - equality test by comparing printed values</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-102.html">error</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - signal a non-correctable error</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-103.html">*error-output*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - file pointer for error input and output</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-104.html">errset</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - trapping errors</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-105.html">eval</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - evaluate an XLISP expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-106.html">evalhook</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - evaluate with hooks</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-107.html">*evalhook*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - user substitute for the evaluator function</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-108.html">evenp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this integer even ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-109.html">exit</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - exit XLISP</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-110.html">exp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute e to the x power</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-111.html">expand</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - expand memory by adding segments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-112.html">expt</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute x to the y power</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="f"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-113.html">fboundp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is a functional value bound to this symbol ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-114.html">first</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the first element of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-115.html">flatc</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - length of printed representation using princ</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-116.html">flatsize</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - length of printed representation using prin1</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-117.html">flet</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - create local functions</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-118.html">float</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert an integer to a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-119.html">*float-format*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - format for printing floating point numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-120.html">floatp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a floating point number ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-121.html">format</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - do formated output</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-122.html">fourth</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the fourth element of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-123.html">funcall</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - call a function with arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-124.html">function</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - get the functional interpretation of a symbol or lambda expression</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="g"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-125.html">gc</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - call the garbage collector</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-126.html">gcd</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the greatest common divisor</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-127.html">*gc-flag*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - controls the printing of 'gc' messages</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-128.html">*gc-hook*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - function to call after garbage collection</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-129.html">gensym</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - generate a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-130.html">get</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the value of a property</nobr></td>
+</tr>
+<tr>
+  <td colspan="4" width="100%">
+    <table cellpadding="0" cellspacing="0"><tbody>
+    <tr>
+      <td><nobr><a href="xlisp-ref-131.html">get-key</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - get a single key stroke from the keyboard</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-132.html">get-lambda-expression</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - returns a reconstruction of a lambda or macro expression</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-133.html">get-output-stream-list</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - empty a specified stream and return it's data as a list</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-134.html">get-output-stream-string</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - empty a specified stream and return it's data as a single string</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-135.html">go</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">special form</font>
+        - go to a tag within a tagbody or prog</nobr></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="h"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-136.html">hash</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the hash index for a symbol</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="i"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-137.html">&nbsp;if&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - evaluate expressions conditionally</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-138.html">int-char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert an integer to a character</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-139.html">*integer-format*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - format for printing integer numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-140.html">integerp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an integer number ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-141.html">intern</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - create a new interned symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-142.html">:isnew</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">message selector</font>
+    - cause an instance to run its initialization method</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="k"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-143.html">&amp;key</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - define keyword arguments</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="l"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-144.html">labels</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - create local functions in a mutually recursive manner</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-145.html">lambda</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - create a function with no name</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-146.html">last</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the last node of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-147.html">length</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - find the length of a list, vector or string</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-148.html">let</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - create local bindings, evaluated in no specific order</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-149.html">let*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - create local bindings, evaluated in sequencial order</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-150.html">list</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - create a list of values</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-151.html">listp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a list ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-152.html">load</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - load a source file</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-153.html">logand</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - the bitwise AND of a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-154.html">logior</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - the bitwise INCLUSIVE OR of a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-155.html">lognot</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - the bitwise EXCLUSIVE OR of a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-156.html">logxor</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - the bitwise NOT of a number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-157.html">loop</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - basic looping form</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-158.html">lower-case-p</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a lower case character ?</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="m"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-159.html">macroexpand</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - expand macro definitions recursively</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-160.html">macroexpand-1</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - expand the first level of a macro definition</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-161.html">macrolet</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - create local macros</nobr></td>
+</tr>
+<tr>
+  <td colspan="4" width="100%">
+    <table cellpadding="0" cellspacing="0"><tbody>
+    <tr>
+      <td><nobr><a href="xlisp-ref-162.html">make-array</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - create an array of specified size</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-163.html">make-string-input-stream</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - create an unnamed stream from a string expression</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-164.html">make-string-output-stream</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - create and return an unnamed output stream</nobr></td>
+    </tr>
+    <tr>
+      <td><nobr><a href="xlisp-ref-165.html">make-symbol</a></nobr></td>
+      <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%"><nobr><font color="#444444">function</font>
+        - make a temporary, uninterned symbol</nobr></td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-166.html">mapc</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - apply a function to successive cars, return the first list of arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-167.html">mapcar</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - apply a function to successive cars, return a list of the values</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-168.html">mapl</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - apply a function to successive cdrs, return the first list of arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-169.html">maplist</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - apply a function to successive cdrs, return a list of the values</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-170.html">max</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the largest of a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-171.html">member</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - find an expression in a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-172.html">:mescape</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - readtable entry specifying a character to be used as a multiple escape character</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-173.html">min</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the smallest of a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-174.html">minusp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this number negative ?</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="n"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-175.html">nconc</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - destructively concatenate lists</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-176.html">:new</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">message selector</font>
+    - create a new instance of a class</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-177.html">nil</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system constant</font>
+    - representing the empty list as well as the false value</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-178.html">:nmacro</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - readtable entry to specify a character to be used as the start of a non-terminating read macro</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-179.html">not</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this false ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-180.html">nstring-downcase</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a string or a part of it to lower case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-181.html">nstring-upcase</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a string or a part of it to upper case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-182.html">nth</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the nth element of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-183.html">nthcdr</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the nth cdr of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-184.html">null</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an empty list ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-185.html">numberp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a number ?</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="o"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-186.html">*obarray*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - the system symbol table</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-187.html">object</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">object</font>
+    - the build-in object class</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-188.html">objectp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an object ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-189.html">oddp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this integer number odd ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-190.html">open</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - open a file stream</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-191.html">&amp;optional</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - define optional arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-192.html">or</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - the logical OR of a list of expressions</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="p"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-193.html">peek</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return an internal computer memory value</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-194.html">peek-char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - look at a single character from a specified source</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-195.html">plusp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this number positive ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-196.html">poke</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - write a value to the internal computer memory</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-197.html">pprint</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - print a pretty looking version of an expression to a specified destination</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-198.html">prin1</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - print an expression without a newline</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-199.html">princ</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - print an expression without quoting and without a newline</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-200.html">print</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - print an expression on a new line</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-201.html">*print-case*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - specifies how symbols are to be printed</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-202.html">prog</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' construct with local bindings, evaluated in no specific order</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-203.html">prog*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' construct with local bindings, evaluated in sequencial order</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-204.html">prog1</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' construct with no local bindings, returning the value of the first expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-205.html">prog2</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' construct with no local bindings, returning the value of the second expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-206.html">progn</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' construct with no local bindings, returning the value of the last expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-207.html">progv</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' construct with local bindings, created out of two lists given as arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-208.html">psetq</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - perform 'setq' assignments in parallel</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-209.html">putprop</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - put a property onto a symbol's property list</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="q"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-210.html">quote</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - return an expression unevaluated</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="r"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-211.html">random</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute a random number between 0 and n-1 inclusive</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-212.html">read</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - read an expression</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-213.html">read-byte</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - read a byte from a stream</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-214.html">read-char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - read a character from a stream</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-215.html">read-line</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - read a line from a stream</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-216.html">*readtable*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - contains data structures relating to the processing of characters</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-217.html">rem</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return the remainder of a list of numbers</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-218.html">remove</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - remove elements from a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-219.html">remove-if</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - remove elements from a list that pass a test</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-220.html">remove-if-not</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - remove elements from a list that fail a test</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-221.html">remprop</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - remove a property from a symbol's property list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-222.html">rest</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - return a list node with the first element removed [identical to 'cdr']</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-223.html">&amp;rest</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - define 'rest' arguments, to be collected in a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-224.html">restore</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - restore a XLISP workspace from a file</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-225.html">return</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - cause a 'block' construct to return a value</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-226.html">return-from</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - return from a named block</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-227.html">reverse</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - reverse a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-228.html">room</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - show memory allocation statistics</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-229.html">rplaca</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - replace the car of a list node</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-230.html">rplacd</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - replace the cdr of a list node</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="s"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-231.html">save</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - save a XLISP workspace to a file</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-232.html">second</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the second element of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-233.html">self</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">symbol</font>
+    - evaluates to the current object when used within a message context</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-234.html">send</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - send a message to an object</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-235.html">send-super</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - send a message to the superclass</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-236.html">:sescape</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - readtable entry specifying a character to be used as a single escape character</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-237.html">set</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - set the value of a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-238.html">setf</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - set the value of a field</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-239.html">setq</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - set the quoted value of a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-240.html">:show</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">message selector</font>
+    - show an object's instance variables</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-241.html">sin</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the sine of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-242.html">sort</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - sort a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-243.html">sqrt</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the square root of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-244.html">*standard-input*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - file pointer for standard input</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-245.html">*standard-output*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - file pointer for standard output</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-246.html">strcat</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - concatenate strings</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-247.html">streamp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a stream ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-248.html">string</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - make a string from a symbol, character or string</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-249.html">string/=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 is not equal to string2, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-250.html">string&lt;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 is less than string2, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-251.html">string&lt;=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 is less than or equal to string2, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-252.html">string=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if the string arguments have the same values, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-253.html">string&gt;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 is greater than string2, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-254.html">string&gt;=</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 is greater than or equal to string2, case is significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-255.html">stringp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a string ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-256.html">string-downcase</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a string or a part of it to lower case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-257.html">string-equal</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 equal to string2, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-258.html">string-greaterp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if string1 is greater than string2, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-259.html">string-left-trim</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - trim the left end of a string</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-260.html">string-lessp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if string1 is less than string2, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-261.html">string-not-equal</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - test if string1 is not equal to string2, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-262.html">string-not-greaterp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if string1 is less than or equal to string2, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-263.html">string-not-lessp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - test if string1 is greater than or equal to string2, case is not significant</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-264.html">string-right-trim</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - trim the right end of a string</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-265.html">string-trim</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - trim both ends of a string</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-266.html">string-upcase</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - convert a string or a part of it to upper case</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-267.html">sublis</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - substitute expressions by using an association list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-268.html">subseq</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - extract a substring</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-269.html">subst</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - substitute expressions</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-270.html">symbol-function</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the functional value of a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-271.html">symbol-name</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the print name of a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-272.html">symbol-plist</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the property list of a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-273.html">symbol-value</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the value of a symbol</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-274.html">symbolp</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this a symbol ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-275.html">system</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - execute a command of the operating system</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="t"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-276.html">&nbsp;t&nbsp;</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system constant</font>
+    - represents 'true'</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-277.html">tagbody</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - a 'block' form with labels</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-278.html">tan</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - compute the tangent of a floating point number</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-279.html">terpri</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - terminate printing, prints a newline character</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-280.html">third</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - get the third element of a list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-281.html">throw</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - throw to a catch, allows non-local exits and traps</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-282.html">:tmacro</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - readtable entry to specify a character to be used as the start of a terminating read macro</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-283.html">top-level</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - clean-up after an error and return to the top level</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-284.html">trace</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - add a function to the trace list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-285.html">*tracelimit*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - the number of forms printed on entry to the break loop</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-286.html">*tracelist*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - a list of the current functions being traced</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-287.html">*tracenable*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - controls whether or not the break loop prints any back trace information on entry</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-288.html">*trace-output*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system variable</font>
+    - file pointer for trace output</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-289.html">truncate</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - truncates a floating point number to an integer</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-290.html">type-of</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - returns the type of the expression</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="u"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-291.html">*unbound*</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">system constant</font>
+    - used to indicate when a symbol has no value</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-292.html">unless</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - evaluate only when a condition is false</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-293.html">untrace</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - remove a function from the trace list</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-294.html">upper-case-p</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this an upper case character ?</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-295.html">unwind-protect</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - allows the trapping of all forms of exit from a protected form</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="v"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-296.html">vector</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - creates an initialized vector [one-dimensional array]</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+</tbody></table>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:5px"><tbody>
+<tr>
+  <td style="height:10px"><a name="w"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-297.html">when</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">special form</font>
+    - evaluate only when a condition is true</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-298.html">:white-space</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">keyword</font>
+    - readtable entry to specifying a character that may be skipped over</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-299.html">write-byte</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - write a byte to a stream</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-300.html">write-char</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">function</font>
+    - write a character to a stream</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+<tr>
+  <td><nobr>&nbsp;[
+    <a href="#top"><font color="#444444">Back to Top</font></a> ]
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"><a name="z"></a></td>
+</tr>
+<tr>
+  <td><nobr><a href="xlisp-ref-301.html">zerop</a></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%"><nobr><font color="#444444">predicate function</font>
+    - is this number zero ?</nobr></td>
+</tr>
+<tr>
+  <td style="height:10px"></td>
+</tr>
+</tbody></table>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+Reference&nbsp; -&nbsp;
+<a href="xlisp-ref-301.html">Previous</a> |
+<a href="xlisp-ref-copyright.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-index.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:04 GMT -->
+</html>

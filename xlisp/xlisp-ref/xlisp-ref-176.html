@@ -1,0 +1,114 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-176.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP :new</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-175.html">Previous</a> |
+<a href="xlisp-ref-177.html">Next</a>
+
+<hr>
+
+<h1>:new</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>message selector</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlobj.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(send <i>class</i> :new <i>args</i>)</dt>
+<dd><i>class</i> - an existing XLISP class except for <a href="xlisp-ref-072.html">class</a><br>
+<i>args</i> - the initializing arguments for the new instance<br>
+returns - the new class object</dd>
+</dl>
+
+<dl>
+<dt>(send class :new <i>ivars</i> [<i>cvars</i> [<i>superclass</i>]])</dt>
+<dd><i>ivars</i> - list of instance variables for new class<br>
+<i>cvars</i> - list of class variable symbols for new class<br>
+<i>superclass</i> - superclass for new object, the default is <a href="xlisp-ref-187.html">object</a><br>
+returns - the new class object</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The ':new' message selector exhibits two different behaviors. When you
+are creating an instance of a <a href="xlisp-ref-072.html">class</a> you
+only need the ':new' message [consisting of the message selector and any
+data]. When you are creating a new <a href="xlisp-ref-072.html">class</a>
+with ':new', you need to specify instance variables and optionally the
+<a href="xlisp-ref-072.html">class</a> variables and superclass.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq new-class (send class :new '(state)))      <font color="#0000CC">; create NEW-CLASS with STATE</font>
+(setq new-obj (send new-class :new))             <font color="#0000CC">; create NEW-OBJ of NEW-CLASS</font>
+(send new-obj :show)                             <font color="#0000CC">; shows the object</font>
+
+(setq sub-class (send class :new '(sub-state)    <font color="#0000CC">; create SUB-CLASS of NEW-CLASS</font>
+                                 '() new-class))
+(send sub-class :show)                           <font color="#0000CC">; show the SUB-CLASS</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-010.html#class-new">:new</a>
+message selector in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-175.html">Previous</a> |
+<a href="xlisp-ref-177.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-176.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

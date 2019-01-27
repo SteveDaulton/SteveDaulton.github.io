@@ -1,0 +1,597 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-012.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP pp</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-011.html">Previous</a> |
+<a href="xlisp-plus-index.html">Next</a>
+
+<hr>
+
+<h1>pp</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined function (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>pp.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(pp <i>expr</i> [<i>destination</i> [<i>break-size</i>]])</dt>
+<dd><i>expr</i> - an expression to be pretty printed<br>
+<i>destination</i> - an optional destination, must be a file pointer or stream,
+the default is <a href="../xlisp-ref/xlisp-ref-245.html">*standard-output*</a><br>
+<i>break-size</i> - an integer expression, default is 45<br>
+returns - always returns <a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'pp' function produces a pretty looking version of the 'expr' and
+prints it to the specified 'destination'. If 'expr' is an atom, like a
+string, a symbol, a number, etc., 'pp' will print it like
+<a href="../xlisp-ref/xlisp-ref-200.html">print</a>. If 'expr' is a list, it will perform
+indenting. <a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a> is always returned
+as the result of 'pp'. The 'destination' may be a file pointer or a stream.
+If there is no 'destination' or it is
+<nobr><a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="../xlisp-ref/xlisp-ref-245.html">*standard-output*</a> is the default.
+The'break-size' paramter is used to determine when an expression should be
+broken into multiple lines. The default 'break-size' <nobr>is 45.</nobr></p>
+
+<p><b>Note:</b> This function is not included in the standard Nyquist
+distribution. If you want to use it, copy the code to your 'init.lsp'
+file. The 'pp' code can be found below at the end of this page.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(pp 'a)          <font color="#0000CC">; prints  A          returns T</font>
+(pp "abcd")      <font color="#0000CC">; prints  "abcd"     returns T</font>
+(pp '(a (b c)))  <font color="#0000CC">; prints  (A (B C))  returns T</font>
+</pre>
+
+<p><b>Common Lisp:</b> In Common Lisp, the 'pp' functionality is provided
+with the <a href="../xlisp-ref/xlisp-ref-197.html">pprint</a> function. The 'pp' function
+was available in previous XLISP releases and is still accessible. It does
+allow you to specify the length through 'break-size', which is not available
+in <a href="../xlisp-ref/xlisp-ref-197.html">pprint</a>.</p>
+
+<h2>The Code</h2>
+
+<p><b>Note:</b> I have never tested this code with Nyquist.</p>
+
+<pre class="example">
+<font color="#0000CC">;;; PP.LSP -- a pretty-printer for XLISP.
+;;
+;; Adapted by Jim Chapman (Bix: jchapman) from a program written originally
+;; for IQLISP by Don Cohen.  Copyright (c) 1984, Don Cohen; (c) 1987, Jim
+;; Chapman.  Permission for non-commercial use and distribution is hereby 
+;; granted.  Modified for XLISP 2.0 by David Betz.
+;;
+;; In addition to the pretty-printer itself, this file contains a few functions
+;; that illustrate some simple but useful applications.
+;;
+;; The basic function accepts two arguments:
+;;
+;;      (PP OBJECT STREAM)
+;;
+;; where OBJECT is any Lisp expression, and STREAM optionally specifies the
+;; output (default is *standard-output*).
+;;
+;; PP-FILE pretty-prints an entire file.  It is what I used to produce this
+;; file (before adding the comments manually).  The syntax is:
+;;
+;;       (PP-FILE "filename" STREAM)
+;;
+;; where the file name must be a string or quoted, and STREAM, again, is the
+;; optional output destination.
+;;
+;; PP-DEF works just like PP, except its first argument is assumed to be the
+;; name of a function or macro, which is translated back into the original
+;; DEFUN or DEFMACRO form before printing.
+;;
+;;; MISCELLANEOUS USAGE AND CUSTOMIZATION NOTES:
+;;
+;;  1. The program uses tabs whenever possible for indentation.
+;;     This greatly reduces the cost of the blank space.  If your output
+;;     device doesn't support tabs, set TABSIZE to NIL -- which is what I
+;;     did when I pretty-printed this file, because of uncertainty 
+;;     about the result after uploading.
+;;
+;;  2. Printmacros are used to handle special forms.  A printmacro is not
+;;     really a macro, just an ordinary lambda form that is stored on the
+;;     target symbol's property list.  The default printer handles the form
+;;     if there is no printmacro or if the printmacro returns NIL.
+;;
+;;  3. Note that all the pretty-printer subfunctions, including the
+;;     the printmacros, return the current column position.
+;;
+;;  4. Miser mode is not fully implemented in this version, mainly because  
+;;     lookahead was too slow.  The idea is, if the "normal" way of
+;;     printing the current expression would exceed the right margin, then
+;;     use a mode that conserves horizontal space.
+;;
+;;  5. When PP gets to the last 8th of the line and has more to print than
+;;     fits on the line, it starts near the left margin.  This is not 
+;;     wonderful, but neither are the alternatives.  If you have a better
+;;     idea, go for it.
+;;
+;;  6. Storage requirements are about 1450 cells to load.  
+;;
+;;  7. I tested this with XLISP 1.7 on an Amiga.
+;;
+;;  8. TAA modified to support prettyprinting arrays.  Fixed bug printing
+;;     (NIL ...).
+;;
+;;  9. TAA modified to support prettyprinting of structures, and some code
+;;     cleanup. Also added PP-PAIR-FORM to handle setq like structures
+;;     more nicely. 
+;;
+;; 10. TAA: It should be noted that you can't pretty print circular lists,
+;;     nor can you successfully read back the following:
+;;       * uninterned symbols, for instance those generated with gensym
+;;         as part of automatically generated code
+;;       * closures, since their environment cannot be reconstructed. These
+;;         are not even expanded.
+;;       * subrs, fsubrs, and streams cannot be represented
+;;
+;; 11. TAA modified so that non-class objects are shown by sending the
+;;       message :storeon (see classes.lsp), printing #. before the expression
+;;       making it an object literal.
+;;
+;; 12. TAA modified so that *print-level* and *print-length* are bound to  NIL
+;;       during the course of execution.</font>
+
+#+:packages
+(unless (find-package "TOOLS")
+        (make-package "TOOLS" :use '("XLISP")))
+
+(in-package "TOOLS")
+
+<font color="#0000CC">; Part of modified classes.lsp. Repeated here in case classes.lsp not used</font>
+#+:packages (shadow 'classp)
+(defun classp (name)
+       (when (objectp name)
+             (eq (send name :class) class)))
+
+(export '(tabsize maxsize miser-size pp-file pp-def pp))
+
+<font color="#0000CC">;(DEFUN SYM-FUNCTION (X)        ;for Xlisp 1.7</font>
+<font color="#0000CC">;    (CAR (SYMBOL-VALUE X)))</font>
+(defun sym-function (x)         ;for Xlisp 2.0
+    (get-lambda-expression (symbol-function x)))
+
+(defvar tabsize 8)      ;set this to NIL for no tabs
+
+(defvar maxsize 60)     ;for readability, PP tries not to print more
+                        ;than this many characters on a line
+
+(defvar miser-size 2)   ;the indentation in miser mode
+
+(defvar min-miser-car 4)        ;used for deciding when to use miser mode
+
+(defvar max-normal-car 9)       ;ditto
+
+(defconstant pp-lpar "(")       ; self evident
+(defconstant pp-rpar ")")
+(defconstant pp-space " ")
+(defconstant pp-immed "#.")
+
+<font color="#0000CC">;; The following function prints a file</font>
+
+(defun pp-file (filename &amp;optional streamout)
+    (or streamout (setq streamout *standard-output*))
+    (princ "; Listing of " streamout)
+    (princ filename streamout)
+    (terpri streamout)
+    (terpri streamout)
+    (do* ((fp (open filename)) (expr (read fp nil) (read fp nil)))
+         ((null expr) (close fp))
+      (pp expr streamout)
+      (terpri streamout)))
+
+<font color="#0000CC">;; Print a lambda or macro form as a DEFUN or DEFMACRO:</font>
+
+(defmacro pp-def (who &amp;optional stream)
+    `(pp (make-def ,who) ,stream))
+
+(defmacro make-def (name &amp;aux expr type)
+    (setq expr (sym-function name))
+    (setq type
+          (cadr (assoc (car expr)
+                       '((lambda defun) (macro defmacro)))))
+    (list 'quote
+          (append (list type name) (cdr expr))))
+
+<font color="#0000CC">;; The pretty-printer high level function:</font>
+
+(defun pp (x &amp;optional stream)
+       (let (*print-level* *print-length*)      ; set special vars to NIL
+            (or stream (setq stream *standard-output*))
+            (pp1 x stream 1 80)
+            (terpri stream)
+            t))
+
+<font color="#0000CC">;; print X on STREAM, current cursor is CURPOS, and right margin is RMARGIN</font>
+
+(defun pp1 (x stream curpos rmargin 
+              &amp;aux (anarray (arrayp x))
+                   (astruct (typep x '(and struct (not random-state))))
+                   size position width)
+    (cond (anarray (setq x (coerce x 'cons)))
+          ((and (objectp x) (not (classp x)))
+           (princ pp-immed stream)              ; immediate execute literal
+           (setq curpos (+ curpos 2))
+           (setq x (send x :storeon))))
+    (cond (astruct (pp-astruct x stream curpos rmargin))
+          ((not (consp x))(prin1 x stream) (+ curpos (flatsize x)))
+          ((printmacrop x stream curpos rmargin))
+          ((and (&gt; (flatsize x) (- rmargin curpos))
+                (&lt; (* 8 (- rmargin curpos)) rmargin))
+           (setq size (+ (/ rmargin 8) (- curpos rmargin)))
+           (pp-moveto stream curpos size)
+           (setq position (pp1 x stream size rmargin))
+           (pp-moveto stream position size))
+          (t (when anarray (princ "#" stream) (setq curpos (1+ curpos)))
+             (princ pp-lpar stream)
+             (setq position
+                   (pp1 (car x) stream (1+ curpos) rmargin))
+             (cond ((and (&gt;= (setq width (- rmargin position))
+                             (setq size (flatsize (cdr x))))
+                         (&lt;= size maxsize))
+                    (pp-rest-across (cdr x) stream position rmargin))
+                   ((consp (car x))
+                    (pp-moveto stream position curpos)
+                    (pp-rest (cdr x) stream curpos rmargin))
+                   ((&gt; (- position curpos) max-normal-car)
+                    (pp-moveto stream position (+ curpos miser-size))
+                    (pp-rest (cdr x) stream (+ curpos miser-size) rmargin))
+                   (t (pp-rest (cdr x) stream position rmargin))))))
+
+<font color="#0000CC">;; PP-MOVETO controls indentating and tabbing.</font>
+<font color="#0000CC">;; If CUR &gt; GOAL then goes to new line first.</font>
+<font color="#0000CC">;; will space to GOAL</font>
+
+(defun pp-moveto (stream curpos goalpos &amp;aux i)
+    (cond ((&gt; curpos goalpos)
+           (terpri stream)
+           (setq curpos 1)
+           (if tabsize
+               (do nil
+                   ((&lt; (- goalpos curpos) tabsize))
+                 (princ "\t" stream)
+                 (setq curpos (+ curpos tabsize))))))
+    (dotimes (i (- goalpos curpos)) (princ pp-space stream))
+    goalpos)
+
+<font color="#0000CC">;; can print the rest of the list without new lines</font>
+
+(defun pp-rest-across (x stream curpos rmargin &amp;aux position)
+    (setq position curpos)
+    (prog nil
+      lp
+      (cond ((null x) (princ pp-rpar stream) (return (1+ position)))
+            ((not (consp x))
+             (princ " . " stream)
+             (prin1 x stream)
+             (princ pp-rpar stream)
+             (return (+ 4 position (flatsize x))))
+            (t (princ pp-space stream)
+               (setq position
+                     (pp1 (car x) stream (1+ position) rmargin))
+               (setq x (cdr x))
+               (go lp)))))
+
+<font color="#0000CC">;; Can print the rest of the list, but must use new lines for each element</font>
+
+(defun pp-rest (x stream curpos rmargin &amp;aux position pos2)
+    (setq position curpos)
+    (prog nil
+      lp
+      (cond ((null x) (princ pp-rpar stream) (return (1+ position)))
+            ((not (consp x))
+             (and (&gt; (flatsize x) (- (- rmargin position) 3))
+                  (setq position (pp-moveto stream position curpos)))
+             (princ " . " stream)
+             (prin1 x stream)
+             (princ pp-rpar stream)
+             (return (+ position 4 (flatsize x))))
+            ((and 
+                  (not (typep (car x) '(or list array struct)))
+                  (&lt;= (setq pos2 (+ 1 position (flatsize (car x))))
+                      rmargin)
+                  (&lt;= pos2 (+ curpos maxsize)))
+             (princ pp-space stream)
+             (prin1 (car x) stream)
+             (setq position pos2))
+            (t (pp-moveto stream position (1+ curpos))
+               (setq position
+                     (pp1 (car x) stream (1+ curpos) rmargin))))
+      (cond ((and (consp (car x)) (cdr x))
+             (setq position (pp-moveto stream position curpos))))
+      (setq x (cdr x))
+      (go lp)))
+
+<font color="#0000CC">;; Handles structures by printing in form:</font>
+<font color="#0000CC">;;       #S(structtype :slot val</font>
+<font color="#0000CC">;;                       ...</font>
+<font color="#0000CC">;;                     :slot val)</font>
+<font color="#0000CC">;;</font>
+<font color="#0000CC">;; code does not check for defaults.</font>
+
+(defun pp-astruct (x stream pos rmar &amp;aux cur snames args)
+       (setq cur pos
+             snames (mapcar #'car (get (type-of x) '*struct-slots*))
+             args 
+             (mapcan #'(lambda (p) 
+                               (list p
+                                     (apply
+                                      (intern
+                                       (strcat (string (type-of x)) 
+                                               "-" 
+                                               (string p)))
+                                      (list x))))
+                     snames))
+       (princ "#s" stream)
+       (if (and (&gt;= (- rmar pos) (+ 2 (flatsize x)))
+                (&lt;= (flatsize x) maxsize))
+           (pp1 (cons (type-of x) args) stream (+ 2 pos) rmar)
+           (prog ()
+                 (princ pp-lpar stream)
+                 (prin1 (type-of x) stream)
+                 (princ pp-space stream)
+                 (setq pos (setq cur (+ pos 4 (flatsize (type-of x)))))
+                 lp
+                 (prin1 (first args) stream)
+                 (princ pp-space stream)
+                 (setq cur
+                       (pp1 (second args)
+                            stream
+                            (+ pos 1 (flatsize (first args)))
+                            rmar))
+                 (setq args (cddr args))
+                 (when (null args)
+                       (princ pp-rpar stream)
+                       (return-from pp-astruct (1+ cur)))
+                 (pp-moveto stream cur pos)
+                 (go lp))))
+             
+<font color="#0000CC">;; PRINTMACROP is the printmacro interface routine.  Note that the</font>
+<font color="#0000CC">;; called function has the same argument list as PP1.  It may either</font>
+<font color="#0000CC">;; decide not to handle the form, by returning NIL (and not printing)</font>
+<font color="#0000CC">;; or it may print the form and return the resulting position.</font>
+
+(defun printmacrop (x stream curpos rmargin &amp;aux macro)
+    (and (symbolp (car x))
+         (car x)        ; must not be NIL (TAA fix)
+         (setq macro (get (car x) 'printmacro))
+         (apply macro (list x stream curpos rmargin))))
+
+<font color="#0000CC">;;; The remaining forms define various printmacros.</font>
+<font color="#0000CC">;;</font>
+<font color="#0000CC">;; Printing format (xxx xxx</font>
+<font color="#0000CC">;;                      &lt;pp-rest&gt;)</font>
+
+(defun pp-binding-form (x stream pos rmar &amp;aux cur)
+    (setq cur pos)
+    (cond ((and (&gt;= (- rmar pos) (flatsize x))
+                (&lt;= (flatsize x) maxsize)) nil)
+          ((&gt; (length x) 2)
+           (princ pp-lpar stream)
+           (prin1 (car x) stream)
+           (princ pp-space stream)
+           (setq cur
+                 (pp1 (cadr x)
+                      stream
+                      (+ 2 pos (flatsize (car x)))
+                      rmar))
+           (pp-moveto stream cur (+ pos 1))
+           (pp-rest (cddr x) stream (+ pos 1) rmar))))
+
+<font color="#0000CC">;; Format (xxxx xxx xxx</font>
+<font color="#0000CC">;;               ...</font>
+<font color="#0000CC">;;              xxx xxx)</font>
+
+(defun pp-pair-form (x stream pos rmar &amp;aux cur)
+    (setq cur pos)
+    (cond ((and (&gt;= (- rmar pos) (flatsize x))
+                (&lt;= (flatsize x) maxsize)) nil)
+          ((&gt; (length x) 1)
+           (princ pp-lpar stream)
+           (prin1 (first x) stream)
+           (princ pp-space stream)
+           (setq pos (setq cur (+ pos 2 (flatsize (first x)))))
+           (setq x (rest x))
+           (loop
+            (pp-moveto stream cur pos)
+            (setq cur (pp1 (first x) stream pos rmar))
+            (princ pp-space stream)
+            (setq x (rest x))
+            (setq cur (pp1 (first x) stream (1+ cur) rmar))
+            (when (null (setq x (rest x)))
+                  (princ pp-rpar stream)
+                  (return-from pp-pair-form (1+ cur)))))))
+
+<font color="#0000CC">;; format (xxx xxx</font>
+<font color="#0000CC">;;             xxx</font>
+<font color="#0000CC">;;           &lt;pprest&gt;)</font>
+       
+(defun pp-do-form (x stream pos rmar &amp;aux cur pos2)
+    (setq cur pos)
+    (cond ((and (&gt;= (- rmar pos) (flatsize x))
+                (&lt;= (flatsize x) maxsize)) nil)
+          ((&gt; (length x) 2)
+           (princ pp-lpar stream)
+           (prin1 (car x) stream)
+           (princ pp-space stream)
+           (setq pos2 (+ 2 pos (flatsize (car x))))
+           (setq cur (pp1 (cadr x) stream pos2 rmar))
+           (pp-moveto stream cur pos2)
+           (setq cur (pp1 (caddr x) stream pos2 rmar))
+           (pp-moveto stream cur (+ pos 1))
+           (pp-rest (cdddr x) stream (+ pos 1) rmar))))
+
+<font color="#0000CC">;; format (xxx xxx xxx</font>
+<font color="#0000CC">;;          &lt;pprest&gt;)</font>
+
+(defun pp-defining-form (x stream pos rmar &amp;aux cur)
+    (setq cur pos)
+    (cond ((and (&gt;= (- rmar pos) (flatsize x))
+                (&lt;= (flatsize x) maxsize)) nil)
+          ((&gt; (length x) 3)
+           (princ pp-lpar stream)
+           (prin1 (car x) stream)
+           (princ pp-space stream)
+           (prin1 (cadr x) stream)
+           (princ pp-space stream)
+           (setq cur
+                 (pp1 (caddr x)
+                      stream
+                      (+ 3 pos (flatsize (car x)) (flatsize (cadr x)))
+                      rmar))
+           (pp-moveto stream cur (+ 3 pos))
+           (pp-rest (cdddr x) stream (+ 3 pos) rmar))))
+
+(putprop 'quote
+         '(lambda (x stream pos rmargin)
+            (cond ((and (cdr x) (null (cddr x)))
+                   (princ "'" stream)
+                   (pp1 (cadr x) stream (1+ pos) rmargin))))
+         'printmacro)
+
+(putprop 'backquote
+         '(lambda (x stream pos rmargin)
+            (cond ((and (cdr x) (null (cddr x)))
+                   (princ "`" stream)
+                   (pp1 (cadr x) stream (1+ pos) rmargin))))
+         'printmacro)
+
+(putprop 'comma
+         '(lambda (x stream pos rmargin)
+            (cond ((and (cdr x) (null (cddr x)))
+                   (princ "," stream)
+                   (pp1 (cadr x) stream (1+ pos) rmargin))))
+         'printmacro)
+
+(putprop 'comma-at
+         '(lambda (x stream pos rmargin)
+            (cond ((and (cdr x) (null (cddr x)))
+                   (princ ",@" stream)
+                   (pp1 (cadr x) stream (+ pos 2) rmargin))))
+         'printmacro)
+
+(putprop 'function
+         '(lambda (x stream pos rmargin)
+            (cond ((and (cdr x) (null (cddr x)))
+                   (princ "#'" stream)
+                   (pp1 (cadr x) stream (+ pos 2) rmargin))))
+         'printmacro)
+
+(putprop 'prog
+         'pp-binding-form
+         'printmacro)
+
+(putprop 'prog*
+         'pp-binding-form
+         'printmacro)
+
+(putprop 'let
+         'pp-binding-form
+         'printmacro)
+
+(putprop 'let*
+         'pp-binding-form
+         'printmacro)
+
+(putprop 'lambda
+         'pp-binding-form
+         'printmacro)
+
+(putprop 'macro
+         'pp-binding-form
+         'printmacro)
+
+(putprop 'do 'pp-do-form 'printmacro)
+
+(putprop 'do*
+         'pp-do-form
+         'printmacro)
+
+(putprop 'defun
+         'pp-defining-form
+         'printmacro)
+
+(putprop 'defmacro
+         'pp-defining-form
+         'printmacro)
+
+(putprop 'setq
+         'pp-pair-form
+         'printmacro)
+
+(putprop 'setf
+         'pp-pair-form
+         'printmacro)
+
+(putprop 'psetq
+         'pp-pair-form
+         'printmacro)
+
+(putprop 'send
+         'pp-defining-form
+         'printmacro)
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-011.html">Previous</a> |
+<a href="xlisp-plus-index.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-012.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

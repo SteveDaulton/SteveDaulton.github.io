@@ -1,0 +1,148 @@
+<TITLE>Cellular Automata</TITLE>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+<br>
+</b>Cellular Automata & Nyquist<b> /
+<a href="cellularautomata.html">Cellular Automata Example</a> /
+<a href="cell-aut.lsp.html">View example: cell-aut.lsp</a
+</b></p>
+
+<h2 align=center>Cellular Automata &amp; Nyquist: So Happy Together</h2>
+<p align=center>Ann Lewis 12/05/02</p>
+
+<p align=center>Sound example: <a href="cell-aut-demo.ogg">cell-aut-demo.ogg
+</a></p>
+
+<p><b>Cellular Automata</b></p>
+
+<p>A cellular automaton is a collection of cells on a grid. Each cell evolves
+according to a set of rules based on the states of adjacent (or nearby) cells.
+One-dimensional, &quot;elementary cellular automata,&quot; are represented by
+a single row of cells/states, each can have value 0 or 1. For a graphical
+automaton, 0/1 corresponds to black/white pixel.</p>
+
+<p>Two-dimensional: cells depend on at least  four neighbors. These are capable
+of simulating a Turing machine for some configuration of about 200,000 cells
+(Gardner 1983, p. 227). Translation: cellular automata are very powerful.</p>
+
+<p><b>Elementary Cellular Automata</b></p>
+
+<p>are the simplest class of one-dimensional cellular automata. Elementary
+cellular automata have two possible values for each cell (0 or 1), and rules
+that depend only on parent and parent neighbor values. The evolution of an
+elementary cellular automaton can completely be described by a 2D table, where
+entry (i, j) corresponds to state j at generation i.</p>
+
+<p>Since there are 2*2*2 = 23 = 8 possible binary states for the three cells
+neighboring a given cell, there are a total of 28 = 256 elementary cellular
+automata.</p>
+
+<p><b>Example: One-Dimensional</b></p>
+
+<p>Steven Wolfram enumerated all possible elementary cellular automata and he
+calls this particular rule set Rule 30.</p>
+
+<p align=center>
+<img src="rule30s.png" width=250 height=185>
+<img src="rule90s.png" width=250 height=185 style="margin-left: 1cm">
+</p>
+
+<p>Rule 30 is of special interest because it is chaotic (Wolfram 2002, p. 871).
+This rule is used as the random number generator used for large integers in
+Mathematica (Wolfram 2002, p. 317). Rule 90 (next slide) is also of interest
+because it generates fractal patterns</p>
+
+<p><b>What does this have to do with Nyquist?</b></p>
+
+<p>Ever wonder what fractal patterns would sound like in music? Using cellular
+automata is a very efficient way of generating interesting musical patterns,
+because you only need to keep track of two generations at any given time. So I
+decided to implement a cellular automata feature in Nyquist</p>
+
+<p><b>Cellular Automata within Nyquist</b></p>
+
+<p>Recall the one-dimensional array of states, each of which can be either 0 or
+1. The musical analogy for this idea is: instead of a row of states, you have
+an array of sounds. If a state has a value of 1, this sound is &ldquo;turned
+on&rdquo;, if 0 its &ldquo;turned off.&rdquo; Also, assume you have chosen some
+method by which you can combine turned-on sounds.</p>
+
+<P STYLE="margin-bottom: 0cm"><b>Example</b></p>
+
+<pre>
+   Osc 60 - Osc 65 - Osc 67 - Osc 70 - Osc 75 - Osc 76 - Osc 79
+</pre>
+
+<p>Here is a very simple array of sounds. In this musical cellular automata
+structure, we choose the combining function to be SUM, for the sake of
+simplicity. Now if states 2,3, and 6 are turned on, we would get the Nyquist
+sound (sum (osc 65) (osc 67) (osc 76)), which is just a simple chord. The
+evolution of this automaton would be a sequential progression of chords.</p>
+
+<p><b>Implementation</b></p>
+
+<p>I have implemented a cellular automata package in Nyquist that allows you to
+use any one-dimensional automaton on any array of sounds, using any combining
+function on the activated sounds.</p>
+
+<pre>
+   Usage: (cell-aut &lt;num iterations&gt; &lt;combining function&gt; &lt;sound list&gt; &lt;update rule&gt;)
+</pre>
+
+<p>Since automata are differentiated by their evolution, or row update rules,
+you can specify the auto-maton you want to use just by specifying the update
+rule. The update rule is simply a function that takes in 3 (t/nil) values, and
+returns t or nil. The three input values will be the values of the cell&rsquo;s
+dependencies, and the output is the current cell&rsquo;s value.</p>
+
+<p><b>Example Update Rule </b></p>
+
+<pre>
+   (defun wolfram-rule-30 (arg1 arg2 arg3)
+     (if (and (eq arg1 t) (eq arg2 t) (eq arg3 t)) nil)
+     (if (and (eq arg1 t) (eq arg2 t) (eq arg3 nil)) nil)
+     (if (and (eq arg1 t) (eq arg2 nil) (eq arg3 t)) nil)
+     (if (and (eq arg1 t) (eq arg2 nil) (eq arg3 nil)) t)
+     (if (and (eq arg1 nil) (eq arg2 t) (eq arg3 t)) t)
+     (if (and (eq arg1 nil) (eq arg2 t) (eq arg3 nil)) t)
+     (if (and (eq arg1 nil) (eq arg2 nil) (eq arg3 t)) t)
+     (if (and (eq arg1 nil) (eq arg2 nil) (eq arg3 nil)) nil))
+</pre>
+
+<p><b>Example Update Rule, con&rsquo;t</b></p>
+
+<p>The previous slide corresponds with this visual implementation The user can
+create their own up-date rules 88 of the possible 256 update rules are known to
+be fundamentally inequivalent (Wolfram 2002, p.57).</p>
+
+<p><b>Example Music Created Using Cellular Automata</b></p>
+
+<p>These examples are very simple: The sound arrays are just arrays of
+oscillators. The samples use Wolfram&rsquo;s fractal rule (90) and
+Wolfram&rsquo;s chaotic rule (30) Combine function is just SUM. </p>
+
+<p><b>Future Work</b></p>
+
+<p>I plan to explore more complicated examples, including cellular automata of
+harmonics, and cellular automata of cellular automata. How much musical
+structure can a cellular automaton describe? Music that is pleasant to the
+human ear is sparse over the set of all possible tone combinations over a given
+range of tones; cellular automata currently does not have this property. Can it
+be added?</p>
+
+<br>
+
+<p align=center><b>
+</b>Cellular Automata & Nyquist<b> /
+<a href="cellularautomata.html">Cellular Automata Example</a> /
+<a href="cell-aut.lsp.html">View example: cell-aut.lsp</a>
+<br>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>

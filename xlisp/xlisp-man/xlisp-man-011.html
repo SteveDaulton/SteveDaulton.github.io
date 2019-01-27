@@ -1,0 +1,140 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-011.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#12">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-010.html">Previous</a> |
+<a href="xlisp-man-012.html">Next</a>
+
+<hr>
+
+<h1>11&nbsp; Symbols</h1>
+
+<hr>
+
+<ul>
+
+<li><nobr><a name="self" href="../xlisp-ref/xlisp-ref-233.html">self</a>
+ - the current object [within a method context]</nobr></li>
+
+<li><nobr><a name="obarray" href="../xlisp-ref/xlisp-ref-186.html">*obarray*</a>
+ - the object hash table</nobr></li>
+
+<li><nobr><a name="standard-input" href="../xlisp-ref/xlisp-ref-244.html">*standard-input*</a>
+ - the standard input stream</nobr></li>
+
+<li><nobr><a name="standard-output" href="../xlisp-ref/xlisp-ref-245.html">*standard-output*</a>
+ - the standard output stream</nobr></li>
+
+<li><nobr><a name="error-output" href="../xlisp-ref/xlisp-ref-103.html">*error-output*</a>
+ - the error output stream</nobr></li>
+
+<li><nobr><a name="trace-output" href="../xlisp-ref/xlisp-ref-288.html">*trace-output*</a>
+ - the trace output stream</nobr></li>
+
+<li><nobr><a name="debug-io" href="../xlisp-ref/xlisp-ref-085.html">*debug-io*</a>
+ - the debug i/o stream</nobr></li>
+
+<li><nobr><a name="breakenable" href="../xlisp-ref/xlisp-ref-042.html">*breakenable*</a>
+ - flag controlling entering break loop on errors</nobr></li>
+
+<li><nobr><a name="" href="../xlisp-ref/xlisp-ref-286.html">*tracelist*</a>
+ - list of names of functions to trace</nobr></li>
+
+<li><nobr><a name="tracenable" href="../xlisp-ref/xlisp-ref-287.html">*tracenable*</a>
+ - enable trace back printout on errors</nobr></li>
+
+<li><nobr><a name="tracelimit" href="../xlisp-ref/xlisp-ref-285.html">*tracelimit*</a>
+ - number of levels of trace back information</nobr></li>
+
+<li><nobr><a name="evalhook" href="../xlisp-ref/xlisp-ref-107.html">*evalhook*</a>
+ - user substitute for the evaluator function</nobr></li>
+
+<li><nobr><a name="applyhook" href="../xlisp-ref/xlisp-ref-028.html">*applyhook*</a>
+ - [not yet implemented]</nobr></li>
+
+<li><nobr><a name="readtable" href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a>
+ - the current readtable</nobr></li>
+
+<li><nobr><a name="unbound" href="../xlisp-ref/xlisp-ref-291.html">*unbound*</a>
+ - indicator for unbound symbols</nobr></li>
+
+<li><nobr><a name="gc-flag" href="../xlisp-ref/xlisp-ref-127.html">*gc-flag*</a>
+ - controls the printing of 'gc' messages</nobr></li>
+
+<li><nobr><a name="gc-hook" href="../xlisp-ref/xlisp-ref-128.html">*gc-hook*</a>
+ - function to call after garbage collection</nobr></li>
+
+<li><nobr><a name="integer-format" href="../xlisp-ref/xlisp-ref-139.html">*integer-format*</a>
+ - format for printing integers [%d or %ld]</nobr></li>
+
+<li><nobr><a name="float-format" href="../xlisp-ref/xlisp-ref-119.html">*float-format*</a>
+ - format for printing floats [%g]</nobr></li>
+
+<li><nobr><a name="print-case" href="../xlisp-ref/xlisp-ref-201.html">*print-case*</a>
+ - symbol output case [:upcase or :downcase]</nobr></li>
+
+</ul>
+
+<a name="plus"></a><a name="plus-2"></a><a name="plus-3"></a>
+<a name="star"></a><a name="star-2"></a><a name="star-3"></a>
+<a name="minus"></a>
+
+<p>There are several symbols maintained by the read-eval-print loop.
+The symbols
+<a href="../xlisp-ref/xlisp-ref-006.html">&nbsp;+&nbsp;</a>,
+<a href="../xlisp-ref/xlisp-ref-007.html">&nbsp;++&nbsp;</a>, and
+<a href="../xlisp-ref/xlisp-ref-008.html">&nbsp;+++&nbsp;</a>
+are bound to the most recent three input expressions. The symbols
+<a href="../xlisp-ref/xlisp-ref-002.html">&nbsp;*&nbsp;</a>,
+<a href="../xlisp-ref/xlisp-ref-003.html">&nbsp;**&nbsp;</a> and
+<a href="../xlisp-ref/xlisp-ref-004.html">&nbsp;***&nbsp;</a>
+are bound to the most recent three results. The symbol
+<a href="../xlisp-ref/xlisp-ref-010.html">&nbsp;-&nbsp;</a>
+is bound to the expression currently being evaluated. It becomes the value of
+<a href="../xlisp-ref/xlisp-ref-006.html">&nbsp;+&nbsp;</a>
+at the end of the evaluation.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#12">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-010.html">Previous</a> |
+<a href="xlisp-man-012.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-011.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

@@ -1,0 +1,131 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-178.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP :nmacro</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-177.html">Previous</a> |
+<a href="xlisp-ref-179.html">Next</a>
+
+<hr>
+
+<h1>:nmacro</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>keyword</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlread.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(:nmacro . <i>function</i>)</dt>
+<dd><i>function</i> - a function</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>':nmacro' is an entry that is used in the
+<a href="xlisp-ref-216.html">*readtable*</a> system variable that contains
+XLISP's data structures relating to the processing of characters from the
+user [or files] and read-macro expansions. The existance of the ':nmacro'
+keyword means that the specified character is the start of a non-terminal
+read macro. For ':nmacro', the form of the
+<a href="xlisp-ref-216.html">*readtable*</a> entry is a dotted pair
+like:</p>
+
+<pre class="example">
+(:nmacro . <font color="#0000CC"><i>function</i></font>)
+</pre>
+
+<p>The 'function' can be a built-in read-macro function or a user defined
+lambda expression. The 'function' takes two parameters, an input stream
+specification, and an integer that is the character value. The 'function'
+should return <a href="xlisp-ref-177.html">NIL</a> if the character is
+'white-space' or a value <a href="xlisp-ref-080.html">cons</a>ed with
+<a href="xlisp-ref-177.html">NIL</a> to return the value. The 'function'
+will probably read additional characters from the input stream.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun look-at (table)                <font color="#0000CC">; define a function to</font>
+  (dotimes (ch 127)                   <font color="#0000CC">;   look in a table</font>
+    (prog ((entry (aref table ch)))   <font color="#0000CC">;   and print out any</font>
+      (if (and (consp entry)          <font color="#0000CC">;   :NMACRO entries</font>
+               (equal (car entry)
+                      ':nmacro))
+          (princ (int-char ch)))))
+  (terpri))
+(look-at *readtable*)                 <font color="#0000CC">;  prints #</font>
+</pre>
+
+<p><b>Note:</b> The system defines that the hash [#] character is a
+non-terminal. This is because the hash is used for a variety of 'read macro
+expansions' including <a href="xlisp-ref-124.html">function</a>, an
+<a href="../xlisp-misc/ascii-table.html">ASCII</a> code, and hexadecimal
+numbers.</p>
+
+<p><b>Caution:</b> If you experiment with
+<nobr><a href="xlisp-ref-216.html">*readtable*</a> ,</nobr> it is useful
+to save the old value in a variable, so that you can restore the system
+state.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man/xlisp-man-008.html#nmacro">:nmacro</a>
+keyword in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-177.html">Previous</a> |
+<a href="xlisp-ref-179.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-178.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

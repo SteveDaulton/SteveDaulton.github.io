@@ -1,0 +1,106 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-006.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#6">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-005.html">Previous</a> |
+<a href="xlisp-man-007.html">Next</a>
+
+<hr>
+
+<h1>6&nbsp; The Evaluator</h1>
+
+<hr>
+
+<p>The process of evaluation in XLISP:</p>
+
+<ul>
+
+<li><p>Strings, integers, characters, floats, objects, arrays, streams,
+subrs [built-in functions], fsubrs [special forms] and closures [user
+defined functions] evaluate to themselves.</p></li>
+
+<li><p>Symbols act as variables and are evaluated by retrieving the value
+associated with their current binding.</p></li>
+
+<li><p>Lists are evaluated by examining the first element of the list and
+then taking one of the following actions:</p></li>
+
+<ul>
+
+<li><p>If it is a symbol, the functional binding of the symbol is
+retrieved.</p></li>
+
+<li><p>If it is a lambda expression, a closure is constructed for the
+function described by the lambda expression.</p></li>
+
+<li><p>If it is a subr [built-in function], fsubr [special form] or closure
+[user defined function], it stands for itself.</p></li>
+
+<li><p>Any other value is an error.</p></li>
+
+</ul>
+
+<p>Then, the value produced by the previous step is examined:</p>
+
+<ul>
+
+<li><p>If it is a subr [built-in function] or closure [user defined
+function], the remaining list elements are evaluated and the subr [built-in
+function] or closure [user defined function] is called with these evaluated
+expressions as arguments.</p></li>
+
+<li><p>If it is an fsubr [special form], the fsubr is called using the
+remaining list elements as arguments [unevaluated].</p></li>
+
+<li><p>If it is a macro, the macro is expanded using the remaining list
+elements as arguments [unevaluated]. The macro expansion is then evaluated
+in place of the original macro call.</p></li>
+
+</ul>
+
+</ul>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#6">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-005.html">Previous</a> |
+<a href="xlisp-man-007.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-006.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

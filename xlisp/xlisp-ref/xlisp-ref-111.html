@@ -1,0 +1,119 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-111.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP expand</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-110.html">Previous</a> |
+<a href="xlisp-ref-112.html">Next</a>
+
+<hr>
+
+<h1>expand</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlsys.c, xldmem.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(expand <i>segments</i>)</dt>
+<dd><i>segments</i> - the number of segments to add as an integer expression<br>
+returns - the number of segments added</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'expand' function expands memory by the specified number of
+'segments'. The number of 'segments' added is returned as the result. The
+power up default is 1000 nodes per segment. Note that
+<a href="xlisp-ref-023.html">alloc</a> allows you to change the number of
+nodes per segment.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(room)      <font color="#0000CC">; prints  Nodes:       8000</font>
+            <font color="#0000CC">;         Free nodes:  5622</font>
+            <font color="#0000CC">;         Segments:    6</font>
+            <font color="#0000CC">;         Allocate:    1000</font>
+            <font color="#0000CC">;         Total:       92586</font>
+            <font color="#0000CC">;         Collections: 8</font>
+            <font color="#0000CC">; returns NIL</font>
+
+(expand 2)  <font color="#0000CC">; add more nodes</font>
+
+(room)      <font color="#0000CC">; prints  Nodes:       10000</font>
+            <font color="#0000CC">;         Free nodes:  7608</font>
+            <font color="#0000CC">;         Segments:    8</font>
+            <font color="#0000CC">;         Allocate:    1000</font>
+            <font color="#0000CC">;         Total:       112602</font>
+            <font color="#0000CC">;         Collections: 8</font>
+            <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p><b>Note:</b> When <a href="xlisp-ref-125.html">gc</a> is called or an
+automatic garbage collection occurs, if the amount of free memory is still
+low after the garbage collection, the system attempts to add more segments
+[an automatic 'expand'].</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-031.html#expand">expand</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-110.html">Previous</a> |
+<a href="xlisp-ref-112.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-111.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

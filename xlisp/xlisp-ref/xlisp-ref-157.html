@@ -1,0 +1,112 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-157.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP loop</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-156.html">Previous</a> |
+<a href="xlisp-ref-158.html">Next</a>
+
+<hr>
+
+<h1>loop</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(loop <i>body</i> ... )</dt>
+<dd><i>body</i> - a series of expressions<br>
+returns - never returns [must use non-local exit]</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'loop' special form specifies a 'repeat-forever' construct. The
+expressions in'body' will be evaluated. When the last expression is
+evaluated in 'body', 'loop' will then repeat the 'body'. When a
+<a href="xlisp-ref-225.html">return</a> is evaluated within a 'loop', the
+specified value will be returned. 'loop' itself does not generate a return
+value. Other exit mechanisms include
+<nobr><a href="xlisp-ref-135.html">go</a> ,</nobr>
+<nobr><a href="xlisp-ref-281.html">throw</a> ,</nobr>
+<nobr><a href="xlisp-ref-226.html">return-from</a> and errors.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq i 65)                      <font color="#0000CC">; initial value</font>
+
+(loop                            <font color="#0000CC">; LOOP</font>
+  (princ (int-char i))           <font color="#0000CC">;   print the character</font>
+  (if (= i 90) (return "done"))  <font color="#0000CC">;   test for limit</font>
+  (setq i (1+ i)))               <font color="#0000CC">;   increment and repeat</font>
+                                 <font color="#0000CC">; prints ABCDEFGHIJKLMNOPQRSTUVWXYZ</font>
+                                 <font color="#0000CC">; returns "done"</font>
+</pre>
+
+<p><b>Note:</b> If you create a 'loop' with no exit mechanism, you will
+probably have to abort your XLISP session.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-020.html#loop">loop</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-156.html">Previous</a> |
+<a href="xlisp-ref-158.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-157.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

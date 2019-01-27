@@ -1,0 +1,142 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-027.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#28">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-026.html">Previous</a> |
+<a href="xlisp-man-028.html">Next</a>
+
+<hr>
+
+<h1>27&nbsp; Input/Output Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#get-key">get-key</a> - get a single key stroke from the keyboard</nobr></li>
+<li><nobr><a href="#read">read</a> - read an expression</nobr></li>
+<li><nobr><a href="#print">print</a> - print an expression on a new line</nobr></li>
+<li><nobr><a href="#prin1">prin1</a> - print an expression</nobr></li>
+<li><nobr><a href="#princ">princ</a> - print an expression without quoting</nobr></li>
+<li><nobr><a href="#pprint">pprint</a> - pretty print an expression</nobr></li>
+<li><nobr><a href="#terpri">terpri</a> - terminate the current print line</nobr></li>
+<li><nobr><a href="#flatsize">flatsize</a> - length of printed representation using prin1</nobr></li>
+<li><nobr><a href="#flatc">flatc</a> - length of printed representation using princ</nobr></li>
+</ol>
+
+<hr>
+
+<a name="get-key"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-131.html">get-key</a>)
+- get a single key stroke from the keyboard</dt>
+<dd>returns - the decimal ASCII value of the key pressed<br>
+<b>Note:</b> this function is not supported on all systems</dd>
+
+<a name="read"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-212.html">read</a> [<i>stream</i>
+[<i>eof</i> [<i>rflag</i>]]]) - read an expression</dt>
+<dd><i>stream</i> - the input stream [default is standard input]<br>
+<i>eof</i> - the value to return on end of file [default is NIL]<br>
+<i>rflag</i> - recursive read flag [default is NIL]<br>
+returns - the expression read</dd>
+
+<a name="print"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-200.html">print</a> <i>expr</i>
+[<i>stream</i>]) - print an expression on a new line</dt>
+<dd><i>expr</i> - the expression to be printed<br>
+<i>stream</i> - the output stream [default is standard output]<br>
+returns - the expression</dd>
+
+<a name="prin1"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-198.html">prin1</a> <i>expr</i>
+[<i>stream</i>]) - print an expression</dt>
+<dd><i>expr</i> - the expression to be printed<br>
+<i>stream</i> - the output stream [default is standard output]<br>
+returns - the expression</dd>
+
+<a name="princ"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-199.html">princ</a> <i>expr</i>
+[<i>stream</i>]) - print an expression without quoting</dt>
+<dd><i>expr</i> - the expressions to be printed<br>
+<i>stream</i> - the output stream [default is standard output]<br>
+returns - the expression</dd>
+
+<a name="pprint"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-197.html">pprint</a> <i>expr</i>
+[<i>stream</i>]) - pretty print an expression</dt>
+<dd><i>expr</i> - the expressions to be printed<br>
+<i>stream</i> - the output stream [default is standard output]<br>
+returns - always returns NIL</dd>
+
+<a name="terpri"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-279.html">terpri</a> [<i>stream</i>])
+- terminate the current print line</dt>
+<dd><i>stream</i> - the output stream [default is standard output]<br>
+returns - NIL</dd>
+
+<a name="flatsize"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-116.html">flatsize</a> <i>expr</i>)
+- length of printed representation using prin1</dt>
+<dd><i>expr</i> - the expression<br>
+returns - the length</dd>
+
+<a name="flatc"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-115.html">flatc</a> <i>expr</i>)
+- length of printed representation using princ</dt>
+<dd><i>expr</i> - the expression<br>
+returns - the length</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#28">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-026.html">Previous</a> |
+<a href="xlisp-man-028.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-027.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

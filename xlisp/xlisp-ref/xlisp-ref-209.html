@@ -1,0 +1,136 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-209.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP putprop</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-208.html">Previous</a> |
+<a href="xlisp-ref-210.html">Next</a>
+
+<hr>
+
+<h1>putprop</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(putprop <i>symbol value property</i>)</dt>
+<dd><i>symbol</i> - the symbol with a property list<br>
+<i>value</i> - the value to be assigned to the property<br>
+<i>property</i> - the property name being changed or added<br>
+returns - the property value</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'putprop' function sets the value of the 'property' in the 'symbol'.
+If the 'property' does not exist, the 'property' is added to the property
+list. The 'symbol' must be an existing symbol. The 'value' may be a single
+value or a list.</p>
+
+<p>Property lists are lists attached to any user defined variables. The
+lists are in the form of:</p>
+
+<pre class="example">
+(<font color="#0000CC"><i>name1 val1 name2 val2</i></font> ... )
+</pre>
+
+<p>Any number of properties may be attached to a single variable.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq person 'bobby)                  <font color="#0000CC">; create a var with a value</font>
+(putprop person 'boogie 'last-name)   <font color="#0000CC">; add a LAST-NAME property</font>
+(putprop person 'disc-jockey 'job)    <font color="#0000CC">; add a JOB property</font>
+
+(get person 'last-name)               <font color="#0000CC">; retrieve LAST-NAME - boogie</font>
+(get person 'job)                     <font color="#0000CC">; retrieve JOB - disc-jockey</font>
+(get person 'height)                  <font color="#0000CC">; non-existant - returns NIL</font>
+
+(putprop person '(10 20 30) 'stats)   <font color="#0000CC">; add STATS - a list</font>
+(get person 'stats)                   <font color="#0000CC">; retrieve STATS - (10 20 30)</font>
+</pre>
+
+<p><b>Note:</b> You can set a property to the value
+<a href="xlisp-ref-177.html">NIL</a>. However, this
+<a href="xlisp-ref-177.html">NIL</a> value is indistinguishable from the
+<a href="xlisp-ref-177.html">NIL</a> returned when a property does not
+exist.</p>
+
+<p><b>Common Lisp:</b> Common LISP does not have a 'putprop' function. It
+uses <a href="xlisp-ref-238.html">setf</a> to achieve this functionality.
+Porting from Common Lisp to XLISP will work fine since XLISP supports the <a
+href="xlisp-ref-238.html">setf</a> modifications of property lists as well
+as the <a href="xlisp-ref-130.html">get</a> function to retrieve property
+values from symbol names. Porting from XLISP to Common Lisp will require
+translating 'putprop' into <a href="xlisp-ref-238.html">setf</a> forms.</p>
+
+<p><b>Caution:</b> In XLISP, the order of 'putprop' arguments is 'symbol',
+'value', 'property'. This is different from many other Lisps which normally
+use 'symbol', 'property', 'value'. Be careful when porting existing Lisp
+code.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-014.html#putprop">putprop</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-208.html">Previous</a> |
+<a href="xlisp-ref-210.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-209.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

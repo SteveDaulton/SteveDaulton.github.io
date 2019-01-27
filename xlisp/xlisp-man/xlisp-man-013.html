@@ -1,0 +1,190 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-013.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#14">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-012.html">Previous</a> |
+<a href="xlisp-man-014.html">Next</a>
+
+<hr>
+
+<h1>13&nbsp; Symbol Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#set">set</a> - set the value of a symbol</nobr></li>
+<li><nobr><a href="#setq">setq</a> - set the [quoted] value of a symbol</nobr></li>
+<li><nobr><a href="#psetq">psetq</a> - parallel version of setq</nobr></li>
+<li><nobr><a href="#setf">setf</a> - set the value of a field</nobr></li>
+<li><nobr><a href="#defun">defun</a> - define a function</nobr></li>
+<li><nobr><a href="#defmacro">defmacro</a> - define a macro</nobr></li>
+<li><nobr><a href="#gensym">gensym</a> - generate a symbol</nobr></li>
+<li><nobr><a href="#intern">intern</a> - make an interned symbol</nobr></li>
+<li><nobr><a href="#make-symbol">make-symbol</a> - make an uninterned symbol</nobr></li>
+<li><nobr><a href="#symbol-name">symbol-name</a> - get the print name of a symbol</nobr></li>
+<li><nobr><a href="#symbol-value">symbol-value</a> - get the value of a symbol</nobr></li>
+<li><nobr><a href="#symbol-function">symbol-function</a> - get the functional value of a symbol</nobr></li>
+<li><nobr><a href="#symbol-plist">symbol-plist</a> - get the property list of a symbol</nobr></li>
+<li><nobr><a href="#hash">hash</a> - compute the hash index for a symbol</nobr></li>
+</ol>
+
+<hr>
+
+<a name="set"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-237.html">set</a> <i>sym</i> <i>expr</i>)
+ -  set the value of a symbol</dt>
+<dd><i>sym</i> - the symbol being set<br>
+<i>expr</i> - the new value<br>
+returns - the new value</dd>
+
+<a name="setq"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-239.html">setq</a> [<i>sym</i> <i>expr</i>]...)
+ -  set the [quoted] value of a symbol</dt>
+<dd><i>sym</i> - the symbol being set [quoted]<br>
+<i>expr</i> - the new value<br>
+returns - the new value</dd>
+
+<a name="psetq"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-208.html">psetq</a> [<i>sym</i> <i>expr</i>]...)
+ - parallel version of setq</dt>
+<dd><i>sym</i> - the symbol being set [quoted]<br>
+<i>expr</i> - the new value<br>
+returns - the new value</dd>
+
+<a name="setf"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-238.html">setf</a> [<i>place</i> <i>expr</i>]...)
+ - set the value of a field</dt>
+<dd><i>place</i> - the field specifier [quoted]:<br>
+<dl>
+<dd><i>sym</i> - set value of a symbol<br>
+(car <i>expr</i>) - set car of a cons node<br>
+(cdr <i>expr</i>) - set cdr of a cons node<br>
+(nth <i>n</i> <i>expr</i>) - set nth car of a list<br>
+(aref <i>expr</i> <i>n</i>) - set nth element of an array<br>
+(get <i>sym</i> <i>prop</i>) - set value of a property<br>
+(symbol-value <i>sym</i>) - set value of a symbol<br>
+(symbol-function <i>sym</i>) - set functional value of a symbol<br>
+(symbol-plist <i>sym</i>) - set property list of a symbol<br></dd>
+</dl>
+<i>expr</i> - the new value<br>
+returns - the new value</dd>
+
+<a name="defun"></a>
+<a name="defmacro"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-087.html">defun</a></a> <i>sym</i>
+<i>fargs</i> <i>expr</i>...) - define a function<br>
+(<a href="../xlisp-ref/xlisp-ref-086.html">defmacro</a></a> <i>sym</i>
+<i>fargs</i> <i>expr</i>...) - define a macro</dt>
+<dd><i>sym</i> - symbol being defined [quoted]<br>
+<i>fargs</i> - formal argument list [lambda list] [quoted]<br>
+<i>expr</i> - expressions constituting the body of the function [quoted]<br>
+returns - the function symbol</dd>
+
+<a name="gensym"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-129.html">gensym</a> [<i>tag</i>])
+- generate a symbol</dt>
+<dd><i>tag</i> - string or number<br>
+returns - the new symbol</dd>
+
+<a name="intern"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-141.html">intern</a></a> <i>pname</i>)
+ - make an interned symbol</dt>
+<dd><i>pname</i> - the symbol's print name string<br>
+returns - the new symbol</dd>
+
+<a name="make-symbol"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-165.html">make-symbol</a></a> <i>pname</i>)
+ - make an uninterned symbol</dt>
+<dd><i>pname</i> - the symbol's print name string<br>
+returns - the new symbol</dd>
+
+<a name="symbol-name"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-271.html">symbol-name</a> <i>sym</i>)
+ - get the print name of a symbol</dt>
+<dd><i>sym</i> - the symbol<br>
+returns - the symbol's print name</dd>
+
+<a name="symbol-value"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-273.html">symbol-value</a> <i>sym</i>)
+ - get the value of a symbol</dt>
+<dd><i>sym</i> - the symbol<br>
+returns - the symbol's value</dd>
+
+<a name="symbol-function"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-270.html">symbol-function</a> <i>sym</i>)
+ - get the functional value of a symbol</dt>
+<dd><i>sym</i> - the symbol<br>
+returns - the symbol's functional value</dd>
+
+<a name="symbol-plist"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-272.html">symbol-plist</a> <i>sym</i>)
+ - get the property list of a symbol</dt>
+<dd><i>sym</i> - the symbol<br>
+returns - the symbol's property list</dd>
+
+<a name="hash"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-136.html">hash</a> <i>sym</i> <i>n</i>)
+ - compute the hash index for a symbol</dt>
+<dd><i>sym</i> - the symbol or string<br>
+<i>n</i> - the table size [integer]<br>
+returns - the hash index [integer]<dt>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#14">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-012.html">Previous</a> |
+<a href="xlisp-man-014.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-013.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

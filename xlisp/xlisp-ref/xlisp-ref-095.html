@@ -1,0 +1,139 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-095.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP dolist</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-094.html">Previous</a> |
+<a href="xlisp-ref-096.html">Next</a>
+
+<hr>
+
+<h1>dolist</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(dolist (<i>symbol list-expr</i> [<i>result</i>]) [<i>expr</i> ... ])</dt>
+<dd><i>symbol</i> - a symbol<br>
+<i>list-expr</i> - a list expression<br>
+<i>result</i> - an optional expression for the returned result<br>
+<i>expr</i> - expressions comprising the body of the loop which may
+contain <a href="xlisp-ref-225.html">return</a>s,
+<a href="xlisp-ref-135.html">go</a>s or tags for
+<a href="xlisp-ref-135.html">go</a><br>
+returns - the return value of the result expression or
+<a href="xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> The 'dolist' special form is basically a list-oriented 'for' looping
+construct that contains a loop 'symbol', a 'list-expr' to draw values from,
+an optional 'return' value and a block of code [expressions] to evaluate.
+The sequence of execution is:</p>
+
+<pre>
+  <i>symbol</i>    := CAR of <i>list-expr</i>
+  temp-list := CDR of <i>list-expr</i>
+  while  temp-list is not empty
+    loop code execution
+    <i>symbol</i>    := CAR of temp-list
+    temp-list := CDR of temp-list
+  end-while
+  return <i>result</i>
+</pre>
+
+<p>The main loop 'symbol' will take on successive values from 'list-expr'.
+The 'dolist' form will go through and create and initialize the 'symbol'.
+After execution of the loop 'exprs', the 'symbol' is set to the next value
+in the 'list-expr'. This continues until the 'list-expr' has been exhausted.
+The value of the 'result' expression is evaluated and returned. If no
+'result' is specified, <a href="xlisp-ref-177.html">NIL</a> is returned.
+When the 'dolist' is finished execution, the 'symbol' that was defined will
+no longer exist or retain its value. If the 'list-expr' is an empty list,
+then no loop execution takes place and the 'result' is returned.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+  (dolist (i () "done")        <font color="#0000CC">; DOLIST with I loop variable</font>
+          (print "here"))      <font color="#0000CC">;   an empty list</font>
+                               <font color="#0000CC">;   and a return value</font>
+                               <font color="#0000CC">;   returns "done"</font>
+
+  (dolist (x '(a b c) "fini")  <font color="#0000CC">; DOLIST with X loop variable</font>
+          (princ x))           <font color="#0000CC">;   a list with (A B C)</font>
+                               <font color="#0000CC">;   and a return value</font>
+                               <font color="#0000CC">;   prints  ABC   returns "fini"</font>
+
+  (dolist (y '(1 2 3))         <font color="#0000CC">; DOLIST with Y loop variable</font>
+          (princ (* y y)))     <font color="#0000CC">;   a list with (1 2 3)</font>
+                               <font color="#0000CC">;   and no return value</font>
+                               <font color="#0000CC">;   prints  149   returns NIL</font>
+                               <font color="#0000CC">;   returns "met in the middle"</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-020.html#dolist">dolist</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-094.html">Previous</a> |
+<a href="xlisp-ref-096.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-095.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

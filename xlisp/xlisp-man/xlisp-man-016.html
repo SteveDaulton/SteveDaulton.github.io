@@ -1,0 +1,315 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-016.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#17">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-015.html">Previous</a> |
+<a href="xlisp-man-017.html">Next</a>
+
+<hr>
+
+<h1>16&nbsp; List Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#car">car</a> - return the car of a list node</nobr></li>
+<li><nobr><a href="#cdr">cdr</a> - return the cdr of a list node</nobr></li>
+<li><nobr><a href="#cxxr">c<i>xx</i>r</a> - all c<i>xx</i>r combinations</nobr></li>
+<li><nobr><a href="#cxxxr">c<i>xxx</i>r</a> - all c<i>xxx</i>r combinations</nobr></li>
+<li><nobr><a href="#cxxxxr">c<i>xxxx</i>r</a> - all c<i>xxxx</i>r combinations</nobr></li>
+<li><nobr><a href="#first">first</a> - get the first element of a list</nobr></li>
+<li><nobr><a href="#second">second</a> - get the second element of a list</nobr></li>
+<li><nobr><a href="#third">third</a> - get the third element of a list</nobr></li>
+<li><nobr><a href="#fourth">fourth</a> - get the fourth element of a list</nobr></li>
+<li><nobr><a href="#rest">rest</a> - get the rest of the list except the first element</nobr></li>
+<li><nobr><a href="#cons">cons</a> - construct a new list node</nobr></li>
+<li><nobr><a href="#list">list</a> - create a list of values</nobr></li>
+<li><nobr><a href="#append">append</a> - append lists</nobr></li>
+<li><nobr><a href="#reverse">reverse</a> - reverse a list</nobr></li>
+<li><nobr><a href="#last">last</a> - return the last list node of a list</nobr></li>
+<li><nobr><a href="#member">member</a> - find an expression in a list</nobr></li>
+<li><nobr><a href="#assoc">assoc</a> - find an expression in an a-list</nobr></li>
+<li><nobr><a href="#remove">remove</a> - remove elements from a list</nobr></li>
+<li><nobr><a href="#remove-if">remove-if</a> - remove elements that pass test</nobr></li>
+<li><nobr><a href="#remove-if-not">remove-if-not</a> - remove elements that fail test</nobr></li>
+<li><nobr><a href="#length">length</a> - find the length of a list, vector or string</nobr></li>
+<li><nobr><a href="#nth">nth</a> - return the nth element of a list</nobr></li>
+<li><nobr><a href="#nthcdr">nthcdr</a> - return the nth cdr of a list</nobr></li>
+<li><nobr><a href="#mapc">mapc</a> - apply function to successive cars</nobr></li>
+<li><nobr><a href="#mapcar">mapcar</a> - apply function to successive cars</nobr></li>
+<li><nobr><a href="#mapl">mapl</a> - apply function to successive cdrs</nobr></li>
+<li><nobr><a href="#maplist">maplist</a> - apply function to successive cdrs</nobr></li>
+<li><nobr><a href="#subst">subst</a> - substitute expressions</nobr></li>
+<li><nobr><a href="#sublis">sublis</a> - substitute with an a-list</nobr></li>
+
+</ol>
+
+<hr>
+
+<a name="car"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-043.html">car</a> <i>expr</i>)
+ -  return the car of a list node</dt>
+<dd> <i>expr</i> - the list node<br>
+returns - the car of the list node</dd>
+
+<a name="cdr"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-049.html">cdr</a> <i>expr</i>)
+ - return the cdr of a list node</dt>
+<dd><i>expr</i> - the list node<br>
+returns - the cdr of the list node</dd>
+
+<a name="cxxr"></a><br>
+
+<dt>(c<i>xx</i>r</a> <i>expr</i>) - all c<i>xx</i>r combinations,
+like <nobr><a href="../xlisp-ref/xlisp-ref-044.html">caar, cadr</a></nobr> and
+<nobr><a href="../xlisp-ref/xlisp-ref-050.html">cdar, cddr</a></nobr></dt>
+
+<a name="cxxxr"></a><br>
+
+<dt>(c<i>xxx</i>r</a> <i>expr</i>) - all c<i>xxx</i>r combinations,
+like <nobr><a href="../xlisp-ref/xlisp-ref-045.html">caaar...caddr</a></nobr>
+and <a href="../xlisp-ref/xlisp-ref-051.html">cdaar...cdddr</a></dt>
+
+<a name="cxxxxr"></a><br>
+
+<dt>(c<i>xxxx</i>r <i>expr</i>) - all c<i>xxxx</i>r combinations,
+like <nobr><a href="../xlisp-ref/xlisp-ref-046.html">caaaar...cadddr</a></nobr>
+and <nobr><a href="../xlisp-ref/xlisp-ref-052.html">cdaaar...cddddr</a></nobr></dt>
+
+<a name="first"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-114.html">first</a> <i>expr</i>)
+ - get the first element of a list, a synonym for
+<a href="../xlisp-ref/xlisp-ref-043.html">car</a></dt>
+
+<a name="second"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-232.html">second</a> <i>expr</i>)
+ - get the second element of a list, a synonym for
+<a href="../xlisp-ref/xlisp-ref-044.html">cadr</a></dt>
+
+<a name="third"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-280.html">third</a> <i>expr</i>)
+ - get the third element of a list, a synonym for
+<a href="../xlisp-ref/xlisp-ref-045.html">caddr</a></dt>
+
+<a name="fourth"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-122.html">fourth</a> <i>expr</i>)
+ - get the fourth element of a list, a synonym for
+<a href="../xlisp-ref/xlisp-ref-046.html">cadddr</a></dt>
+
+<a name="rest"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-222.html">rest</a> <i>expr</i>)
+- get the rest of the list with the first element removed, a synonym for
+<a href="../xlisp-ref/xlisp-ref-049.html">cdr</a></dt>
+
+<a name="cons"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-080.html">cons</a></a> <i>expr1</i>
+<i>expr2</i>) - construct a new list node</dt>
+<dd><i>expr1</i> -  the car of the new list node<br>
+<i>expr2</i> - the cdr of the new list node<br>
+returns - the new list node</dd>
+
+<a name="list"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-150.html">list</a> <i>expr</i>...)
+ - create a list of values</dt>
+<dd><i>expr</i> - expressions to be combined into a list<br>
+returns - the new list</dd>
+
+<a name="append"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-026.html">append</a> <i>expr</i>...)
+- append lists</dt>
+<dd><i>expr</i> - lists whose elements are to be appended<br>
+returns - the new list</dd>
+
+<a name="reverse"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-227.html">reverse</a> <i>expr</i>)
+  - reverse a list</dt>
+<dd><i>expr</i> - the list to reverse<br>
+returns - a new list in the reverse order</dd>
+
+<a name="last"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-146.html">last</a> <i>list</i>)
+ - return the last list node of a list</dt>
+<dd><i>list</i> - the list<br>
+returns - the last list node in the list</a></dd>
+
+<a name="member"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-171.html">member</a> <i>expr</i>
+<i>list</i> &amp;key :test :test-not) - find an expression in a list</dt>
+<dd><i>expr</i> - the expression to find<br>
+<i>list</i> - the list to search<br>
+:test - the test function [defaults to eql]<br>
+:test-not - the test function [sense inverted]      <br>
+returns - the remainder of the list starting with the expression</dd>
+
+<a name="assoc"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-032.html">assoc</a> <i>expr</i>
+<i>alist</i> &amp;key :test :test-not) - find an expression in an a-list</dt>
+<dd><i>expr</i> - the expression to find<br>
+<i>alist</i> - the association list<br>
+:test - the test function [defaults to eql]<br>
+:test-not - the test function [sense inverted]<br>
+returns - the alist entry or <code>nil</code></dd>
+
+<a name="remove"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-218.html">remove</a> <i>expr</i>
+<i>list</i> &amp;key :test :test-not) - remove elements from a list</dt>
+
+<dd><i>expr</i> - the element to remove<br>
+<i>list</i> - the list<br>
+:test - the test function [defaults to eql]<br>
+:test-not - the test function [sense inverted]<br>
+returns - copy of list with matching expressions removed</dd>
+
+<a name="remove-if"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-219.html">remove-if</a> <i>test</i>
+<i>list</i>) - remove elements that pass test</dt>
+<dd><i>test</i> - the test predicate<br>
+<i>list</i> - the list<br>
+returns - copy of list with matching elements removed</dd>
+
+<a name="remove-if-not"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-220.html">remove-if-not</a> <i>test</i>
+<i>list</i>) - remove elements that fail test</dt>
+<dd><i>test</i> - the test predicate<br>
+<i>list</i> - the list<br>
+returns - copy of list with non-matching elements removed</dd>
+
+<a name="length"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-147.html">length</a> <i>expr</i>)
+- find the length of a list, vector or string</dt>
+<dd><i>expr</i> - the list, vector or string<br>
+returns - the length of the list, vector or string</dd>
+
+<a name="nth"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-182.html">nth</a> <i>n</i> <i>list</i>)
+ - return the nth element of a list</dt>
+<dd><i>n</i> - the number of the element to return [zero origin]<br>
+<i>list</i> - the list<br>
+returns - the nth element or NIL if the list isn't that long</dd>
+
+<a name="nthcdr"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-183.html">nthcdr</a> <i>n</i>
+<i>list</i>) - return the nth cdr of a list</dt>
+<dd><i>n</i> - the number of the element to return [zero origin]<br>
+<i>list</i> - the list<br>
+returns - the nth cdr or NIL if the list isn't that long</dd>
+
+<a name="mapc"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-166.html">mapc</a> <i>fcn</i> <i>list1</i>
+<i>list</i>...) - apply function to successive cars</dt>
+<dd><i>fcn</i> - the function or function name<br>
+<i>listn</i> - a list for each argument of the function<br>
+returns - the first list of arguments</dd>
+
+<a name="mapcar"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-167.html">mapcar</a> <i>fcn</i> <i>list1</i>
+<i>list</i>...) - apply function to successive cars</dt>
+<dd><i>fcn</i> - the function or function name<br>
+<i>listn</i> - a list for each argument of the function<br>
+returns - a list of the values returned<br></dd>
+
+<a name="mapl"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-168.html">mapl</a> <i>fcn</i> <i>list1</i>
+<i>list</i>...) - apply function to successive cdrs</dt>
+<dd><i>fcn</i> - the function or function name<br>
+<i>listn</i> - a list for each argument of the function<br>
+returns - the first list of arguments</dd>
+
+<a name="maplist"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-169.html">maplist</a> <i>fcn</i>
+<i>list1</i> <i>list</i>...) - apply function to successive cdrs</dt>
+<dd><i>fcn</i> - the function or function name<br>
+<i>listn</i> - a list for each argument of the function<br>
+returns - a list of the values returned</dd>
+
+<a name="subst"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-269.html">subst</a> <i>to</i> <i>from</i>
+<i>expr</i> &amp;key :test :test-not) - substitute expressions</dt>
+<dd><i>to</i> - the new expression<br>
+<i>from</i> - the old expression<br>
+<i>expr</i> - the expression in which to do the substitutions<br>
+:test - the test function [defaults to eql]<br>
+:test-not - the test function [sense inverted]<br>
+returns - the expression with substitutions</dd>
+
+<a name="sublis"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-267.html">sublis</a> <i>alist</i>
+<i>expr</i> &amp;key :test :test-not) - substitute with an a-list</dt>
+<dd><i>alist</i> - the association list<br>
+<i>expr</i> - the expression in which to do the substitutions<br>
+:test - the test function [defaults to eql]<br>
+:test-not - the test function [sense inverted]<br>
+returns - the expression with substitutions</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#17">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-015.html">Previous</a> |
+<a href="xlisp-man-017.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-016.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

@@ -1,0 +1,107 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-030.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#31">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-029.html">Previous</a> |
+<a href="xlisp-man-031.html">Next</a>
+
+<hr>
+
+<h1>30&nbsp; String Stream Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#make-string-input-stream">make-string-input-stream</a> - create an unnamed stream from a string expression</nobr></li>
+<li><nobr><a href="#make-string-output-stream">make-string-output-stream</a> - create and return an unnamed output stream</nobr></li>
+<li><nobr><a href="#get-output-stream-string">get-output-stream-string</a> - empty a stream and return the data as a string</nobr></li>
+<li><nobr><a href="#get-output-stream-list">get-output-stream-list</a> - empty a stream and return the data as a list</nobr></li>
+</ol>
+
+<p>These functions operate on unnamed streams. An unnamed output stream
+collects characters sent to it when it is used as the destination of any
+output function. The functions 'get-output-stream-string' and
+'get-output-stream-list' can be used to read [and empty] an unnamed output
+stream and return it's contents as a single string or as a list of
+characters. An unnamed input stream is setup with the
+'make-string-input-stream' function and returns each character of the string
+when it is used as the source of any input function.</p>
+
+<hr>
+
+<a name="make-string-input-stream"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-163.html">make-string-input-stream</a>
+<i>string</i> [<i>start</i> [<i>end</i>]])</dt>
+<dd><i>string</i> - the string<br>
+<i>start</i> - the starting offset<br>
+<i>end</i> - the ending offset + 1<br>
+returns - an unnamed stream that reads from the string</dd>
+
+<a name="make-string-output-stream"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-164.html">make-string-output-stream</a>)</dt>
+<dd>returns - an unnamed output stream</dd>
+
+<a name="get-output-stream-string"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-134.html">get-output-stream-string</a>
+<i>stream</i>)</dt>
+<dd><i>stream</i> - the output stream<br>
+returns - the output so far as a string<br>
+<b>Note:</b> the output stream is emptied by this function</dd>
+
+<a name="get-output-stream-list"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-133.html">get-output-stream-list</a>
+<i>stream</i>)</dt>
+<dd><i>stream</i> - the output stream<br>
+returns -  the output so far as a list<br>
+<b>Note:</b> the output stream is emptied by this function</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#31">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-029.html">Previous</a> |
+<a href="xlisp-man-031.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-030.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

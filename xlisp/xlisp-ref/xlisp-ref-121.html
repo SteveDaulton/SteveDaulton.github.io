@@ -1,0 +1,189 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-121.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP format</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-120.html">Previous</a> |
+<a href="xlisp-ref-122.html">Next</a>
+
+<hr>
+
+<h1>format</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlfio.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(format destination format [expr1 ... ])</dt>
+<dd><i>destination</i> - a required destination [see below]<br>
+<i>format</i> - a format string<br>
+<i>exprN</i> - an expression<br>
+returns - output string if stream is
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="xlisp-ref-177.html">NIL</a> otherwise</dd>
+</dl>
+
+<p>The 'destination' must be a file pointer, a stream,
+<a href="xlisp-ref-177.html">NIL</a> [to create a string] or
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> [to print to
+<a href="xlisp-ref-245.html">*standard-output*</a>].</p>
+
+<h2>Description</h2>
+
+<p>The 'format' function prints the specified expressions [if any] to the
+specified 'destination' using the 'format' string to control the print
+format. If the 'destination' is
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> a string is created and
+returned with the contents of the 'format'. If the 'destination' is
+<nobr><a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> ,</nobr> the printing
+occurs to <a href="xlisp-ref-245.html">*standard-output*</a>. The 'format'
+function returns <nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> if
+the 'destination' was non-<a href="xlisp-ref-177.html">NIL</a>. The 'format'
+string is a string [surrounded by double-quote characters]. This string
+contains ASCII text to be printed along with formatting directives
+[identified by a preceeding tilde '~' character]. The character following
+the tilde character is not case sensitive ['~a' and '~A' will function
+equivalently].</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(format T "Now is the time for")         <font color="#0000CC">; prints  Now is the time for</font>
+(format T "all ~A ~S to" 'good 'men)     <font color="#0000CC">; prints  all GOOD MEN to</font>
+(format T "come to the")                 <font color="#0000CC">; prints  come to the</font>
+(format T "~A of their ~S"               <font color="#0000CC">; prints  aid of their "party"</font>
+          "aid" "party")
+(format *standard-ouput* "Hello there")  <font color="#0000CC">; prints  Hello there</font>
+(format nil "ho ho ~S" 'ho)              <font color="#0000CC">; returns "ho ho HO"</font>
+(format T "this is ~%a break")           <font color="#0000CC">; prints  this is</font>
+                                         <font color="#0000CC">;         a break</font>
+(format T "this is a long ~
+           string")                      <font color="#0000CC">; prints  this is a long string</font>
+</pre>
+
+<p><b>Supported format directives:</b> The 'format' string in XLISP supports
+the following format directives:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>~A</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">ASCII, prints the 'expr'. If it is a string print it
+    without quotes. This is like the <a href="xlisp-ref-199.html">princ</a>
+    function.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>~S</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">s-expr, prints the 'expr'. If it is a string print it
+    with quotes. This is like the <a href="xlisp-ref-198.html">prin1</a>
+    function.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>~%</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">prints a 'newline' control character.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>~~</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">prints a single tilde '~' character.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>~&lt;newline&gt;</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">continue the 'format' string on the next line. This
+    signals a line break in the format. The 'format' function will ignore
+    all white-space [blanks, tabs, newlines]. This is useful when the
+    'format' string is longer than a program line. Note that the 'newline'
+    character must immediately follow the tilde character.</td>
+</tr>
+</tbody></table></p>
+
+<p><b>Common Lisp:</b> The 'format' function in Common Lisp is quite
+impressive. It includes 26 different formatting directives. XLISP, as shown
+above, does not include most of these. The more difficult ones that you
+might encounter are the decimal, octal, hexidecimal, fixed-format
+floating-point and exponential floating-point. It is possible to print in
+octal and hexadecimal notation by setting
+<a href="xlisp-ref-139.html">*integer-format*</a>. It is possible to print
+in fixed format and exponential by setting
+<a href="xlisp-ref-119.html">*float-format*</a>. However, neither of these
+system variables are supported in Common Lisp and neither gives control over
+field size.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-028.html#format">format</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-120.html">Previous</a> |
+<a href="xlisp-ref-122.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-121.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

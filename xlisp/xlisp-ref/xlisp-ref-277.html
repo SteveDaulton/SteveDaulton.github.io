@@ -1,0 +1,109 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-277.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP tagbody</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-276.html">Previous</a> |
+<a href="xlisp-ref-278.html">Next</a>
+
+<hr>
+
+<h1>tagbody</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(tagbody [<i>expr</i> ... ])</dt>
+<dd><i>expr</i> - expressions comprising the body of the block which may
+contain <a href="xlisp-ref-135.html">go</a>s or tags for
+<a href="xlisp-ref-135.html">go</a><br>
+returns - <a href="xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'tagbody' special form is basically a 'block' construct that contains
+a block of code [expressions] to evaluate. After the execution of the
+'tagbody' 'exprs', <a href="xlisp-ref-177.html">NIL</a> is returned. The
+'tagbody' special form allows 'go-to' style branching within the 'block'
+construct via the <a href="xlisp-ref-135.html">go</a> special form. To allow
+this, each 'expr' may be a tag or a form. The tag-symbol is the 'label' and
+must exist somewhere within the 'block' that the <a
+href="xlisp-ref-135.html">go</a> occurs within.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(tagbody                   <font color="#0000CC">; build the 'block'</font>
+   start (print "begin")   <font color="#0000CC">; tag - start</font>
+         (GO end)
+         (print "hello")   <font color="#0000CC">; won't ever be reached</font>
+   end   (print "done"))   <font color="#0000CC">; tag - END</font>
+                           <font color="#0000CC">; prints  "begin" "done"</font>
+                           <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-021.html#tagbody">tagbody</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-276.html">Previous</a> |
+<a href="xlisp-ref-278.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-277.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

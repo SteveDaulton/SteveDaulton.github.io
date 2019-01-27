@@ -1,0 +1,120 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-138.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP int-char</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-137.html">Previous</a> |
+<a href="xlisp-ref-139.html">Next</a>
+
+<hr>
+
+<h1>int-char</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlstr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(int-char <i>int</i>)</dt>
+<dd><i>int</i> - an integer numeric expression<br>
+returns - the character with that code</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'int-char' function returns a character which is the result of turning the
+'int' expression into a character. If a 'int' cannot be made into a
+character, an error is signalled:</p>
+
+<pre class="example">
+<font color="#AA0000">error: character code out of range</font>
+</pre>
+
+<p>The range that 'int' produces a valid character is 0 through 255.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(int-char 48)    <font color="#0000CC">; returns #\0</font>
+(int-char 65)    <font color="#0000CC">; returns #\A</font>
+(int-char 97)    <font color="#0000CC">; returns #\a</font>
+(int-char 91)    <font color="#0000CC">; returns #\[</font>
+(int-char 10)    <font color="#0000CC">; returns #\Newline</font>
+(int-char 999)   <font color="#0000CC">; error - character code out of range</font>
+</pre>
+
+<p><b>Common Lisp:</b> Common Lisp specifies that 'int-char' should return a
+<a href="xlisp-ref-177.html">NIL</a> when there is no valid character for
+the integer value being passed in while XLISP generates an error in these cases.
+In some cases it is possible to substitue the
+<a href="xlisp-ref-076.html">code-char</a> function for 'int-char'.</p>
+
+<p><b>Note:</b> Unlike the <a href="xlisp-ref-062.html">char-code</a> and
+<a href="xlisp-ref-066.html">char-int</a> functions,
+<a href="xlisp-ref-076.html">code-char</a> and 'int-char' are not identical
+in use. <a href="xlisp-ref-076.html">code-char</a> accepts 0..127 for its
+range and then produces <a href="xlisp-ref-177.html">NIL</a> results while
+'int-char' accepts 0..255 for its range and then produces errors.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-026.html#int-char">int-char</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-137.html">Previous</a> |
+<a href="xlisp-ref-139.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-138.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

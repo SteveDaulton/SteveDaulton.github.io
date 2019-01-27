@@ -1,0 +1,115 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-092.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP digit-char-p</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-091.html">Previous</a> |
+<a href="xlisp-ref-093.html">Next</a>
+
+<hr>
+
+<h1>digit-char-p</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>predicate function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlstr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(digit-char-p <i>char</i>)</dt>
+<dd><i>char</i> - a character expression<br>
+returns - the digit weight if character is a digit,
+<a href="xlisp-ref-177.html">NIL</a> otherwise</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'digit-char-p' predicate function checks if the 'char' expression is
+a numeric digit. If 'char' is numeric digit, the equivalent integer value
+is returned, otherwise a <a href="xlisp-ref-177.html">NIL</a> is
+returned. Decimal digits are '0' [ASCII decimal <nobr>value 48]</nobr>
+through '9' [ASCII decimal <nobr>value 57].</nobr></p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(digit-char-p #\0)   <font color="#0000CC">; returns 0</font>
+(digit-char-p #\9)   <font color="#0000CC">; returns 9</font>
+(digit-char-p #\A)   <font color="#0000CC">; returns NIL</font>
+(digit-char-p #\a)   <font color="#0000CC">; returns NIL</font>
+(digit-char-p #\.)   <font color="#0000CC">; returns NIL</font>
+(digit-char-p #\-)   <font color="#0000CC">; returns NIL</font>
+(digit-char-p #\+)   <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p><b>Note:</b> Other non-digit characters used in numbers are NOT included:
+plus [+], minus [-], exponent <nobr>[e or E]</nobr> and decimal point
+[.].</p>
+
+<p><b>Common Lisp:</b> Common Lisp supports the use of an optional radix
+parameter. This option specifies numeric base. This allows the
+'digit-char-p' to function properly for hexadecimal digits [for example].
+Common LISP supports up to base 36 radix systems. XLISP does not support
+this radix parameter.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-026.html#digit-char-p">digit-char-p</a>
+predicate function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-091.html">Previous</a> |
+<a href="xlisp-ref-093.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-092.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

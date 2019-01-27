@@ -1,0 +1,112 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-027.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP apply</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-026.html">Previous</a> |
+<a href="xlisp-ref-028.html">Next</a>
+
+<hr>
+
+<h1>apply</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(apply <i>function args</i>)</dt>
+<dd><i>function</i> - the function or symbol to be applied to 'args'<br>
+<i>args</i> - a list that contains the arguments to be passed to 'function'<br>
+returns - the result of applying the function to the arguments</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>'apply' causes 'function' to be evaluated with 'args' as the parameters.
+'apply' returns the result of 'function'. 'args' must be in the form of a
+list.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun my-add (x y)              <font color="#0000CC">; create MY-ADD function</font>
+  (print "my add")
+  (+ x y))
+(my-add 1 2)                     <font color="#0000CC">; prints "my add" returns 3</font>
+(apply 'my-add '(2 4))           <font color="#0000CC">; prints "my add" returns 6</font>
+(apply 'my-add 1 2)              <font color="#0000CC">; error: bad argument type </font>
+(apply 'my-add '(1 2 3))         <font color="#0000CC">; error: too many arguments</font>
+(apply (function +) '(9 10))     <font color="#0000CC">; returns 19</font>
+(apply '+ '(4 6))                <font color="#0000CC">; returns 10</font>
+(apply 'print '("hello there"))  <font color="#0000CC">; prints/returns "hello there"</font>
+(apply 'print "hello there")     <font color="#0000CC">; error: bad argument type</font>
+</pre>
+
+<p> <b>Note:</b> When using 'apply' to cause the evaluation of a system
+function, you can use the quoted name of the function [like 'print in
+the examples]. You can also use the actual function [like <nobr>(function
++)</nobr> in the examples].</p>
+
+<p>See the
+<nobr><a href="../xlisp-man/xlisp-man-012.html#apply">apply</a></nobr>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-026.html">Previous</a> |
+<a href="xlisp-ref-028.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-027.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

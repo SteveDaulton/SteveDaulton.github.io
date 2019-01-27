@@ -1,0 +1,1693 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/devel/audacity-nyquist-en.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:18:17 GMT -->
+<head><title>Audacity and Nyquist</title>
+
+<style type="text/css">
+.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+.box {
+  color: #000000;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+</style>
+
+</head>
+
+<body>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../nyquist.html">Audacity and Nyquist</a> /
+<a href="../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples/examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<hr>
+
+<h1>Audacity and Nyquist 2009</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#header">Nyquist Plugin Header</a></nobr></li>
+<li><nobr><a href="#widgets">Nyquist Plugin Widgets</a></nobr></li>
+<ul>
+<li><nobr><a href="#slider-widget">Slider Widget</a></nobr></li>
+<li><nobr><a href="#text-widget">Text Input Widget</a></nobr></li>
+<li><nobr><a href="#choice-widget">Multiple-Choice Widget</a></nobr></li>
+</ul>
+<li><nobr><a href="#variables">Nyquist Variables</a></nobr></li>
+<ul>
+<li><nobr><a href="#scratch">The *scratch* Symbol</a></nobr></li>
+</ul>
+<li><nobr><a href="#stereo">Stereo Tracks</a></nobr></li>
+<li><nobr><a href="#return">Return Values</a></nobr></li>
+<li><nobr><a href="#math">Math Functions</a></nobr></li>
+<li><nobr><a href="#workbench">Nyquist Workbench</a></nobr></li>
+<li><nobr><a href="#apropos">Apropos Plugin</a></nobr></li>
+</ol>
+
+<p>The Audacity Nyquist Interface is implemented in the following files in
+the Audacity source code:</p>
+
+<ul>
+<li><nobr>audacity/src/effects/nyquist/Nyquist.cpp</nobr></li>
+<li><nobr>audacity/lib-src/libnyquist/nyx.c</nobr></li>
+</ul>
+
+<p><b>Note:</b> All [comments] and [explanations] on this page are written
+in square brackets, so they cannot be confused with <nobr>(Lisp
+code).</nobr></p>
+
+<a name="header"></a>
+
+<hr>
+
+<h2>Nyquist Plugin Header</h2>
+
+<hr>
+
+<p><b>Important:</b> In the Nyquist plugin header there must be only
+<b>one</b> single semicolon at the beginning of each line because these
+lines are parsed by Audacity.</p>
+
+<p>The Nyquist Lisp interpreter as well as the Nyquist SAL compiler in
+contrast recognize everything after the first semicolon up to the end of the
+line as a comment and just simply ignores it. So in the Nyquist code, below
+the plugin header, comments can also be started with several semicolons in a
+row.</p>
+
+<pre class="example">
+;nyquist plug-in
+;version <font color="#0000CC">version</font>
+;type <font color="#0000cc">type</font>
+;name "<font color="#0000cc">name</font>"
+;action "<font color="#0000cc">text</font>"
+;categories "<font color="#0000CC">text</font>"
+;info "<font color="#0000cc">text</font>"
+;control <font color="#0000CC">parameters</font>
+;codetype <font color="#0000CC">type</font>
+;debugflags <font color="#0000CC">flags</font>
+</pre>
+
+<p>The 'categories', 'info', 'control', 'codetype', and 'debugflags' lines are optional
+and can be omitted.</p>
+
+<p><b>Required</b> plugin header lines:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;nyquist plug-in</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">tells Audacity 'this is a Nyquist plugin'.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;version 1</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">only the <a href="#slider-widget">Slider</a> widget is
+    supported.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;version 2</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the <nobr><a href="#text-widget">Text</a> input</nobr>
+    widget was added in <nobr>Audacity 1.2</nobr>.</td>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;version 3</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the 
+    <nobr>multiple-<a href="#choice-widget">Choice</a></nobr> widget was
+    added in <nobr>Audacity 1.3</nobr>.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td colspan="3">Only one ';version' line is needed. If you don't know
+    which one to choose use the version with the highest number. The
+    version line is only needed to prevent Audacity from raising errors in
+    case a user comes to the idea to apply a plugin with a
+    <nobr>brand-new</nobr> feature in a very old Audacity program.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;type generate</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">plugin appears in the Audacity 'Generate' menu.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;type process</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">plugin appears in the Audacity 'Effect' menu.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;type analyze</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">plugin appears in the Audacity 'Analyze' menu.</td>
+</tr>
+
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td colspan="3">Only one ';type' line is needed. A plugin cannot appear
+   in several Audacity menus at the same time. But it is possible to write
+   several plugins with the same name but with different ';type' lines,
+   which then will appear under the same name in different Audacity menus.
+   But please do this only if you really <nobr>need it</nobr>.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;name "<font color="#0000cc">name</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">name of the plugin how it will appear in the Audacity menu.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;action "<font color="#0000cc">text</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text to be displayed while the plugin is working.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td colspan="3"><b>Optional</b> plugin header lines:</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;categories "<font color="#0000cc">text</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">LV2 categories, see
+    <a href="#categories">Categories</a> below.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;info "<font color="#0000cc">text</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text to be displayed at the top border of the plugin window.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td colspan="3">A character sequence '\n' within 'text' causes a line
+    break. It is not possible to 'quote' a line break in the plugin code
+    with a <nobr>backslash '\'</nobr> at the end of the line. In the plugin
+    header, the 'text' in the 'action' und 'info' lines must be written in
+    <b>one</b> single line.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;control <font color="#0000CC">parameters</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">defines a <a href="#widgets">Plugin Widget</a>. There can
+    be several 'control' lines in the plugin header.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;codetype lisp</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the syntax of the plugin is Lisp. This is the default if
+    the 'codetype' line is missing.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;codetype sal</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the syntax of the plugin is SAL. The default is 'lisp'.</td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;debugflags <font color="#0000CC">flags</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">see <nobr><a href="#internal-debug">Internal Debug Options</a></nobr> below.</td>
+</tr>
+</tbody></table></p>
+
+<a name="categories"></a>
+
+<p><div class="box">
+
+<p><b>Categories</b>&nbsp; [<nobr>Audacity 1.3.9</nobr>, <nobr>November 2009</nobr>]</p>
+
+<p>LV2 categories had been introduced in Audacity as part of 'Google Summer
+<nobr>of Code 2008'</nobr>:</p>
+
+<ul>
+<li><nobr><a href="http://wiki.audacityteam.org/index.php?title=LV2_Support#2008-06-04:_Category_support_working"
+>http://wiki.audacityteam.org/index.php?title=LV2_Support#2008-06-04:_Category_support_working</a></nobr></li>
+</ul>
+
+<p>The categories were tried out in the <nobr>1.3.6 Beta</nobr> version of
+Audacity, but it was unpopular with the majority of users because of the
+extra navigation involved to reach the effects. Categories will not be
+<nobr>re-introduced</nobr> until it is provided with a way by which the user
+can turn the grouping on and off in the interface.</p>
+
+<p>The 'categories' header line is currently optional.</p>
+
+</div></p>
+
+<a name="internal-debug"></a>
+
+<p><div class="box">
+
+<p><b>Internal Debug Options</b></p>
+
+<p>There is an optional 'debugflags' line available, which skips the plugin
+window and directly executes the plugin code, so if a 'debugflags' line is
+found in the plugin header no <nobr>user-interaction</nobr> is possible.</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;debugflags trace</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">sets *tracenable* to 'true'. The plugin behaves as if
+    the 'Debug' button was clicked by the user. This is the default.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;debugflags notrace</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">sets *tracenable* to 'false'. The plugin behaves as if
+    the 'OK' button was clicked by the user.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;debugflags compiler</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">sets <nobr>*sal-compiler-debug*</nobr> to 'true'.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>;debugflags nocompiler</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">sets <nobr>*sal-compiler-debug*</nobr> to 'false'. This
+    is the default.</td>
+</tr>
+</tbody></table></p>
+
+<p>In the <nobr><a href="#workbench">Nyquist Workbench</a></nobr>, the
+'compiler' and 'nocompiler' debugflags control whether the generated Lisp
+code from the SAL compiler will be sent to 'stdout' or to the output window
+in the Nyquist Workbench.</p>
+
+</div></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="widgets"></a>
+
+<hr>
+
+<h2>Nyquist Plugin Widgets</h2>
+
+<hr>
+
+<p>Every ';control' line gets parsed by Audacity into several tokens, where
+each token is separated by one or several whitespaces:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr valign="top">
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[0]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[1]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[2]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[3]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[4]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[5]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[6]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>tokens[7]</nobr></td>
+</tr>
+<tr>
+  <td height="2px"></td>
+</tr>
+<tr valign="top">
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>;control</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>var-name</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;text-left&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>widget-type</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;text-right&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>initial-value</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>minimum</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>maximum</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td><nobr>plugin template</nobr></td>
+</tr>
+<tr>
+  <td><nobr><font size="-2">&nbsp;</font></nobr></td>
+</tr>
+<tr valign="top">
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>;control</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">symbol</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#AA0000">int</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">integer</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">integer</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">integer</font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td><nobr>integer <a href="#slider-widget">Slider</a> widget</nobr></td>
+</tr>
+<tr>
+  <td height="2px"></td>
+</tr>
+<tr valign="top">
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>;control</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">symbol</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#AA0000">real</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">float</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">float</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">float</font></code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td><nobr><nobr>floating-point</nobr> <a href="#slider-widget">Slider</a> widget</nobr></td>
+</tr>
+<tr>
+  <td height="2px"></td>
+</tr>
+<tr valign="top">
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>;control</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">symbol</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#AA0000">string</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>[space]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>[space]</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td><nobr><a href="#text-widget">Text</a> input widget</nobr></td>
+</tr>
+<tr>
+  <td height="2px"></td>
+</tr>
+<tr valign="top">
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>;control</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">symbol</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#AA0000">choice</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code>&quot;<font color="#0000CC">string</font>&quot;</code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td class="button"><nobr><code><font color="#0000CC">integer</font></code></nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>[space]</nobr></td>
+  <td><code><nobr>&nbsp;</nobr></code></td>
+  <td align="center"><nobr>[space]</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td><nobr>multiple-<a href="#choice-widget">Choice</a> widget</nobr></td>
+</tr>
+</tbody></table></p>
+
+<p>Blue words represent data types. Because tokens are separated by
+whitepace, strings containing whitespace must be written
+<nobr>in-between</nobr> quotation marks. Do not try to memorize this table,
+use it as a reference. The detailed syntax for each widget type is described
+in the following sections below.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="slider-widget"></a>
+
+<hr>
+
+<h2>Slider Widget</h2>
+
+<hr>
+
+<p><nobr>&nbsp;<img alt="[Slider Widget]" src="images/slider-widget.png"></nobr></p>
+
+<p>Slider widgets are supported in all Audacity Nyquist plugin versions.</p>
+
+<pre class="example">;control <font color="#0000cc">variable-name</font> "<font color="#0000cc">text-left</font>" <font color="#0000cc">variable-type</font> "<font color="#0000cc">text-right</font>" <font color="#0000cc">initial-value minimum maximum</font>
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>variable-name</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a Lisp symbol.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>variable-type</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a 'number' type:</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td colspan="2">
+  </td>
+  <td width="100%">
+    <table cellpadding="0" cellspacing="0"><tbody>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>int</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">integer [FIXNUM, a XLISP number without a dot]</td>
+    </tr>
+    <tr>
+      <td style="height: 5px;"></td>
+    </tr>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>real</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">floating point [FLONUM, a XLISP number with a dot]</td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"text-left"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text that will appear to the left of the slider</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"text-right"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text that will appear to the right of the slider</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>initial-value</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">variable value [and slider position] at the first start of the plugin</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>minimum</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">variable value when the slider is moved to the left border</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>maximum</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">variable value when the slider is moved to the right border</td>
+</tr>
+</tbody></table></p>
+
+<p>The variable value [the slider position] can be referenced by the
+variable name in the plugin code.</p>
+
+<p>In more recent versions of Audacity there appears a text input box beside
+the slider, where the user can type in a variable value via the keyboard.
+Note that it's up to the plugin programmer to catch undesired variable
+values typed in by the user.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="text-widget"></a>
+
+<hr>
+
+<h2>Text Input Widget</h2>
+
+<hr>
+
+<p><nobr>&nbsp; <img alt="[Text Input Widget]" src="images/text-widget.png"></nobr></p>
+
+<p>The text input widget is supported in plugins version 2 or above, it will
+not work in <nobr>Audacity 1.1</nobr> and below.</p>
+
+<pre class="example">
+;control <font color="#0000cc">variable-name</font> "<font color="#0000cc">text-left</font>" string "<font color="#0000cc">text-right</font>" "<font color="#0000cc">initial-string</font>"
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>variable-name</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a Lisp symbol.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"text-left"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text that will appear to the left of the text input field.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"text-right"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text that will appear to the right of the text input field.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"initial-string"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the string will appear inside the text field.</td>
+</tr>
+</tbody></table></p>
+
+<p>The text typed in by the user in the text field of the plugin window can
+be referred as a string variable from within the plugin code.</p>
+
+<p>Examples how to use the 'text input' widget can be found in the source
+code of the <a href="#apropos">Apropos</a> plugin.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="choice-widget"></a>
+
+<hr>
+
+<h2><nobr>Multiple-Choice</nobr> Widget</h2>
+
+<hr>
+
+<p><nobr>&nbsp;<img alt="[Multiple-Choice Widget]" src="images/choice-widget.png"></nobr></p>
+
+<p>The choice widget is supported in plugins <nobr>version 3</nobr> or
+above, it will not work in <nobr>Audacity 1.2</nobr> or below.</p>
+
+<pre class="example">
+;control <font color="#0000cc">variable-name</font> "<font color="#0000cc">text-left</font>" choice "<font color="#0000cc">string-1</font>,<font color="#0000cc">string-2</font>,..." <font color="#0000CC">initial-value</font>
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>variable-name</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a Lisp symbol.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"text-left"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">text that will appear to the left of the
+    <nobr>multiple-choice</nobr> list.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"string-1,..."</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">for every string an entry in a list to choose from will
+    be produced.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>initial-value</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the number of the list entry, that will be displayed as
+    the default choice at the first start of the plugin.</td>
+</tr>
+</tbody></table></p>
+
+<p>The list entries 'string-1', 'string-2', etc. are internally represented
+by integer numbers. The first, top most list entry 'string-1' will be
+represented by the <nobr>number 0.</nobr> The list entry choosen by the user
+can be determined by the integer value of the variable from within the
+plugin code.</p>
+
+<p>Examples how to use the 'choice' widget can be found in the source code
+of the <a href="#apropos">Apropos</a> plugin.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="variables"></a>
+
+<hr>
+
+<h2>Nyquist Variables</h2>
+
+<hr>
+
+<p>The variables given from Audacity to Nyquist are defined in the file
+'<nobr>audacity/lib-src/libnyquist/nyx/nyx.c</nobr>' in the Audacity source
+code.</p>
+
+<p>The following variables are given from Audacity to Nyquist:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>s</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the Audacity sound [the selected part of the Audacity
+    audio track]</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>len</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the number of samples contained in 's'</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>*sound-srate*</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the sample frequency of the Audacity track</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>*warp*</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a list of three values:
+  </td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td colspan="2">
+  </td>
+  <td width="100%">
+    <table cellpadding="0" cellspacing="0"><tbody>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>time-offset</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">in Audacity <nobr>always 0.</nobr></td>
+    </tr>
+    <tr>
+      <td style="height: 5px;"></td>
+    </tr>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>time-stretch</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">the length in seconds of the selected part of the
+        Audacity audio track.</td>
+    </tr>
+    <tr>
+      <td style="height: 5px;"></td>
+    </tr>
+    <tr>
+      <td valign="top">
+        <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+          <tr valign="top">
+            <td class="button"><nobr><code>continuous-time-warp</code></nobr></td>
+          </tr>
+        </tbody></table>
+      </td>
+      <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+      <td width="100%">in Audacity <nobr>always NIL</nobr>.</td>
+    </tr>
+    </tbody></table>
+  </td>
+</tr>
+</tbody></table></p>
+
+<p>The length of the sound in seconds can be computed one of the following
+ways:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(/ len *sound-srate*)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">divide the number of samples by the sample frequency</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(get-duration 1)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">get the 'time-stretch' value from the *warp* variable</td>
+</tr>
+</tbody></table></p>
+
+<p><div class="box">
+
+<p><b>Roger Dannenberg writes:</b><p>
+
+<p>The details of *warp* are part of the Nyquist internal implementation,
+and one should not write code that accesses *warp* directly. To get the
+duration of an Audacity selection, call the Nyquist function:<p>
+
+<pre class="example">
+(get-duration 1)
+</pre>
+
+<p>This function answers the question: &quot;If a behavior has a nominal
+duration of 1, how long will it be after warping it according to the
+Nyquist environment?&quot; Since many built-in behaviors like OSC and LFO
+have nominal durations <nobr>of 1,</nobr> Audacity sets up the environment
+to stretch them by the selection's duration. Otherwise, if you wrote
+<nobr>(OSC C4),</nobr> the result would have a duration of one second
+instead of the duration of the selection.</p>
+
+</div></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="scratch"></a>
+
+<hr>
+
+<h2>The *scratch* Symbol</h2>
+
+<hr>
+
+<p>Since <nobr>Audacity 1.3.9</nobr>, there is a new global symbol
+*scratch*, which is not deleted <nobr>in-between</nobr> plugin runs.</p>
+
+<p><b>Roger Dannenberg writes:</b></p>
+
+<p>The point of *scratch* is to provide some way for information to survive
+from one invocation of a <nobr>plug-in</nobr> to the next. There should
+probably be some recommended protocols for dealing with *scratch* since it
+is sort of a bottleneck for passing data among <nobr>plug-ins</nobr>.
+<nobr>I would</nobr> recommend not setting *scratch* as a variable but using
+it as a holder of property lists. That way, you get a whole name space
+rather than a single variable name.</p>
+
+<p>To pass data from plugin '<nobr>effectX-partA</nobr>' to
+'<nobr>effectX-partB</nobr>':</p>
+
+<p><div class="box">
+
+<p><b>1.</b> Assign a property name based on the effect name, e.g.:</p>
+
+<pre class="example">
+'EFFECTX
+</pre>
+
+<p><b>2.</b> '<nobr>effectX-partA</nobr>' should delete any old property
+value:</p>
+
+<pre class="example">
+remprop(quote(*scratch*), quote(effectx))
+</pre>
+
+<p><b>3.</b> '<nobr>effectX-partA</nobr>' should compute a new property
+<nobr>value 'v'</nobr> and <nobr>save it</nobr>:</p>
+
+<pre class="example">
+putprop(quote(*scratch*), v, quote(effectx))
+</pre>
+
+<p><b>4.</b> '<nobr>effectX-partB</nobr>' should access the property using:</p>
+
+<pre class="example">
+get(quote(*scratch*), quote(effectx))
+</pre>
+
+<p><b>5.</b> When '<nobr>effectX-partB</nobr>' finishes, it should remove
+the property:</p>
+
+<pre class="example">
+remprop(quote(*scratch*), quote(effectx)), ...
+</pre>
+
+</div></p>
+
+<p>But there may be cases where you do some analysis and want to use the
+analysis data multiple times. You might even have multiple analysis plugins
+operating on different inputs to collect data to feed into a plugin with
+multiple inputs. In this case, which might be quite common, you should not
+call 'remprop()', but this has the problem of leaving data on the *scratch*
+property list indefinitely, <nobr>so ...</nobr></p>
+
+<p><div class="box">
+
+<p>In cases where *scratch* data is not deleted immediately after use, there
+should be another effect, e.g. '<nobr>effectX-partCleanup</nobr>', that
+simply calls:</p>
+
+<pre class="example">
+remprop(quote(*scratch*), quote(effectx))
+</pre>
+
+<p>allowing the user to explicitly free up any data stored on the 'EFFECTX
+property. It would be reasonable to omit the
+'<nobr>effectX-partCleanup</nobr>' effect if the data stored on the property
+list has a maximum size of, <nobr>say, 10KB</nobr>. The problem we want to
+avoid is properties with unbounded size getting left in the heap until
+Audacity is restarted.</p>
+
+</div></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="stereo"></a>
+
+<hr>
+
+<h2>Stereo Tracks</h2>
+
+<hr>
+
+<p>If a sound from an Audacity stereo track was given to Nyquist, the 's'
+variable contains an array of sounds. Because all Nyquist 'snd-...'
+low-level functions only can process mono signals, to use such a function,
+the 's' array first must be split into single mono signals and afterwards
+being re-combined into an array before it is given back to Audacity.</p>
+
+<pre class="example">
+(if (arrayp s)
+    (vector
+      (<font color="#0000cc">snd-function</font> (aref s 0))   <font color="#008844">; left stereo channel</font>
+      (<font color="#0000cc">snd-function</font> (aref s 1)))  <font color="#008844">; right stereo channel</font>
+  (<font color="#0000cc">snd-function</font> s))               <font color="#008844">; mono signal</font>
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(arrayp s)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">tests if 's' is an array</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(vector ... )</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">re-combines the two mono signals into a stereo signal,
+    a 'vector' is an one-dimensional array</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(aref s 0)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the left stereo channel [the 0-th slot of the array]</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>(aref s 1)</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the right stereo channel [the 1-st slot of the array]</td>
+</tr>
+</tbody></table></p>
+
+<p><b>Important:</b> The Nyquist interface within Audacity can handle a
+maximum of two channels simultaneously [Audacity stereo tracks]. If in
+Audacity more than one audio track were selected, each of the selected
+tracks will be given sequencially, one after the other, with a maximum of
+two channels simultaneously [stereo] to Nyquist for processing. It is
+<b>not</b> possible with Nyquist in Audacity e.g. to copy audio signals
+from one Audacity track into another track <nobr>[Audacity
+1.3.9,</nobr> <nobr>November 2009].</nobr></p>
+
+<p><div class="box">
+
+<p><b>multichan-expand</b></p>
+
+<p>In the 'nyquist.lsp' file in the Audacity 'nyquist' sub-directory there
+is a function 'multichan-expand' defined that simplifies the handling of
+multi-channel sounds [e.g. stereo tracks]:</p>
+
+<pre class="example">
+(multichan-expand <font color="#0000cc">function</font> &amp;rest <font color="#0000cc">arguments</font>)
+</pre>
+
+<p>So the 'arrayp' constuct from above can also be written:</p>
+
+<pre class="example">
+(multichan-expand #'<font color="#0000cc">snd-function</font> s)
+</pre>
+
+<p>This looks a bit more cryptic and reads less intelligibly [arrording to
+my opinion], but it can help to clean up the code in long-winded audio
+processing functions.</p>
+
+</div></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="return"></a>
+
+<hr>
+
+<h2>Return Values</h2>
+
+<hr>
+
+<p>The result of the <b>last</b> computation within the plugin code will
+be given back from Nyquist to Audacity. According to the data type of the
+Nyquist return value one of the following actions will be invoked in
+Audacity:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr>sound<code></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the sound will be re-inserted into the selected part of
+    the Audacity track. If the returned sound is shorter or longer than the
+    original sound, the selection will be reduced or augmented. If a mono
+    sound is returned to a stereo track, so in both channels of
+    the stereo track the same mono sound will be inserted. If a stereo sound
+    is returned to a mono track, an error message will be displayed.</td>
+</tr>
+<tr>
+  <td style="height: 10px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr>string<code></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a dialog window will appear with the string being
+    displayed as text.</td>
+</tr>
+<tr>
+  <td style="height: 10px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr>list<code></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">if a specially formatted list [see below] will be given
+    back to Audacity, a label track will be created below the audio
+    track[s].</td>
+</tr>
+</tbody></table></p>
+
+<p>The list to create a label track must have the following format:</p>
+
+<pre class="example">
+((<font color="#0000cc">int-or-float</font> "<font color="#0000cc">string</font>") (<font color="#0000cc">int-or-float</font> "<font color="#0000cc">string</font>") ... )
+</pre>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code><font color="#0000cc">int-or-float</font></code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the time in seconds from the beginning of the Audacity
+    selection, where the label will appear.</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>"<font color="#0000cc">string</font>"</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">a string to be displayed in the label's text field.</td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="math"></a>
+
+<hr>
+
+<h2>Math Functions</h2>
+
+<hr>
+
+<p><nobr>n-th power of x:</nobr></p>
+
+<pre class="example">
+(exp (* (log <font color="#0000CC">x-number</font>) <font color="#0000CC">n-number</font>))
+</pre>
+
+<p>n-th root of a number:</p>
+
+<pre class="example">
+(exp (/ (log <font color="#0000CC">x-number</font>) <font color="#0000CC">n-number</font>))
+</pre>
+
+<p>n-th root of a sound:</p>
+
+<pre class="example">
+(s-exp (mult (s-log <font color="#0000CC">x-sound</font>) (/ 1.0 <font color="#0000CC">n-number</font>)))
+</pre>
+
+<p>n-th root with two sounds:</p>
+
+<pre class="example">
+(s-exp (mult (s-log <font color="#0000CC">x-sound</font>) (s-recip <font color="#0000CC">n-sound</font>)))
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="workbench"></a>
+
+<hr>
+
+<h2>Nyquist Workbench</h2>
+
+<hr>
+
+<p>The Nyquist Workbench gives the ability to run arbitrary Nyquist code
+in Audacity from a <nobr>graphical IDE</nobr>.</p>
+
+<p><nobr>&nbsp; <img alt="[Nyquist Workbench]" src="images/nyquist-workbench.png"></nobr></p>
+
+<p>The Nyquist Workbench is an Audacity module, which currently
+[<nobr>Audacity 1.3.9</nobr>, <nobr>November 2009</nobr>] is no official
+part of the Audacity distribution. The source code can be downloaded
+from:</p>
+
+<ul>
+<li><nobr><a href="http://audacity.homerow.net/index.php?dir=modules%2F"
+>http://audacity.homerow.net/index.php?dir=modules%2F</a></nobr></li>
+</ul>
+
+<p>Download the 'NyqBench' <nobr>zip-archive</nobr> from the URL above and
+unpack it on your harddisk. In the 'Readme.txt' file in the Nyquist
+Workbench source code directory you will find instructions how to compile the
+Nyquist Workbench on your operation system.</p>
+
+<p>Here is how it works on Linux:</p>
+
+<p><div class="box">
+
+<p><b>1.</b> First type './configure' in the Audacity source code
+directory:</p>
+
+<pre class="example">
+sh:~/downloads/audacity$ ./configure
+</pre>
+
+<p>After 'configure' has finished, do <b>not</b> type 'make', you first need
+to compile the Nyquist Workbench.</p>
+
+<p><b>2.</b> Open the Makefile in the Nyquist Workbench directory and make
+the AUDACITY_DIR variable at the top of the Makefile point to the base of
+the Audacity source code directory:</p>
+
+<pre class="example">
+AUDACITY_DIR ?= <font color="#0000CC">/home/edgar/downloads/audacity</font>
+</pre>
+
+<p>Of course you need to replace '/home/edgar/downloads/audacity' with the
+Audacity source code directory on <b>your</b> harddisk.</p>
+
+<p><b>3.</b> After saving the changes in the Makefile, compile the Nyquist
+Workbench. In the Nyquist Workbench directory type:</p>
+
+<pre class="example">
+sh:~/downloads/nyqbench$ make
+</pre>
+
+<p>After 'make' has finished you shold see a message like:</p>
+
+<pre class="example">
+NyqBench.so has been copied to /home/edgar/downloads/audacity/modules
+</pre>
+
+<p><b>4.</b> Now compile Audacity. In the Audacity source code directory
+type:</p>
+
+<pre class="example">
+sh:~/downloads/audacity$ make
+</pre>
+
+<p><b>5.</b> If 'make' has finished successfully, still in the Audacity
+source code directory, type:</p>
+
+<pre class="example">
+sh:~/downloads/audacity$ sudo make install
+</pre>
+
+<p><b>6.</b> Currently <nobr>[Audacity 1.3.10-alpha,</nobr> <nobr>November
+2009]</nobr> the Audacity <nobr>'make install'</nobr> does not copy the
+'modules' directory, so type:</p>
+
+<pre class="example">
+sh:~/downloads/audacity$ sudo cp -r modules /usr/local/share/audacity
+</pre>
+
+<p>This copies the 'modules' directory including everything inside from the
+Audacity source code directory to
+'<nobr>/usr/local/share/audacity/modules</nobr>'.</p>
+
+<p><b>7.</b> After the next start of Audacity, you should have an additional
+Audacity 'Tools' menu with a 'Nyquist Workbench' entry inside.</p>
+
+</div></p>
+
+<p>Tested with <nobr>Audacity 1.3.10-alpha</nobr> <nobr>CVS HEAD</nobr>,
+<nobr>November 23. 2009</nobr>, on <nobr>Ubuntu 9.10</nobr>.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="apropos"></a>
+
+<hr>
+
+<h2>Nyquist Apropos Plugin</h2>
+
+<hr>
+
+<p>Because not all functions, documented in the Nyquist manual, are
+implemented in Audacity and also not even all Nyquist functions are
+documented in the Nyquist manual [Lisp is a 'programmable programming
+language', only functions which are considered as stable are documented],
+it is often helpful to have a tool to find out wether a particular Nyquist
+function is implemented or not.</p>
+
+<p>Basically only Nyquist functions beginning with 'snd-...' are implemented
+in C within the Nyquist interpreter [in the Nyquist manual they are called
+'low-level' functions], while all other Nyquist functions are implemented
+in the Lisp files within the Audacity 'nyquist' sub-directory and can be
+changed, improved and extended with no need to re-compile Audacity [as long
+as no C-implemented Nyquist 'low-level' function is needed which is not
+included with Nyquist in Audacity].</p>
+
+<p>All Nyquist/XLISP symbols [e.g. all variable and function names] are
+stored in the XLISP *obarray*. To find out from within Audacity, wether a
+particular function is implemented or not, you can e.g. first create and
+select a 'dummy' audio track with any generator from the Audacity 'Generate'
+menu, then open the 'Nyquist Prompt' from the Audacity 'Effect' menu
+[doesn't work without a selected audio track] and copy the following line
+into the 'Nyquist Prompt' text input field:</p>
+
+<pre class="example">
+(print (fboundp 'snd-abs))
+</pre>
+
+<p><b>Important:</b> now please klick 'Debug' instead of the 'OK' button.</p>
+
+<p>First a dialog appears telling you: 'Nyquist did not return audio' [or
+similar]. In this dialog, klick the 'OK' button. Then another dialog
+'Nyquist output' appears with the result of the 'print' function:</p>
+
+<p><table cellpadding="0" cellspacing="0"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>T</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">meaning 'true', function is implemented</td>
+</tr>
+<tr>
+  <td style="height: 5px;"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>NIL</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">meaning 'false', function is not implemented</td>
+</tr>
+</tbody></table></p>
+
+<p>I had typed this so often in the past that I have written an Audacity
+Nyquist 'Apropos' plugin:</p>
+
+<p><b>Download:</b>&nbsp; <a href="apropos/apropos.html">Apropos-Plugin</a></p>
+
+<p>Right-Click on the plugin link, choose 'save target as', and save the
+file 'apropos.ny' file in the Audacity 'Plug-Ins' sub-directory. After a
+re-start of Audacity you can find the 'Apropos' plugin in the 'Generate'
+menu, the only menu that works without a 'dummy' audio track.</p>
+
+<p>The 'Apropos' plugin offers a pattern search through the Nyquist/XLISP
+*obarray*. You can also choose between <nobr>'Functions only',</nobr>
+<nobr>'Variables only'</nobr> and <nobr>'All symbols':</nobr></p>
+
+<p><nobr>&nbsp; <img alt="[Apropos Plugin Window]" src="images/apropos-plugin.png"></nobr></p>
+
+<p><b>Note:</b> with <b>no</b> search pattern <nobr>[empty field],</nobr>
+the plugin matches <b>all</b> symbol names.</p>
+
+<p><b>Important:</b> As written in the plugin window, please press 'Debug'
+instead of the 'OK' button, otherwise you will not see the results.</p>
+
+<p>First appears a dialog that reminds me that I have forgotten to
+press the 'Debug' button:</p>
+
+<p><nobr>&nbsp; <img alt="[Apropos Plugin Message]" src="images/apropos-message.png"></nobr></p>
+
+<p>In the first dialog above, just klick the 'OK' button. Afterwards, but
+only if you have clicked the 'Debug' button in the plugin window, appears
+the window with the results, sorted in alphabetical order:</p>
+
+<p><nobr>&nbsp; <img alt="[Apropos Plugin Output]" src="images/apropos-output.png"></nobr></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name=""></a>
+
+<hr>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../nyquist.html">Audacity and Nyquist</a> /
+<a href="../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples/examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/devel/audacity-nyquist-en.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:18:18 GMT -->
+</html>

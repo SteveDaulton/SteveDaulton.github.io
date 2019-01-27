@@ -1,0 +1,113 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-272.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP symbol-plist</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-271.html">Previous</a> |
+<a href="xlisp-ref-273.html">Next</a>
+
+<hr>
+
+<h1>symbol-plist</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr> xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(symbol-plist <i>symbol</i>)</dt>
+<dd><i>symbol</i> - the symbol name with a property list<br>
+returns - the symbol's property list </dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'symbol-plist' function returns the actual property list from the
+'symbol'. The 'symbol' must be an existing, bound variable, but it does not
+need to have anything in it's property list.</p>
+
+<p>Property lists are lists attached to any user defined variables. The lists
+are in the form of:</p>
+
+<pre class="example">
+(<font color="#0000CC"><i>name1 val1 name2 val2</i></font> ....)
+</pre>
+
+<p>Any number of properties may be attached to a single variable.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq person 'bobby)                  <font color="#0000CC">; create a var with a value</font>
+(putprop person 'boogie 'last-name)   <font color="#0000CC">; add a LAST-NAME property</font>
+(putprop person 'disc-jockey 'job)    <font color="#0000CC">; add a JOB property</font>
+(putprop person '(10 20 30) 'stats)   <font color="#0000CC">; add a STATS list</font>
+
+(symbol-plist person)                 <font color="#0000CC">; returns the property list:</font>
+                                      <font color="#0000CC">;   (STATS (10 20 30)</font>
+                                      <font color="#0000CC">;    JOB DISC-JOCKEY</font>
+                                      <font color="#0000CC">;    LAST-NAME BOOGIE)</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-013.html#symbol-plist">symbol-plist</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-271.html">Previous</a> |
+<a href="xlisp-ref-273.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-272.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

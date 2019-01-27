@@ -1,0 +1,250 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/audacity-wiki/basics/nyquist-prompt.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:08 GMT -->
+<head><title>The Audacity Nyquist Prompt</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+</style></head><body>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<hr>
+
+<p align=center>
+<a href="../../sjones/docs/main.html">Steven Jones</a> /
+<a href="../../pmorales/main.html">Pedro Morales</a> /
+<a href="../../drsky/main.html">David R. Sky</a> /
+<a href="../../emacs/main.html">Nyquist and Emacs</a> /
+<a href="../index.html">Audacity Wiki</a></p>
+
+<hr>
+
+<h1>The Audacity Nyquist Prompt</h1>
+
+<hr>
+
+<p>With the Audacity Nyquist Prompt you can test small snippets of Nyquist
+code or doing quick audio hacks. On this page the basic usage of the Nyquist
+prompt is explained.</p>
+
+<ol>
+<li><nobr><a href="#1">Preparations</a></nobr></li>
+<ul>
+<li><nobr><a href="#1-1">Load a Sound File</a></nobr></li>
+<li><nobr><a href="#1-2">Create a Mono Track</a></nobr></li>
+<li><nobr><a href="#1-2">Create a Stereo Track</a></nobr></li>
+</ul><br>
+<li><nobr><a href="#2">The Nyquist Prompt</a></nobr></li>
+<ul>
+<li><nobr><a href="#2-1">The Nyquist Interpreter</a></nobr></li>
+<li><nobr><a href="#2-2">The Nyquist Debugger</a></nobr></li>
+</ul>
+</ol>
+
+<p><b>Note:</b> All [comments] and [explanations] are written in square
+brackets, so they cannot be confused with <nobr>(Lisp code).</nobr></p>
+
+<a name="1"></a>
+
+<hr>
+
+<h2>1&nbsp; Preparations</h2>
+
+<hr>
+
+<p>The Audacity Nyquist prompt is placed in the Audacity 'Effect' menu
+which only can be activated if an Audacity audio track exists and at least a
+part of it marked or selected [Audacity 1.3.4].</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="1-1"></a>
+
+<hr>
+
+<h2>1.1&nbsp; Load a Sound File</h2>
+
+<hr>
+
+<p>If you have a mono or stereo sound file available you can load it
+into Audacity via:</p>
+
+
+<p><nobr>&nbsp; &nbsp;Audacity <b>File</b> menu > <b>Import</b> >
+<b>Audio</b> &nbsp; or &nbsp; <b>Shift</b> + <b>Control</b> +
+<b>I</b></nobr></p>
+
+
+<p>If you have no sound files available you can build your
+own mono or stereo tracks via the Audacity 'Generate' menu.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="1-2"></a>
+
+<hr>
+
+<h2>1.2&nbsp; Create a Mono Track</h2>
+
+<hr>
+
+<p><b>1.</b> Go to the Audacity 'Generate' menu and choose 'Tone'. Leave
+everything as-is, just click 'OK', a mono track will appear in the Audacity
+window.</p>
+
+<p><nobr>&nbsp;<img alt="[mono track]" src="pictures/mono-track.png"></nobr></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="1-3"></a>
+
+<hr>
+
+<h2>1.3&nbsp; Create a Stereo Track</h2>
+
+<hr>
+
+<p><b>1.</b> Mark the whole mono track from above either by pressing
+'Ctrl+A' on the keyboard, or by clicking with the mouse into the track
+header, with taking care not to move the buttons or sliders, the whole track
+then will appear in a different color.</p>
+
+<p><b>2.</b> Go to the 'Edit' menu and choose 'Duplicate'. A second,
+identical mono track will appear below the first one.</p>
+
+<p><nobr>&nbsp;<img alt="[two mono tracks]"
+src="pictures/two-mono-tracks.png"></nobr></p>
+
+<p><b>3.</b> In the upper mono track, open the track menu by clicking on the
+small black triangle at the top of the track header and coose 'Make stereo
+track'. Both mono tracks then will get combined to a single stereo
+track.</p></li> </ul>
+
+<p><nobr>&nbsp;<img alt="[stereo track]" src="pictures/stereo-track.png"></nobr></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2"></a>
+
+<hr>
+
+<h2>2&nbsp; The Nyquist Prompt</h2>
+
+<hr>
+
+<p>To enable the Audacity 'Effect' menu at least a part of an Audacity audio
+track must be marked or selected. Then go to the Audacity 'Effect' menu and
+choose 'Nyquist prompt'. A window like the following will appear:</p>
+
+<p><nobr>&nbsp;<img alt="[nyquist prompt]"
+src="pictures/nyquist-prompt-001.png"></nobr></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2-1"></a>
+
+<hr>
+
+<h2>2.1&nbsp; The Nyquist Interpreter</h2>
+
+<hr>
+
+<p>In the 'Nyquist Prompt' window, type into the text field a string
+&quot;hello&quot; with quotes:</p>
+
+<p><nobr>&nbsp;<img alt="[nyquist prompt with quoted text]"
+src="pictures/nyquist-prompt-002.png"></nobr></p>
+
+<p>If you click 'OK', you should get a window displaying 'hello':</p>
+
+<p><nobr>&nbsp;<img alt="[hello window]"
+src="pictures/nyquist-prompt-003.png"></nobr></p>
+
+<p>Click 'OK' in the 'hello' window to make it disappear again.</p>
+
+<p>Congratulations, you just have learned how to send text messages to the
+user.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2-2"></a>
+
+
+<hr>
+
+<h2>2.2&nbsp; The Nyquist Debugger</h2>
+
+<hr>
+
+<p>After clicking 'OK' in the 'hello' window, go back to the Audacity
+'Effect' menu and choose 'Nyquist prompt' again, but this time type
+hello without the quotes:</p>
+
+<p><nobr>&nbsp;<img alt="[nyquist prompt with unquoted text]"
+src="pictures/nyquist-prompt-004.png"></nobr></p>
+
+<p><b>Important:</b> Now click 'Debug' instead of 'OK'.</p>
+
+<p>You should first get a window displaying a 'Nyquist did not return audio'
+or similar message:</p>
+
+<p><nobr>&nbsp;<img alt="[no audio message]"
+src="pictures/nyquist-prompt-005.png"></nobr></p>
+
+<p>After clicking 'OK' in the window above, a second window appears,
+displaying the detailed Nyquist error messages:</p>
+
+<p><nobr>&nbsp;<img alt="[unbound variable error]"
+src="pictures/nyquist-prompt-006.png"></nobr></p>
+
+<p><b>Important:</b> The 'Nyquist output' window only appears if you click
+'Debug' in the 'Nyquist Prompt' window. If you click 'OK', then, even with a
+Nyquist error, only the first window will appear.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<hr>
+
+<p align=center>
+<a href="../../sjones/docs/main.html">Steven Jones</a> /
+<a href="../../pmorales/main.html">Pedro Morales</a> /
+<a href="../../drsky/main.html">David R. Sky</a> /
+<a href="../../emacs/main.html">Nyquist and Emacs</a> /
+<a href="../index.html">Audacity Wiki</a></p>
+
+<hr>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/audacity-wiki/basics/nyquist-prompt.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

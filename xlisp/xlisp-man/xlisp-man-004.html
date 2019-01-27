@@ -1,0 +1,108 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-004.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#4">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-003.html">Previous</a> |
+<a href="xlisp-man-005.html">Next</a>
+
+<hr>
+
+<h1>4&nbsp; Break Command Loop</h1>
+
+<hr>
+
+<p>When XLISP encounters an error while evaluating an expression, it
+attempts to handle the error in the following way:</p>
+
+<ul>
+
+<li><p>If the symbol <a
+href="../xlisp-ref/xlisp-ref-042.html">*breakenable*</a> is true, the
+message corresponding to the error is printed. If the error is correctable,
+the correction message is printed.</p></li>
+
+<li><p>If the symbol <a
+href="../xlisp-ref/xlisp-ref-287.html">*tracenable*</a> is true, a trace
+back is printed. The number of entries printed depends on the value of the
+symbol <a href="../xlisp-ref/xlisp-ref-285.html">*tracelimit*</a>. If this
+symbol is set to something other than a number, the entire trace back stack
+is printed.</p></li>
+
+</ul>
+
+<p>XLISP then enters a 'read-eval-print' loop to allow the user to examine
+the state of the interpreter in the context of the error. This loop differs
+from the normal top-level 'read-eval-print' loop in that if the user invokes
+the <a href="../xlisp-ref/xlisp-ref-083.html">continue</a> function:</p>
+
+<pre class="example">
+1&gt; (continue)
+</pre>
+
+<p>XLISP will continue from a correctable error. If the user invokes the
+<a href="../xlisp-ref/xlisp-ref-074.html">clean-up</a> function:</p>
+
+<pre class="example">
+1&gt; (clean-up)
+</pre>
+
+<p>XLISP will abort the break loop and return to the top level or the next
+lower numbered break loop. When in a break loop, XLISP prefixes the break
+level to the normal prompt with a number.</p>
+
+<p>If the symbol <a href="../xlisp-ref/xlisp-ref-042.html">*breakenable*</a>
+is NIL, XLISP looks for a surrounding
+<a href="../xlisp-ref/xlisp-ref-104.html">errset</a> function. If one is
+found, XLISP examines the value of the print flag. If this flag is true, the
+error message is printed. In any case, XLISP causes the
+<a href="../xlisp-ref/xlisp-ref-104.html">errset</a> function call to return
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a>.</p>
+
+<p>If there is no surrounding <a
+href="../xlisp-ref/xlisp-ref-104.html">errset</a> function, XLISP prints the
+error message and returns to the top level.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#4">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-003.html">Previous</a> |
+<a href="xlisp-man-005.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-004.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

@@ -1,0 +1,183 @@
+<title>Rhythmic Pattern Tutorial</title>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<h1 align=center>Rhythmic Pattern Tutorial</h1>
+
+
+
+<p align=center>Sound examples:
+<a href="09-rhythm/pulsepat.ogg">pulsepat.ogg</a> -
+<a href="09-rhythm/bassline.ogg">bassline.ogg</a> -
+<a href="09-rhythm/evolving.ogg">evolving.ogg</a></p>
+
+<br>
+
+<p >This example illustrates a very simple percussion sound created
+with noise and using the sound to generate a rhythm.</p>
+
+<p>The sound is created by filtering noise. The filter is controlled using the
+piece-wise linear function (<tt>pwl</tt>):</p>
+
+<pre>
+   (defun pulse (dur)
+     (stretch dur (hp (noise) (pwl 0 15 0.2 6000 0.6 15000 0.75 7))))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/pulse.ogg">pulse.ogg</a></p>
+
+<p>A sequence of sounds is constructed and repeated in the following code.
+Notice that each time through the pattern, the scale factor is increased by
+0.1, giving the whole sequence a crescendo:</p>
+
+<pre>
+   (defun pulsepat (&amp;optional (rep 16)) 
+     (seqrep (i rep)
+       (stretch 0.2
+         (scale (* i 0.1)
+           (seq (pulse 1) (pulse 1) (pulse 2) (pulse 2))))))
+</pre>
+
+<pre>
+   (play (pulsepat 17))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/pulsepat.ogg">pulsepat.ogg</a></p>
+
+<h2>Pitched Patterns</h2>
+
+<p>This example uses the <tt>ring</tt> function from the
+<a href="12-scratch-tutorial.html">Vinal Scratch Tutorial</a>. When the pitch
+parameter is increased, we hear a kind of electronic bass sound. Try this:</p>
+
+<pre>
+   (play (ring 0.4 30 1.2))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/ring.ogg">ring.ogg</a></p>
+
+<p>These notes can be combined to create a pattern. The <tt>techno</tt>
+function creates a short pattern of 3 notes repeated any number of times:</p>
+
+<pre>
+   (defun techno (rep)
+     (seqrep (i rep) 
+       (scale 0.8
+         (sim
+           (scale 0.8 (at 0.0 (ring 0.4 30 1.2)))
+           (scale 0.6 (at 0.2 (ring 0.2 30 0.9)))
+           (scale 0.7 (at 0.3 (ring 0.1 30 1.1))) ))))
+</pre>
+
+<p>Try this:</p>
+
+<pre>
+   (play (techno 3))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/techno.ogg">techno.ogg</a></p>
+
+<p>The following combines and transposes rhythmic segments to create a bass
+line:</p>
+
+<pre>
+   (play (seqrep (i 2)
+           (seq (techno 2)
+                (transpose 5 (techno 2))
+                (transpose -2 (techno 1))
+                (transpose 3 (techno 1))
+                (techno 2))))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/seqrep-techno.ogg">seqrep-techno.ogg</a>
+</p>
+
+<h3>Layers for Richer Texture</h3>
+
+<p>Sounds can often be combined with time and pitch offsets to create richer
+textures. The following layers two sequences based on the same <tt>techno</tt>
+function:</p>
+
+<pre>
+   (play (sim
+           (scale 0.4
+             (at 0.0
+               (seqrep (i 2)
+                 (seq (techno 2)
+                      (transpose 5 (techno 2))
+                      (transpose -2 (techno 1))
+                      (transpose 3 (techno 1))
+                      (techno 2)))))
+	   (scale 0.2
+             (at 0.1
+               (seqrep (i 2)
+                 (seq (transpose 2 (techno 2))
+                      (transpose 7 (techno 2))
+                      (transpose -4 (techno 1))
+                      (transpose 5 (techno 1))
+                      (transpose -2 (techno 2)))) ))))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/rich-tex-techno.ogg">rich-tex-techno.ogg
+</a></p>
+
+<p>Note that the second layer is almost but not exactly a transposition of the
+first layer. If it were an exact transposition, it would make sense to
+encapsulate the first layer in a function and call it twice. The following
+variation is much more concise, but it does not compute exactly the same sound:
+</p>
+
+<pre>
+   (defun bass-line ()
+     (seqrep (i 2)
+       (seq (techno 2)
+            (transpose 5 (techno 2))
+            (transpose -2 (techno 1))
+            (transpose 3 (techno 1))
+            (techno 2))))
+</pre>
+
+<pre>
+   (play (sim (scale 0.4 (bass-line))
+              (scale 0.2 
+                (at 0.1 (transpose 2 (bass-line))))))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/bassline.ogg">bassline.ogg</a></p>
+
+<h2>Another Example</h2>
+
+<p>This example also uses the <code>ring</code> function from the
+<a href="12-scratch-tutorial.html">Vinal Scratch Tutorial</a>.</p>
+
+<pre>
+   (play (seqrep (i 17) 
+           (lp (scale (+ (* i 0.05 ) 0.3) 
+                 (seq (transpose -4 (ring 0.1 32 0.6)) 
+                      (transpose -5 (ring 0.05 20 0.2)) 
+                      (transpose (* 2 i) (ring 0.1 27 0.5)) 
+                      (transpose -3 (ring 0.05 22 0.1)) 
+                      (transpose (* i 3) (ring 0.1 28 0.4)) 
+                      (ring 0.05 31 0.7)))
+               (* 100 i))))
+</pre>
+
+<p>- Sound example: <a href="09-rhythm/evolving.ogg">evolving.ogg</a></p>
+
+<p>This play 17 repetitions of a sound. Each time, the sound is a bit louder,
+the low-pass frequency is raised by 100 Hz, and two of the transpositions are
+increased. This creates a rhythmic and evolving sound.</p>
+
+<br>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>

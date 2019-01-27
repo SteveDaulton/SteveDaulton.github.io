@@ -1,0 +1,283 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-023.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#24">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-022.html">Previous</a> |
+<a href="xlisp-man-024.html">Next</a>
+
+<hr>
+
+<h1>23&nbsp; Arithmetic Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#truncate">truncate</a> - truncates a floating point number to an integer</nobr></li>
+<li><nobr><a href="#float">float</a> - converts an integer to a floating point number</nobr></li>
+<li><nobr><a href="#add">&nbsp;+&nbsp;</a> - add a list of numbers</nobr></li>
+<li><nobr><a href="#subtract">&nbsp;-&nbsp;</a> - subtract a list of numbers or negate a single number</nobr></li>
+<li><nobr><a href="#multiply">&nbsp;*&nbsp;</a> - multiply a list of numbers</nobr></li>
+<li><nobr><a href="#divide">&nbsp;/&nbsp;</a> - divide a list of numbers</nobr></li>
+<li><nobr><a href="#1+">1+</a> - add one to a number</nobr></li>
+<li><nobr><a href="#1-">1-</a> - subtract one from a number</nobr></li>
+<li><nobr><a href="#rem">rem</a> - remainder of a list of numbers</nobr></li>
+<li><nobr><a href="#min">min</a> - the smallest of a list of numbers</nobr></li>
+<li><nobr><a href="#max">max</a> - the largest of a list of numbers</nobr></li>
+<li><nobr><a href="#abs">abs</a> - the absolute value of a number</nobr></li>
+<li><nobr><a href="#gcd">gcd</a> - compute the greatest common divisor</nobr></li>
+<li><nobr><a href="#random">random</a> - compute a random number between 0 and n-1 inclusive</nobr></li>
+<li><nobr><a href="#sin">sin</a> - compute the sine of a number</nobr></li>
+<li><nobr><a href="#cos">cos</a> - compute the cosine of a number</nobr></li>
+<li><nobr><a href="#tan">tan</a> - compute the tangent of a number</nobr></li>
+<li><nobr><a href="#asin">asin</a> - compute the arcsine of a number</nobr></li>
+<li><nobr><a href="#acos">acos</a> - compute the arccosine of a number</nobr></li>
+<li><nobr><a href="#atan">atan</a> - compute the arctangent of a number</nobr></li>
+<li><nobr><a href="#expt">expt</a> - compute x to the y power</nobr></li>
+<li><nobr><a href="#exp">exp</a> - compute e to the x power</nobr></li>
+<li><nobr><a href="#sqrt">sqrt</a> - compute the square root of a number</nobr></li>
+<li><nobr><a href="#less-than">&nbsp;&lt;&nbsp;</a> - test for less than</nobr></li>
+<li><nobr><a href="#less-than-or-equal">&nbsp;&lt;=&nbsp;</a> - test for less than or equal to</nobr></li>
+<li><nobr><a href="#equal">&nbsp;=&nbsp;</a> - test for equal to</nobr></li>
+<li><nobr><a href="#not-equal">&nbsp;/=&nbsp;</a> - test for not equal to</nobr></li>
+<li><nobr><a href="#greater-than-or-equal">&nbsp;&gt;=&nbsp;</a> - test for greater than or equal to</nobr></li>
+<li><nobr><a href="#greater-than">&nbsp;&gt;&nbsp;</a> - test for greater than</nobr></li>
+</ol>
+
+<hr>
+
+<a name="truncate"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-289.html">truncate</a> <i>expr</i>)
+- truncates a floating point number to an integer</dt>
+<dd><i>expr</i> - the number<br>
+returns - the result of truncating the number</dd>
+
+<a name="float"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-118.html">float</a> <i>expr</i>)
+- converts an integer to a floating point number</dt>
+<dd><i>expr</i> - the number<br>
+returns - the result of floating the integer</dd>
+
+<a name="add"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-005.html">&nbsp;+&nbsp;</a> <i>expr</i>...)
+- add a list of numbers</dt>
+<dd><i>expr</i> - the numbers<br>
+returns - the result of the addition</dd>
+
+<a name="subtract"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-009.html">&nbsp;-&nbsp;</a> <i>expr</i>...)
+- subtract a list of numbers or negate a single number</dt>
+<dd><i>expr</i> - the numbers<br>
+returns - the result of the subtraction</dd>
+
+<a name="multiply"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-001.html">&nbsp;*&nbsp;</a> <i>expr</i>...)
+- multiply a list of numbers</dt>
+<dd><i>expr</i> - the numbers<br>
+returns - the result of the multiplication</dd>
+
+<a name="divide"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-011.html">&nbsp;/&nbsp;</a> <i>expr</i>...)
+- divide a list of numbers</dt>
+<dd><i>expr</i> - the numbers<br>
+returns - the result of the division</dd>
+
+<a name="1+"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-013.html">1+</a> <i>expr</i>)
+- add one to a number</dt>
+<dd><i>expr</i> - the number<br>
+returns - the number plus one</dd>
+
+<a name="1-"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-014.html">1-</a> <i>expr</i>)
+- subtract one from a number</dt>
+<dd><i>expr</i> - the number<br>
+returns - the number minus one</dd>
+
+<a name="rem"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-217.html">rem</a> <i>expr</i>...)
+- remainder of a list of numbers</dt>
+<dd><i>expr</i> - the numbers<br>
+returns - the result of the remainder operation</dd>
+
+<a name="min"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-173.html">min</a> <i>expr</i>...)
+- the smallest of a list of numbers</dt>
+<dd><i>expr</i> - the expressions to be checked<br>
+returns - the smallest number in the list</dd>
+
+<a name="max"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-170.html">max</a> <i>expr</i>...)
+- the largest of a list of numbers</dt>
+<dd><i>expr</i> - the expressions to be checked<br>
+returns - the largest number in the list</dd>
+
+<a name="abs"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-020.html">abs</a> <i>expr</i>)
+- the absolute value of a number</dt>
+<dd><i>expr</i> - the number<br>
+returns - the absolute value of the number</dd>
+
+<a name="gcd"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-126.html">gcd</a> <i>n1</i> <i>n2</i>...)
+- compute the greatest common divisor</dt>
+<dd><i>n1</i> - the first number [integer]<br>
+<i>n2</i> - the second number[s] [integer]<br>
+returns - the greatest common divisor</dd>
+
+<a name="random"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-211.html">random</a> <i>n</i>)
+- compute a random number between 0 and n-1 inclusive</dt>
+<dd><i>n</i> - the upper bound [integer]<br>
+returns - a random number</dd>
+
+<a name="sin"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-241.html">sin</a> <i>expr</i>)
+- compute the sine of a number</dt>
+<dd><i>expr</i> - the floating point number<br>
+returns - the sine of the number</dd>
+
+<a name="cos"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-084.html">cos</a> <i>expr</i>)
+- compute the cosine of a number</dt>
+<dd><i>expr</i> - the floating point number<br>
+returns - the cosine of the number</dd>
+
+<a name="tan"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-278.html">tan</a> <i>expr</i>)
+- compute the tangent of a number</dt>
+<dd><i>expr</i> - the floating point number<br>
+returns - the tangent of the number</dd>
+
+
+<a name="asin"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-031.html">asin</a> <i>expr</i>)
+- compute the arcsine</dt>
+<dd><i>expr</i> - the floating point number<br>
+returns - the arcsine of the number<br>
+<b>Note:</b> not implemented in Nyquist.</dd>
+
+
+<a name="acos"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-021.html">acos</a> <i>expr</i>)
+- compute the arccosine</dt>
+<dd><i>expr</i> - the floating point number<br>
+returns - the arccosine of the number<br>
+<b>Note:</b> not implemented in Nyquist.</dd>
+
+
+<a name="atan"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-033.html">atan</a> <i>expr</i>
+[<i>expr2</i>]) - compute the arctangent</dt>
+<dd><i>expr</i> - the value of <i>x</i><br>
+<i>expr2</i> - the value of <i>y</i> [default value is 1.0]<br>
+returns - the arctangent of <i>x</i>/<i>y</i></dd>
+
+<a name="expt"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-112.html">expt</a> <i>x-expr</i>
+<i>y-expr</i>) - compute x to the y power</dt>
+<dd><i>x-expr</i> - the floating point number<br>
+<i>y-expr</i> - the floating point exponent<br>
+returns - x to the y power</dd>
+
+<a name="exp"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-110.html">exp</a> <i>x-expr</i>)
+- compute e to the x power</dt>
+<dd><i>x-expr</i> - the floating point number<br>
+returns -  e to the x power</dd>
+
+<a name="sqrt"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-243.html">sqrt</a> <i>expr</i>)
+- compute the square root of a number</dt>
+<dd><i>expr</i> - the floating point number<br>
+returns -  the square root of the number</dd>
+
+<a name="less-than"></a><a name="less-than-or-equal"></a>
+<a name="equal"></a><a name="not-equal"></a>
+<a name="greater-than-or-equal"><a name="greater-than"></a></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-015.html">&nbsp;&lt;&nbsp;</a>
+<i>n1</i> <i>n2</i>...) - test for less than<br>
+(<a href="../xlisp-ref/xlisp-ref-016.html">&nbsp;&lt;=&nbsp;</a>
+<i>n1</i> <i>n2</i>...) -  test for less than or equal to<br>
+(<a href="../xlisp-ref/xlisp-ref-017.html">&nbsp;=&nbsp;</a>
+<i>n1</i> <i>n2</i>...) - test for equal to<br>
+(<a href="../xlisp-ref/xlisp-ref-012.html">&nbsp;/=&nbsp;</a>
+<i>n1</i> <i>n2</i>...) -  test for not equal to<br>
+(<a href="../xlisp-ref/xlisp-ref-019.html">&nbsp;&gt;=&nbsp;</a>
+<i>n1</i> <i>n2</i>...) - test for greater than or equal to<br>
+(<a href="../xlisp-ref/xlisp-ref-018.html">&nbsp;&gt;&nbsp;</a>
+<i>n1</i> <i>n2</i>...) - test for greater than</dt>
+<dd><i>n1</i> - the first number to compare<br>
+<i>n2</i> - the second number to compare<br>
+returns - T if the results of comparing <i>n1</i> with <i>n2</i>, <i>n2</i>
+with <i>n3</i>, etc., are all true.</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#24">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-022.html">Previous</a> |
+<a href="xlisp-man-024.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-023.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

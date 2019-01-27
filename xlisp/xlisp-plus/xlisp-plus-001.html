@@ -1,0 +1,130 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-001.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP debug</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-index.html">Previous</a> |
+<a href="xlisp-plus-002.html">Next</a>
+
+<hr>
+
+<h1>debug, nodebug</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined function (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(debug)</dt>
+<dd>returns - always returns
+<a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a></dd>
+</dl>
+
+<dl>
+<dt>(nodebug)</dt>
+<dd>returns - always returns
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+
+<h2>Description</h2>
+
+<p>The 'debug' function sets <a href="../xlisp-ref/xlisp-ref-042.html">*breakenable*</a>
+to <a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a>. This has the effect of
+turning on the
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr> for
+errors. 'debug' always returns
+<a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a>.</p>
+
+<pre class="example">
+(defun debug ()
+  (setq *breakenable* t))
+</pre>
+
+<p>The 'nodebug' function sets
+<a href="../xlisp-ref/xlisp-ref-042.html">*breakenable*</a> to
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a>. This has the effect of turning off
+the <nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>
+for errors. 'nodebug' always returns <a href="../xlisp-ref/xlisp-ref-177.html">NIL</a>.</p>
+
+<pre class="example">
+(defun nodebug ()
+  (setq *breakenable* nil))
+</pre>
+
+<p>The default is 'debug' enabled.</p>
+
+<p><b>Note:</b> These functions are not included in the standard Nyquist
+distribution. If you want to use them, copy the code above to your
+'init.lsp' file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(debug)      <font color="#0000CC">; returns T</font>
+
+(+ 1 "a")    <font color="#0000CC">; error: bad argument type</font>
+             <font color="#0000CC">; enters break-loop</font>
+
+(clean-up)   <font color="#0000CC">; from within the break-loop</font>
+
+(nodebug)    <font color="#0000CC">; returns NIL</font>
+
+(+ 1 "a")    <font color="#0000CC">; error: bad argument type</font>
+             <font color="#0000CC">; but doesn't enter break-loop</font>
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-index.html">Previous</a> |
+<a href="xlisp-plus-002.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-001.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

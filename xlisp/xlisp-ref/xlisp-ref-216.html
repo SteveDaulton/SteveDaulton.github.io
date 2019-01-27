@@ -1,0 +1,194 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-216.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP *readtable*</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-215.html">Previous</a> |
+<a href="xlisp-ref-217.html">Next</a>
+
+<hr>
+
+<h1>*readtable*</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>system variable</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlread.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;*readtable*</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p> The *readtable* is a system variable that contains XLISP's data
+structures relating to the processing of characters from the user (or files)
+and read-macro expansions. The table is 128 entries [0..127] for each of the
+7-bit <a href="../xlisp-misc/ascii-table.html">ASCII</a> characters that
+XLISP can read. Each entry in the *readtable* array must be one of
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<nobr><a href="xlisp-ref-082.html">:constituent</a> ,</nobr>
+<nobr><a href="xlisp-ref-298.html">:white-space</a> ,</nobr>
+<nobr><a href="xlisp-ref-236.html">:sescape</a> ,</nobr>
+<nobr><a href="xlisp-ref-172.html">:mescape</a> ,</nobr> a
+<a href="xlisp-ref-282.html">:tmacro</a> dotted pair or a
+<a href="xlisp-ref-178.html">:nmacro</a> dotted pair with the meaning
+of:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>&nbsp;NIL</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>the character is invalid</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-177.html">nil</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:CONSTITUENT</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>the character is valid, as is</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-082.html">:constituent</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:WHITE-SPACE</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>the character may be skipped over</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-298.html">:white-space</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:SESCAPE</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>the single escape character '\'</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-236.html">:sescape</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>:MESCAPE</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>the multiple escape character '|'</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-172.html">:mescape</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>(:TMACRO . <i>fun</i>)</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>a terminating readmacro</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-282.html">:tmacro</a>]</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>(:NMACRO . <i>fun</i>)</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td><nobr>a non-terminating readmacro</nobr></td>
+  <td width="100%"><nobr>&nbsp;&nbsp; [see
+    <a href="xlisp-ref-178.html">:nmacro</a>]</nobr></td>
+</tr>
+</tbody></table></p>
+
+
+<p>In the case of <a href="xlisp-ref-178.html">:nmacro</a> and
+<nobr><a href="xlisp-ref-282.html">:tmacro</a> ,</nobr> the form of the
+*readtable* entry is a list like:</p>
+
+<pre class="example">
+(:tmacro . <font color="#0000CC"><i>function</i></font>)
+(:nmacro . <font color="#0000CC"><i>function</i></font>)
+</pre>
+
+<p>The 'function' can be a built-in read-macro function or a user defined
+<a href="xlisp-ref-145.html">lambda</a> expression. The 'function' takes two
+parameters, an input stream specification, and an integer that is the
+character value. The 'function' should return
+<a href="xlisp-ref-177.html">NIL</a> if the character is 'white-space' or a
+value <a href="xlisp-ref-080.html">cons</a>ed with
+<a href="xlisp-ref-177.html">NIL</a> to return the value.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+*readtable*             <font color="#0000CC">; returns the current table</font>
+
+<font color="#0000CC">;; define a function to look in a table and</font>
+<font color="#0000CC">;; print out any entries with a function</font>
+
+(defun look-at (table)
+  (dotimes (ch 127)
+    (prog ((entry (aref table ch)))
+      (case entry
+        (nil          nil)
+        (:constituent nil)
+        (:white-space nil)
+        (:sescape     nil)
+        (:mescape     nil)
+        (t (princ (int-char ch))))))
+  (terpri))
+
+(look-at *readtable*)   <font color="#0000CC">; prints "#'(),;`</font>
+</pre>
+
+<p><b>Caution:</b> If you experiment with *readtable*, it is useful to save
+the old value in a variable, so that you can restore the system state.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-011.html#readtable">*readtable*</a>
+system variable in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-215.html">Previous</a> |
+<a href="xlisp-ref-217.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-216.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

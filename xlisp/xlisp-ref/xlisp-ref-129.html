@@ -1,0 +1,117 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-129.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP gensym</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-128.html">Previous</a> |
+<a href="xlisp-ref-130.html">Next</a>
+
+<hr>
+
+<h1>gensym</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(gensym [<i>tag</i>])</dt>
+<dd><i>tag</i> - an optional integer or string<br>
+returns - the new symbol</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'gensym' function generates and returns a symbol. The default symbol
+form is as a character 'G' followed by a number, 'Gn'. The default numbering
+starts at '1'. You can change what the generated symbol looks like. By
+calling 'gensym' with a string 'tag', the default string is set to the
+string parameter. If 'tag' is an integer number, the current number is
+set to the integer parameter.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(gensym)             <font color="#0000CC">; first time =&gt; G1</font>
+(gensym 100)         <font color="#0000CC">; returns G100</font>
+(gensym "MYGENSYM")  <font color="#0000CC">; returns MYGENSYM101</font>
+(gensym 0)           <font color="#0000CC">; returns MYGENSYM0</font>
+(gensym)             <font color="#0000CC">; returns MYGENSYM1</font>
+(gensym "G")         <font color="#0000CC">; \</font>
+(gensym 0)           <font color="#0000CC">; /  put it back to 'normal'</font>
+(gensym)             <font color="#0000CC">; just like first time =&gt; G1</font>
+</pre>
+
+<p><b>Note:</b> It takes 2 calls to 'gensym' to set both portions of the
+'gensym' symbol.</p>
+
+<p><b>Note:</b> Although it is possible to call 'gensym' with numbers in the string
+like &quot;AB1&quot;, this does generate an odd sequence. What will happen is you will
+get a sequence of symbols like:</p>
+
+<pre class="example">
+... AB18 AB19 AB110 AB111 ...
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-013.html#gensym">gensym</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-128.html">Previous</a> |
+<a href="xlisp-ref-130.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-129.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

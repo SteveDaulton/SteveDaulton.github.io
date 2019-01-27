@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/emacs/speech/compile-festival.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>How to compile Festival</title>
+</head>
+
+<body>
+
+<p align=center><a href="../main.html">Nyquist and Emacs</a> /
+<a href="main.html">Speech Synthesizers</p>
+
+<hr>
+
+<center>
+<table width=640><tbody><tr><td>
+<h2>How to compile Festival (Fedora RedHat)</h2>
+
+<h3>1) Download the archives</h3>
+
+<p>from &nbsp; <a href="http://www.cstr.ed.ac.uk/downloads/festival/1.95/">
+http://www.cstr.ed.ac.uk/downloads/festival/1.95/</a></p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ festival-1.95-beta.tar.gz
+ festlex_CMU.tar.gz
+ festlex_OALD.tar.gz
+ festlex_POSLEX.tar.gz
+ festvox_don.tar.gz
+ festvox_kallpc16k.tar.gz
+ festvox_kedlpc16k.tar.gz
+ festvox_rablpc16k.tar.gz
+ speech_tools-1.2.95.beta.tar.gz
+</pre></td></tr></tbody></table>
+
+<p>You don't absolutely -NEED- all of these files but they are required for
+a convenient test run.</p>
+
+<p>Now create a new directory (for illustration I'll use ".../foo"). Copy
+all of the archives into foo and unpack them. You should now have 2
+sub-directories under foo:</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ .../foo/speech_tools
+ .../foo/festival
+</pre></td></tr></tbody></table>
+
+<h3>2) Build the speech_tools first</h3>
+
+<p>cd into foo/speech_tools and execute the command</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ ./configure
+</pre></td></tr></tbody></table>
+
+<p>This will produce the file</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ .../foo/speech_tools/config/config
+</pre></td></tr></tbody></table>
+
+<p>I had to edit config to point to the right compiler. Specifically I
+changed the line</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ COMPILER=gcc32   to   COMPILER=gcc
+</pre></td></tr></tbody></table>
+
+<p>Next move back to the .../foo/speech_tools and execute</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ ./make
+</pre></td></tr></tbody></table>
+
+<p>Now get a cup of coffee or a beer or whatever because it will take
+a while.</p>
+
+<p>Once the make is done you can issue</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ ./make test
+</pre></td></tr></tbody></table>
+
+<p>to see if everything is ok.</p>
+
+<p>Now assuming speech_tools compiled ok its time to build festival proper.</p>
+
+<h3>3) Building Festival</h3>
+
+<p>Navigate to</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ .../foo/festival
+</pre></td></tr></tbody></table>
+
+<p>There should be no need to configure festival since it "inherits"
+configuration from speech_tools.</p>
+
+<p>Issue the command</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ ./make
+</pre></td></tr></tbody></table>
+
+<p>Get another cup of coffee or beer or beverage of your choice....(tonight
+that would be a Scottish John Courage)</p>
+
+<p>Once the make is done you can issue</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ ./make test
+</pre></td></tr></tbody></table>
+
+<p>if you wish.</p>
+
+<h3>4) Making Festival talk...</h3>
+
+<p>After the compiles you need to add .../foo/festival/bin to PATH in your
+~/.bash_profile file.</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ PATH=$PATH:.../foo/festival/bin
+</pre></td></tr></tbody></table>
+
+<p>Now log out and back in and issue the command</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ festival
+</pre></td></tr></tbody></table>
+
+<p>Hopefully you will get a SIOD prompt. Try</p>
+
+<table bgcolor="eeeff0" width="100%"><tbody><tr><td><pre>
+ (SayText "Hello World")
+</pre></td></tr></tbody></table>
+
+<p>to see if it all works.</p>
+
+<h3>5) Two caveats:</h3>
+
+<p>1) SIOD scheme appears to be case sensitive so saytext &lt; &gt; SayText. -- 
+Pardon me if this is obvious but it is a very common mistake and I
+make it all the time.</p>
+
+<p>2) When you log out and back into a Linux session all
+the mixer channels mute. Try the command aumix to set mixer levels etc.</p>
+
+</td></tr></tbody></table>
+</center>
+
+<br><br><hr>
+
+<p align=center><a href="../main.html">Nyquist and Emacs</a> /
+<a href="main.html">Speech Synthesizers</p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/emacs/speech/compile-festival.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>
+

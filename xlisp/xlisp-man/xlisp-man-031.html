@@ -1,0 +1,199 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-031.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#32">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-030.html">Previous</a> |
+<a href="xlisp-man-032.html">Next</a>
+
+<hr>
+
+<h1>31&nbsp; System Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#load">load</a> - load a source file</nobr></li>
+<li><nobr><a href="#save">save</a> - save workspace to a file</nobr></li>
+<li><nobr><a href="#restore">restore</a> - restore workspace from a file</nobr></li>
+<li><nobr><a href="#dribble">dribble</a> - create a file with a transcript of a session</nobr></li>
+<li><nobr><a href="#gc">gc</a> - force garbage collection</nobr></li>
+<li><nobr><a href="#expand">expand</a> - expand memory by adding segments</nobr></li>
+<li><nobr><a href="#alloc">alloc</a> - change number of nodes to allocate in each segment</nobr></li>
+<li><nobr><a href="#room">room</a> - show memory allocation statistics</nobr></li>
+<li><nobr><a href="#type-of">type-of</a> - returns the type of the expression</nobr></li>
+<li><nobr><a href="#peek">peek</a> - peek at a location in memory</nobr></li>
+<li><nobr><a href="#poke">poke</a> - poke a value into memory</nobr></li>
+<li><nobr><a href="#address-of">address-of</a> - get the address of an xlisp node</nobr></li>
+<li><nobr><a href="#system">system</a> - execute a command of the operating system</nobr></li>
+<li><nobr><a href="#exit">exit</a> - exit xlisp</nobr></li>
+</ol>
+
+<p><b>Nyquist:</b> in Nyquist, the XLISP 'load' function first tries to load
+a file from the current directory. A '.lsp' extension is added if there is
+not already an alphanumeric extension following a period. If that fails,
+XLISP searches the path, which is obtained from the XLISPPATH environment
+variable in Unix and HKEY_LOCAL_MACHINE\SOFTWARE\CMU\Nyquist\XLISPPATH under
+Win32. [The Macintosh version has no search path.]</p>
+
+<p><b>Note:</b> All XLISP system functions added by Nyquist
+can be found in <nobr><a href="xlisp-man-033.html#system-functions">Chapter
+34</a></nobr>.</p>
+
+<hr>
+
+<a name="load"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-152.html">load</a> <i>fname</i>
+&amp;key :verbose :print) - load a source file</dt>
+<dd><i>fname</i> - the filename string or symbol<br>
+:verbose - the verbose flag, default is T<br>
+:print - the print flag, default is NIL<br>
+returns - the filename</dd>
+
+<a name="save"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-231.html">save</a> <i>fname</i>)
+- save workspace to a file</dt>
+<dd><i>fname</i> - the filename string or symbol<br>
+returns - T if workspace was written, NIL otherwise</dd>
+
+<a name="restore"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-224.html">restore</a> <i>fname</i>)
+- restore workspace from a file</dt>
+<dd><i>fname</i> - the filename string or symbol<br>
+returns - NIL on failure, otherwise never returns</dd>
+
+<a name="dribble"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-097.html">dribble</a> [<i>fname</i>])
+- create a file with a transcript of a session</dt>
+<dd><i>fname</i> - file name string or symbol [if missing, close current transcript]<br>
+returns - T if the transcript is opened, NIL if it is closed</dd>
+
+<a name="gc"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-125.html">gc</a>)
+- force garbage collection</dt>
+<dd>returns - NIL</dd>
+
+<a name="expand"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-111.html">expand</a> <i>num</i>)
+- expand memory by adding segments</dt>
+<dd><i>num</i> - the number of segments to add<br>
+returns - the number of segments added</dd>
+
+<a name="alloc"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-023.html">alloc</a> <i>num</i>)
+- change number of nodes to allocate in each segment</dt>
+<dd><i>num</i> - the number of nodes to allocate<br>
+returns - the old number of nodes to allocate</dd>
+
+<a name="room"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-228.html">room</a>)
+- show memory allocation statistics</dt>
+<dd>returns - NIL</dd>
+
+<a name="type-of"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-290.html">type-of</a> <i>expr</i>)
+- returns the type of the expression</dt>
+<dd><i>expr</i> - the expression to return the type of<br>
+returns - NIL if the value is NIL otherwise one of the symbols:<br>
+<dl><dd>SYMBOL - for symbols<br>
+OBJECT - for objects<br>
+CONS - for conses<br>
+SUBR - for built-in functions<br>
+FSUBR - for special forms<br>
+CLOSURE - for defined functions<br>
+STRING - for strings<br>
+FIXNUM - for integers<br>
+FLONUM - for floating point numbers<br>
+CHARACTER - for characters<br>
+FILE-STREAM - for file pointers<br>
+UNNAMED-STREAM - for unnamed streams<br>
+ARRAY - for arrays</dd></dl></dd>
+
+<a name="peek"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-193.html">peek</a> <i>addrs</i>)
+- peek at a location in memory</dt>
+<dd><i>addrs</i> -  the address to peek at [integer]<br>
+returns - the value at the specified address [integer]</dd>
+
+<a name="poke"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-196.html">poke</a> <i>addrs</i>
+<i>value</i>) - poke a value into memory</dt>
+<dd><i>addrs</i> - the address to poke [integer]<br>
+<i>value</i> - the value to poke into the address [integer]<br>
+returns - the value</dd>
+
+<a name="address-of"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-022.html">address-of</a>)
+- get the address of an XLISP node</dt>
+<dd><i>expr</i> - the node<br>
+returns - the address of the node [integer]</dd>
+
+<a name="system"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-275.html">system</a>
+<i>command</i>) - execute a command of the operating system</dt>
+<dd><i>command</i> - the command to execute<br>
+returns - T if the command was successful, the error code otherwise</dd>
+
+<a name="exit"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-109.html">exit</a>) - exit XLISP</dt>
+<dd>returns - never returns</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#32">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-030.html">Previous</a> |
+<a href="xlisp-man-032.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-031.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

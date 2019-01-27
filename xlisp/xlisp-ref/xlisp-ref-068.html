@@ -1,0 +1,114 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-068.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP char-not-equal</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-067.html">Previous</a> |
+<a href="xlisp-ref-069.html">Next</a>
+
+<hr>
+
+<h1>char-not-equal</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlstr.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(char-not-equal <i>char1 charN</i> ... )</dt>
+<dd><i>char1</i> - a character expression<br>
+<i>charN</i> - character expression(s) to compare<br>
+returns - <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a>
+if the characters are of different
+<a href="../xlisp-misc/ascii-table.html">ASCII</a> value,
+<a href="xlisp-ref-177.html">NIL</a> otherwise<br>
+<b>Note:</b> case is not significant with this function</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'char-not-equal' function takes one or more character arguments. It
+checks to see if all the character arguments are different values. <a
+href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> is returned if the arguments are
+of different <a href="../xlisp-misc/ascii-table.html">ASCII</a> value. In the
+case of two arguments, this has the effect of testing if 'char1' is not
+equal to 'char2'. This test is case insensitive, the character '#\a' is
+considered to be the same <a href="../xlisp-misc/ascii-table.html">ASCII</a>
+value <nobr>as '#\A'.</nobr></p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(char-not-equal #\a #\b)      <font color="#0000CC">; returns T</font>
+(char-not-equal #\a #\b #\c)  <font color="#0000CC">; returns T</font>
+(char-not-equal #\a #\a)      <font color="#0000CC">; returns NIL</font>
+(char-not-equal #\a #\b #\b)  <font color="#0000CC">; returns NIL</font>
+(char-not-equal #\A #\a)      <font color="#0000CC">; returns NIL</font>
+(char-not-equal #\a #\A)      <font color="#0000CC">; returns NIL</font>
+</pre>
+
+<p><b>Note:</b> The 'char-not-equal' function is listed in the original
+XLISP documentation as 'char-not-equalp'.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-026.html#char-not-equal">char-not-equal</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-067.html">Previous</a> |
+<a href="xlisp-ref-069.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-068.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

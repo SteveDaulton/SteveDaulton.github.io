@@ -1,0 +1,131 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-007.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#7">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-006.html">Previous</a> |
+<a href="xlisp-man-008.html">Next</a>
+
+<hr>
+
+<h1>7&nbsp; Lexical Conventions</h1>
+
+<hr>
+
+<p>The following conventions must be followed when entering XLISP
+programs:</p>
+
+<ul>
+
+<li><p>Comments in XLISP code begin with a semi-colon character and continue
+to the end of the line.</p></li>
+
+<li><p>Symbol names in XLISP can consist of any sequence of non-blank
+printable characters except the following:</p></li>
+
+<p><code>&nbsp;(&nbsp; )&nbsp; '&nbsp; `&nbsp; ,&nbsp; "&nbsp; ;&nbsp;</code></p>
+
+<p><nobr>[opening parenthesis,</nobr> <nobr>closing parenthesis,</nobr>
+<nobr>single quote,</nobr> back-quote, comma, double-quote, semi-colon].</p>
+
+<li><p>Uppercase and lowercase characters are not distinguished within
+symbol names. All lowercase characters are mapped to uppercase on
+input.</p></li>
+
+<li><p>Integer literals consist of a sequence of digits optionally beginning
+with a '+' [plus] or '-' [minus]. The range of values an integer can
+represent is limited by the size of a C 'long' value on the machine on which
+XLISP is running.</p></li>
+
+<li><p>Floating point literals consist of a sequence of digits optionally
+beginning with a '+' [plus] or '-' [minus] and including an embedded decimal
+point. The range of values a floating point number can represent is limited
+by the size of a C 'float' [or 'double' on machines with 32 bit addresses]
+on the machine on which XLISP is running.</p></li>
+
+<li><p>Literal strings are sequences of characters surrounded by double
+quotes. Within quoted strings the '\' [backslash] character is used to allow
+non-printable characters to be included. The codes recognized are:</p></li>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr><code>\\</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">the character '\' [backslash]</td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>\n</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">newline</td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>\t</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">tab</td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>\r</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">return</td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>\f</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">form feed</td>
+</tr>
+<tr valign="top">
+  <td><nobr><code>\nnn</code></nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%">the character whose octal code is 'nnn'</td>
+</tr>
+</tbody></table></p>
+
+<p>An <a href="../xlisp-misc/ascii-table.html">ASCII</a> table
+is provided with this version of the XLISP manual with all octal, decimal
+and hexadecimal character values.</p>
+
+</ul>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#7">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-006.html">Previous</a> |
+<a href="xlisp-man-008.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-007.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

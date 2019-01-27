@@ -1,0 +1,108 @@
+;nyquist plug-in
+;version 2
+;type generate
+;name "Apropos..."
+;action "Apropos..."
+;info "Apropos searches the Nyquist *obarray* for matching symbol names.\nPlease press Debug instead of the Okay button.\n"
+;control pattern "Search Pattern" string ""  
+;control action "Type of Symbol" choice "All Symbols,Functions only,Variables only"  
+
+(setf *gc-flag* nil)  ; do not print garbage collector messages
+
+;; The 'apropos' function searches the Nyquist/XLISP *obarray* symbol hash
+;; table for matching symbol names containing 'pattern' and being of 'type'
+;; and prints a list of the results in alphabetical order.
+;;
+;; 'pattern and 'type' can be given as symbols or strings
+;;
+;; if no 'pattern' is given, all symbol names are considered as matching
+;; if no 'type' is given, all symbol types are considered as matching
+;; with 'type', only the first letter is important
+;; a type of 'f' searches for symbols with a valid function value
+;; a type of 'v' searches for symbols with a valid variable value
+;;
+;; Examples:
+;;
+;; (apropos)         prints a list of all symbols known by Nyquist
+;; (apropos nil 'f)  prints a list of all bound functions known by Nyquist
+;; (apropos nil 'v)  prints a list of all bound variables known by Nyquist
+;; (apropos 'snd 'f) prints a list of all function names containing 'snd'
+;;
+;; The 'apropos' function can also be used as-is in Roger Dannenberg's
+;; original Nyquist version.
+;;
+(defun apropos (&optional pattern type)
+  (let (result-list)
+    ;; make sure 'pattern' is a string, either empty or upper-case
+    (if pattern
+        (setf pattern (string-upcase (string pattern)))
+      (setf pattern ""))
+    ;; take only the first letter of 'type' and make it an upper-case string
+    (if type (setf type (string-upcase (subseq (string type) 0 1))))
+    ;; go through all entries in the *obarray* symbol hash table
+    (dotimes (i (length *obarray*))
+      (let ((entry (aref *obarray* i)))  ; *obarray* is an array of lists
+        ;; if the *obarray* entry is not an empty list
+        (if entry
+          ;; go through all elements of the *obarray* entry list
+          ;; do not use 'dolist' because *obarray* contains *unbound*
+          (dotimes (j (length entry))
+            ;; convert the symbol to a string to enable pattern matching
+            (let ((string (string (nth j entry))))
+              ;; if the symbol string matches the search pattern
+              (if (string-search pattern string)
+                  ;; if a special symbol type to search for was given
+                  (if type
+                      ;; if a 'type' search was initiated and the current
+                      ;; symbol has no 'type' value bound to it, do nothing
+                      ;; and return from 'cond' without adding the symbol
+                      ;; string to the result list
+                      (cond ((and (string= type "F")  ; bound functions only
+                                  (not (fboundp (nth j entry))))
+                             nil)
+                            ((and (string= type "V")  ; bound variables only
+                                  (not (boundp (nth j entry))))
+                             nil)
+                            ;; if the symbol has passed all tests,
+                            ;; add the symbol string to the result list
+                            (t (setf result-list (cons string result-list))))
+                    ;; if no special symbol type to search for had been given,
+                    ;; but the symbol string had matched the search pattern,
+                    ;; add the symbol string to the result list
+                    (setf result-list (cons string result-list)))))))))
+    ;; if the result list contains more than one element
+    ;; make it become an alphabetically sorted list
+    (if (> (length result-list) 1)
+        (setf result-list (sort result-list 'string<)))
+    ;; print a message according to the search type and pattern
+    (cond ((and type (string= type "F")) (setf type "function"))
+          ((and type (string= type "V")) (setf type "variable"))
+          (t (setf type "symbol")))
+    (if (string= pattern "")
+        (format t "All ~a names known by Nyquist:~%" type)
+      (format t "All ~a names containing pattern ~a:~%" type pattern))
+    ;; print the search results
+    (cond (result-list
+           (let ((list-length (length result-list)))
+             (format t "(number of symbols: ~a)~%" list-length)
+             (dolist (i result-list) (format t "~a~%" i))
+             (if (> list-length 20)
+               (format t "Number of symbols: ~a~%" list-length))))
+          (t (format t "No matches found.")))))
+
+;; start the 'apropos' search according to the settings of the Audacity user
+(cond ((= action 0) (apropos pattern))
+      ((= action 1) (apropos pattern 'functions))
+      ((= action 2) (apropos pattern 'variables)))
+
+;; 'format t' versus 'format nil'
+;;
+;; In the 'apropos' function above I needed 'format t' because the 'format'
+;; output is printed directly into the Audacity 'Debug' window. In the line
+;; below I write 'format nil' because the 'format' function output is given
+;; to Audacity to display and not printed on the screen directly. Audacity
+;; then takes the function output string and displays it in a message box on
+;; the screen, but the 'format' function itself prints nothing in this case.
+
+(format nil "Please read the Debug window output.")
+

@@ -1,0 +1,463 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/audacity-wiki/basics/change-volume.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>Changing Volume</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+}
+</style></head><body>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+<hr>
+
+<p align=center>
+<a href="../../sjones/docs/main.html">Steven Jones</a> /
+<a href="../../pmorales/main.html">Pedro Morales</a> /
+<a href="../../drsky/main.html">David R. Sky</a> /
+<a href="../../emacs/main.html">Nyquist and Emacs</a> /
+<a href="../index.html">Audacity Wiki</a></p>
+
+<hr>
+
+<h1>Changing the Volume of an Audacity Track</h1>
+
+<hr>
+
+<p><b>Note:</b> All [comments] and [explanations] are written in square
+brackets, so they cannot be confused with <nobr>(Lisp code).</nobr></p>
+
+<ol>
+<li><nobr><a href="#1">Changing the Volume of an Audacity Track</a> - the 'scale' function</nobr></li>
+<br>
+<li><nobr><a href="#2">Changing the Volume of Stereo Tracks Independently</a></nobr></li>
+<ul>
+<li><nobr><a href="#2-1">Splitting and Re-combining Stereo Sounds</a></nobr></li>
+<li><nobr><a href="#2-2">Splitting Stereo Sounds</a> - the 'aref' function</nobr></li>
+<li><nobr><a href="#2-3">Combining Mono Sounds</a> - the 'vector' function</nobr></li>
+<li><nobr><a href="#2-4">Processing Both Channels Independently</a></nobr></li>
+</ul>
+<br>
+<li><nobr><a href="#3">Handling Mono and Stereo Tracks Automatically</a></nobr></li>
+<ul>
+<li><nobr><a href="#3-1">Testing for Stereo Sounds</a> - the 'arrayp' predicate function</nobr></li>
+<li><nobr><a href="#3-2">If-Then-Else with Lisp</a> - the 'if' special form</nobr></li>
+<li><nobr><a href="#3-3">Handling Mono and Stereo Tracks Automatically</a></nobr></li>
+</ul>
+<br>
+<li><nobr>Changing the Volume with Envelopes</nobr></li>
+<br>
+<li><nobr>Changing the Volume with a Low Frequency Generator</nobr></li>
+</ol>
+
+
+<a name="1"></a>
+
+<hr>
+
+<h1>1&nbsp; Changing the Volume of an Audacity Track</h1>
+
+<hr>
+
+<p>To change the volume of an Audacity track with Nyquist, the easiest way
+is to use the Nyquist 'scale' function:</p>
+
+<ul><li><nobr>(scale <i>number sound</i>)</nobr></li></ul>
+
+<p>The 'scale' function multiplies the amplitude [volume] of the 'sound' by
+the given 'number'. A number of 0.5 will make the volume become half as loud
+as before, while a number of 2 will make the sound become double as loud as
+before.</p>
+
+<p><b>Example:</b></p>
+
+<p>First either load a sound file into Audacity or create an audio track,
+e.g. with 'Tone' from the Audacity 'Generate' menu. Then mark the whole
+track either by pressing 'Ctrl+A' on the keyboard, or by clicking with the
+mouse into the track header, with taking care not to move the buttons or
+sliders. The whole track then will appear in a different color.</p>
+
+<p>Now open the 'Nyquist Prompt' from the Audacity 'Effect' menu. A window
+with a text field will appear where you can type in:</p>
+
+<pre class="example">
+(scale 0.5 s)
+</pre>
+
+<p><b>Important:</b> Do not forget to type the parens. The parens are part
+of the Lisp language Nyquist is based on. Without the parens the Nyquist
+interpreter will not be able to understand your code.</p>
+
+<p>The 's' variable is the Audacity 'sound' [the selected part of the
+Audacity track]. Nyquist in Audacity always understands 's' as the Audacity
+sound variable.</p>
+
+<p>After clicking 'OK' in the 'Nyquist Prompt' window the 'scale' function
+will take the Audacity sound and return a 'scaled-down' sound with half the
+volume to Audacity. The result of the last computation of the Nyquist code
+always gets automatically returned to Audacity.</p>
+
+<p><b>Note:</b> If you try 'scale' with big numbers you will notice that you
+can return sounds with volumes taller than the Audacity track which will
+sound horribly distorted if you play them afterwards in Audacity. So an
+important lesson to learn is that Nyquist gives you the freedom to do
+whatever you want but it's now on you to take care that the result will
+still sound tolerably afterwards.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2"></a>
+
+<hr>
+
+<h1>2&nbsp; Changing the Volume of Stereo Tracks Independently</h1>
+
+<hr>
+
+<p>To be able to change the volumes of both channels of a stereo track
+independently, we first have to split up the stereo track into two mono
+sounds, then change the volume of both mono sounds independently from each
+other, and afterwards we need to re-combine the two mono sounds to become a
+stereo sound again, before the sound can be given back to the Audacity
+stereo track.</p>
+
+<p>This sounds a lot more complicated than the first example but
+fortunately Nyquist helps us with many build-in functions.</p>
+
+<p>From the first example we already know how to change the volume with the
+'scale' function, so we only need to find a way how to split and re-combine
+stereo sounds into single mono sounds and back to a stereo sound again.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2-1"></a>
+
+<hr>
+
+<h2>2.1&nbsp; Splitting and Re-combining Stereo Sounds</h2>
+
+<hr>
+
+<p>Here the important thing to know is that Nyquist handles sounds with more
+than one channel as arrays. A stereo sound in Nyquist is represented as an
+array with two 'slots' [also called 'fields' in other programming
+languages]. If a sound from an Audacity stereo track is given to Nyquist,
+the 's' variable is an array.</p>
+
+<p><b>Note:</b> To keep the code simple, the following examples only work
+with Audacity stereo tracks, with mono tracks you will get Nyquist errors
+['Nyquist did not return audio', etc]. Click 'Debug' instead of 'OK' in
+the 'Nyquist prompt' window if you want to read the detailed Nyquist error
+messages. In the next chapter will show how to avoid such errors.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2-2"></a>
+
+<hr>
+
+<h2>2.2&nbsp; Splitting Stereo Sounds</h2>
+
+<hr>
+
+<p>The Nyquist function to reference single slots of arrays is:</p>
+
+<ul><li><nobr>(aref <i>array index</i>)</nobr></li></ul>
+
+<p>where the first slot of the array is index 0 [zero].</p>
+
+<p>With an Audacity stereo sound, the slot with the index 0 is always the
+left channel and the slot with the index 1 is always the right channel:</p>
+
+<pre class="example">
+(aref s 0)  <font color="#0000CC">; left channel</font>
+(aref s 1)  <font color="#0000CC">; right channel</font>
+</pre>
+
+<p><b>Note:</b> everything after the first semicolon until the end of the
+line is a comment and therefore ignored by Nyquist.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2-3"></a>
+
+<hr>
+
+<h2>2.3&nbsp; Combining Mono Sounds</h2>
+
+<hr>
+
+<p>Now we still need a function to re-combine both mono sounds back into a
+stereo array. Therefore the Nyquist 'vector' function is very handy:</p>
+
+<ul><li><nobr>(vector <i>expression</i> ... )</nobr></li></ul>
+
+<p>A 'vector' is a one-dimensional array. The 'vector' function creates an
+array with as many slots as 'expressions' are given as arguments. If we give
+two sounds as arguments [the two mono channels] we will get back an array of
+two sounds, what in Nyquist equals to a stereo sound.</p>
+
+<p>The 'stereo to <nobr>2 x mono</nobr> and back again' code in Nyquist
+would look like this:</p>
+
+<pre class="example">
+(vector
+  (aref s 0)   <font color="#0000CC">; left channel</font>
+  (aref s 1))  <font color="#0000CC">; right channel</font>
+</pre>
+
+<p><b>Note:</b> Look at the ordering of the opening and closing parens. The
+parens tell the interpreter which function comes first. The function in the
+innermost parens in Lisp ALWAYS gets computed first. So this way the return
+values from <nobr>(aref s 0)</nobr> and <nobr>(aref s 1)</nobr> will be
+given as arguments to the 'vector' function, which in turn will combine and
+return them as an one-dimensional array with two slots.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="2-4"></a>
+
+<hr>
+
+<h2>2.4&nbsp; Processing Both Channels Independently</h2>
+
+<hr>
+
+<p>First remember how we changed the volume in the first example:</p>
+
+<pre class="example">
+(scale 0.5 s)
+</pre>
+
+<p>Next we take again advantage of one of the most important principles of
+Lisp, always to compute the innermost parens first. Look again at the
+'vector' code from above. All you have to do is to replace the two innermost
+occurrences of 's' [the arguments to 'aref'] with the code from the first
+example:</p>
+
+<pre class="example">
+(vector
+  (aref (scale 0.5 s) 0)   <font color="#0000CC">; left channel</font>
+  (aref (scale 0.5 s) 1))  <font color="#0000CC">; right channel</font>
+</pre>
+
+<p>The result of course still makes not much difference to the first
+example, but now you can write:</p>
+
+<pre class="example">
+(vector
+  (aref (scale 0.5 s) 0)   <font color="#0000CC">; left channel</font>
+  (aref (scale 2.0 s) 1))  <font color="#0000CC">; right channel</font>
+</pre>
+
+<p>Then the left channel will be returned with half the volume while the
+right channel will be returned with the double volume. This way now both
+channels can be amplified or attenuated independently from each other.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="3"></a>
+
+<hr>
+
+<h1>3&nbsp; Handling Mono and Stereo Tracks Automatically</h1>
+
+<hr>
+
+
+<p>We still have the problem that our stereo function raises errors with
+mono tracks. Now we will see how mono and stereo tracks can be recognized
+and handled automatically.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="3-1"></a>
+
+<hr>
+
+<h2>3.1&nbsp; Testing for Stereo Sounds</h2>
+
+<hr>
+
+<p>As you already know, Nyquist handles sounds with more than one channel
+as arrays.</p>
+
+<p>The Nyquist function to test wether a variable is an array or not is:</p>
+
+<ul><li><nobr>(arrayp <i>variable</i>)</nobr></li></ul>
+
+<p>Some simple tests with 'arrayp':</p>
+
+<p>Load a mono or a stereo track into Audacity or create a track with any of
+the generators from the Audacity 'Generate' menu, then mark the whole track
+or only a part part of it, and open the 'Nyquist Prompt' from the Audacity
+'Effect' menu. Into the text field you type:</p>
+
+<pre class="example">
+(print (arrayp s))
+</pre>
+
+<p><b>Important:</b> Please take care to type the correct ordering of
+opening and closing parens. The parens tell the interpreter which function
+comes first. The function in the innermost parens in Lisp ALWAYS gets
+computed first. Here the return value from <nobr>(arrayp s)</nobr> will be
+given to the 'print' function, which in turn will print the result to the
+Nyquist 'debug' window.</p>
+
+<p><b>Important:</b> In the 'Nyquist Prompt' window, do NOT klick the 'OK'
+button, klick the 'Debug' button instead, otherwise you won't be able to see
+the result. This way you will simultaneously learn how to use the Nyquist
+debugging tools.</p>
+
+<p>After clicking the 'Debug' button, first a window 'Nyquist did not return
+audio' [or similar] appears, were you just klick 'OK'. Then, directly
+afterwards, a second window 'Nyquist output' [the debugger window] appears
+with the printed result of the 'arrayp' function:</p>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>T</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">meaning 'true', the sound is an array [= a stereo sound]</td>
+</tr>
+<tr>
+  <td style="height:5px"></td>
+</tr>
+<tr>
+  <td valign="top">
+    <table cellpadding="0" cellspacing="0" width="100%"><tbody>
+      <tr valign="top">
+        <td class="button"><nobr><code>NIL</code></nobr></td>
+      </tr>
+    </tbody></table>
+  </td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;</nobr></td>
+  <td width="100%">meaning 'false', the sound is NOT an array [= a mono sound]</td>
+</tr>
+</tbody></table></p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="3-2"></a>
+
+<hr>
+
+<h2>3.2&nbsp; If-Then-Else with Lisp</h2>
+
+<hr>
+
+<p>Now that we know how to find out wether the 's' variable contains a mono
+or stereo sound we can use 'arrayp' in an if-then-else construct. In
+contrast to most other programming languages in Lisp there is only an 'if'
+function, but no 'then' and 'else' keywords, instead the ordering what
+to compute in which case is done with the parens [what else].</p>
+
+<p>We can write Nyquist code for handling mono and stereo signals
+automatically like this:</p>
+
+<pre class="example">
+(if (arrayp s)         <font color="#0000CC">; IF s is an array [= stereo]</font>
+    (stereo-function)  <font color="#0000CC">; THEN use the stereo function</font>
+  (mono-function))     <font color="#0000CC">; ELSE use the mono function</font>
+</pre>
+
+<p><b>Note:</b> Here you can see that Lisp code usually does not get read
+and understood by humans with counting the parens, but by the different
+indentation level of the lines. It is also very helpful to use an editor
+which is capable to 'match' parens. E.g. if you move the cursor to an
+opening or closing paren, the other related opening or closing paren will be
+automatically highlighted. This will prevent you from going nuts with
+counting.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<a name="3-3"></a>
+
+<hr>
+
+<h2>3.3&nbsp; Handling Mono and Stereo Tracks Automatically</h2>
+
+<hr>
+
+<p>In the next version we will extend our stereo function with an
+'arrayp' if-then-else construct and a window with a message to the user,
+which gets displayed with mono tracks:</p>
+
+<pre class="example">
+(if (arrayp s)
+    (vector
+      (aref (scale 0.5 s) 0)   <font color="#0000CC">; left channel</font>
+      (aref (scale 2.0 s) 1))  <font color="#0000CC">; right channel</font>
+  "This function only works with stereo tracks.")  <font color="#0000CC">; message to the user</font>
+</pre>
+
+<p><b>Note:</b> If Nyquist gives back a string instead of a sound to
+Audacity, the 'Nyquist did not return audio' window will be replaced by a
+window displaying the Nyquist string as a message to the user.</p>
+
+<p>It is also possible to give back the unmodified sound in the 's'
+variable:</p>
+
+<pre class="example">
+(if (arrayp s)
+    (vector
+      (aref (scale 0.5 s) 0)   <font color="#0000CC">; left channel</font>
+      (aref (scale 2.0 s) 1))  <font color="#0000CC">; right channel</font>
+  s)  <font color="#0000CC">; unmodified sound</font>
+</pre>
+
+<p>No error will happen and no window will be displayed, Audacity will just
+re-insert the unmodified sound at the same place where it came from.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to top</a></nobr></p>
+
+<hr>
+
+<p align=center>
+<a href="../../sjones/docs/main.html">Steven Jones</a> /
+<a href="../../pmorales/main.html">Pedro Morales</a> /
+<a href="../../drsky/main.html">David R. Sky</a> /
+<a href="../../emacs/main.html">Nyquist and Emacs</a> /
+<a href="../index.html">Audacity Wiki</a></p>
+
+<hr>
+
+<p align=center><b>
+<a href="https://forum.audacityteam.org/">Audacity Support Forum</a> /
+<a href="../../../nyquist.html">Audacity and Nyquist</a> /
+<a href="../../../manual/home.html">Nyquist Reference Manual</a> /
+<a href="../../examples.html">Nyquist Examples and Tutorials</a>
+</b></p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/audacity-wiki/basics/change-volume.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

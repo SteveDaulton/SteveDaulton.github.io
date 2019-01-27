@@ -1,0 +1,329 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-010.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#10">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-009.html">Previous</a> |
+<a href="xlisp-man-011.html">Next</a>
+
+<hr>
+
+<h1>10&nbsp; Objects</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#10-1">Definitions</a></nobr></li>
+<ul>
+<li><nobr><a href="#selector-def">selector</a> - a symbol used to select an appropriate method</nobr></li>
+<li><nobr><a href="#message-def">message</a> - a selector and a list of actual arguments</nobr></li>
+<li><nobr><a href="#method-def">method</a> - the code that implements a message</nobr></li>
+<li><nobr><a href="#object-def">object</a> - the top of the class hierarchy</nobr></li>
+<li><nobr><a href="#class-def">class</a> - the class of all object classes</nobr></li>
+</ul>
+<li><nobr><a href="#10-2">The 'send' Function</a></nobr></li>
+<li><nobr><a href="#10-3">The 'self' Symbol</a></nobr></li>
+<li><nobr><a href="#10-4">The 'send-super' Function</a></nobr></li>
+<li><nobr><a href="#10-5">The 'Object' Class</a></nobr></li>
+<ul>
+<li><nobr><a href="#object">object</a> - the top of the class hierarchy</nobr></li>
+<ul>
+<li><nobr><a href="#object-show">:show</a> - show an object's instance variables</nobr></li>
+<li><nobr><a href="#object-class">:class</a> - return the class of an object</nobr></li>
+<li><nobr><a href="#object-isnew">:isnew</a> - the default object initialization routine</nobr></li>
+<li><nobr><a href="#send-super">send-super</a> - send superclass a message</nobr></li>
+</ul>
+</ul>
+<li><nobr><a href="#10-6">The 'Class' Class</a></nobr></li>
+<ul>
+<li><nobr><a href="#class">class</a> - class of all object classes</nobr></li>
+<ul>
+<li><nobr><a href="#class-new">:new</a> - create a new instance of a class</nobr></li>
+<li><nobr><a href="#class-isnew">:isnew</a> - initialize a new class</nobr></li>
+<li><nobr><a href="#class-answer">:answer</a> - add a message to a class</nobr></li>
+</ul>
+</ul>
+</ol>
+
+<a name="10-1"></a>
+<a name="selector-def"></a>
+<a name="message-def"></a>
+<a name="method-def"></a>
+<a name="object-def"></a>
+<a name="class-def"></a>
+
+<hr>
+
+<h2>10.1&nbsp; Definitions</h2>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr>
+  <td><nobr>selector</nobr></td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>a symbol used to select an appropriate method</nobr></td>
+</tr>
+<tr>
+  <td><nobr>message</nobr></td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>a selector and a list of actual arguments</nobr></td>
+</tr>
+<tr>
+  <td><nobr>method</nobr></td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>the code that implements a message</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="../xlisp-ref/xlisp-ref-187.html">object</a></nobr></td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>the top of the class hierarchy</nobr></td>
+</tr>
+<tr>
+  <td><nobr><a href="../xlisp-ref/xlisp-ref-072.html">class</a></nobr></td>
+  <td valign="top"><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>the class of all object classes (including itself)</nobr></td>
+</tr>
+</tbody></table></p>
+
+<p>Since XLISP was created to provide a simple basis for experimenting with
+object-oriented programming, one of the primitive data types included is
+<a href="../xlisp-ref/xlisp-ref-187.html">object</a>. In XLISP, an object
+consists of a data structure containing a pointer to the object's
+<a href="../xlisp-ref/xlisp-ref-072.html">class</a> as well as an array
+containing the values of the object's instance variables.</p>
+
+<p>Officially, there is no way to see inside an object [look at the values
+of its instance variables]. The only way to communicate with an object is by
+sending it a message.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="10-2"></a>
+
+<hr>
+
+<h2>10.2&nbsp; The 'send' Function</h2>
+
+<hr>
+
+<p>You can send a message to an object using the <a
+href="../xlisp-ref/xlisp-ref-234.html">send</a> function. This function takes
+the object as its first argument, the message selector as its second
+argument [which must be a symbol] and the message arguments as its remaining
+arguments.</p>
+
+<p>The <a href="../xlisp-ref/xlisp-ref-234.html">send</a> function
+determines the class of the receiving object and attempts to find a method
+corresponding to the message selector in the set of messages defined for
+that class. If the message is not found in the object's class and the class
+has a super-class, the search continues by looking at the messages defined
+for the super-class. This process continues from one super-class to the next
+until a method for the message is found. If no method is found, an error
+occurs.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="10-3"></a>
+
+<hr>
+
+<h2>10.3&nbsp; The 'self' Symbol</h2>
+
+<hr>
+
+<p>When a method is found, the evaluator binds the receiving object to the
+symbol <a href="../xlisp-ref/xlisp-ref-233.html">self</a> and evaluates the method
+using the remaining elements of the original list as arguments to the
+method. These arguments are always evaluated prior to being bound to their
+corresponding formal arguments. The result of evaluating the method becomes
+the result of the expression.</p>
+
+<p>Within the body of a method, a message can be sent to the current object
+by calling:</p>
+
+<pre class="example">
+(send self ... )
+</pre>
+
+<p>The method lookup starts with the object's class regardless of the class
+containing the current method.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="10-4"></a>
+
+<hr>
+
+<h2>10.4&nbsp; The 'send-super' Function</h2>
+
+<hr>
+
+<p>Sometimes it is desirable to invoke a general method in a superclass even
+when it is overridden by a more specific method in a subclass. This can be
+accomplished by calling <a
+href="../xlisp-ref/xlisp-ref-235.html">send-super</a>, which begins the
+method lookup in the superclass of the class defining the current method
+rather than in the class of the current object.</p>
+
+<p>The <a href="../xlisp-ref/xlisp-ref-235.html">send-super</a> function
+takes a selector as its first argument [which must be a symbol] and the
+message arguments as its remaining arguments. Notice that <a
+href="../xlisp-ref/xlisp-ref-235.html">send-super</a> can only be sent from
+within a method, and the target of the message is always the current object
+<a href="../xlisp-ref/xlisp-ref-233.html">self</a>.</p>
+
+<pre class="example">
+(send-super ... )
+</pre>
+
+<p>is similar to:</p>
+
+<pre class="example">
+(send self ... )
+</pre>
+
+<p>except that method lookup begins in the superclass of the class
+containing the current method rather than the class of the current
+object.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="10-5"></a>
+<a name="object"></a>
+<a name="object-show"></a>
+<a name="object-class"></a>
+<a name="object-isnew"></a>
+<a name="send-super"></a>
+
+<hr>
+
+<h2>10.5&nbsp; The 'Object' Class</h2>
+
+<hr>
+
+<p><a href="../xlisp-ref/xlisp-ref-187.html">object</a> - the top of the class hierarchy.</p>
+
+<p>Messages:</p>
+
+<dl>
+
+<dt><a href="../xlisp-ref/xlisp-ref-240.html">:show</a> - show an object's instance variables.</dt>
+<dd>returns - the object<br><br></dd>
+
+<dt><a href="../xlisp-ref/xlisp-ref-073.html">:class</a> - return the class of an object</dt>
+<dd>returns - the class of the object<br><br></dd>
+
+<dt><a href="../xlisp-ref/xlisp-ref-142.html">:isnew</a> - the default object initialization routine</dt>
+<dd>returns - the object<br><br></dd>
+
+<dt><a href="../xlisp-ref/xlisp-ref-235.html">send-super</a> <i>sel</i> <i>args</i>... - send superclass a message</dt>
+<dd><i>sel</i> - the message selector<br>
+<i>args</i> - the message arguments<br>
+returns - the result of sending the message<br></dd>
+
+</dl>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<a name="10-6"></a>
+<a name="class"></a>
+<a name="class-new"></a>
+<a name="class-isnew"></a>
+<a name="class-answer"></a>
+
+<hr>
+
+<h2>10.6&nbsp; The 'Class' Class</h2>
+
+<hr>
+
+<p><a href="../xlisp-ref/xlisp-ref-072.html">class</a>
+ - class of all object classes (including itself)</p>
+
+<p>Messages:</p>
+
+<dl>
+
+<dt><a href="../xlisp-ref/xlisp-ref-176.html">:new</a>
+ - create a new instance of a class</dt>
+<dd>returns -    the new class object<br><br></dd>
+
+<dt><a href="../xlisp-ref/xlisp-ref-142.html">:isnew</a> <i>ivars</i> [<i>cvars</i> [<i>super</i>]]
+ - initialize a new class</dt>
+<dd><i>ivars</i> - the list of instance variable symbols<br>
+<i>cvars</i> - the list of class variable symbols<br>
+<i>super</i> - the superclass (default is object)<br>
+returns - the new class object<br><br></dd>
+
+<dt><a href="../xlisp-ref/xlisp-ref-025.html">:answer</a> <i>msg</i> <i>fargs</i> <i>code</i>
+ - add a message to a class</dt>
+<dd><i>msg</i> - the message symbol<br>
+<i>fargs</i> - the formal argument list (lambda list)<br>
+<i>code</i> - a list of executable expressions<br>
+returns - the object<br></dd>
+
+</dl>
+
+<p>When a new instance of a
+<a href="../xlisp-ref/xlisp-ref-072.html">class</a> is created by sending
+the message <a href="../xlisp-ref/xlisp-ref-176.html">:new</a>
+to an existing <a href="../xlisp-ref/xlisp-ref-072.html">class</a>, the
+message <a href="../xlisp-ref/xlisp-ref-142.html">:isnew</a> followed by
+whatever parameters were passed to the
+<a href="../xlisp-ref/xlisp-ref-176.html">:new</a> message is sent to the
+newly created <a href="../xlisp-ref/xlisp-ref-187.html">object</a>.</p>
+
+<p>When a new <a href="../xlisp-ref/xlisp-ref-072.html">class</a> is created
+by sending the <a href="../xlisp-ref/xlisp-ref-176.html">:new</a> message to
+the object <a href="../xlisp-ref/xlisp-ref-072.html">class</a>, an optional
+parameter may be specified indicating the superclass of the new
+<a href="../xlisp-ref/xlisp-ref-072.html">class</a>. If this parameter is
+omitted, the new <a href="../xlisp-ref/xlisp-ref-072.html">class</a> will be
+a subclass of <a href="../xlisp-ref/xlisp-ref-187.html">object</a>. A
+<a href="../xlisp-ref/xlisp-ref-072.html">class</a> inherits all instance
+variables, class variables, and methods from its superclass.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#10">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-009.html">Previous</a> |
+<a href="xlisp-man-011.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-010.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

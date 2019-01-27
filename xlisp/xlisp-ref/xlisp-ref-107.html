@@ -1,0 +1,150 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-107.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP *evalhook*</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-106.html">Previous</a> |
+<a href="xlisp-ref-108.html">Next</a>
+
+<hr>
+
+<h1>*evalhook*</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>system variable</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xleval.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;*evalhook*</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>*evalhook* is a system variable whose value is user code that will
+intercept evaluations either through normal system evaluation or through
+calls to <a href="xlisp-ref-107.html">evalhook</a>. The default value for
+*evalhook* is <nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> which
+specifies to use the built in system evaluator. If *evalhook* is
+<nobr>non-<a href="xlisp-ref-177.html">NIL</a> ,</nobr> the routine is
+called with expression and environment parameters. If the environment
+argument is <nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> then the the
+current global environment is used. The environment, if
+<nobr>non-<a href="xlisp-ref-177.html">NIL</a> ,</nobr> is a structure
+composed of dotted pairs constructed of the symbol and its value which have
+the form:</p>
+
+<pre class="example">
+(((<font color="#0000CC"><i>sym1</i></font> . <font color="#0000CC"><i>val1</i></font>) (<font color="#0000CC"><i>sym2</i></font> . <font color="#0000CC"><i>val2</i></font>) ... )))
+</pre>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun myeval (exp env)           <font color="#0000CC">; define MYEVAL routine</font>
+  (princ "exp: ") (print exp)
+  (princ "env: ") (print env)
+  (evalhook exp #'myeval NIL env))
+
+(defun foo (a) (+ a a))           <font color="#0000CC">; create simple function</font>
+(setq *evalhook* #'myeval)        <font color="#0000CC">; and install MYEVAL as hook</font>
+
+(foo 1)                           <font color="#0000CC">; prints exp: (FOO 1) env:NIL</font>
+                                  <font color="#0000CC">;        exp: 1       env:NIL</font>
+                                  <font color="#0000CC">;        exp: (+ A A) env:((((A . 1))))</font>
+                                  <font color="#0000CC">;        exp: A       env:((((A . 1))))</font>
+                                  <font color="#0000CC">;        exp: A       env:((((A . 1))))</font>
+                                  <font color="#0000CC">; returns 2</font>
+
+(top-level)                       <font color="#0000CC">; to clean up *evalhook*</font>
+</pre>
+
+<p><b>Note:</b> The <a href="xlisp-ref-107.html">evalhook</a> function and
+*evalhook* system variable are very useful in the construction of debugging
+facilities within XLISP. The <a href="xlisp-ref-284.html">trace</a> and
+<a href="xlisp-ref-293.html">untrace</a> functions use
+<a href="xlisp-ref-107.html">evalhook</a> and *evalhook* to implement
+their functionality. The other useful aspect of
+<a href="xlisp-ref-107.html">evalhook</a> and *evalhook* is to help in
+understanding how XLISP works to see the expressions, their environment
+and how they are evaluated.</p>
+
+<p><b>Caution:</b> Be careful when using *evalhook* and
+<a href="xlisp-ref-107.html">evalhook</a>. If you put in a bad definition
+into *evalhook*, you might not be able to do anything and will need to
+exit XLISP.</p>
+
+<p><b>Unusual behaviour:</b> The <a href="xlisp-ref-107.html">evalhook</a>
+function and *evalhook* system variable, by their nature, cause some unusual
+things to happen. After you have set *evalhook* to some
+non-<a href="xlisp-ref-177.html">NIL</a> value, your function will be
+called. However, when you are all done and set *evalhook* to
+<a href="xlisp-ref-177.html">NIL</a> or some other new routine, it will
+never be set. This is because the 'xevalhook' function [in the 'xlbfun.c'
+source file] saves the old value of *evalhook* before calling your routine,
+and then restores it after the evaluation. The mechanism to reset
+*evalhook* is to execute the
+<a href="xlisp-ref-283.html">top-level</a> function, which sets
+*evalhook* to <a href="xlisp-ref-177.html">NIL</a>.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-011.html#evalhook">*evalhook*</a>
+system variable in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-106.html">Previous</a> |
+<a href="xlisp-ref-108.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-107.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

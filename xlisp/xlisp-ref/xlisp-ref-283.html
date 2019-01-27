@@ -1,0 +1,119 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-283.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP top-level</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-282.html">Previous</a> |
+<a href="xlisp-ref-284.html">Next</a>
+
+<hr>
+
+<h1>top-level</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c, xldbug.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(top-level)</dt>
+<dd>returns - never returns</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'top-level' function aborts to the top level of XLISP. This may be
+from within several levels of the
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>.
+This is valid for
+<a href="xlisp-ref-041.html">break</a>s,
+<a href="xlisp-ref-102.html">error</a>s and
+<a href="xlisp-ref-053.html">cerror</a>s [continuable errors]. If 'top-level'
+is evaluated while not in a
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a> ,</nobr>
+a message is printed:
+
+<pre class="example">
+<font color="#0000CC">[ back to top level ]</font>
+</pre>
+
+<p>This message does not cause XLISP to go into a
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>.
+The 'top-level' function never actually returns a value.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(top-level)      <font color="#0000CC">; [ back to top level ]</font>
+
+(break "out")    <font color="#0000CC">; break: out    (1st)</font>
+(break "twice")  <font color="#0000CC">; break: twice  (2nd)</font>
+(top-level)      <font color="#0000CC">; to exit out of the break loop</font>
+</pre>
+
+<p><b>Keyboard:</b> In the IBM PC and MS-DOS versions of XLISP, a 'Ctrl+c'
+key sequence has the same effect as doing a (top-level). On a Macintosh,
+this can be accomplished by a pull-down menu or a 'Command+t'. [I haven't
+tested this with Nyquist.]</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-022.html#top-level">top-level</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-282.html">Previous</a> |
+<a href="xlisp-ref-284.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-283.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

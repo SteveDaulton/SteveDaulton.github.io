@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/emacs/how-to/emacs-lisp-modes.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:08 GMT -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>Emacs Lisp modes</title>
+</head>
+
+<body>
+
+<p align=center><a href="../main.html">Nyquist and Emacs</a></p>
+
+<hr>
+<center>
+<table width=640><tbody><tr><td>
+<h2>The different Emacs Lisp modes</h2>
+
+<p>(see GNU Emacs user manual: Compiling and Testing Programs - sub-chapter:
+Executing Lisp Expressions)</p>
+
+<h3>Emacs-Lisp mode</h3>
+
+<p>This mode is for editing source files of programs to run in Emacs Lisp.
+Emacs-Lisp mode defines C-M-x to evaluate the current defun.</p>
+
+<p><b>Note:</b> On Microsoft Windows C-M-x is typed as alt-ctrl-x what is not
+a very clever shortcut because alt-ctrl is often occupied by Windows itself.
+So if alt-ctrl-x doesn't work for any reasons either type &lt;Esc&gt; ctrl-x
+or rename the shortcut.</p>
+
+<p>For Emacs-Lisp mode type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x emacs-lisp-mode
+</pre></td></tr></tbody></table>
+
+<h3>Emacs-Lisp Interaction mode</h3>
+
+<p>This is the interactive Emacs Lisp mode. It defines C-j to evaluate the 
+s-expression before point and insert its value in the buffer. Interaction
+means: Input and output are inside the same buffer.</p>
+
+<p>For Emacs-Lisp Interaction mode type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x lisp-interaction-mode
+</pre></td></tr></tbody></table>
+
+<h3>Lisp mode</h3>
+
+<p>This mode is for editing source files of programs that run in Lisps other
+than Emacs Lisp (e.g. Nyquist XLisp). Lisp mode defines C-M-x to send
+the current defun to an inferior Lisp process.</p>
+
+<p><b>Note:</b> Same problem like Emacs-Lisp mode. If C-M-x (alt-ctrl-x)
+doesn't work either type &lt;Esc&gt; ctrl-x or rename the shortcut.</p>
+
+<p>For Lisp mode type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x lisp-mode
+</pre></td></tr></tbody></table>
+
+<h3>Inferior Lisp mode</h3>
+
+<p>This mode is for interactive sessions with an external Lisp interpreter
+(e.g. Nyquist XLisp). Inferior Lisp mode combines the special features of Lisp
+mode and Shell mode. This is the mode for running the Nyquist interpreter.</p>
+
+<p>For Inferior Lisp mode type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x inferior-lisp-mode
+</pre></td></tr></tbody></table>
+
+<p>How to run Nyqist see: <a href="nyquist-in-an-emacs-buffer.html">Running
+Nyquist in an Emacs buffer</a>
+
+<h3>Scheme mode</h3>
+
+<p>Like Lisp mode but for Scheme programs. For scheme mode type:</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ M-x scheme-mode
+</pre></td></tr></tbody></table>
+
+<h3>Inferior Scheme mode</h3>
+
+<p>The mode for an interactive session with an external Scheme interpreter.</p>
+
+<table bgcolor="eeeeee" width="100%"><tbody><tr><td><pre>
+ ??? - Issue: what is the M-x shortcut for inferior scheme mode ?
+</pre></td></tr></tbody></table>
+
+</td></tr></tbody></table>
+</center>
+
+<br><hr>
+
+<p align=center><a href="../main.html">Nyquist and Emacs</a></p>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/examples/emacs/how-to/emacs-lisp-modes.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:08 GMT -->
+</html>

@@ -1,0 +1,118 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-007.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP makunbound</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-006.html">Previous</a> |
+<a href="xlisp-plus-008.html">Next</a>
+
+<hr>
+
+<h1>makunbound</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined function (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(makunbound <i>symbol</i>)</dt>
+<dd><i>symbol</i> - an expression evaluating to a symbol<br>
+returns - the <i>symbol</i></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'makunbound' function makes a symbol's value unbound. The 'symbol'
+must be a valid symbol, but it does not need to have a value. The 'makunbound'
+function returns the symbol as its result.</p>
+
+<pre class="example">
+(defun makunbound (sym)
+  (setf (symbol-value sym) '*unbound*) sym)
+</pre>
+
+<p><b>Note:</b> The 'makunbound' function is intended to simplify porting
+code from Common Lisp to XLISP. This function is not included in the
+standard Nyquist distribution. If you want to use it, copy the code above to
+your 'init.lsp' file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq myvar "hi")    <font color="#0000CC">; setup MYVAR "hi"</font>
+myvar                <font color="#0000CC">; returns "hi"</font>
+(makunbound 'myvar)  <font color="#0000CC">; returns MYVAR</font>
+myvar                <font color="#0000CC">; error: unbound variable</font>
+</pre>
+
+<p><b>Caution:</b> With 'makunbound' you can also unbind internal XLISP
+variables like <a href="../xlisp-ref/xlisp-ref-186.html">*obarray*</a> or
+<nobr><a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> !</nobr></p>
+
+<p><b>Note:</b> 'makunbound' is not misspelled, there is no 'e' in it.</p>
+
+<p><b>Note:</b> The <a href="xlisp-plus-008.html">fmakunbound</a> function
+works on functions [closures] in the same way that the 'makunbound' function
+works on variables. Be sure to use the correct one for what you are
+unbinding. These functions do not generate an error if you try to unbind the
+wrong type. This is because of the definition of these functions and the
+fact that the function and variable name spaces are separate. [You can have
+both a function called FOO and a variable called FOO.]</p>
+
+<p>See also the XLISP Plus <a href="xlisp-plus-008.html">fmakunbound</a>
+function.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-006.html">Previous</a> |
+<a href="xlisp-plus-008.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-007.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

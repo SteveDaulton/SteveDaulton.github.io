@@ -1,0 +1,115 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-290.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP type-of</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-289.html">Previous</a> |
+<a href="xlisp-ref-291.html">Next</a>
+
+<hr>
+
+<h1>type-of</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlsys.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(type-of <i>expr</i>)</dt>
+<dd><i>expr</i> - an expression to check<br>
+returns - the type of the expression</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'type-of' function returns the type of the expression.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(type-of NIL)                             <font color="#0000CC">; returns NIL</font>
+(type-of '#(1 2 3))                       <font color="#0000CC">; returns ARRAY</font>
+(type-of (lambda (x) (print x)))          <font color="#0000CC">; returns CLOSURE</font>
+(type-of '(a b))                          <font color="#0000CC">; returns CONS</font>
+(type-of #'savefun)                       <font color="#0000CC">; returns CLOSURE</font>
+(type-of '(a . b))                        <font color="#0000CC">; returns CONS</font>
+(type-of *standard-output*)               <font color="#0000CC">; returns FILE-STREAM</font>
+(type-of 1.2)                             <font color="#0000CC">; returns FLONUM</font>
+(type-of #'do)                            <font color="#0000CC">; returns FSUBR</font>
+(type-of 1)                               <font color="#0000CC">; returns FIXNUM</font>
+(type-of object)                          <font color="#0000CC">; returns OBJECT</font>
+(type-of "str")                           <font color="#0000CC">; returns STRING</font>
+(type-of #'car)                           <font color="#0000CC">; returns SUBR</font>
+(type-of 'a)                              <font color="#0000CC">; returns SYMBOL</font>
+(type-of #\a)                             <font color="#0000CC">; returns CHARACTER</font>
+(type-of (make-string-input-stream "a"))  <font color="#0000CC">; returns UNNAMED-STREAM</font>
+</pre>
+
+<p><b>Common Lisp:</b> The XLISP and Common Lisp 'type-of' functions are
+basically the same. Differences between the two can occur in what the types
+are called [like CHARACTER in XLISP and STANDARD-CHAR in Common Lisp]. Also,
+Common Lisp can give additional information. For strings, it returns a list
+of the form (SIMPLE-STRING 32) where the number 32 is the string size.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-031.html#type-of">type-of</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-289.html">Previous</a> |
+<a href="xlisp-ref-291.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-290.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

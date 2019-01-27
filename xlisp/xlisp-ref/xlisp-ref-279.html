@@ -1,0 +1,118 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-279.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP terpri</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-278.html">Previous</a> |
+<a href="xlisp-ref-280.html">Next</a>
+
+<hr>
+
+<h1>terpri</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlfio.c, xlprin.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(terpri [<i>dest</i>])</dt>
+<dd><i>dest</i> - an optional destination, must be a file pointer or
+stream, default is <a href="xlisp-ref-245.html">*standard-output*</a><br>
+returns - <a href="xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'terpri' function prints a new-line to the specified 'destination'
+This will terminate the current print line for 'destination'.
+<a href="xlisp-ref-177.html">NIL</a> is always returned as the result. The
+'destination' may be a file pointer or a stream. If there is no
+'destination', <a href="xlisp-ref-245.html">*standard-output*</a> is the
+default.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(terpri)                                 <font color="#0000CC">; prints  #\Newline</font>
+
+(setq f (open "pr" :direction :output))  <font color="#0000CC">; create a file</font>
+(princ "hi" f)                           <font color="#0000CC">; returns "hi"</font>
+(princ 727 f)                            <font color="#0000CC">; returns 727</font>
+(princ "ho" f)                           <font color="#0000CC">; returns "ho"</font>
+(terpri f)                               <font color="#0000CC">; returns NIL</font>
+(close f)                                <font color="#0000CC">; file contains hi727ho#\Newline</font>
+</pre>
+
+<p><b>Common Lisp:</b> Common Lisp specifies that print operations with a
+'destination' of <a href="xlisp-ref-177.html">NIL</a> will go to
+<a href="xlisp-ref-245.html">*standard-output*</a>. XLISP does not send the
+output to <a href="xlisp-ref-245.html">*standard-output*</a> with a
+'destination' of <a href="xlisp-ref-177.html">NIL</a>. Common Lisp also
+specifies that a 'destination' of
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> will be sent to
+*terminal-io*, which is not defined in XLISP by default. XLISP does not
+allow <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> as a valid argument
+for 'destination'.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-027.html#terpri">terpri</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-278.html">Previous</a> |
+<a href="xlisp-ref-280.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-279.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

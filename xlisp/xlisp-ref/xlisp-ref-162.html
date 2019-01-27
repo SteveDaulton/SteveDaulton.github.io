@@ -1,0 +1,123 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-162.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP make-array</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-161.html">Previous</a> |
+<a href="xlisp-ref-163.html">Next</a>
+
+<hr>
+
+<h1>make-array</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(make-array <i>size</i>)</dt>
+<dd><i>size</i> - the size [integer] of the array to be created<br>
+returns - the new array</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'make-array' function creates an array of the specified size and
+returns the array. Array elements may be any valid lisp data type, including
+lists or arrays. Arrays made by 'make-array' and accessed by
+<a href="xlisp-ref-029.html">aref</a> are <nobr>base 0.</nobr> This means
+the first element is accessed by element number '0' and the last element is
+accessed by element number 'n-1', where 'n' is the array size. Array
+elements are initialized to <a href="xlisp-ref-177.html">NIL</a>.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq my-array (make-array 16))     <font color="#0000CC">; make the array</font>
+(aref my-array 0)                   <font color="#0000CC">; return 0th (first) element</font>
+(aref my-array 15)                  <font color="#0000CC">; return 15th (last) element</font>
+(aref my-array 16)                  <font color="#0000CC">; error: non existant element</font>
+
+(dotimes (i 16)                     <font color="#0000CC">; set each element to its index</font>
+  (setf (aref my-array i) i))       <font color="#0000CC">;   by the setf function</font>
+
+(setq new (make-array 4))           <font color="#0000CC">; make another array</font>
+(setf (aref new 0) (make-array 4))  <font color="#0000CC">; make new[0] an array of 4</font>
+(setf (aref (aref new 0) 1) 'a)     <font color="#0000CC">; set new[0,1] = 'a</font>
+(setf (aref new 2) '(a b c))        <font color="#0000CC">; set new[2] = '(a b c)</font>
+my-array                            <font color="#0000CC">; look at array</font>
+</pre>
+
+<p><b>Read macro:</b> There is a built-in read-macro for arrays, '#' [the
+hash symbol]. This allows you to create arbitrary arrays with initial values
+without going through a 'make-array' function. There is also the XLISP
+<a href="xlisp-ref-296.html">vector</a> function to create initialized
+arrays.</p>
+
+<p><b>Common Lisp:</b> Common Lisp supports multi-dimensional arrays, XLISP
+only supports one-dimensional arrays. In XLISP, multi-dimenstional arrays
+can be created by using 'arrays within arrays'. Common Lisp supports various
+keyword parameters that are not supported in XLISP.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-015.html#make-array">make-array</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-161.html">Previous</a> |
+<a href="xlisp-ref-163.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-162.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

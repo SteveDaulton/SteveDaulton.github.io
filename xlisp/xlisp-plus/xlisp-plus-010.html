@@ -1,0 +1,117 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-010.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP mapcon</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-009.html">Previous</a> |
+<a href="xlisp-plus-011.html">Next</a>
+
+<hr>
+
+<h1>mapcon</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined macro (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(mapcon function list1 [list2 ... ])</dt>
+<dd><i>function</i> - a function definition like a
+<a href="../xlisp-ref/xlisp-ref-145.html">lambda</a> form<br>
+<i>listN</i> - a list or list expression<br>
+returns - a list from the results of the <i>function</i> applications</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'mapcon' macro applies the 'function' to the successive <a
+href="../xlisp-ref/xlisp-ref-049.html">cdr</a>s of each of the lists 'listN'.
+Each of the lists supplies one of the arguments to 'function'. The 'mapcon'
+macro is similar to the <a href="../xlisp-ref/xlisp-ref-169.html">maplist</a>
+function, except that 'mapcon' returns a list that is constructed via the
+destructive <a href="../xlisp-ref/xlisp-ref-175.html">nconc</a> function from
+the results of the 'function' applications. If the lists are of different
+lengths, the shortest list will determine the number of applications of
+'function'.</p>
+
+<pre class="example">
+(defmacro mapcon (&rest args)
+  `(apply #'nconc (maplist ,@args)))
+</pre>
+
+<p><b>Note:</b> The 'mapcon' macro is intended to simplify porting code from
+Common Lisp to XLISP. This macro is not included in the standard Nyquist
+distribution. If you want to use it, copy the code above to your 'init.lsp'
+file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(maplist 'list '(a b))   <font color="#0000CC">; returns (((A B)) ((B)))</font>
+(mapcon  'list '(a b))   <font color="#0000CC">; returns ((A B) (B))</font>
+</pre>
+
+<p><b>Note:</b> Remember that 'mapcon' uses
+<a href="../xlisp-ref/xlisp-ref-175.html">nconc</a> and so it destructively
+deals with its list arguments.</p>
+
+<p><b>Note:</b> The use of the 'function' will work properly when it is a
+quoted symbol [the name of the function], an unquoted symbol whose value is
+a function or a closure object like a
+<a href="../xlisp-ref/xlisp-ref-145.html">lambda</a> form.</p>
+
+<p>See also the XLISP Plus <a href="xlisp-plus-009.html">mapcan</a>
+function.</p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-009.html">Previous</a> |
+<a href="xlisp-plus-011.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-010.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

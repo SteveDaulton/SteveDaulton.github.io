@@ -1,0 +1,141 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-047.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP case</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-046.html">Previous</a> |
+<a href="xlisp-ref-048.html">Next</a>
+
+<hr>
+
+<h1>case</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(case <i>expr</i> [(<i>value action</i>) ... ])</dt>
+<dd><i>expr</i> - an expression<br>
+<i>value</i> - an unevaluated expression or list of unevaluated expressions to
+compare against 'expr'<br>
+<i>action</i> - one or more expressions to execute if the case matches<br>
+returns - the value of the last expression of the matching case</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'case' special form is a selection control form. 'case' evaluates
+'expr'. This value is then compared against all the 'value' entries. If
+'value' is a single atom, the atom is compared against 'expr'. If 'value' is
+a list, each of the elements of the list are compared against 'expr'. The
+'action' associated with the first 'value' that matches 'expr' is evaluated
+and returned as the result of the 'case' special form. If no 'value'
+matches, a <a href="xlisp-ref-177.html">NIL</a> is returned. If the last
+'value' is the <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> symbol and no
+other 'value' has matched 'expr', then 'case' will evaluate the 'action'
+associated with <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a>. If there are
+multiple <a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> entries, the first
+is considered to be the end of the 'case'.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(case 'a ('a "a"))                     <font color="#0000CC">; returns "a"</font>
+(case 'a ('b "b"))                     <font color="#0000CC">; returns NIL</font>
+(case 9 (1 "num") (t "ho") (t "hi"))   <font color="#0000CC">; returns "ho"</font>
+(case 'a ((1 2 3 4) "number")
+         ((a b c d) "alpha"))          <font color="#0000CC">; returns "alpha"</font>
+(case 'a)                              <font color="#0000CC">; returns NIL</font>
+(case)                                 <font color="#0000CC">; returns NIL</font>
+(defun print-what (parm)               <font color="#0000CC">; define a function</font>
+  (case (type-of parm)                 <font color="#0000CC">; check PARM type</font>
+        (flonum   (print "float"))
+        (fixnum   (print "integer"))
+        (string   (print "string"))
+        (cons     (print "list"))
+        (T        (print "other")))    <font color="#0000CC">; otherwise</font>
+  NIL)                                 <font color="#0000CC">; and always return NIL</font>
+(print-what 1.2)                       <font color="#0000CC">; prints  "float"   returns NIL</font>
+(print-what 3)                         <font color="#0000CC">; prints  "integer" returns NIL</font>
+(print-what "ab")                      <font color="#0000CC">; prints  "string"  returns NIL</font>
+(print-what '(a b))                    <font color="#0000CC">; prints  "list"    returns NIL</font>
+(print-what 'a)                        <font color="#0000CC">; prints  "other"   returns NIL</font>
+</pre>
+
+<p><b>Note:</b> The 'case' special form does not work with a list or string
+as the 'expr'. This is because 'case' defines the test used to be the
+<a href="xlisp-ref-100.html">eql</a> test which does not work with lists
+or strings, only symbols and numbers.</p>
+
+<p><b>Common Lisp:</b> In XLISP, you can use the value
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> as the last value to get the
+effect of 'otherwise'. Common Lisp uses the symbol 'otherwise' and
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> for this. If you are porting
+code from Common Lisp to XLISP, be careful to make sure
+<a href="xlisp-ref-276.html">&nbsp;T&nbsp;</a> is used instead of
+'otherwise' in 'case' statements. Note that no error will be generated,
+XLISP will just try to match the 'expr' to 'otherwise'.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-019.html#case">case</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-046.html">Previous</a> |
+<a href="xlisp-ref-048.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-047.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

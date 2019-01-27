@@ -1,0 +1,161 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-006.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP set-macro-character</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-005.html">Previous</a> |
+<a href="xlisp-plus-007.html">Next</a>
+
+<hr>
+
+<h1>set-macro-character</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>defined function (closure)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>init.lsp</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(set-macro-character <i>char-num function</i> [<i>termflag</i>])</dt>
+<dd><i>char-num</i> - an integer expression<br>
+<i>function</i> - a function definition<br>
+<i>termflag</i> - an expression, <a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> or
+non-<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a><br>
+returns - always returns <a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'set-macro-character' function installs the code that will be
+executed when the specified character 'char-num' is encountered by the XLISP
+reader. The 'function' is placed in the
+<a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> system variable which contains
+the reader table array. The table is 128 entries [0..127] for each of the
+7-bit <a href="../xlisp-misc/ascii-table.html">ASCII</a> characters that
+XLISP can read. Each entry in the table must be
+one of <nobr><a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-082.html">:constituent</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-298.html">:white-space</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-236.html">:sescape</a> ,</nobr>
+<nobr><a href="../xlisp-ref/xlisp-ref-172.html">:mescape</a> ,</nobr> a
+<a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> dotted pair or a
+<a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a> dotted pair.</p>
+
+<p>The 'set-macro-character' function only allows you to put in a
+terminating read-macro function <a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> or
+a non-terminating read-macro-function
+<a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a>. If the 'termflag' is present and
+non-<nobr><a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> ,</nobr> then the 'function'
+will be put in <a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> as a
+<a href="../xlisp-ref/xlisp-ref-282.html">:tmacro</a> entry. If 'termflag' is not present
+or <nobr><a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> ,</nobr> then 'function' will
+be put in <a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a> as a
+<a href="../xlisp-ref/xlisp-ref-178.html">:nmacro</a> entry. The 'function' can be a
+built-in read-macro function or a user defined
+<a href="../xlisp-ref/xlisp-ref-087.html">defun</a> symbol or a
+<a href="../xlisp-ref/xlisp-ref-145.html">lambda</a> expression.</p>
+
+<p>The 'function' takes two parameters, an input stream specification, and
+an integer that is the character value. The 'function' should return
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> if the character is 'white-space' or a
+value <a href="../xlisp-ref/xlisp-ref-080.html">cons</a>ed with
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> to return the value. The function
+'set-macro-character' always returns
+<a href="../xlisp-ref/xlisp-ref-276.html">&nbsp;T&nbsp;</a>.</p>
+
+<pre class="example">
+(defun set-macro-character (ch fun &optional tflag)
+  (setf (aref *readtable* (char-int ch))
+        (cons (if tflag :tmacro :nmacro) fun))
+  t)
+</pre>
+
+<p><b>Note:</b> The 'set-macro-character' function is not included in the
+standard Nyquist distribution. If you want to use it, copy the code to your
+'init.lsp' file.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(print "hi") % comment                 <font color="#0000CC">; prints "hi"  and gives</font>
+                                       <font color="#0000CC">; error: unbound variable - %</font>
+                                       <font color="#0000CC">; because % is viewed as a variable</font>
+
+(setq semi (get-macro-character #\;))  <font color="#0000CC">; get semi-colon code</font>
+
+(SET-MACRO-CHARACTER #\% semi T)       <font color="#0000CC">; set % to work as a comment</font>
+
+(print "hi") % comment                 <font color="#0000CC">; prints  "hi" and no error because</font>
+                                       <font color="#0000CC">; % is now a comment character in *READTABLE*</font>
+</pre>
+
+<p><b>Note:</b> In the normal XLISP system the following characters have
+code associated with them in the
+<a href="../xlisp-ref/xlisp-ref-216.html">*readtable*</a>:</p>
+
+<pre>
+  "  #  '  (  )  ,  ;  `
+</pre>
+
+<p>[double-quote, hash, single quote, opening parenthesis, closing
+parenthesis, comma, semicolon, backquote.]</p>
+
+<p><b>Common Lisp:</b> The 'set-macro-character function' is somewhat
+related to the Common Lisp 'set-dispatch-macro-character' function.</p>
+
+<p>See also the XLISP Plus
+<a href="xlisp-plus-005.html">get-macro-character</a> function.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-plus-index.html">XLISP Plus</a>&nbsp; -&nbsp;
+<a href="xlisp-plus-005.html">Previous</a> |
+<a href="xlisp-plus-007.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-plus/xlisp-plus-006.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

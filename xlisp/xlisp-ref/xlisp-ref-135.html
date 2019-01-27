@@ -1,0 +1,134 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-135.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP go</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-134.html">Previous</a> |
+<a href="xlisp-ref-136.html">Next</a>
+
+<hr>
+
+<h1>go</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(go <i>tag-symbol</i>)</dt>
+<dd><i>tag-symbol</i> - a symbol<br>
+returns - never returns a value</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'go' special form allows 'goto' style branching within 'block' constructs
+<nobr>[<a href="xlisp-ref-093.html">do</a> ,</nobr>
+<nobr><a href="xlisp-ref-094.html">do*</a> ,</nobr>
+<nobr><a href="xlisp-ref-095.html">dolist</a> ,</nobr>
+<nobr><a href="xlisp-ref-096.html">dotimes</a> ,</nobr>
+<nobr><a href="xlisp-ref-277.html">tagbody</a> ,</nobr>
+<nobr><a href="xlisp-ref-157.html">loop</a> ,</nobr>
+<a href="xlisp-ref-202.html">prog</a> and
+<a href="xlisp-ref-203.html">prog*</a>]. The
+'tag-symbol' is the 'label' and must exist somewhere within the 'block'
+that the 'go' occurs within. Otherwise an error will be generated:</p>
+
+<pre class="example">
+<font color="#AA0000">error: no target for GO</font>
+</pre>
+
+<p>'go' never returns a value. If the 'tag-symbol' exists, then
+the execution will continue immediately after the'tag-symbol'.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun foo (i j)                   <font color="#0000CC">; define FOO</font>
+  (prog ()                         <font color="#0000CC">; with a PROG</font>
+         (print "begin")
+   start (print j)                 <font color="#0000CC">; tag - START</font>
+         (setq j (1- j))
+         (if (eql i j) (GO start)  <font color="#0000CC">; 2-way branch</font>
+                       (GO end))
+         (print "hello")           <font color="#0000CC">; won't ever be reached</font>
+   end   (print "done")            <font color="#0000CC">; tag - END</font>
+         (return 42)))
+
+(foo 1 2)                          <font color="#0000CC">; prints  "begin" 2 1 "done"</font>
+                                   <font color="#0000CC">;   returns 42</font>
+
+(foo 2 1)                          <font color="#0000CC">; prints  "begin" 1 "done"</font>
+                                   <font color="#0000CC">;   returns 42</font>
+</pre>
+
+<p><b>Note:</b> Although 'go' will accept a 'tag-symbol' that is not a
+symbol, it will not find this improper 'tag-symbol'. An error will be
+generated:</p>
+
+<pre class="example">
+<font color="#AA0000">error: no target for GO</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-021.html#go">go</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-134.html">Previous</a> |
+<a href="xlisp-ref-136.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-135.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

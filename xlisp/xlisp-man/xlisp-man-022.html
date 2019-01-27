@@ -1,0 +1,159 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-022.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#23">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-021.html">Previous</a> |
+<a href="xlisp-man-023.html">Next</a>
+
+<hr>
+
+<h1>22&nbsp; Debugging and Error Handling</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#trace">trace</a> - add a function to the trace list</nobr></li>
+<li><nobr><a href="#untrace">untrace</a> - remove a function from the trace list</nobr></li>
+<li><nobr><a href="#error">error</a> - signal a non-correctable error</nobr></li>
+<li><nobr><a href="#cerror">cerror</a> - signal a correctable error</nobr></li>
+<li><nobr><a href="#break">break</a> - enter a break loop</nobr></li>
+<li><nobr><a href="#clean-up">clean-up</a> - clean-up after an error</nobr></li>
+<li><nobr><a href="#top-level">top-level</a> - clean-up after an error and return to the top level</nobr></li>
+<li><nobr><a href="#continue">continue</a> - continue from a correctable error</nobr></li>
+<li><nobr><a href="#errset">errset</a> - trap errors</nobr></li>
+<li><nobr><a href="#baktrace">baktrace</a> - print n levels of trace back information</nobr></li>
+<li><nobr><a href="#evalhook">evalhook</a> - evaluate with hooks</nobr></li>
+</ol>
+
+<hr>
+
+<a name="trace"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-284.html">trace</a> <i>sym</i>)
+- add a function to the trace list</dt>
+<dd><i>sym</i> - the function to add [quoted]<br>
+returns - the trace list</dd>
+
+<a name="untrace"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-293.html">untrace</a> <i>sym</i>)
+- remove a function from the trace list</dt>
+<dd><i>sym</i> - the function to remove [quoted]<br>
+returns - the trace list</dd>
+
+<a name="error"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-102.html">error</a> <i>emsg</i>
+[<i>arg</i>]) - signal a non-correctable error</dt>
+<dd><i>emsg</i> - the error message string<br>
+<i>arg</i> - the argument expression [printed after the message]<br>
+returns - never returns</dd>
+
+<a name="cerror"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-053.html">cerror</a> <i>cmsg</i>
+<i>emsg</i> [<i>arg</i>]) - signal a correctable error</dt>
+<dd><i>cmsg</i> - the continue message string<br>
+<i>emsg</i> - the error message string<br>
+<i>arg</i> - the argument expression [printed after the message]<br>
+returns - <code>nil</code> when continued from the break loop</dd>
+
+<a name="break"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-041.html">break</a> [<i>bmsg</i>
+[<i>arg</i>]]) - enter a break loop</dt>
+<dd><i>bmsg</i> - the break message string [defaults to **BREAK**]<br>
+<i>arg</i> - the argument expression [printed after the message]<br>
+returns - NIL when continued from the break loop</dd>
+
+<a name="clean-up"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-074.html">clean-up</a>)
+- clean-up after an error</dt>
+<dd>returns - never returns</dd>
+
+<a name="top-level"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-283.html">top-level</a>)
+- clean-up after an error and return to the top level</dt>
+<dd>returns - never returns</dd>
+
+<a name="continue"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-083.html">continue</a>)
+- continue from a correctable error</dt>
+<dd>returns - never returns</dd>
+
+<a name="errset"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-104.html">errset</a> <i>expr</i>
+[<i>pflag</i>]) - trap errors</dt>
+<dd><i>expr</i> - the expression to execute<br>
+<i>pflag</i> - flag to control printing of the error message<br>
+returns - the value of the last expression consed with NIL or NIL on error</dd>
+
+<a name="baktrace"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-037.html">baktrace</a> [<i>n</i>])
+- print n levels of trace back information</dt>
+<dd><i>n</i> - the number of levels [defaults to all levels]<br>
+returns - NIL</dd>
+
+<a name="evalhook"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-106.html">evalhook</a> <i>expr</i>
+<i>ehook</i> <i>ahook</i> [<i>env</i>]) - evaluate with hooks</dt>
+<dd><i>expr</i> - the expression to evaluate<br>
+<i>ehook</i> -  the value for *evalhook*<br>
+<i>ahook</i> - the value for *applyhook*<br>
+<i>env</i> - the environment [default is NIL]<br>
+returns - the result of evaluating the expression</dd>
+
+</dl>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#23">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-021.html">Previous</a> |
+<a href="xlisp-man-023.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-022.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

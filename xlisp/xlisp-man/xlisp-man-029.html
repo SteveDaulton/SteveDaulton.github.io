@@ -1,0 +1,135 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-029.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#30">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-028.html">Previous</a> |
+<a href="xlisp-man-030.html">Next</a>
+
+<hr>
+
+<h1>29&nbsp; File I/O Functions</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#open">open</a> - open a file stream</nobr></li>
+<li><nobr><a href="#close">close</a> - close a file stream</nobr></li>
+<li><nobr><a href="#read-char">read-char</a> - read a character from a stream</nobr></li>
+<li><nobr><a href="#peek-char">peek-char</a> - peek at the next character</nobr></li>
+<li><nobr><a href="#write-char">write-char</a> - write a character to a stream</nobr></li>
+<li><nobr><a href="#read-line">read-line</a> - read a line from a stream</nobr></li>
+<li><nobr><a href="#read-byte">read-byte</a> - read a byte from a stream</nobr></li>
+<li><nobr><a href="#write-byte">write-byte</a> - write a byte to a stream</nobr></li>
+</ol>
+
+<p><b>Note:</b> A description of all Nyquist file I/O functions can be found
+in <nobr><a href="xlisp-man-033.html">Chapter 34</a></nobr>.</p>
+
+<hr>
+
+<a name="open"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-190.html">open</a> <i>fname</i>
+&amp;key :direction) - open a file stream</dt>
+<dd><i>fname</i> - the file name string or symbol<br>
+:direction - :input or :output [default is :input]<br>
+returns -  a stream</dd>
+
+<a name="close"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-075.html">close</a> <i>stream</i>)
+- close a file stream</dt>
+<dd><i>stream</i> - the stream<br>
+returns - NIL</dd>
+
+<a name="read-char"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-214.html">read-char</a> [<i>stream</i>])
+- read a character from a stream</dt>
+<dd><i>stream</i> - the input stream [default is standard input]<br>
+returns - the character</dd>
+
+<a name="peek-char"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-194.html">peek-char</a> [<i>flag</i>
+[<i>stream</i>]]) - peek at the next character</dt>
+<dd><i>flag</i> - flag for skipping white space [default is NIL]<br>
+<i>stream</i> - the input stream [default is standard input]<br>
+returns -  the character [integer]</dd>
+
+<a name="write-char"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-300.html">write-char</a> <i>ch</i>
+[<i>stream</i>]) - write a character to a stream</dt>
+<dd><i>ch</i> - the character to write<br>
+<i>stream</i> - the output stream [default is standard output]<br>
+returns -  the character</dd>
+
+<a name="read-line"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-215.html">read-line</a> [<i>stream</i>])
+- read a line from a stream</dt>
+<dd><i>stream</i> - the input stream [default is standard input]<br>
+returns - the string</dd>
+
+<a name="read-byte"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-213.html">read-byte</a> [<i>stream</i>])
+- read a byte from a stream</dt>
+<dd><i>stream</i> - the input stream [default is standard input]<br>
+returns - the byte [integer]</dd>
+
+<a name="write-byte"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-299.html">write-byte</a> <i>byte</i>
+[<i>stream</i>]) - write a byte to a stream</dt>
+<dd><i>byte</i> - the byte to write [integer]<br>
+<i>stream</i> - the output stream [default is standard output]<br>
+returns - the byte [integer]</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#30">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-028.html">Previous</a> |
+<a href="xlisp-man-030.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-029.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

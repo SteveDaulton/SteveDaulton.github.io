@@ -1,0 +1,117 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-078.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP comma-at</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-077.html">Previous</a> |
+<a href="xlisp-ref-079.html">Next</a>
+
+<hr>
+
+<h1>comma-at</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>reader expansion</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c, xlread.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(comma-at <i>expr</i>)</dt>
+<dd><i>expr</i> - an expression which is evaluated within a
+<a href="xlisp-ref-036.html">backquote</a>d expression</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>A <a href="xlisp-ref-036.html">backquote</a> special form returns an
+expression unevaluated, except that portions of the expression may be
+evaluated when they are preceeded by a
+<a href="xlisp-ref-077.html">comma</a> [,] or 'comma-at' [,@]. 'comma-at'
+will evaluate the portion of the expression that the comma-at preceeds. The
+portion needs to be a list. The list is spliced into the expression. If the
+portion is not a list, 'comma-at' will splice in nothing.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq box 'stuff-inside)                 <font color="#0000CC">; BOX contains STUFF-INSIDE</font>
+(print box)                              <font color="#0000CC">; prints STUFF-INSIDE</font>
+(quote (i have the box))                 <font color="#0000CC">; returns (I HAVE THE BOX)</font>
+(backquote (i have the box))             <font color="#0000CC">; returns (I HAVE THE BOX)</font>
+(backquote (I have (comma box)))         <font color="#0000CC">; returns (I HAVE STUFF-INSIDE)</font>
+(backquote (I have the ,@box))           <font color="#0000CC">; returns (I HAVE THE)</font>
+(setq automobile '(a van))               <font color="#0000CC">; set up AUTOMOBILE</font>
+(backquote (I have automobile))          <font color="#0000CC">; returns (I HAVE AUTOMOBILE)</font>
+(backquote (I have (comma automobile)))  <font color="#0000CC">; returns (I HAVE (A VAN))</font>
+(backquote (I have ,@automobile))        <font color="#0000CC">; returns (I HAVE A VAN)</font>
+`(I have ,@automobile)                   <font color="#0000CC">; returns (I HAVE A VAN)</font>
+</pre>
+
+<p><b>Read macro:</b> XLISP supports the normal read macro of a comma [,@]
+as a short-hand method of writing the 'comma-at' read-expansion.</p>
+
+<p><b>Note:</b> <nobr><a href="xlisp-ref-036.html">backquote</a> ,</nobr>
+<a href="xlisp-ref-077.html">comma</a> and 'comma-at' are very useful in
+defining macros via <a href="xlisp-ref-086.html">defmacro</a>.</p>
+
+<p>See the
+<nobr><a href="../xlisp-man/xlisp-man-008.html#comma-at">comma-at</a></nobr>
+reader expansion in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-077.html">Previous</a> |
+<a href="xlisp-ref-079.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-078.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

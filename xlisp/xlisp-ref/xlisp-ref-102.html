@@ -1,0 +1,141 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-102.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP error</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-101.html">Previous</a> |
+<a href="xlisp-ref-103.html">Next</a>
+
+<hr>
+
+<h1>error</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlbfun.c, xldbug.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(error <i>err-msg</i> [<i>arg</i>])</dt>
+<dd><i>err-msg</i> - a string expression for the error message<br>
+<i>arg</i> - an optional argument expression (printed after the message)<br>
+returns - never returns</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'error' function allows the generation of a non-correctable error.
+A non-correctable error requires evaluation of a
+<a href="xlisp-ref-074.html">clean-up</a> or
+<a href="xlisp-ref-283.html">top-level</a> function from within the XLISP
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr> to
+return to normal execution. The form of the message generated is:</p>
+
+<pre class="example">
+error: <font color="#0000CC"><i>err-msg</i></font> - <font color="#0000CC"><i>arg</i></font>
+</pre>
+
+<p> From within the break-loop, if a
+<a href="xlisp-ref-083.html">continue</a> function is evaluated then a an
+error message is generated:</p>
+
+<pre class="example">
+<font color="#AA0000">error: this error can't be continued</font>
+</pre>
+
+<p>There is no return from the 'error' function.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(error "fee" "fi")           <font color="#0000CC">; ERROR generates the message</font>
+                             <font color="#0000CC">;   error: fee - "fi"</font>
+
+(error "can't get" "there")  <font color="#0000CC">; ERROR generates the message</font>
+                             <font color="#0000CC">;   error: Can't get - "there"</font>
+</pre>
+
+<p><b>Common Lisp:</b> Common Lisp and XLISP have the same basic form and
+style for 'error'. However, the 'err-msg' string in Common Lisp is sent to
+the <a href="xlisp-ref-121.html">format</a> function. Although, XLISP does
+have the <a href="xlisp-ref-121.html">format</a> function, it does not print
+the 'err-msg' with <a href="xlisp-ref-121.html">format</a>. So, porting from
+XLISP to Common Lisp will work fine. When porting from Common Lisp to XLISP,
+you will need to check for this embedded control information in the error
+messages.</p>
+
+<p><b>Note:</b> Remember that <a href="xlisp-ref-042.html">*breakenable*</a>
+needs to be non-<a href="xlisp-ref-177.html">NIL</a> for 'error' and
+<a href="xlisp-ref-053.html">cerror</a> and system errors to be caught by
+the normal system
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>. If
+<a href="xlisp-ref-042.html">*breakenable*</a> is
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> 'error' and
+<a href="xlisp-ref-053.html">cerror</a> and system errors can be caught by
+an <a href="xlisp-ref-104.html">errset</a> form. If there is no surrounding
+<nobr><a href="xlisp-ref-104.html">errset</a> ,</nobr> no error message is
+generated and the
+<nobr><a href="../xlisp-man/xlisp-man-004.html">break loop</a></nobr>
+is not entered.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-022.html#error">error</a>
+function in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-101.html">Previous</a> |
+<a href="xlisp-ref-103.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-102.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

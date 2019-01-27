@@ -1,0 +1,212 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-032.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#33">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-031.html">Previous</a> |
+<a href="xlisp-man-033.html">Next</a>
+
+<hr>
+
+<h1>32&nbsp; File I/O Examples</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#33-1">Input from a File</a></nobr></li>
+<li><nobr><a href="#33-2">Output to a File</a></nobr></li>
+<li><nobr><a href="#33-3">A Slightly More Complicated File Example</a></nobr></li>
+</ol>
+
+<a name="33-1"></a>
+
+<hr>
+
+<h2>32.1&nbsp; Input from a File</h2>
+
+<hr>
+
+
+<p>To open a file for input, use the <a
+href="../xlisp-ref/xlisp-ref-190.html">open</a> function with the keyword
+argument <a href="../xlisp-ref/xlisp-ref-190.html">:direction</a> set to
+<a href="../xlisp-ref/xlisp-ref-190.html">:input</a>. To open a file for
+output, use the <a href="../xlisp-ref/xlisp-ref-190.html">open</a> function
+with the keyword argument
+<a href="../xlisp-ref/xlisp-ref-190.html">:direction</a> set to
+<a href="../xlisp-ref/xlisp-ref-190.html">:output</a>. The
+<a href="../xlisp-ref/xlisp-ref-190.html">open</a> function takes a single
+required argument which is the name of the file to be opened. This name can
+be in the form of a string or a symbol. The
+<a href="../xlisp-ref/xlisp-ref-190.html">open</a> function returns an
+object of type 'file-stream' if it succeeds in opening the specified
+file. It returns the value
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> if it fails.</p>
+
+<p>In order to manipulate the file, it is necessary to save the value
+returned by the <a href="../xlisp-ref/xlisp-ref-190.html">open</a> function.
+This is usually done by assigning it to a variable with the
+<a href="../xlisp-ref/xlisp-ref-239.html">setq</a>
+special form or by binding it using
+<a href="../xlisp-ref/xlisp-ref-148.html">let</a> or
+<a href="../xlisp-ref/xlisp-ref-149.html">let*</a>. Here is an example:</a>
+
+<pre class="example">
+(setq fp (open "init.lsp" :direction :input))
+</pre>
+
+
+<p>Evaluating this expression will result in the file 'init.lsp' being
+opened. The file object that will be returned by the
+<a href="../xlisp-ref/xlisp-ref-190.html">open</a> function will be
+assigned to the variable 'fp'.</p>
+
+<p>It is now possible to use the file for input. To read an expression from
+the file, just supply the value of the 'fp' variable as the optional
+'stream' argument to the <a href="../xlisp-ref/xlisp-ref-212.html">read</a>
+function:</p>
+
+<pre class="example">
+(read fp)
+</pre>
+
+<p>Evaluating this expression will result in reading the first expression
+from the file 'init.lsp'. The expression will be returned as the
+result of the <a href="../xlisp-ref/xlisp-ref-212.html">read</a> function.
+More expressions can be read from the file using further calls to the
+<a href="../xlisp-ref/xlisp-ref-212.html">read</a> function. When there
+are no more expressions to read, the
+<a href="../xlisp-ref/xlisp-ref-212.html">read</a> function will return
+<a href="../xlisp-ref/xlisp-ref-177.html">NIL</a> [or whatever value was
+supplied as the second argument to
+<a href="../xlisp-ref/xlisp-ref-212.html">read</a>].</p>
+
+<p>Once you are done reading from the file, you should close it. To close
+the file, use the <a href="../xlisp-ref/xlisp-ref-075.html">close</a>
+function:</p>
+
+<pre class="example">
+(close fp)
+</pre>
+
+<p>Evaluating this expression will cause the file to be closed.</p>
+
+
+<p>&nbsp;&nbsp;<a href="#top">Back to Top</a></p>
+
+<a name="33-2"></a>
+
+<hr>
+
+<h2>33.2&nbsp; Output to a File</h2>
+
+<hr>
+
+<p>Writing to a file is pretty much the same as reading from one. You need
+to open the file first. This time you should use the
+<a href="../xlisp-ref/xlisp-ref-190.html">open</a> function to indicate
+that you will do output to the file. For example:</p>
+
+<pre class="example">
+(setq fp (open "test.dat" :direction :output))
+</pre>
+
+<p>Evaluating this expression will open the file 'test.dat' for
+output. If the file already exists, its current contents will be discarded.
+If it doesn't already exist, it will be created. In any case, a
+'file-stream' object will be returned by the
+<a href="../xlisp-ref/xlisp-ref-190.html">open</a> function. This file
+object will be assigned to the 'fp' variable.</p>
+
+<p>It is now possible to write to this file by supplying the value of the
+'fp' variable as the optional 'stream' parameter in the
+<a href="../xlisp-ref/xlisp-ref-200.html">print</a> function.</p>
+
+<pre class="example">
+(print "Hello there" fp)
+</pre>
+
+<p>Evaluating this expression will result in the string <nobr>'Hello
+there'</nobr> being written to the file 'test.dat'. More data can be written
+to the file using the same technique.</p>
+
+<p>Once you are done writing to the file, you should
+<a href="../xlisp-ref/xlisp-ref-075.html">close</a> it. Closing an output
+file is just like closing an input file:</p>
+
+<pre class="example">
+(close fp)
+</pre>
+
+<p>Evaluating this expression will
+<a href="../xlisp-ref/xlisp-ref-075.html">close</a> the output file and
+make it permanent.</p>
+
+<p>&nbsp;&nbsp;<a href="#top">Back to Top</a></p>
+
+<a name="33-3"></a>
+
+<hr>
+
+<h2>33.3&nbsp; A Slightly More Complicated File Example</h2>
+
+<hr>
+
+<p>This example shows how to
+<a href="../xlisp-ref/xlisp-ref-190.html">open</a> a file,
+<a href="../xlisp-ref/xlisp-ref-212.html">read</a> each Lisp expression
+from the file and <a href="../xlisp-ref/xlisp-ref-200.html">print</a> it.
+It demonstrates the use of files and the use of the optional 'stream'
+argument to the <a href="../xlisp-ref/xlisp-ref-212.html">read</a>
+function.</p>
+
+<pre class="example">
+(do* ((fp (open "test.dat" :direction :input))
+      (ex (read fp) (read fp)))
+     ((null ex) nil)
+  (print ex))
+</pre>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</a></nobr></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#33">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-031.html">Previous</a> |
+<a href="xlisp-man-033.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-032.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

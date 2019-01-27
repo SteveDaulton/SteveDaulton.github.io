@@ -1,0 +1,134 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-045.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP caaar ... caddr</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-044.html">Previous</a> |
+<a href="xlisp-ref-046.html">Next</a>
+
+<hr>
+
+<h1>caaar ... caddr</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>function (subr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xllist.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(caaar <i>expr</i>)<br>
+(caadr <i>expr</i>)<br>
+(cadar <i>expr</i>)<br>
+(caddr <i>expr</i>)</dt>
+<dd><i>expr</i> - a list or list expression<br>
+returns - the result of the last <a href="xlisp-ref-043.html">car</a>
+function</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> The 'caaar', 'caadr', 'cadar' and 'caddr' functions go through the list
+expression and perform a sequence of
+<nobr><a href="xlisp-ref-043.html">car</a> /
+<a href="xlisp-ref-049.html">cdr</a></nobr> operations. The sequence of
+operations is performed from right to left. So 'caddr' does a
+<a href="xlisp-ref-049.html">cdr</a> on the expression, followed by
+a <nobr><a href="xlisp-ref-049.html">cdr</a> ,</nobr> followed by a
+<a href="xlisp-ref-043.html">car</a>. If at any point the list is
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="xlisp-ref-177.html">NIL</a> is returned. If at any point a
+<a href="xlisp-ref-043.html">car</a> operation is performed on an atom
+[as opposed to a list] an error is reported:</p>
+
+<pre class="example">
+<font color="#AA0000">error: bad argument</font>
+</pre>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(setq mylist '(((11A 11B) (12A 12B) (13A 13B))   <font color="#0000CC">; make a 3-level list</font>
+               ((21A 21B) (22A 22B) (23A 23B))
+               ((31A 31B) (32A 32B) (33A 33B))
+               ((41A 41B) (42A 42B) (43A 43B))))
+
+(caaar mylist)   <font color="#0000CC">; returns 11A</font>
+(caadr mylist)   <font color="#0000CC">; returns (21A 21B)</font>
+(cadar mylist)   <font color="#0000CC">; returns (12A 12B)</font>
+(caddr mylist)   <font color="#0000CC">; returns ((31A 31B) (32A 32B) (33A 33B))</font>
+
+(cdaar mylist)   <font color="#0000CC">; returns (11B)</font>
+(cdadr mylist)   <font color="#0000CC">; returns ((22A 22B) (23A 23B))</font>
+(cddar mylist)   <font color="#0000CC">; returns ((13A 13B))</font>
+(cdddr mylist)   <font color="#0000CC">; returns (((41A 41B) (42A 42B) (43A 43B)))</font>
+</pre>
+
+<p><b>Note:</b> The 'cx...xr' functions are part of the historical Lisp
+functions. In XLISP you probably will find it much more convenient to work
+with the modern lisp functions like
+<a href="xlisp-ref-182.html">nth</a> and
+<a href="xlisp-ref-183.html">nthcdr</a>. Please read the
+<a href="../xlisp-man/xlisp-man-016.html">list functions</a> page in the
+<nobr>XLISP 2.0</nobr> manual.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-016.html#cxxxr">c<i>xxx</i>r</a>
+functions in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-044.html">Previous</a> |
+<a href="xlisp-ref-046.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-045.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

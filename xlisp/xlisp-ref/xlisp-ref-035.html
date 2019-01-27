@@ -1,0 +1,126 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-035.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP &amp;aux</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-034.html">Previous</a> |
+<a href="xlisp-ref-036.html">Next</a>
+
+<hr>
+
+<h1>&amp;aux</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>keyword</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xleval.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&amp;aux [<i>aux-var</i> | (<i>aux-var aux-value</i>)] ...</dt>
+<dd><i>aux-var</i> - auxiliary variable<br>
+<i>aux-value</i> - auxiliary variable initialization</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p> In XLISP, there are several times that you define a formal argument list
+for a body of code [like
+<nobr><a href="xlisp-ref-087.html">defun</a> ,</nobr>
+<nobr><a href="xlisp-ref-086.html">defmacro</a> ,</nobr>
+<a href="xlisp-ref-025.html">:answer</a> and
+<a href="xlisp-ref-145.html">lambda</a>]. The 'aux-var' variables are a
+mechanism for you to define variables local to the function or operation
+definition. If there is an optional 'aux-value', they will be set to that
+value on entry to the body of code. Otherwise, they are initialized to
+<a href="xlisp-ref-177.html">NIL</a>. At the end of the function or
+operation execution, these local symbols and their values are are
+removed.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(defun my-add                            <font color="#0000CC">; define function MY-ADD</font>
+  (num1 &amp;rest num-list &amp;aux sum)         <font color="#0000CC">;   with 1 arg, rest, 1 aux var</font>
+  (setq sum num1)                        <font color="#0000CC">;   clear SUM</font>
+  (dotimes (i (length num-list) )        <font color="#0000CC">;   loop through rest list</font>
+     (setq sum (+ sum (car num-list)))   <font color="#0000CC">;      add the number to sum</font>
+     (setq num-list (cdr num-list)))     <font color="#0000CC">;      and remove num from list</font>
+  sum)                                   <font color="#0000CC">;   return sum when finished</font>
+
+(my-add 1 2 3 4)                         <font color="#0000CC">; returns 10</font>
+(my-add 5 5 5 5 5)                       <font color="#0000CC">; returns 25</font>
+
+(defun more-keys                         <font color="#0000CC">; define MORE-KEYS</font>
+        ( a                              <font color="#0000CC">;   with 1 parameter A</font>
+          &amp;aux b                         <font color="#0000CC">;   with local var B</font>
+               (c 99)                    <font color="#0000CC">;        local var C= 99</font>
+               (d T)  )                  <font color="#0000CC">;        local var D= T</font>
+        (format T "a=~a " a)             <font color="#0000CC">;   body of the function</font>
+        (format T "b=~a " b)
+        (format T "c=~a " c)
+        (format T "d=~a " d))
+
+(more-keys "hi")                         <font color="#0000CC">; prints a=hi b=NIL c=99 d=T</font>
+</pre>
+
+<p>See the
+<nobr><a href="../xlisp-man/xlisp-man-009.html#9-1-5">&amp;aux</a></nobr>
+keyword in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-034.html">Previous</a> |
+<a href="xlisp-ref-036.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-035.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

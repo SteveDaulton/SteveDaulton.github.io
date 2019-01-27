@@ -1,0 +1,113 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-020.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#21">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-019.html">Previous</a> |
+<a href="xlisp-man-021.html">Next</a>
+
+<hr>
+
+<h1>20&nbsp; Looping Constructs</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#loop">loop</a> - basic looping form</nobr></li>
+<li><nobr><a href="#do">do</a> - loop while the termination test is NIL</nobr></li>
+<li><nobr><a href="#do*">do*</a> - 'do' loop with sequential binding</nobr></li>
+<li><nobr><a href="#dolist">dolist</a> - loop through a list</nobr></li>
+<li><nobr><a href="#dotimes">dotimes</a> - loop from zero to n-1</nobr></li>
+</ol>
+
+<hr>
+
+<a name="loop"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-157.html">loop</a> <i>expr</i>...)
+- basic looping form</dt>
+<dd><i>expr</i> - the body of the loop<br>
+returns - never returns (must use non-local exit)</dd>
+
+<a name="do"></a><a name="do*"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-093.html">do</a> (<i>binding</i>...)
+(<i>texpr</i> <i>rexpr</i>...) <i>expr</i>...)<br>
+(<a href="../xlisp-ref/xlisp-ref-094.html">do*</a> (<i>binding</i>...)
+(<i>texpr</i> <i>rexpr</i>...) <i>expr</i>...)</dt>
+<dd><i>binding</i> - the variable bindings each of which is either:<br>
+<dl><dd>1) a symbol [which is initialized to NIL]<br>
+2) a list of the form: (<i>sym</i> <i>init</i> [<i>step</i>]) where:<dl>
+<dd><i>sym</i> - is the symbol to bind<br>
+<i>init</i> - is the initial value of the symbol<br>
+<i>step</i> - is a step expression<br></dd></dl></dd></dl>
+<i>texpr</i> - the termination test expression<br>
+<i>rexpr</i> -  result expressions [the default is NIL]<br>
+<i>expr</i> - the body of the loop [treated like an implicit prog]<br>
+returns - the value of the last result expression</dd>
+
+<a name="dolist"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-095.html">dolist</a> (<i>sym</i>
+<i>expr</i> [<i>rexpr</i>]) <i>expr</i>...)
+- loop through a list</dt>
+<dd><i>sym</i> - the symbol to bind to each list element<br>
+<i>expr</i> - the list expression<br>
+<i>rexpr</i> - the result expression [the default is NIL]<br>
+<i>expr</i> - the body of the loop [treated like an implicit prog]</dd>
+
+<a name="dotimes"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-096.html">dotimes</a> (<i>sym</i>
+<i>expr</i> [<i>rexpr</i>]) <i>expr</i>...)
+- loop from zero to n-1</dt>
+<dd><i>sym</i> - the symbol to bind to each value from 0 to n-1<br>
+<i>expr</i> - the number of times to loop<br>
+<i>rexpr</i> - the result expression [the default is NIL]<br>
+<i>expr</i> - the body of the loop [treated like an implicit prog]</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#21">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-019.html">Previous</a> |
+<a href="xlisp-man-021.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-020.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

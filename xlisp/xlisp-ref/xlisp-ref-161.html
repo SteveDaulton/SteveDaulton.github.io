@@ -1,0 +1,112 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-161.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP macrolet</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-160.html">Previous</a> |
+<a href="xlisp-ref-162.html">Next</a>
+
+<hr>
+
+<h1>macrolet</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(macrolet ([<i>macro</i> ... ]) <i>expr</i> ... )</dt>
+<dd><i>macro</i> - a macro definition binding which is of the form:<br>
+<dl><dd>(<i>symbol arg-list body</i>)</dd>
+<dl><dd><i>symbol</i> - the symbol specifying the macro name<br>
+<i>arg-list</i> - the argument list for the macro<br>
+<i>body</i> - the body of the macro</dd></dl></dl>
+<i>expr</i> - an expression<br>
+returns - the value of the last expression</dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'macrolet' special form is basically a local block construct that
+allows local 'macro' definitions followed by a block of code to evaluate.
+The first form after the macrolet is the 'binding' form. It contains a
+series of 'macros'. The 'macrolet' form will sequentially execute the
+'exprs' after defining the 'macros'. The value of the last 'expr' evaluated
+is returned. When the 'macrolet' is finished execution, the 'symbols' that
+were defined will no longer exist.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(macrolet ((pls (n1 n2) `(+ ,n1 ,n2)))  <font color="#0000CC">; a MACROLET form including a PLS macro</font>
+  (pls 4 5))                            <font color="#0000CC">; returns 9</font>
+
+                                        <font color="#0000CC">; the PLS macro no longer exists</font>
+(pls 4 5)                               <font color="#0000CC">; error: unbound function - PLS</font>
+
+                                        <font color="#0000CC">; an empty MACROLET</font>
+(macrolet () (print 'a))                <font color="#0000CC">; prints A</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-019.html#macrolet">macrolet</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-160.html">Previous</a> |
+<a href="xlisp-ref-162.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-161.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

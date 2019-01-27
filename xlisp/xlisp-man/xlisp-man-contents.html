@@ -1,0 +1,501 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-contents.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+Contents&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-index.html">Previous</a> |
+<a href="xlisp-man-001.html">Next</a>
+
+<hr>
+
+<h1>Contents</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a name="1" href="xlisp-man-001.html">Introduction</a></nobr></li>
+<li><nobr><a name="2" href="xlisp-man-002.html">A Note From The Author</a></nobr></li>
+<li><nobr><a name="3" href="xlisp-man-003.html">XLISP Command Loop</a></nobr></li>
+<li><nobr><a name="4" href="xlisp-man-004.html">Break Command Loop</a></nobr></li>
+<li><nobr><a name="5" href="xlisp-man-005.html">Data Types</a></nobr></li>
+<li><nobr><a name="6" href="xlisp-man-006.html">The Evaluator</a></nobr></li>
+<li><nobr><a name="7" href="xlisp-man-007.html">Lexical Conventions</a></nobr></li>
+<li><nobr><a name="8" href="xlisp-man-008.html">Readtable</a></nobr></li>
+<ul>
+<nobr>Read Table Entries:</nobr>
+<ul>
+<li><nobr><a href="xlisp-man-008.html#constituent">:constituent</a> - indicating a symbol constituent</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#white-space">:white-space</a> - indicating a whitespace character</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#tmacro">:tmacro</a> - terminating readmacro</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#nmacro">:nmacro</a> - terminating non-readmacro</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#sescape">:sescape</a> - single escape character '\'</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#mescape">:mescape</a> - multiple escape character '|'</nobr></li>
+</ul>
+<nobr>Read Macros:</nobr>
+<ul>
+<li><nobr><a href="xlisp-man-008.html#quote">&nbsp;'&nbsp;</a> - read macro for <a href="../xlisp-ref/xlisp-ref-210.html">quote</a></nobr></li>
+<li><nobr><a href="xlisp-man-008.html#function">&nbsp;#'&nbsp;</a> - read macro for <a href="../xlisp-ref/xlisp-ref-124.html">function</a></nobr></li>
+<li><nobr><a href="xlisp-man-008.html#array">&nbsp;#()&nbsp;</a> - read macro for arrays</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#hexadecimal">&nbsp;#x&nbsp;</a> - read macro for hexadecimal numbers</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#octal">&nbsp;#o&nbsp;</a> - read macro for octal numbers</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#binary">&nbsp;#b&nbsp;</a> - read macro for binary numbers</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#character">&nbsp;#\&nbsp;</a> - read macro for character values</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#comment">#|...|#</a> - read macro for comments</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#uninterned">&nbsp;#:&nbsp;</a> - read macro for uninterned symbols</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#backquote">&nbsp;`&nbsp;</a> - read macro for <a href="../xlisp-ref/xlisp-ref-036.html">backquote</a></nobr></li>
+<li><nobr><a href="xlisp-man-008.html#comma">&nbsp;,&nbsp;</a> - read macro for <a href="../xlisp-ref/xlisp-ref-077.html">comma</a></nobr></li>
+<li><nobr><a href="xlisp-man-008.html#comma-at">&nbsp;,@&nbsp;</a> - read macro for <a href="../xlisp-ref/xlisp-ref-078.html">comma-at</a></nobr></li>
+</ul>
+<nobr>Characters Names:</nobr>
+<ul>
+<li><nobr><a href="xlisp-man-008.html#tmacro">#\Tab</a> - a 'horizontal tab' character</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#tmacro">#\Newline</a> - a 'newline' character</nobr></li>
+<li><nobr><a href="xlisp-man-008.html#tmacro">#\Space</a> - a 'space' character</nobr></li>
+</ul>
+</ul>
+<li><nobr><a name="9" href="xlisp-man-009.html">Lambda Lists</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-009.html#9-1">Arguments</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-009.html#9-1-1">Required Arguments</a></nobr></li>
+<li><nobr><a href="xlisp-man-009.html#9-1-2">Optional Arguments</a></nobr></li>
+<li><nobr><a href="xlisp-man-009.html#9-1-3">Rest Arguments</a></nobr></li>
+<li><nobr><a href="xlisp-man-009.html#9-1-4">Keyword Arguments</a></nobr></li>
+<li><nobr><a href="xlisp-man-009.html#9-1-5">Auxiliary Variables</a></nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-009.html#9-2">Syntax for Lambda Lists</a></nobr></li>
+</ul>
+<li><nobr><a name="10" href="xlisp-man-010.html">Objects</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-010.html#10-1">Definitions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-010.html#selector-def">selector</a> - a symbol used to select an appropriate method</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#message-def">message</a> - a selector and a list of actual arguments</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#method-def">method</a> - the code that implements a message</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#object-def">object</a> - the top of the class hierarchy</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#class-def">class</a> - the class of all object classes</nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-010.html#10-2">The 'send' Function</a></nobr></li>
+<li><nobr><a href="xlisp-man-010.html#10-3">The 'self' Symbol</a></nobr></li>
+<li><nobr><a href="xlisp-man-010.html#10-4">The 'send-super' Function</a></nobr></li>
+<li><nobr><a href="xlisp-man-010.html#10-5">The 'Object' Class</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-010.html#object">object</a> - the top of the class hierarchy</nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-010.html#object-show">:show</a> - show an object's instance variables</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#object-class">:class</a> - return the class of an object</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#object-isnew">:isnew</a> - the default object initialization routine</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#send-super">send-super</a> - send superclass a message</nobr></li>
+</ul>
+</ul>
+<li><nobr><a href="xlisp-man-010.html#10-6">The 'Class' Class</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-010.html#class">class</a> - class of all object classes</nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-010.html#class-new">:new</a> - create a new instance of a class</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#class-isnew">:isnew</a> - initialize a new class</nobr></li>
+<li><nobr><a href="xlisp-man-010.html#class-answer">:answer</a> - add a message to a class</nobr></li>
+</ul>
+</ul>
+</ul>
+<li><nobr><a name="11" href="xlisp-man-011.html">Symbols</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-011.html#self">self</a>- the current object [within a method context]</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#obarray">*obarray*</a> - the object hash table</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#standard-input">*standard-input*</a> - the standard input stream</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#standard-output">*standard-output*</a> - the standard output stream</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#error-output">*error-output*</a> - the error output stream</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#trace-output">*trace-output*</a> - the trace output stream</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#debug-io">*debug-io*</a> - the debug i/o stream</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#breakenable">*breakenable*</a> - flag controlling entering break loop on errors</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#tracelist">*tracelist*</a> - list of names of functions to trace</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#tracenable">*tracenable*</a> - enable trace back printout on errors</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#tracelimit">*tracelimit*</a> - number of levels of trace back information</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#evalhook">*evalhook*</a> - user substitute for the evaluator function</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#applyhook">*applyhook*</a> - [not yet implemented]</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#readtable">*readtable*</a> - the current readtable</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#unbound">*unbound*</a> - indicator for unbound symbols</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#gc-flag">*gc-flag*</a> - controls the printing of 'gc' messages</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#gc-hook">*gc-hook*</a> - function to call after garbage collection</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#integer-format">*integer-format*</a> - format for printing integers</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#float-format">*float-format*</a> - format for printing floats</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#print-case">*print-case*</a> - symbol output case</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#plus">&nbsp;+&nbsp;</a> - the most recent input expression</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#plus-2">&nbsp;++&nbsp;</a> - the next to the last input expression</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#plus-3">&nbsp;+++&nbsp;</a> - the second to the last input expression</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#star">&nbsp;*&nbsp;</a> - the result of the previously evaluated expression</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#star-2">&nbsp;**&nbsp;</a> - the result of the next to the last evaluated expression</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#star-3">&nbsp;***&nbsp;</a> - the result of the second to the last evaluated expression</nobr></li>
+<li><nobr><a href="xlisp-man-011.html#minus">&nbsp;-&nbsp;</a> - the expression currently being evaluated</nobr></li>
+</ul>
+<li><nobr><a name="12" href="xlisp-man-012.html">Evaluation Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-012.html#eval">eval</a> - evaluate an XLISP expression</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#apply">apply</a> - apply a function to a list of arguments</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#funcall">funcall</a> - call a function with arguments</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#quote">quote</a> - return an expression unevaluated</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#function">function</a> - get the functional interpretation</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#backquote">backquote</a> - fill in a template</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#lambda">lambda</a> - make a function closure</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#get-lambda-expression">get-lambda-expression</a> - get the lambda expression</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#macroexpand">macroexpand</a> - recursively expand macro calls</nobr></li>
+<li><nobr><a href="xlisp-man-012.html#macroexpand-1">macroexpand-1</a> - expand a macro call</nobr></li>
+</ul>
+<li><nobr><a name="13" href="xlisp-man-013.html">Symbol Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-013.html#set">set</a> - set the value of a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#setq">setq</a> - set the [quoted] value of a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#psetq">psetq</a> - parallel version of setq</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#setf">setf</a> - set the value of a field</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#defun">defun</a> - define a function</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#defmacro">defmacro</a> - define a macro</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#gensym">gensym</a> - generate a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#intern">intern</a> - make an interned symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#make-symbol">make-symbol</a> - make an uninterned symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#symbol-name">symbol-name</a> - get the print name of a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#symbol-value">symbol-value</a> - get the value of a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#symbol-function">symbol-function</a> - get the functional value of a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#symbol-plist">symbol-plist</a> - get the property list of a symbol</nobr></li>
+<li><nobr><a href="xlisp-man-013.html#hash">hash</a> - compute the hash index for a symbol</nobr></li>
+</ul>
+<li><nobr><a name="14" href="xlisp-man-014.html">Property List Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-014.html#get">get</a> - get the value of a property</nobr></li>
+<li><nobr><a href="xlisp-man-014.html#putprop">putprop</a> - put a property onto a property list</nobr></li>
+<li><nobr><a href="xlisp-man-014.html#remprop">remprop</a> - remove a property from a property list</nobr></li>
+</ul>
+<li><nobr><a name="15" href="xlisp-man-015.html">Array Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-015.html#aref">aref</a> - get the nth element of an array</nobr></li>
+<li><nobr><a href="xlisp-man-015.html#make-array">make-array</a> - make a new array</nobr></li>
+<li><nobr><a href="xlisp-man-015.html#vector">vector</a> - make an initialized vector</nobr></li>
+</ul>
+<li><nobr><a name="16" href="xlisp-man-016.html">List Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-016.html#car">car</a> - return the car of a list node</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#cdr">cdr</a> - return the cdr of a list node</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#cxxr">c<i>xx</i>r</a> - all c<i>xx</i>r combinations</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#cxxxr">c<i>xxx</i>r</a> - all c<i>xxx</i>r combinations</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#cxxxxr">c<i>xxxx</i>r</a> - all c<i>xxxx</i>r combinations</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#first">first</a> - get the first element of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#second">second</a> - get the second element of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#third">third</a> - get the third element of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#fourth">fourth</a> - get the fourth element of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#rest">rest</a> - get the rest of the list except the first element</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#cons">cons</a> - construct a new list node</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#list">list</a> - create a list of values</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#append">append</a> - append lists</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#reverse">reverse</a> - reverse a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#last">last</a> - return the last list node of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#member">member</a> - find an expression in a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#assoc">assoc</a> - find an expression in an a-list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#remove">remove</a> - remove elements from a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#remove-if">remove-if</a> - remove elements that pass test</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#remove-if-not">remove-if-not</a> - remove elements that fail test</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#length">length</a> - find the length of a list, vector or string</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#nth">nth</a> - return the nth element of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#nthcdr">nthcdr</a> - return the nth cdr of a list</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#mapc">mapc</a> - apply function to successive cars</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#mapcar">mapcar</a> - apply function to successive cars</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#mapl">mapl</a> - apply function to successive cdrs</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#maplist">maplist</a> - apply function to successive cdrs</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#subst">subst</a> - substitute expressions</nobr></li>
+<li><nobr><a href="xlisp-man-016.html#sublis">sublis</a> - substitute with an a-list</nobr></li>
+</ul>
+<li><nobr><a name="17" href="xlisp-man-017.html">Destructive List Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-017.html#rplaca">rplaca</a> - replace the car of a list node</nobr></li>
+<li><nobr><a href="xlisp-man-017.html#rplacd">rplacd</a> - replace the cdr of a list node</nobr></li>
+<li><nobr><a href="xlisp-man-017.html#nconc">nconc</a> - destructively concatenate lists</nobr></li>
+<li><nobr><a href="xlisp-man-017.html#delete">delete</a> - delete elements from a list</nobr></li>
+<li><nobr><a href="xlisp-man-017.html#delete-if">delete-if</a> - delete elements that pass test</nobr></li>
+<li><nobr><a href="xlisp-man-017.html#delete-if-not">delete-if-not</a> - delete elements that fail test</nobr></li>
+<li><nobr><a href="xlisp-man-017.html#sort">sort</a> - sort a list</nobr></li>
+</ul>
+<li><nobr><a name="18" href="xlisp-man-018.html">Predicate Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-018.html#atom">atom</a> - is this an atom ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#symbolp">symbolp</a> - is this a symbol ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#numberp">numberp</a> - is this a number ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#null">null</a> - is this an empty list ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#not">not</a> - is this false ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#listp">listp</a> - is this a list ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#endp">endp</a> - is this the end of a list ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#consp">consp</a> - is this a non-empty list ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#integerp">integerp</a> - is this an integer ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#floatp">floatp</a> - is this a float ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#stringp">stringp</a> - is this a string ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#characterp">characterp</a> - is this a character ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#arrayp">arrayp</a> - is this an array ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#streamp">streamp</a> - is this a stream ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#objectp">objectp</a> - is this an object ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#boundp">boundp</a> - is a value bound to this symbol ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#fboundp">fboundp</a> - is a functional value bound to this symbol ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#minusp">minusp</a> - is this number negative ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#zerop">zerop</a> - is this number zero ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#plusp">plusp</a> - is this number positive ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#evenp">evenp</a> - is this integer even ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#oddp">oddp</a> - is this integer odd ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#eq">eq</a> - are the expressions identical ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#eql">eql</a> - are the expressions identical ?</nobr></li>
+<li><nobr><a href="xlisp-man-018.html#equal">equal</a> - are the expressions equal ?</nobr></li>
+</ul>
+<li><nobr><a name="19" href="xlisp-man-019.html">Control Constructs</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-019.html#cond">cond</a> - evaluate conditionally</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#and">and</a> - the logical AND of a list of expressions</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#or">or</a> - the logical OR of a list of expressions</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#if">if</a> - evaluate expressions conditionally</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#when">when</a> - evaluate only when a condition is true</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#unless">unless</a> - evaluate only when a condition is false</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#case">case</a> - select by case</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#let">let</a> - create local bindings</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#let*">let*</a> - let with sequential binding</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#flet">flet</a> - create local functions</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#labels">labels</a> - flet with recursive functions</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#macrolet">macrolet</a> - create local macros</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#catch">catch</a> - evaluate expressions and catch throws</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#throw">throw</a> - throw to a catch</nobr></li>
+<li><nobr><a href="xlisp-man-019.html#unwind-protect">unwind-protect</a> - protect evaluation of an expression</nobr></li>
+</ul>
+<li><nobr><a name="20" href="xlisp-man-020.html">Looping Constructs</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-020.html#loop">loop</a> - basic looping form</nobr></li>
+<li><nobr><a href="xlisp-man-020.html#do">do</a> - loop while the termination test is NIL</nobr></li>
+<li><nobr><a href="xlisp-man-020.html#do*">do*</a> - 'do' loop with sequential binding</nobr></li>
+<li><nobr><a href="xlisp-man-020.html#dolist">dolist</a> - loop through a list</nobr></li>
+<li><nobr><a href="xlisp-man-020.html#dotimes">dotimes</a> - loop from zero to n-1</nobr></li>
+</ul>
+<li><nobr><a name="21" href="xlisp-man-021.html">The Program Feature</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-021.html#prog">prog</a> - the program feature</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#prog*">prog*</a> - 'prog' with sequential binding</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#block">block</a> - named block</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#return">return</a> - cause a prog construct to return a value</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#return-from">return-from</a> - return from a named block</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#tagbody">tagbody</a> - block with labels</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#go">go</a> - go to a tag within a tagbody or prog</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#progv">progv</a> - dynamically bind symbols</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#prog1">prog1</a> - return the value of the first expression</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#prog2">prog2</a> - return the value of the second expression</nobr></li>
+<li><nobr><a href="xlisp-man-021.html#progn">progn</a> - return the value of the last expression</nobr></li>
+</ul>
+<li><nobr><a name="22" href="xlisp-man-022.html">Debugging and Error Handling</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-022.html#trace">trace</a> - add a function to the trace list</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#untrace">untrace</a> - remove a function from the trace list</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#error">error</a> - signal a non-correctable error</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#cerror">cerror</a> - signal a correctable error</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#break">break</a> - enter a break loop</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#clean-up">clean-up</a> - clean-up after an error</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#top-level">top-level</a> - clean-up after an error and return to the top level</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#continue">continue</a> - continue from a correctable error</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#errset">errset</a> - trap errors</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#baktrace">baktrace</a> - print n levels of trace back information</nobr></li>
+<li><nobr><a href="xlisp-man-022.html#evalhook">evalhook</a> - evaluate with hooks</nobr></li>
+</ul>
+<li><nobr><a name="23" href="xlisp-man-023.html">Arithmetic Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-023.html#truncate">truncate</a> - truncates a floating point number to an integer</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#float">float</a> - converts an integer to a floating point number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#add">&nbsp;+&nbsp;</a> - add a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#subtract">&nbsp;-&nbsp;</a> - subtract a list of numbers or negate a single number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#multiply">&nbsp;*&nbsp;</a> - multiply a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#divide">&nbsp;/&nbsp;</a> - divide a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#1+">1+</a> - add one to a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#1-">1-</a> - subtract one from a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#rem">rem</a> - remainder of a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#min">min</a> - the smallest of a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#max">max</a> - the largest of a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#abs">abs</a> - the absolute value of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#gcd">gcd</a> - compute the greatest common divisor</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#random">random</a> - compute a random number between 0 and n-1 inclusive</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#sin">sin</a> - compute the sine of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#cos">cos</a> - compute the cosine of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#tan">tan</a> - compute the tangent of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#asin">asin</a> - compute the arcsine of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#acos">acos</a> - compute the arccosine of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#atan">atan</a> - compute the arctangent of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#expt">expt</a> - compute x to the y power</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#exp">exp</a> - compute e to the x power</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#sqrt">sqrt</a> - compute the square root of a number</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#less-than">&nbsp;&lt;&nbsp;</a> - test for less than</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#less-than-or-equal">&nbsp;&lt;=&nbsp;</a> - test for less than or equal to</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#equal">&nbsp;=&nbsp;</a> - test for equal to</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#not-equal">&nbsp;/=&nbsp;</a> - test for not equal to</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#greater-than-or-equal">&nbsp;&gt;=&nbsp;</a> - test for greater than or equal to</nobr></li>
+<li><nobr><a href="xlisp-man-023.html#greater-than">&nbsp;&gt;&nbsp;</a> - test for greater than</nobr></li>
+</ul>
+<li><nobr><a name="24" href="xlisp-man-024.html">Bitwise Logical Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-024.html#logand">logand</a> - the bitwise and of a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-024.html#logior">logior</a> - the bitwise inclusive or of a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-024.html#logxor">logxor</a> - the bitwise exclusive or of a list of numbers</nobr></li>
+<li><nobr><a href="xlisp-man-024.html#lognot">lognot</a> - the bitwise not of a number</nobr></li>
+</ul>
+<li><nobr><a name="25" href="xlisp-man-025.html">String Functions</a></nobr></li>
+<ul>
+
+<li><nobr><a href="xlisp-man-025.html#string">string</a> - make a string from an integer ascii value</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-trim">string-trim</a> - trim both ends of a string</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-left-trim">string-left-trim</a> - trim the left end of a string</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-right-trim">string-right-trim</a> - trim the right end of a string</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-upcase">string-upcase</a> - convert a string to uppercase</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-downcase">string-downcase</a> - convert a string to lowercase</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#nstring-upcase">nstring-upcase</a> - convert a part of a string to uppercase</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#nstring-downcase">nstring-downcase</a> - convert a part of a string to lowercase</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#strcat">strcat</a> - concatenate strings</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#subseq">subseq</a> - extract a substring</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-less-than">string&lt;</a> - test for less than in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-less-than-or-equal">string&lt;=</a> - test for less than or equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-equal">string=</a> - test for equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-not-equal">string/=</a> - test for not equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-greater-than-or-equal">string&gt;=</a> - test for greater than or equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-greater-than">string&gt;</a> - test for greater than in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-lessp">string-lessp</a> - is this less than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-not-greaterp">string-not-greaterp</a> - is this not greater than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-equalp">string-equal</a> - is this equal in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-not-equalp">string-not-equal</a> - is this not equal in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-not-lessp">string-not-lessp</a> - is this not less than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-025.html#string-greaterp">string-greaterp</a> - is this greater than in ASCII ordering ?</nobr></li>
+</ul>
+<li><nobr><a name="26" href="xlisp-man-026.html">Character Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-026.html#char">char</a> - extract a character from a string</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#upper-case-p">upper-case-p</a> - is this an upper case <nobr>character ?</nobr></nobr></li>
+<li><nobr><a href="xlisp-man-026.html#lower-case-p">lower-case-p</a> - is this a lower case <nobr>character ?</nobr></nobr></li>
+<li><nobr><a href="xlisp-man-026.html#both-case-p">both-case-p</a> - is this an alphabetic [either case] <nobr>character ?</nobr></nobr></li>
+<li><nobr><a href="xlisp-man-026.html#digit-char-p">digit-char-p</a> - is this a digit <nobr>character ?</nobr></nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-code">char-code</a> - get the ASCII code of a character</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#code-char">code-char</a> - get the character with a specified ASCII code</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-upcase">char-upcase</a> - convert a character to upper case</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-downcase">char-downcase</a> - convert a character to lower case</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#digit-char">digit-char</a> - convert a digit weight to a digit</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-int">char-int</a> - convert a character to an integer</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#int-char">int-char</a> - convert an integer to a character</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-less-than">char&lt;</a> - test for less than in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-less-than-or-equal">char&lt;=</a> - test for less than or equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-equal">char=</a> - test for equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-not-equal">char/=</a> - test for not equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-greater-than-or-equal">char&gt;=</a> - test for greater than or equal to in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-greater-than">char&gt;</a> - test for greater than in ASCII ordering</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-lessp">char-lessp</a> - is this less than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-not-greaterp">char-not-greaterp</a> - is this not greater than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-equal">char-equal</a> - is this equal in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-not-equal">char-not-equal</a> - is this not equal in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-not-lessp">char-not-lessp</a> - is this not less than in ASCII ordering ?</nobr></li>
+<li><nobr><a href="xlisp-man-026.html#char-greaterp">char-greaterp</a> - is this greater than in ASCII ordering ?</nobr></li>
+</ul>
+<li><nobr><a name="27" href="xlisp-man-027.html">Input/Output Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-027.html#get-key">get-key</a> - get a single key stroke from the keyboard</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#read">read</a> - read an expression</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#print">print</a> - print an expression on a new line</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#prin1">prin1</a> - print an expression</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#princ">princ</a> - print an expression without quoting</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#pprint">pprint</a> - pretty print an expression</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#terpri">terpri</a> - terminate the current print line</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#flatsize">flatsize</a> - length of printed representation using prin1</nobr></li>
+<li><nobr><a href="xlisp-man-027.html#flatc">flatc</a> - length of printed representation using princ</nobr></li>
+</ul>
+<li><nobr><a name="28" href="xlisp-man-028.html">The Format Function</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-028.html#format">format</a> - do formated output</nobr></li>
+</ul>
+<li><nobr><a name="29" href="xlisp-man-029.html">File I/O Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-029.html#open">open</a> - open a file stream</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#close">close</a> - close a file stream</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#read-char">read-char</a> - read a character from a stream</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#peek-char">peek-char</a> - peek at the next character</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#write-char">write-char</a> - write a character to a stream</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#read-line">read-line</a> - read a line from a stream</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#read-byte">read-byte</a> - read a byte from a stream</nobr></li>
+<li><nobr><a href="xlisp-man-029.html#write-byte">write-byte</a> - write a byte to a stream</nobr></li>
+</ul>
+<li><nobr><a name="30" href="xlisp-man-030.html">String Stream Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-030.html#make-string-input-stream">make-string-input-stream</a> - create an unnamed stream from a string expression</nobr></li>
+<li><nobr><a href="xlisp-man-030.html#make-string-output-stream">make-string-output-stream</a> - create and return an unnamed output stream</nobr></li>
+<li><nobr><a href="xlisp-man-030.html#get-output-stream-string">get-output-stream-string</a> - empty a stream and return the data as a string</nobr></li>
+<li><nobr><a href="xlisp-man-030.html#get-output-stream-list">get-output-stream-list</a> - empty a stream and return the data as a list</nobr></li>
+</ul>
+<li><nobr><a name="31" href="xlisp-man-031.html">System Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-031.html#load">load</a> - load a source file</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#save">save</a> - save workspace to a file</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#restore">restore</a> - restore workspace from a file</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#dribble">dribble</a> - create a file with a transcript of a session</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#gc">gc</a> - force garbage collection</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#expand">expand</a> - expand memory by adding segments</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#alloc">alloc</a> - change number of nodes to allocate in each segment</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#room">room</a> - show memory allocation statistics</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#type-of">type-of</a> - returns the type of the expression</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#peek">peek</a> - peek at a location in memory</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#poke">poke</a> - poke a value into memory</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#address-of">address-of</a> - get the address of an xlisp node</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#system">system</a> - execute a command of the operating system</nobr></li>
+<li><nobr><a href="xlisp-man-031.html#exit">exit</a> - exit xlisp</nobr></li>
+</ul>
+<li><nobr><a name="32" href="xlisp-man-032.html">File I/O Examples</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-032.html#33-1">Input from a File</a></nobr></li>
+<li><nobr><a href="xlisp-man-032.html#33-2">Output to a File</a></nobr></li>
+<li><nobr><a href="xlisp-man-032.html#33-3">A Slightly More Complicated File Example</a></nobr></li>
+</ul>
+<li><nobr><a name="33" href="xlisp-man-033.html">Nyquist Functions</a> - only available in the Nyquist version of XLISP</nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#predicate-functions">Predicate Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#filep">filep</a> - is this a file ?</nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-033.html#arithmetic-functions">Arithmetic Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#rrandom">rrandom</a> - compute a random real number between 0 and 1 inclusive</nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-033.html#string-functions">String Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#string-search">string-search</a> - search for pattern in string</nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-033.html#file-io-functions">File I/O Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#open-binary">open-binary</a> - open a binary file stream</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#setdir">setdir</a> - set current directory</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#listdir">listdir</a> - get a directory listing</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#get-temp-path">get-temp-path</a> - get a path where a temporary file can be created</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#read-int">read-int</a> - read a binary integer from a stream</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#write-int">write-int</a> - write a binary integer to a stream</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#read-float">read-float</a> - read a binary floating-point number from a stream</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#write-float">write-float</a> - write a binary floating-point number to a stream</nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-033.html#system-functions">System Functions</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#info">info</a> - show information about memory usage</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#bigendiap">bigendiap</a> - is this a big-endian machine ?</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#setup-console">setup-console</a> - set default console attributes</nobr></li>
+<li><nobr><a href="xlisp-man-033.html#echoenabled">echoenabled</a> - turn console input echoing on or off</nobr></li>
+</ul>
+<li><nobr><a href="xlisp-man-033.html#profiling">Profiling</a></nobr></li>
+<ul>
+<li><nobr><a href="xlisp-man-033.html#profile">profile</a> - turn profiling on or off</nobr></li>
+</ul>
+</ul>
+</ol>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+Contents&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-index.html">Previous</a> |
+<a href="xlisp-man-001.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-contents.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

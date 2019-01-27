@@ -1,0 +1,148 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-187.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP object</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-186.html">Previous</a> |
+<a href="xlisp-ref-188.html">Next</a>
+
+<hr>
+
+<h1>object</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>object</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlobj.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>&nbsp;object</dt>
+</dl>
+
+<h2>Description</h2>
+
+<p>'object' is an object <a href="xlisp-ref-072.html">class</a>. An object
+is a composite structure that contains internal state information, methods
+[which respond to messages], a pointer to the object's
+<a href="xlisp-ref-072.html">class</a> and a pointer to the object's
+super-class. XLISP contains two built in objects: 'object' and
+<a href="xlisp-ref-072.html">class</a>. 'object' is the superclass for the
+<a href="xlisp-ref-072.html">class</a> object.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(send object :show)                                     <font color="#0000CC">; look at the object definition</font>
+
+                                                        <font color="#0000CC">; example use of objects</font>
+(setq my-class (send class :new '(state)))              <font color="#0000CC">; new class MY-CLASS with STATE</font>
+       
+(send my-class :answer :isnew '()                       <font color="#0000CC">; set up initialization</font>
+                              '((setq state nil) self))
+
+(send my-class :answer :set-it '(value)                 <font color="#0000CC">; create :SET-IT message</font>
+                               '((setq state value)))
+
+(setq my-obj (send my-class :new))                      <font color="#0000CC">; create MY-OBJ out of MY-CLASS</font>
+(send my-obj :set-it 5)                                 <font color="#0000CC">; STATE is set to 5</font>
+</pre>
+
+<p><b>Object definition:</b> The internal definition of the 'object' object
+instance is:</p>
+
+<pre class="example">
+Object is #&lt;Object: #23fd8&gt;, Class is #&lt;Object: #23fe2&gt;
+  MESSAGES = ((:SHOW . #&lt;Subr-: #23db2&gt;) 
+              (:CLASS . #&lt;Subr-: #23dee&gt;) 
+              (:ISNEW . #&lt;Subr-: #23e2a&gt;))
+  IVARS = NIL
+  CVARS = NIL
+  CVALS = NIL
+  SUPERCLASS = NIL
+  IVARCNT = 0
+  IVARTOTAL = 0
+#&lt;Object: #23fd8&gt;
+</pre>
+
+<p>The <a href="xlisp-ref-072.html">class</a> of 'object' is
+<a href="xlisp-ref-072.html">class</a>. There is no superclass of 'object'.
+Remember that the location information [like #23fd8] varies from system to
+system, yours will probably look different.</p>
+
+<p><b>Built-in methods:</b> The built in methods in XLISP include:</p>
+
+<ul>
+<li><nobr><a href="xlisp-ref-025.html">:answer</a> - add a method to an object</nobr></li>
+<li><nobr><a href="xlisp-ref-073.html">:class</a> - return the object's <a href="xlisp-ref-072.html">class</a></nobr></li>
+<li><nobr><a href="xlisp-ref-142.html">:isnew</a> - run initialization code on object</nobr></li>
+<li><nobr><a href="xlisp-ref-176.html">:new</a> - create a new object [instance or <a href="xlisp-ref-072.html">class</a>]</nobr></li>
+<li><nobr><a href="xlisp-ref-240.html">:show</a> - show the internal state of the object</nobr></li>
+</ul>
+
+<p><b>Message structure:</b> The normal XLISP convention for a 'message' is
+to have a valid symbol preceeded by a colon like
+<a href="xlisp-ref-142.html">:isnew</a> or ':my-message'. However, it is
+possible to define a 'message' that is a symbol without a colon, but this
+makes the code less readable.</p>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-010.html#object">object</a>
+class in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-186.html">Previous</a> |
+<a href="xlisp-ref-188.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-187.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>

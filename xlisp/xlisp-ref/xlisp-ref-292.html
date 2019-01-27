@@ -1,0 +1,110 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-292.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+<head><title>XLISP unless</title>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-291.html">Previous</a> |
+<a href="xlisp-ref-293.html">Next</a>
+
+<hr>
+
+<h1>unless</h1>
+
+<hr>
+
+<p><table cellpadding="0" cellspacing="0" style="margin-left:10px"><tbody>
+<tr valign="top">
+  <td><nobr>Type:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>special form (fsubr)</nobr></td>
+</tr>
+<tr valign="top">
+  <td><nobr>Source:</nobr></td>
+  <td><nobr>&nbsp;&nbsp;-&nbsp;&nbsp;</nobr></td>
+  <td width="100%"><nobr>xlcont.c</nobr></td>
+</tr>
+</tbody></table></p>
+
+<h2>Syntax</h2>
+
+<dl>
+<dt>(unless <i>test</i> [<i>expr</i> ... ])</dt>
+<dd><i>test</i> - an expression, <a href="xlisp-ref-177.html">NIL</a> or
+non-<a href="xlisp-ref-177.html">NIL</a><br>
+<i>expr</i> - expressions comprising a body of code<br>
+returns - the value of the last expression or
+<a href="xlisp-ref-177.html">NIL</a></dd>
+</dl>
+
+<h2>Description</h2>
+
+<p>The 'unless' special form executes the 'expr' forms if 'test' evaluates
+to a <a href="xlisp-ref-177.html">NIL</a> value. If 'test' is
+<nobr><a href="xlisp-ref-177.html">NIL</a> ,</nobr> the value of the last
+'expr' is returned as the result. If 'test' is
+<nobr>non-<a href="xlisp-ref-177.html">NIL</a> ,</nobr>
+<a href="xlisp-ref-177.html">NIL</a> is returned with none of 'expr'
+evaluated.</p>
+
+<h2>Examples</h2>
+
+<pre class="example">
+(unless NIL)                    <font color="#0000CC">; returns NIL</font>
+(unless T)                      <font color="#0000CC">; returns NIL</font>
+
+(unless NIL (print "hi") 'foo)  <font color="#0000CC">; prints "hi"  returns FOO</font>
+
+(unless (listp "a")
+        (print "not a list"))   <font color="#0000CC">; prints  "not a list"</font>
+                                <font color="#0000CC">; returns "not a list"</font>
+</pre>
+
+<p>See the
+<a href="../xlisp-man/xlisp-man-019.html#unless">unless</a>
+special form in the <nobr>XLISP 2.0</nobr> manual.</p>
+
+<p><nobr>&nbsp;&nbsp;<a href="#top">Back to Top</nobr></a></p>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="../xlisp-man/xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="../xlisp-man/xlisp-man-contents.html">Contents</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-ref-291.html">Previous</a> |
+<a href="xlisp-ref-293.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-ref/xlisp-ref-292.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:11 GMT -->
+</html>

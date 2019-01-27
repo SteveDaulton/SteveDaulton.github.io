@@ -1,0 +1,157 @@
+<html>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-021.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+<head><title>XLISP: An Object-oriented Lisp</title></head>
+
+<style type="text/css">
+  pre.example {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+  td.button {
+  color: #000000;
+  background-color: #F5F5F5;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 8px;
+  border: #808080;
+  border-style: solid;
+  border-width: 1px;
+  width:auto;
+}
+</style>
+
+<body>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#22">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-020.html">Previous</a> |
+<a href="xlisp-man-022.html">Next</a>
+
+<hr>
+
+<h1>21&nbsp; The Program Feature</h1>
+
+<hr>
+
+<ol>
+<li><nobr><a href="#prog">prog</a> - the program feature</nobr></li>
+<li><nobr><a href="#prog*">prog*</a> - 'prog' with sequential binding</nobr></li>
+<li><nobr><a href="#block">block</a> - named block</nobr></li>
+<li><nobr><a href="#return">return</a> - cause a prog construct to return a value</nobr></li>
+<li><nobr><a href="#return-from">return-from</a> - return from a named block</nobr></li>
+<li><nobr><a href="#tagbody">tagbody</a> - block with labels</nobr></li>
+<li><nobr><a href="#go">go</a> - go to a tag within a tagbody or prog</nobr></li>
+<li><nobr><a href="#progv">progv</a> - dynamically bind symbols</nobr></li>
+<li><nobr><a href="#prog1">prog1</a> - return the value of the first expression</nobr></li>
+<li><nobr><a href="#prog2">prog2</a> - return the value of the second expression</nobr></li>
+<li><nobr><a href="#progn">progn</a> - return the value of the last expression</nobr></li>
+</ol>
+
+<hr>
+
+<a name="prog"></a><a name="prog*"></a>
+
+<dl>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-202.html">prog</a> (<i>binding</i>...)
+<i>expr</i>...) - the program feature<br>
+(<a href="../xlisp-ref/xlisp-ref-203.html">prog*</a> (<i>binding</i>...)
+<i>expr</i>...) - prog with sequential binding</dt>
+<dd><i>binding</i> - the variable bindings each of which is either:<br>
+<dl><dd>1) a symbol [which is initialized to NIL]<br>
+2) a list whose car is a symbol and whose CADR is an initialization expression</dd></dl>
+<i>expr</i> - expressions to evaluate or tags [symbols]<br>
+returns - NIL or the argument passed to the return function</dd>
+
+<a name="block"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-038.html">block</a> <i>name</i>
+<i>expr</i>...) - named block</dt>
+<dd><i>name</i> - the block name [symbol]<br>
+<i>expr</i> - the block body<br>
+returns - the value of the last expression</dd>
+
+<a name="return"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-225.html">return</a> [<i>expr</i>])
+- cause a prog construct to return a value</dt>
+<dd><i>expr</i> - the value [defaults to NIL]<br>
+returns - never returns</dd>
+
+<a name="return-from"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-226.html">return-from</a> <i>name</i>
+[<i>value</i>]) - return from a named block</dt>
+<dd><i>name</i> - the block name [symbol]<br>
+<i>value</i> - the value to return [defaults to NIL]<br>
+returns - never returns</dd>
+
+<a name="tagbody"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-266.html">tagbody</a> <i>expr</i>...)
+- block with labels</dt>
+<dd><i>expr</i> - expression[s] to evaluate or tags [symbols]<br>
+returns - NIL</dd>
+
+<a name="go"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-135.html">go</a> <i>sym</i>)
+- go to a tag within a tagbody or prog</dt>
+<dd><i>sym</i> - the tag [quoted]<br>
+returns - never returns</dd>
+
+<a name="progv"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-207.html">progv</a> <i>slist</i>
+<i>vlist</i> <i>expr</i>...) - dynamically bind symbols</dt>
+<dd><i>slist</i> - list of symbols<br>
+<i>vlist</i> - list of values to bind to the symbols<br>
+<i>expr</i> - expression[s] to evaluate<br>
+returns - the value of the last expression</dd>
+
+<a name="prog1"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-204.html">prog1</a> <i>expr1</i>
+<i>expr</i>...) - execute expressions sequentially</dt>
+<dd><i>expr1</i> - the first expression to evaluate<br>
+<i>expr</i> - the remaining expressions to evaluate<br>
+returns - the value of the first expression</dd>
+
+<a name="prog2"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-205.html">prog2</a> <i>expr1</i>
+<i>expr2</i> <i>expr</i>...) - execute expressions sequentially</dt>
+<dd><i>expr1</i> - the first expression to evaluate<br>
+<i>expr2</i> - the second expression to evaluate<br>
+<i>expr</i> - the remaining expressions to evaluate<br>
+returns - the value of the second expression</dd>
+
+<a name="progn"></a><br>
+
+<dt>(<a href="../xlisp-ref/xlisp-ref-206.html">progn</a> <i>expr</i>...)
+- execute expressions sequentially</dt>
+<dd><i>expr</i> - the expressions to evaluate<br>
+returns - the value of the last expression [or NIL]</dd>
+
+</dl>
+
+<hr>
+
+<a href="../xlisp-index.html">XLISP</a> &gt;
+<a href="xlisp-man-index.html">XLISP 2.0</a>&nbsp; -&nbsp;
+<a href="xlisp-man-contents.html#22">Contents</a>&nbsp; -&nbsp;
+<a href="../xlisp-ref/xlisp-ref-index.html">Reference</a>&nbsp; -&nbsp;
+<a href="xlisp-man-020.html">Previous</a> |
+<a href="xlisp-man-022.html">Next</a>
+
+</body>
+<!-- Mirrored from www.audacity-forum.de/download/edgar/nyquist/nyquist-doc/xlisp/xlisp-man/xlisp-man-021.htm by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 25 Jan 2019 10:20:10 GMT -->
+</html>
